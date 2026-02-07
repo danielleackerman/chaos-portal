@@ -1,0 +1,108 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+import { NAV_DATA, PAGE_DATA, SUB_LABELS, extractDomain } from '../../data/library.js';
+
+export function getStaticPaths() {
+  const paths = [];
+  for (const [cat, subs] of Object.entries(NAV_DATA)) {
+    for (const [sub, pages] of Object.entries(subs)) {
+      for (const page of pages) {
+        paths.push({
+          params: { slug: page.id },
+          props: { pageId: page.id, category: cat, subcategory: sub }
+        });
+      }
+    }
+  }
+  return paths;
+}
+
+const { pageId, category, subcategory } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const page = PAGE_DATA[pageId];
+const accent = category === 'music' ? 'amber' : 'teal';
+const catLabel = category === 'music' ? 'Music' : 'Story';
+const subLabel = SUB_LABELS[subcategory] || subcategory;
+---
+
+<PortalLayout title={page.title} currentPage="library">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <a href={`${base}/library/${category}/`}>{catLabel} Library</a>
+    <span class="sep">›</span>
+    <strong>{page.title}</strong>
+  </nav>
+
+  <div class={`page-hero page-hero--${accent}`}>
+    <div class={`eyebrow eyebrow--${accent}`}>{subLabel}</div>
+    <h1>{page.title}</h1>
+    {page.scope && <p class="subtitle">{page.scope}</p>}
+  </div>
+
+  <div style="display:flex; gap:0.75rem; margin-bottom:1.5rem; align-items:center; flex-wrap:wrap;">
+    <div class="search-bar" id="search-container">
+      <svg class="search-bar__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input
+        class="search-bar__input"
+        type="text"
+        id="search-input"
+        placeholder={`Search ${page.total} resources...`}
+      />
+    </div>
+    <span style="font-size:0.75rem; color:var(--text-3); white-space:nowrap;" id="search-count">
+      {page.links.length} resources
+    </span>
+  </div>
+
+  <div class="card-grid" id="links-grid">
+    {page.links.map((link, i) => (
+      <a
+        href={link.u}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link-card"
+        data-title={link.t.toLowerCase()}
+      >
+        <div class="link-card__meta">
+          <div>
+            <div class="link-card__title">{link.t}</div>
+            <div class="link-card__domain">{extractDomain(link.u)}</div>
+          </div>
+          <svg class="link-card__icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <div style="height:3rem;"></div>
+
+</PortalLayout>
+
+<script is:inline>
+  // Client-side search filtering
+  (function() {
+    const input = document.getElementById('search-input');
+    const grid = document.getElementById('links-grid');
+    const count = document.getElementById('search-count');
+    if (!input || !grid) return;
+
+    const cards = Array.from(grid.querySelectorAll('.link-card'));
+    const total = cards.length;
+
+    input.addEventListener('input', function() {
+      const q = this.value.toLowerCase().trim();
+      let visible = 0;
+      cards.forEach(card => {
+        const title = card.getAttribute('data-title') || '';
+        const match = !q || title.includes(q);
+        card.style.display = match ? '' : 'none';
+        if (match) visible++;
+      });
+      if (count) {
+        count.textContent = q ? `${visible} of ${total} resources` : `${total} resources`;
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,183 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  currentPage?: string;
+}
+
+const { title, currentPage = '' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} | Chaos Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet" />
+  <link href={`${base}/pagefind/pagefind-ui.css`} rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="site-brand" href={`${base}/`}>
+        <span class="site-brand__title">CHAOS PORTAL</span>
+        <span class="site-brand__subtitle">Beta</span>
+      </a>
+      <nav class="site-nav">
+        <a href={`${base}/`} aria-current={currentPage === 'home' ? 'page' : undefined}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+          Home
+        </a>
+        <a href={`${base}/library/music/`} aria-current={currentPage === 'library' ? 'page' : undefined}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          Library
+        </a>
+        <a href={`${base}/compass/`} aria-current={currentPage === 'compass' ? 'page' : undefined}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          Compass
+        </a>
+      </nav>
+      <div style="display:flex; gap:0.5rem; align-items:center;">
+        <button class="global-search-trigger" id="search-trigger" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Search
+          <kbd>⌘K</kbd>
+        </button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Toggle theme">
+          🌙 Dark Mode
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Search modal -->
+  <div class="search-modal" id="search-modal">
+    <div class="search-modal__inner">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <span style="font-size:0.875rem; font-weight:600; color:var(--text);">Search Portal</span>
+        <button id="search-close" style="background:none; border:none; cursor:pointer; color:var(--text-3); font-size:1.25rem; padding:0.25rem; line-height:1;">✕</button>
+      </div>
+      <div id="pagefind-container"></div>
+    </div>
+  </div>
+
+  <main class="container" data-pagefind-body>
+    <slot />
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      Chaos Portal Beta · Story & Music Creative Framework
+    </div>
+  </footer>
+
+  <script is:inline>
+    // Theme system
+    (function() {
+      var root = document.documentElement;
+      var btn = document.getElementById('theme-toggle');
+      var KEY = 'chaos-portal-theme';
+
+      function apply(theme) {
+        var isDark = theme === 'dark';
+        if (isDark) {
+          root.classList.add('dark-mode');
+        } else {
+          root.classList.remove('dark-mode');
+        }
+        if (btn) {
+          btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+          btn.setAttribute('aria-pressed', String(isDark));
+        }
+      }
+
+      var stored = localStorage.getItem(KEY);
+      apply(stored || 'dark');
+
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('#theme-toggle')) {
+          var isDark = root.classList.contains('dark-mode');
+          var next = isDark ? 'light' : 'dark';
+          apply(next);
+          localStorage.setItem(KEY, next);
+        }
+      });
+    })();
+
+    // Search modal + Pagefind
+    (function() {
+      var modal = document.getElementById('search-modal');
+      var trigger = document.getElementById('search-trigger');
+      var closeBtn = document.getElementById('search-close');
+      var container = document.getElementById('pagefind-container');
+      var initialized = false;
+
+      function getBase() {
+        // Extract base from the pagefind CSS link
+        var link = document.querySelector('link[href*="pagefind"]');
+        if (link) return link.href.replace('/pagefind/pagefind-ui.css', '');
+        return '';
+      }
+
+      function openSearch() {
+        if (!modal) return;
+        modal.classList.add('is-open');
+
+        if (!initialized && container) {
+          var base = getBase();
+          var script = document.createElement('script');
+          script.src = base + '/pagefind/pagefind-ui.js';
+          script.onload = function() {
+            if (typeof PagefindUI !== 'undefined') {
+              new PagefindUI({
+                element: container,
+                showSubResults: true,
+                showImages: false,
+                autofocus: true,
+                baseUrl: base + '/'
+              });
+            }
+          };
+          document.head.appendChild(script);
+          initialized = true;
+        }
+
+        setTimeout(function() {
+          var input = container && container.querySelector('input');
+          if (input) input.focus();
+        }, 150);
+      }
+
+      function closeSearch() {
+        if (modal) modal.classList.remove('is-open');
+      }
+
+      if (trigger) trigger.addEventListener('click', openSearch);
+      if (closeBtn) closeBtn.addEventListener('click', closeSearch);
+
+      if (modal) modal.addEventListener('click', function(e) {
+        if (e.target === modal) closeSearch();
+      });
+
+      document.addEventListener('keydown', function(e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          if (modal && modal.classList.contains('is-open')) {
+            closeSearch();
+          } else {
+            openSearch();
+          }
+        }
+        if (e.key === 'Escape' && modal && modal.classList.contains('is-open')) {
+          closeSearch();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

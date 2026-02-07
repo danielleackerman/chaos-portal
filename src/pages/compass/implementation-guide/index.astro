@@ -1,0 +1,1579 @@
+---
+import PortalLayout from '../../../layouts/PortalLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<PortalLayout title="Implementation Guide | Compass" currentPage="compass">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <a href={`${base}/compass/`}>Compass</a>
+    <span class="sep">›</span>
+    <strong>VII. Implementation Guide</strong>
+  </nav>
+
+  <div class="page-hero page-hero--purple">
+    <div class="eyebrow eyebrow--purple">SECTION VII</div>
+    <h1>Implementation Guide</h1>
+  </div>
+
+  <div class="compass-content">
+    <p class="subtitle">Implementation Guide &amp; Deliverables Roadmap</p><h2 id="part-i-system-architecture">PART I: SYSTEM ARCHITECTURE</h2>
+<h3 id="story-coordinate-compass">Story Coordinate Compass</h3>
+<p>This is a spatial navigation system for story analysis. It treats
+every story as a mappable territory with two primary dimensions.</p>
+<ul><li><strong>Purpose</strong>: Track WHERE you are in a story’s timeline + WHAT analytical depth to
+examine</li><li><strong>Format</strong>: 2D coordinate grid (Position ×
+Dimension)</li><li><strong>Output</strong>: Precise coordinate notation like
+ <span class="coord-tag">[6:00 / D3]</span></li><li><strong>Reference</strong>: Organized
+repository of analytical frameworks and concepts accessible at each
+coordinate</li></ul>
+<h3 id="how-the-system-works">How The System Works</h3>
+<p>The Story Coordinate Compass functions as both <strong>NAVIGATION
+GRID</strong> and <strong>REFERENCE ATLAS</strong>.</p>
+<p>When you locate a coordinate: <code><span class="coord-tag">[6:00 / D3]</span></code> = “Midpoint,
+Cognitive Dimension 3”</p>
+<p>The system provides:</p>
+<ul><li>Which frameworks apply to this dimension</li><li>What questions to ask at this position</li><li>What patterns to look for</li><li>How
+this dimension intersects with others</li></ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-ii-story-compass-specifications">PART II: STORY COMPASS
+SPECIFICATIONS</h2>
+<h3 id="grid-structure">Grid Structure</h3>
+<p><strong>Horizontal Axis: Story Position (13 points)</strong></p>
+<pre><code>12:00 → 1:00 → 2:00 → 3:00 → 4:00 → 5:00 → 6:00 → 7:00 → 8:00 → 9:00 → 10:00 → 11:00 → 12:00</code></pre>
+<ul>
+<li>Represents temporal/structural progression through narrative</li>
+<li>Maps to: Act structures, story beats, dramatic sequences</li>
+<li>Current granularity: 13 positions</li>
+<li>Future expansion: 30-minute beats = 24 positions</li>
+</ul>
+<p><strong>Vertical Axis: Story Depth Dimension (6 depths)</strong></p>
+<ul>
+<li><strong>Core Dimension 0:</strong> Main Philosophical Conflict,
+Essential Problem &amp; Thematic Core</li>
+<li><strong>Archetypal Dimension 1:</strong> Mythic Patterns &amp;
+Archetypal Forms</li>
+<li><strong>Psychological Dimension 2:</strong> Emotional &amp;
+Affective States</li>
+<li><strong>Cognitive Dimension 3:</strong> Cognitive Dynamics &amp;
+Belief Systems</li>
+<li><strong>Structural Dimension 4:</strong> Structural &amp; Functional
+Logic</li>
+<li><strong>Surface Dimension 5:</strong> Expressive Surface &amp;
+Symbolic Effects</li>
+</ul>
+<p><strong>Grid Capacity:</strong> 13 positions × 6 dimensions =
+<strong>78 unique coordinate cells per story</strong></p>
+<h3 id="cell-coordinate-grid-simple-view">78-Cell Coordinate Grid
+(Simple View)</h3>
+<table class="fixed-cols">
+<colgroup><col style="width: 12%;"/><col style="width: 14.6667%;"/><col style="width: 14.6667%;"/><col style="width: 14.6667%;"/><col style="width: 14.6667%;"/><col style="width: 14.6667%;"/><col style="width: 14.6667%;"/></colgroup>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>D0: Core</th>
+<th>D1: Archetypal</th>
+<th>D2: Psychological</th>
+<th>D3: Cognitive</th>
+<th>D4: Structural</th>
+<th>D5: Surface</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>12:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>1:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>2:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>3:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>4:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>5:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>6:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>7:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>8:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>9:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>10:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="even">
+<td>11:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+<tr class="odd">
+<td>12:00</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+<td>●</td>
+</tr>
+</tbody>
+</table>
+<p>Each ● represents a unique analytical coordinate where position and
+dimension intersect.</p>
+<h3 id="cell-coordinate-grid-enhanced-view-with-key-descriptors">78-Cell
+Coordinate Grid (Enhanced View with Key Descriptors)</h3>
+<table>
+<colgroup>
+<col style="width: 9%"/>
+<col style="width: 16%"/>
+<col style="width: 14%"/>
+<col style="width: 17%"/>
+<col style="width: 14%"/>
+<col style="width: 14%"/>
+<col style="width: 12%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>D0: Core Problem</th>
+<th>D1: Archetypal</th>
+<th>D2: Psychological</th>
+<th>D3: Cognitive</th>
+<th>D4: Structural</th>
+<th>D5: Surface</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>12:00</td>
+<td>Opening conflict</td>
+<td>Call/Threshold</td>
+<td>Identity baseline</td>
+<td>Audience orientation</td>
+<td>Setup/Inciting</td>
+<td>Opening imagery</td>
+</tr>
+<tr class="even">
+<td>1:00</td>
+<td>Problem escalates</td>
+<td>Departure begins</td>
+<td>Initial resistance</td>
+<td>First impressions</td>
+<td>Rising action</td>
+<td>Establishing tone</td>
+</tr>
+<tr class="odd">
+<td>2:00</td>
+<td>Stakes clarify</td>
+<td>Helper/Mentor</td>
+<td>Internal conflict</td>
+<td>Pattern building</td>
+<td>Complications</td>
+<td>Motif introduction</td>
+</tr>
+<tr class="even">
+<td>3:00</td>
+<td>First pressure</td>
+<td>Tests begin</td>
+<td>Defense activation</td>
+<td>First reversal</td>
+<td>Plot point 1</td>
+<td>Symbolic shift</td>
+</tr>
+<tr class="odd">
+<td>4:00</td>
+<td>Choice demanded</td>
+<td>Allies/Enemies</td>
+<td>Ego under strain</td>
+<td>Belief challenge</td>
+<td>Commitment</td>
+<td>Aesthetic escalation</td>
+</tr>
+<tr class="even">
+<td>5:00</td>
+<td>Point of no return</td>
+<td>Approach</td>
+<td>Identity crisis</td>
+<td>Cognitive shift</td>
+<td>Midpoint approach</td>
+<td>Tonal turn</td>
+</tr>
+<tr class="odd">
+<td>6:00</td>
+<td>Core revelation</td>
+<td>Ordeal/Death-rebirth</td>
+<td>Shadow confrontation</td>
+<td>Recognition moment</td>
+<td>Midpoint</td>
+<td>Central symbol</td>
+</tr>
+<tr class="even">
+<td>7:00</td>
+<td>Consequences unfold</td>
+<td>Reward/Refusal</td>
+<td>Integration attempt</td>
+<td>Meaning revision</td>
+<td>Rising stakes</td>
+<td>Visual payoff</td>
+</tr>
+<tr class="odd">
+<td>8:00</td>
+<td>Truth confronted</td>
+<td>Road back</td>
+<td>Transformation</td>
+<td>Reinterpretation</td>
+<td>Plot point 2</td>
+<td>Expressive climax</td>
+</tr>
+<tr class="even">
+<td>9:00</td>
+<td>Ultimate pressure</td>
+<td>Final ordeal</td>
+<td>Ego restructured</td>
+<td>Belief revision</td>
+<td>Crisis/Dark night</td>
+<td>Symbolic peak</td>
+</tr>
+<tr class="odd">
+<td>10:00</td>
+<td>Synthesis required</td>
+<td>Resurrection</td>
+<td>New identity</td>
+<td>Pattern completion</td>
+<td>Climax approach</td>
+<td>Aesthetic resolution</td>
+</tr>
+<tr class="even">
+<td>11:00</td>
+<td>Final choice</td>
+<td>Victory/Defeat</td>
+<td>Self-acceptance</td>
+<td>Final insight</td>
+<td>Falling action</td>
+<td>Resolution imagery</td>
+</tr>
+<tr class="odd">
+<td>12:00</td>
+<td>New equilibrium</td>
+<td>Return/Changed world</td>
+<td>Integrated self</td>
+<td>Meaning solidified</td>
+<td>Resolution</td>
+<td>Closing symbol</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note:</strong> Both table formats will be developed as
+interactive web tools where users can click coordinates to access
+detailed framework guidance.</p>
+<hr/>
+<h3 id="coordinate-notation-system">Coordinate Notation System</h3>
+<p><strong>Standard Format:</strong>
+<code class="strong-code">[Story Timeline Position / Story Depth Dimension]</code></p>
+<p>Examples:</p>
+<div class="coord-list"><div class="coord-line"><span class="coord-tag">[12:00 / D0]</span> = Opening,</div><div class="coord-line"><span class="coord-tag">[3:00 / D4]</span> = First turning point, Structural Dimension</div><div class="coord-line"><span class="coord-tag">[6:00 / D2]</span> = Midpoint, Psychological Dimension</div><div class="coord-line"><span class="coord-tag">[9:00 / D1]</span> = Crisis,</div></div>
+<p>Extended Notation (for complex analysis):  -
+ [3:00-4:00 / D3]  = Transition between beats, Cognitive
+Dimension</p>
+<div class="coord-list"><div class="coord-line"><span class="coord-tag">[6:00 / D2+D3]</span> = Midpoint examined across</div><div class="coord-line"><span class="coord-tag">[6:00 / All]</span> = Midpoint examined across all dimensions</div></div>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-iii-hub-node-strategy">PART III: HUB NODE STRATEGY</h2>
+<h3 id="concept-multi-dimensional-anchor-points">Concept:
+Multi-Dimensional Anchor Points</h3>
+<p>Some concepts are structurally central—they appear across multiple
+dimensions and serve as connection points in the system.</p>
+<p>Hub Node Criteria:</p>
+<ul><li>Appears in 3+ dimensions</li><li>Has
+high analytical utility</li><li>Requires cross-dimensional understanding to
+grasp fully</li></ul>
+<h3 id="hub-node-examples">Hub Node Examples</h3>
+<div class="callout"><pre><code>┌─────────────────────────────────────────────────────────────────┐
+│ HUB NODE: SHADOW                                            │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<div class="callout-body"><pre class="hub-meta"><code>Primary Dimension: D2 (Psychological)
+
+Also appears in:
+- D0: Repressed problem, denied truth
+- D1: Underworld descent myths, dark twin archetype
+- D3: Projection bias, splitting, confirmation bias
+- D5: Mirror imagery, dark doubles, visual inversion
+
+Hub Status: 5 dimensions</code></pre></div>
+</div>
+<hr/>
+<div class="callout"><pre><code>┌─────────────────────────────────────────────────────────────────┐
+│ HUB NODE: THRESHOLD                                         │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<div class="callout-body"><pre class="hub-meta"><code>Primary Dimension: D1 (Archetypal)
+
+Also appears in:
+- D0: Point of no return, irreversible choice
+- D4: Structural turning point, act break
+
+Hub Status: 3 dimensions</code></pre></div>
+</div>
+<hr/>
+<div class="callout"><pre><code>┌─────────────────────────────────────────────────────────────────┐
+│ HUB NODE: VOICE                                             │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<div class="callout-body"><pre class="hub-meta"><code>Primary Dimension: D5 (Expressive Surface)
+
+Also appears in:
+- D2: Character identity expression
+- D3: Rhetorical authority, ethos
+
+Hub Status: 3 dimensions</code></pre></div>
+</div>
+<hr/>
+<div class="callout"><pre><code>┌─────────────────────────────────────────────────────────────────┐
+│ HUB NODE: RECOGNITION (Anagnorisis)                         │
+└─────────────────────────────────────────────────────────────────┘</code></pre>
+<div class="callout-body"><pre class="hub-meta"><code>Primary Dimension: D4 (Structural)
+
+Also appears in:
+- D0: Core realization about problem
+- D2: Identity shift moment
+- D3: Pattern recognition, belief revision
+
+Hub Status: 4 dimensions</code></pre></div>
+</div>
+<hr/>
+<h3 id="hub-node-documentation-format">Hub Node Documentation
+Format</h3>
+<pre><code>[CONCEPT NAME] — Master Entry (Primary Dimension)
+
+Primary Definition:
+[Core explanation in primary dimension context]
+
+Cross-Dimensional Presence:
+├─ Dimension X: [Function/meaning in this dimension]
+├─ Dimension Y: [Function/meaning in this dimension]
+└─ Dimension Z: [Function/meaning in this dimension]
+
+See Also:
+├─ Related frameworks: [List]
+└─ Contrasts with: [List]
+
+Examples:
+- [Concrete story instance 1]
+- [Concrete story instance 2]</code></pre>
+<h3 id="hub-node-visual-treatment">Hub Node Visual Treatment</h3>
+<p>In digital tools:</p>
+<ul><li>Hub nodes appear larger/highlighted in NCM
+visualization</li><li>Clicking a hub node shows all dimensional connections</li><li>Cross-references automatically populate in all related dimensions</li></ul>
+<p>In printed materials:</p>
+<ul><li>Hub nodes marked with special icon (⬢)</li><li>Cross-reference blocks clearly formatted</li><li>Page numbers for each
+dimensional appearance listed</li></ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-iv-relationship-finder-tool">PART IV: RELATIONSHIP FINDER
+TOOL</h2>
+<h3 id="overview-purpose">Overview &amp; Purpose</h3>
+<p>The Relationship Finder is a cross-system concept lookup and
+comparison tool designed to help users navigate relationships between
+different narrative frameworks without flattening distinctions or
+forcing false equivalences.</p>
+<p><strong>Core Problem It Solves:</strong> Users working with multiple
+analytical systems (Jung, Dramatica, Enneagram, etc.) need to understand
+how concepts relate across frameworks without losing the unique value of
+each system.</p>
+<p><strong>Primary Use Cases:</strong></p>
+<ol><li><strong>Concept Discovery:</strong> “I’m analyzing Shadow—show me where else this
+appears”</li><li><strong>Framework Translation:</strong> “I know this is
+Enneagram Type 4—what’s that in Jungian terms?”</li><li><strong>Analytical Completeness:</strong> “I’m using Jung—what am I missing from other
+systems?”</li><li><strong>Learning &amp; Exploration:</strong> “I understand
+Dramatica Antagonist—teach me related concepts”</li></ol>
+<hr/>
+<h3 id="tool-architecture">Tool Architecture</h3>
+<p><strong>Database Structure:</strong></p>
+<pre><code>CONCEPTS TABLE
+├─ Concept ID
+├─ Concept Name
+├─ Primary Dimension (0-5)
+├─ Source Framework (Jung, Dramatica, Enneagram, etc.)
+├─ Definition (short)
+├─ Narrative Function
+├─ Hub Node Status (Y/N)
+└─ Cross-Links to related concepts
+
+RELATIONSHIPS TABLE
+├─ Concept A ID
+├─ Concept B ID
+├─ Relationship Type (Equivalent, Resonant, Contrasts, Complements)
+├─ Similarity Score (0-100%)
+├─ Overlap Description
+├─ Distinction Notes
+└─ Usage Context Guidance
+
+FRAMEWORKS TABLE
+├─ Framework ID
+├─ Framework Name
+├─ Primary Author/Source
+├─ Best Used For
+├─ Dimensions Covered
+└─ Related Frameworks</code></pre>
+<hr/>
+<h3 id="user-interface-design">User Interface Design</h3>
+<p><strong>Primary Interface: Concept Lookup</strong></p>
+<pre><code>┌─────────────────────────────────────────────┐
+│  FRAMEWORK FINDER                            │
+└─────────────────────────────────────────────┘
+
+[Step 1] Select Source Framework:
+[Dropdown: Jung | Dramatica | Enneagram | Propp | MBTI | Four Temperaments | Defense Mechanisms | Cognitive Biases | etc.]
+
+[Step 2] Select Concept:
+[Dropdown: populated based on framework selected]
+
+[Search Results Display Below]</code></pre>
+<p><strong>Results Display Template:</strong></p>
+<pre><code>═══════════════════════════════════════════════
+SHADOW (Jung — Psychological Dimension 2)
+═══════════════════════════════════════════════
+
+Primary Definition:
+Repressed or denied aspects of the self; the "dark side" of personality containing both negative traits we reject and positive potentials we haven't integrated.
+
+Narrative Function:
+- Externalizes internal conflict
+- Creates character depth through contradiction
+- Drives transformation arc through confrontation
+
+Hub Node Status: ✓ Yes (appears in 5 dimensions)
+
+─────────────────────────────────────────────
+RELATED CONCEPTS IN OTHER FRAMEWORKS
+─────────────────────────────────────────────
+
+● DRAMATICA: Antagonist
+   Similarity Score: 40% (Partial Overlap)
+   
+   Where they align:
+   - Both represent opposing force
+   - Both can be externalized in story
+   
+   Where they differ:
+   - Shadow is internal/psychological content
+   - Antagonist is functional plot role
+   - Shadow is repressed self-aspect
+   - Antagonist serves story argument structure
+   
+   When to use Shadow lens: 
+   Character psychology, internal conflict, individuation
+   
+   When to use Antagonist lens: 
+   Plot structure, ensemble balance, argument construction
+
+● ENNEAGRAM: Disintegration Patterns (All Types)
+   Similarity Score: 55% (Moderate Overlap)
+   
+   Where they align:
+   - Both involve regressive/repressed material
+   - Both activate under stress
+   - Both require integration work
+   
+   Where they differ:
+   - Enneagram tracks predictable stress patterns
+   - Shadow is broader unconscious content
+   - Enneagram shows which type → which behaviors
+   - Shadow doesn't follow fixed patterns
+   
+   When to use Shadow lens:
+   General unconscious material, projection dynamics
+   
+   When to use Enneagram lens:
+   Character-specific stress responses, growth paths
+
+● COGNITIVE BIASES: Projection Bias
+   Similarity Score: 70% (Strong Overlap)
+   
+   Where they align:
+   - Both involve attributing own traits to others
+   - Both operate unconsciously
+   - Both distort perception
+   
+   Where they differ:
+   - Shadow is psychological content (what is projected)
+   - Projection bias is cognitive mechanism (how it's projected)
+   - Shadow includes positive + negative material
+   - Projection bias neutral toward content
+   
+   When to use Shadow lens:
+   Understanding what psychological material exists
+   
+   When to use Projection Bias lens:
+   Understanding the mechanism of misattribution
+
+● DEFENSE MECHANISMS: Denial, Reaction Formation
+   Similarity Score: 60% (Moderate-Strong Overlap)
+   
+   Where they align:
+   - Both protect ego from threatening material
+   - Both operate unconsciously
+   - Shadow often maintained through defense mechanisms
+   
+   Where they differ:
+   - Defense mechanisms are processes
+   - Shadow is content being defended against
+   - Defenses are how; Shadow is what
+   
+   Relationship: Defense mechanisms MAINTAIN the Shadow
+
+─────────────────────────────────────────────
+APPEARS ACROSS DIMENSIONS
+─────────────────────────────────────────────
+
+Core Dimension 0: Repressed problem or denied truth
+Archetypal Dimension 1: Underworld descent, dark twin myths
+Psychological Dimension 2: Primary location (repressed self)
+Cognitive Dimension 3: Projection, splitting, confirmation bias
+Surface Dimension 5: Mirror imagery, dark doubles, visual inversion
+
+─────────────────────────────────────────────
+COORDINATE TAGS (Common Story Positions)
+─────────────────────────────────────────────
+
+[2:00-3:00 / D2] — First hints of repressed material
+<span class="coord-tag">[6:00 / D2]</span> — Midpoint shadow confrontation (classic)
+[8:00-9:00 / D2] — Integration attempt or final rejection
+
+─────────────────────────────────────────────
+STORY EXAMPLES
+─────────────────────────────────────────────
+
+● Star Wars: Luke's shadow = Vader (father + dark potential)
+● Fight Club: Narrator's shadow = Tyler Durden (externalized)
+● Black Swan: Nina's shadow = Lily + her own dark desires
+● The Strange Case of Dr. Jekyll and Mr. Hyde: Literary archetype
+
+─────────────────────────────────────────────
+EXPLORE FURTHER
+─────────────────────────────────────────────
+
+[Button: View All Jung Concepts]
+[Button: View All D2 Psychological Concepts]
+[Button: Show Me Contrasting Concepts]
+[Button: Deep Dive: Shadow Hub Node Analysis]
+
+═══════════════════════════════════════════════</code></pre>
+<hr/>
+<h3 id="similarity-scoring-methodology">Similarity Scoring
+Methodology</h3>
+<p><strong>How similarity scores are calculated:</strong></p>
+<p><strong>80-100%: Equivalent</strong> (Direct mapping possible)</p>
+<ul><li>Same
+function in narrative</li><li>Same mechanism</li><li>Same outcome</li><li>Interchangeable
+in most contexts</li></ul>
+<p><strong>Example:</strong> Hero (Jung) ↔︎ Protagonist (Dramatica) =
+90%</p>
+<hr/>
+<p><strong>50-79%: Strong Resonance</strong> (Significant overlap, notable distinctions)</p>
+<ul><li>Overlapping functions</li><li>Different emphases</li><li>Use together for fuller picture</li></ul>
+<p><strong>Example:</strong> Shadow (Jung) ↔︎ Projection Bias (Cognitive) = 70%</p>
+<hr/>
+<p><strong>30-49%: Partial Resonance</strong> (Some overlap, mostly distinct)</p>
+<ul><li>Touch similar territory</li><li>Fundamentally different lenses</li><li>Can complement each other</li></ul>
+<p><strong>Example:</strong> Shadow (Jung) ↔︎ Antagonist (Dramatica) =
+40%</p>
+<hr/>
+<p><strong>0-29%: Minimal Overlap</strong> (Contrasting or unrelated)</p>
+<ul><li>Different domains</li><li>Different purposes</li><li>May appear similar but aren’t</li></ul>
+<p><strong>Example:</strong> Shadow (Jung) ↔︎ Three-Act Structure = 5%</p>
+<hr/>
+<h3 id="development-requirements">Development Requirements</h3>
+<p>Phase 1: Database Population (Weeks 5-8)</p>
+<ul><li>Catalog
+all frameworks from dimensional content pages</li><li>Create concept entries
+for each (estimate: 500-800 concepts)</li><li>Document relationships between
+high-priority concepts (50-100 key relationships)</li><li>Assign similarity
+scores through systematic comparison</li></ul>
+<p>Phase 2: Interface Build (Weeks 9-12)</p>
+<ul><li>Create
+search/filter interface</li><li>Build results display templates</li><li>Implement
+cross-linking</li><li>Add coordinate tag integration</li></ul>
+<p>Phase 3: Enhancement (Months 4-6)</p>
+<ul><li>Add story
+examples for each concept</li><li>Build “Framework Translation” workflow</li><li>Create saved comparison feature</li><li>Community contribution system
+(optional)</li></ul>
+<hr/>
+<h3 id="technical-stack-recommendations">Technical Stack
+Recommendations</h3>
+<p>For Static Site (Phase 1):</p>
+<ul><li>JSON database of
+concepts + relationships</li><li>JavaScript search/filter</li><li>Lunr.js or
+Pagefind for search</li><li>No backend required initially</li></ul>
+<p>For Dynamic Tool (Phase 2):</p>
+<ul><li>Supabase or Firebase
+for database</li><li>User accounts for saved searches</li><li>API for concept
+lookups</li><li>Progressive web app capability</li></ul>
+<hr/>
+<h3 id="success-metrics">Success Metrics</h3>
+<p>Tool is working if:</p>
+<ul><li>Users can find concepts across
+frameworks in &lt;30 seconds</li><li>Similarity scores feel accurate to users</li><li>Users discover relevant frameworks they didn’t know about</li><li>Users
+report it helps prevent false equivalences</li><li>Users use it to structure
+multi-framework analyses</li></ul>
+<hr/>
+<h3 id="example-high-priority-concept-relationships-to-document">Example
+High-Priority Concept Relationships to Document</h3>
+<p>Psychological Dimension 2:</p>
+<ul><li>Shadow ↔︎ [Antagonist,
+Projection, Enneagram Disintegration, Dark Double]</li><li>Hero ↔︎
+[Protagonist, Type 3/8 Enneagram, Ego, Warrior]</li><li>Mentor ↔︎ [Guardian,
+Sage, Type 2, Wise Old Man]</li></ul>
+<p>Cognitive Dimension 3:</p>
+<ul><li>Confirmation Bias ↔︎ [Shadow
+Projection, Motivated Reasoning, Selective Attention]</li><li>Cognitive
+Dissonance ↔︎ [Internal Conflict, Value Clash, Belief Revision]</li><li>Dunning-Kruger ↔︎ [Hubris, Tragic Flaw, Innocent Archetype]</li></ul>
+<p>Structural Dimension 4:</p>
+<ul><li>Midpoint ↔︎ [6:00 Position,
+Ordeal, Point of No Return, Central Reversal]</li><li>Climax ↔︎ [9:00-10:00
+Position, Final Confrontation, Crisis, Resurrection]</li></ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-v-building-out-dimensional-content">PART V: BUILDING OUT
+DIMENSIONAL CONTENT</h2>
+<h3 id="overview">Overview</h3>
+<p>Section IIA (Story Structure Crosswalk) serves as the template for
+how dimensional content should be developed. Each dimension requires
+similar detailed treatment with comprehensive framework
+documentation.</p>
+<p>This section provides the complete blueprint for what needs to be
+built, organized by dimension, drawing from the comprehensive framework
+documentation in source materials.</p>
+<hr/>
+<h3 id="core-dimension-0-main-philosophical-conflict-essential-problem-thematic-core">CORE
+DIMENSION 0: Main Philosophical Conflict, Essential Problem &amp;
+Thematic Core</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<h4 class="subsection">A. Problem Typologies</h4>
+<ul><li>Dramatica’s 4 Domains
+(Universe, Physics, Psychology, Mind)</li><li>Dramatica’s 64 Problem Elements
+(the atomic problems)</li><li>Four Classic Conflict Types (Man vs. Nature, Man
+vs. Society, Man vs. Man, Man vs. Self)</li><li>Story Conflict Cube (4→8→16
+cell system)</li><li>Internal vs. External conflict mapping</li></ul>
+<h4 class="subsection">B. Value Polarity Systems</h4>
+<ul><li>McKee value change
+patterns (truth ↔︎ deception, love ↔︎ indifference, etc.)</li><li>Moral premise
+structures</li><li>Thematic question frameworks</li><li>Core tension
+identification</li></ul>
+<h4 class="subsection">C. Stakes Frameworks</h4>
+<ul><li>Personal, relational,
+societal, existential</li><li>Nested stakes structures</li><li>Stakes escalation
+patterns</li></ul>
+<h4 class="subsection">D. Problem-Solution Architectures</h4>
+<ul><li>Dramatica
+Problem/Solution pairs</li><li>Focus/Direction mechanics</li><li>Throughline
+intersection logic</li></ul>
+<p>Content Structure Notes:</p>
+<ul><li>Follow Section IIA model
+with crosswalk format</li><li>Each problem type gets: definition, function,
+mechanics, maps to, transformation tendencies</li><li>Cross-link to Structural
+Dimension 4 (how problems structure story)</li><li>Cross-link to Psychological
+Dimension 2 (how problems manifest internally)</li></ul>
+<p><strong>Estimated Scope:</strong> 60-80 framework entries</p>
+<hr/>
+<h3 id="archetypal-dimension-1-mythic-patterns-archetypal-forms">ARCHETYPAL
+DIMENSION 1: Mythic Patterns &amp; Archetypal Forms</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<h4 class="subsection">A. Jungian Archetype Systems</h4>
+<ul><li>The 12 Jungian
+Archetypes (Ego: Innocent, Everyperson, Hero, Caregiver | Soul:
+Explorer, Rebel, Lover, Creator | Self: Jester, Sage, Magician, Ruler) -
+Shadow and Shadow Pairings framework</li><li>Anima/Animus dynamics</li><li>Self
+archetype (integrated wholeness)</li><li>Persona vs. Shadow mechanics</li></ul>
+<h4 class="subsection">B. Monomyth &amp; Journey Structures</h4>
+<ul><li>Campbell’s
+Hero’s Journey (12-17 stages depending on version)</li><li>Vogler’s 5 Dramatic
+Archetypes (Orphan, Wanderer, Warrior, Martyr, Magician)</li><li>Threshold
+crossing patterns</li><li>Descent/katabasis myths</li><li>Death-rebirth cycles</li><li>Return with boon motifs</li></ul>
+<h4 class="subsection">C. Folk &amp; Fairy Tale Systems</h4>
+<ul><li>Propp’s 7
+Character Functions (Hero, Villain, Dispatcher, Donor, Helper,
+Princess/Prize, False Hero)</li><li>Propp’s 31 Narrative Functions</li><li>ATU Tale
+Type Index (selected major types)</li><li>Universal story patterns</li></ul>
+<h4 class="subsection">D. Mythic Motifs &amp; Symbols</h4>
+<ul><li>Sacred marriage</li><li>Underworld descent</li><li>Quest for immortality</li><li>Seasonal/cyclical myths</li><li>Creation/destruction patterns</li><li>Threshold guardians</li><li>Magic helpers</li><li>Tests and trials</li></ul>
+<h4 class="subsection">E. Moral &amp; Alignment Frameworks</h4>
+<ul><li>6 Moral
+Alignment Archetypes (adapted from D&amp;D)</li><li>Moral spectrum systems</li><li>Ethical archetype patterns</li></ul>
+<p>Content Structure Notes:</p>
+<ul><li>Each archetype includes:
+psychological shadow, mythic precedent, modern story examples</li><li>Map
+Campbell stages to Story Compass clock positions</li><li>Cross-link to
+Psychological D2 (archetypes as psychological patterns)</li><li>Cross-link to
+Surface D5 (archetypal imagery)</li></ul>
+<p><strong>Estimated Scope:</strong> 100-150 framework entries</p>
+<hr/>
+<h3 id="psychological-dimension-2-emotional-affective-states">PSYCHOLOGICAL
+DIMENSION 2: Emotional &amp; Affective States</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<h4 class="subsection">A. Personality Typology Systems</h4>
+<ul><li>Enneagram (Types
+1-9 with wings, stress lines, growth lines)</li><li>Four Temperaments
+(Choleric, Sanguine, Melancholic, Phlegmatic)</li><li>MBTI-Based Character
+Archetypes (8 major types: Analyst, Diplomat, Sentinel, Explorer, etc.)</li><li>“What They Want vs. What They Fear” system</li></ul>
+<h4 class="subsection">B. Defense Mechanisms</h4>
+<ul><li>Denial (refusing to
+acknowledge reality)</li><li>Projection (attributing own feelings/traits to
+others)</li><li>Splitting (all-good vs. all-bad thinking)</li><li>Reaction formation
+(expressing opposite of true feeling)</li><li>Rationalization (justifying
+behavior with false reasons)</li><li>Displacement (redirecting emotions to
+safer target)</li><li>Sublimation (channeling impulses into acceptable
+outlets)</li><li>Repression (unconscious blocking of threatening material)</li><li>Regression (reverting to earlier developmental stage)</li><li>Intellectualization (avoiding emotion through analysis)</li></ul>
+<h4 class="subsection">C. Trauma Response Patterns</h4>
+<ul><li>Fight (confrontation,
+aggression, hypervigilance)</li><li>Flight (avoidance, escape, withdrawal)</li><li>Freeze (immobilization, dissociation, numbing)</li><li>Fawn (appeasement,
+people-pleasing, boundary collapse)</li></ul>
+<h4 class="subsection">D. Attachment Styles</h4>
+<ul><li>Secure attachment (coherent,
+balanced, trusting)</li><li>Anxious-preoccupied attachment (fear of
+abandonment, seeking reassurance)</li><li>Dismissive-avoidant attachment
+(self-reliant, emotionally distant)</li><li>Fearful-avoidant attachment
+(disorganized, approach-avoidance conflict)</li><li>Internal Working Models
+(how attachment shapes worldview, expectations, relationship
+patterns)</li></ul>
+<h4 class="subsection">E. Shadow Dynamics</h4>
+<ul><li>Personal shadow (repressed
+traits)</li><li>Collective shadow (cultural repressions)</li><li>Projection
+mechanisms</li><li>Shadow integration processes</li><li>Golden shadow (repressed
+positive traits)</li></ul>
+<h4 class="subsection">F. Character Psychology Frameworks</h4>
+<ul><li>Ego formation
+stages</li><li>Identity pressure points</li><li>Internal conflict patterns</li><li>Emotional wound systems</li><li>Character web (Truby) — moral spectrum of
+responses</li></ul>
+<h4 class="subsection">G. Aesthetic &amp; Vibrational Systems</h4>
+<ul><li>Aesthetic
+quadrants</li><li>Energy vectors</li><li>Persona archetypes (for character
+styling)</li></ul>
+<p>Content Structure Notes:</p>
+<ul><li>Each system includes:
+core motivation, wound pattern, growth path, story examples</li><li>Enneagram
+entries show stress/growth lines</li><li>Defense mechanisms linked to specific
+story beats</li><li>Cross-link to Cognitive D3 (how psychology affects
+cognition)</li><li>Cross-link to Archetypal D1 (archetypal psychological
+patterns)</li></ul>
+<p><strong>Estimated Scope:</strong> 80-120 framework entries</p>
+<hr/>
+<h3 id="cognitive-dimension-3-cognitive-dynamics-belief-systems">COGNITIVE
+DIMENSION 3: Cognitive Dynamics &amp; Belief Systems</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<h4 class="subsection">A. Cognitive Biases  (Comprehensive catalog</h4>
+<ul><li>50+
+major biases)</li><li>Confirmation bias</li><li>Availability heuristic</li><li>Anchoring
+bias</li><li>Dunning-Kruger effect</li><li>Fundamental attribution error</li><li>Hindsight
+bias</li><li>Sunk cost fallacy</li><li>Status quo bias</li><li>Bandwagon effect</li><li>Halo
+effect</li><li>[Plus 40+ additional documented biases]</li></ul>
+<h4 class="subsection">B. Logical Fallacies  (Comprehensive catalog</h4>
+<ul><li>40+
+major fallacies)</li><li>Ad hominem</li><li>Straw man</li><li>False dilemma</li><li>Slippery
+slope</li><li>Appeal to authority</li><li>Red herring</li><li>Circular reasoning</li><li>Post
+hoc ergo propter hoc</li><li>Hasty generalization</li><li>No true Scotsman</li><li>[Plus
+30+ additional documented fallacies]</li></ul>
+<h4 class="subsection">C. Rhetorical Modes &amp; Strategies</h4>
+<ul><li>Ethos
+(credibility, character)</li><li>Pathos (emotion, values)</li><li>Logos (logic,
+reason)</li><li>Kairos (timing, opportunity)</li><li>Persuasion frameworks
+(Cialdini’s 6 principles)</li><li>Argumentation structures</li></ul>
+<h4 class="subsection">D. Information Control Techniques</h4>
+<ul><li>Suspense
+(audience knows less than character)</li><li>Surprise (simultaneous
+revelation)</li><li>Dramatic irony (audience knows more)</li><li>Mystery (audience
+assembles clues)</li><li>Unreliable narration</li><li>Narrative misdirection</li></ul>
+<h4 class="subsection">E. Belief Formation &amp; Revision</h4>
+<ul><li>Pattern
+recognition processes</li><li>Causal inference mechanics</li><li>Ethical reasoning
+frameworks</li><li>Meaning-making patterns</li><li>Cognitive dissonance mechanics</li><li>Worldview construction</li></ul>
+<h4 class="subsection">F. Dramatica Mind Systems</h4>
+<ul><li>Problem/Solution
+elements (as cognitive patterns)</li><li>MC Solve/Remain Changed mechanics</li><li>Throughline thinking patterns</li></ul>
+<p>Content Structure Notes:</p>
+<ul><li>Each bias/fallacy
+includes: definition, mechanism, story function, character examples</li><li>Group related cognitive patterns</li><li>Show how biases compound or
+counteract</li><li>Cross-link to Psychological D2 (psychological origins of
+cognitive patterns)</li><li>Cross-link to Structural D4 (how cognition affects
+plot mechanics)</li></ul>
+<p><strong>Estimated Scope:</strong> 120-150 framework entries</p>
+<hr/>
+<h3 id="structural-dimension-4-structural-functional-logic">STRUCTURAL
+DIMENSION 4: Structural &amp; Functional Logic</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<p><strong>Status:</strong> Section IIA (Story Structure Crosswalk)
+COMPLETED — covers comprehensive structural frameworks</p>
+<p>Content Includes:</p>
+<ul><li>Foundational Story Engines
+(Monomyth, Classical 3-Act, Story as Value Change)</li><li>Structural
+Geometries (Chiastic, Ring, Frame)</li><li>Episodic &amp; Modular (Episodic,
+Picaresque)</li><li>Quest &amp; Braided (Quest, Braided Narrative)</li><li>Temporal
+Disruption (In Medias Res, Nonlinear)</li><li>Contrast Engines (Ordinary ↔︎
+Extraordinary)</li><li>Five-Act Structure as Diagnostic Lens</li></ul>
+<p>Additional Content to Develop:</p>
+<ul><li>Dramatica structure
+systems (8 archetypes as plot functions, throughlines, signposts)</li><li>Save
+the Cat 15 beats</li><li>Dan Harmon Story Circle (detailed)</li><li>Genre-specific
+beat sheets</li><li>Scene function taxonomy (plant, payoff, setup, reminder,
+revelation)</li><li>Act structure variations (4-act, 5-act detailed
+treatment)</li></ul>
+<p>Integration Notes:</p>
+<ul><li>Section IIA serves as model for
+all other dimensions</li><li>Add coordinate tags to each structure (where it
+commonly appears on clock)</li><li>Cross-link to Core D0 (how structure serves
+problem)</li><li>Cross-link to Surface D5 (how structure manifests
+expressively)</li></ul>
+<p><strong>Estimated Additional Scope:</strong> 20-30 framework entries
+beyond Section IIA</p>
+<hr/>
+<h3 id="surface-dimension-5-expressive-surface-symbolic-effects">SURFACE
+DIMENSION 5: Expressive Surface &amp; Symbolic Effects</h3>
+<p><strong>Framework Categories to Document:</strong></p>
+<h4 class="subsection">A. Trope Taxonomy</h4>
+<ul><li>Character tropes (Chosen One,
+Mentor’s Death, Dark Lord, Reluctant Hero, etc.)</li><li>Plot tropes
+(MacGuffin, Chekhov’s Gun, Red Herring, Deus Ex Machina, etc.)</li><li>Setting
+tropes (Dystopia, Lost World, Haunted House, Hidden Kingdom, etc.)</li><li>Relationship tropes (Enemies to Lovers, Mentor-Student, Found Family,
+etc.)</li><li>[Curated selection from TV Tropes — 200-300 major tropes]</li></ul>
+<h4 class="subsection">B. Symbolic Imagery Systems</h4>
+<ul><li>Visual symbols
+(mirrors, thresholds, circles, spirals, doors, windows, etc.)</li><li>Color
+symbolism (red = passion/danger, white = purity/death, black =
+mystery/void, etc.)</li><li>Weather symbolism (storm = turmoil, sunshine =
+hope, fog = confusion, etc.)</li><li>Animal symbolism (wolf = predator, dove =
+peace, serpent = transformation/deception, etc.)</li><li>Elemental symbolism
+(fire, water, earth, air)</li><li>Number symbolism (3, 7, 12, etc.)</li></ul>
+<h4 class="subsection">C. Aesthetic &amp; Tonal Frameworks</h4>
+<ul><li>Tone
+categories (serious, comedic, ironic, sincere, melancholic, etc.)</li><li>Mood
+palettes (tense, hopeful, ominous, triumphant, etc.)</li><li>Style markers
+(minimalist, baroque, naturalistic, expressionistic, surreal, etc.)</li><li>Genre aesthetics (noir visual language, western iconography, sci-fi
+futurism, etc.)</li></ul>
+<h4 class="subsection">D. Sensory Pattern Systems</h4>
+<ul><li>Visual motifs
+(recurring imagery, color patterns, framing choices)</li><li>Auditory motifs
+(recurring sounds, musical themes, silence usage)</li><li>Tactile/kinesthetic
+descriptions</li><li>Olfactory/gustatory cues</li><li>Synesthesia in narrative</li></ul>
+<h4 class="subsection">E. Tonal Architecture</h4>
+<ul><li>Genre mixing patterns
+(horror-comedy, action-romance, etc.)</li><li>Tonal dissonance (Ordinary ↔︎
+Extraordinary contrast engine)</li><li>Register shifts (formal ↔︎ colloquial)</li><li>Voice consistency vs. variation</li></ul>
+<h4 class="subsection">F. Genre Surface Conventions</h4>
+<ul><li>Expected visual
+language per genre</li><li>Iconic moments and imagery</li><li>Genre-specific symbols</li><li>Aesthetic rule systems</li></ul>
+<p>Content Structure Notes:</p>
+<ul><li>Each trope includes:
+definition, function, variations, subversions, examples</li><li>Symbol entries
+show: cultural origins, narrative uses, cross-cultural variations</li><li>Group related aesthetic choices</li><li>Show how surface choices encode deeper
+dimensions</li><li>Cross-link to Archetypal D1 (archetypal imagery)</li><li>Cross-link to Psychological D2 (emotional/aesthetic correspondence)</li></ul>
+<p><strong>Estimated Scope:</strong> 250-400 framework entries (largest
+dimension by volume)</p>
+<hr/>
+<h3 id="development-template-following-section-iia-model">Development
+Template (Following Section IIA Model)</h3>
+<p><strong>Each dimensional page should include:</strong></p>
+<p>1. Dimension Overview</p>
+<ul><li>What this dimension examines</li><li>Why it matters for story analysis</li><li>How it relates to other dimensions</li><li>When to prioritize this lens</li></ul>
+<p><strong>2. Framework Categories (Organized A, B, C, etc.)</strong></p>
+<ul><li>Logical groupings of related frameworks</li><li>Clear category definitions</li><li>Usage guidance</li></ul>
+<p><strong>3. Individual Framework Entries</strong></p>
+<p>Standard format:</p>
+<pre><code>[FRAMEWORK NAME]
+[Italicized subtitle if applicable]
+
+Definition Box:
+- Structural Function
+- Defining Logic
+- Narrative Mechanics
+- Maps To (story types/genres)
+- Transformation Arc Tendencies
+
+Examples Callout Box:
+- Story example 1
+- Story example 2
+- Story example 3
+
+Framework Crosswalk (6-Dimension Analysis):
+- Core Dimension 0
+- Archetypal Dimension 1
+- Psychological Dimension 2
+- Cognitive Dimension 3
+- Structural Dimension 4
+- Surface Dimension 5</code></pre>
+<p>4. Visual Design Consistency</p>
+<ul><li>Follow
+00_STYLE_GUIDE_PHASE1_v5.html</li><li>Use established callout box styles</li><li>Maintain color coding (if applicable)</li><li>Consistent typography
+hierarchy</li></ul>
+<p>5. Integration Features</p>
+<ul><li>Coordinate tags:
+ <span class="coord-tag">[6:00 / D2]</span>  showing common story positions</li><li>Hub node
+indicators (⬢ symbol)</li><li>Cross-references to other dimensions</li><li>Links to
+Relationship Finder tool</li><li>Related framework suggestions</li></ul>
+<hr/>
+<h3 id="integration-with-story-coordinate-compass">Integration with
+Story Coordinate Compass</h3>
+<p><strong>Each framework entry should include:</strong></p>
+<p><strong>Coordinate Tags:</strong> Which story positions this
+framework commonly appears - Format: <code>[Position / Dimension]</code>
+- Example: <code><span class="coord-tag">[6:00 / D2]</span></code> = Midpoint, Psychological</p>
+<p>Dimensional Weight:  Primary vs. secondary dimension
+placement</p>
+<ul><li>Primary: Main analytical home</li><li>Secondary: Also
+appears/applies in these dimensions</li><li>Tertiary: Minor relevance or edge
+cases</li></ul>
+<p>Hub Node Status:  If applicable</p>
+<ul><li>Mark concepts
+appearing in 3+ dimensions</li><li>Link to Hub Nodes Reference Document</li></ul>
+<p>Cross-Links:  To related frameworks in other
+dimensions</p>
+<ul><li>“See also” references</li><li>“Contrasts with” references</li><li>“Complements” references</li></ul>
+<hr/>
+<h3 id="quality-control-checklist">Quality Control Checklist</h3>
+<p>For each dimensional content page:</p>
+<div class="checklist"><div class="check">[ ] Follows Section IIA format and structure</div><div class="check">[ ] Maintains consistent terminology (dimension names, notation)</div><div class="check">[ ] Includes coordinate tags for major frameworks</div><div class="check">[ ] Cross-links to other dimensions where relevant</div><div class="check">[ ] Provides concrete story examples</div><div class="check">[ ] Uses callout boxes appropriately (info, example, warning)</div><div class="check">[ ] Mobile-responsive design</div><div class="check">[ ] Internal navigation (breadcrumbs, table of contents)</div><div class="check">[ ] Hub nodes clearly marked</div><div class="check">[ ] Relationship Finder integration ready</div></div>
+<hr/>
+<h3 id="content-sources">Content Sources</h3>
+<p>Primary Documentation:</p>
+<ul><li>Comprehensive framework
+documentation (source files)</li><li>Section IIA as structural template</li><li>00_STYLE_GUIDE_PHASE1_v5.html for visual consistency</li><li>Framework
+Bibliography (Appendix C</li><li>to be developed)</li></ul>
+<p>Cross-Reference:</p>
+<ul><li>Hub Nodes Reference Document
+(tracks multi-dimensional concepts)</li><li>Relationship Finder database
+(concept relationships)</li><li>Story Compass coordinate system (positional
+mapping)</li></ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-vi-expandability-tools-protocols">PART VI: EXPANDABILITY
+TOOLS &amp; PROTOCOLS</h2>
+<p><strong>For each dimensional page:</strong></p>
+<div class="checklist"><div class="check">[ ] Follows Section IIA format and structure</div><div class="check">[ ] Maintains consistent terminology (dimension names, notation)</div><div class="check">[ ] Includes coordinate tags for major frameworks</div><div class="check">[ ] Cross-links to other dimensions where relevant</div><div class="check">[ ] Provides concrete story examples</div><div class="check">[ ] Uses callout boxes appropriately (info, example, warning)</div><div class="check">[ ] Mobile-responsive design</div><div class="check">[ ] Internal navigation (breadcrumbs, TOC)</div></div>
+<hr/>
+<h3 id="tool-1-new-entry-template">Tool 1: New Entry Template</h3>
+<p>Use this standardized format when adding new concepts to the
+system:</p>
+<pre><code>## [CONCEPT NAME]
+
+**Primary Dimension:** [0-5]
+**Secondary Dimensions:** [List]
+**Source Framework:** [System/Author]
+
+**Core Definition:**
+[1-2 sentence definition]
+
+**Function in Narrative:**
+[What it does, what work it performs]
+
+**Distinguishing Features:**
+[What makes it unique or different from similar concepts]
+
+**Cross-References:**
+├─ Resonates with: [Similar concepts]
+├─ Contrasts with: [Opposite concepts]
+└─ Applied in: [Where it appears in stories]
+
+**Examples:**
+- [Concrete story instance 1]
+- [Concrete story instance 2]
+
+**Dimensional Weight Distribution:**
+- Dimension X: [Primary/Secondary/Tertiary]
+- Dimension Y: [Primary/Secondary/Tertiary]</code></pre>
+<h3 id="tool-2-audit-trigger-system">Tool 2: Audit Trigger System</h3>
+<p>Automatic review triggers to maintain system coherence:</p>
+<table>
+<colgroup>
+<col style="width: 50%"/>
+<col style="width: 50%"/>
+</colgroup>
+<thead>
+<tr class="header">
+<th>Trigger Condition</th>
+<th>Action Required</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>25 new entries added</td>
+<td>Run positional audit across all dimensions</td>
+</tr>
+<tr class="even">
+<td>New framework added</td>
+<td>Create crosswalk document</td>
+</tr>
+<tr class="odd">
+<td>Can’t locate concept twice</td>
+<td>Add entry points and cross-references</td>
+</tr>
+<tr class="even">
+<td>5+ references to same concept</td>
+<td>Consider hub node status</td>
+</tr>
+<tr class="odd">
+<td>Cross-system confusion reported</td>
+<td>Build equivalence/resonance table</td>
+</tr>
+<tr class="even">
+<td>Dimension feels overcrowded</td>
+<td>Review for possible sub-dimension structure</td>
+</tr>
+<tr class="odd">
+<td>User can’t find expected content</td>
+<td>Add signposting and navigation aids</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tool-3-version-control-strategy">Tool 3: Version Control
+Strategy</h3>
+<p>Track system evolution over time:</p>
+<p>Version Numbering:</p>
+<ul><li>Major version (1.0 →
+2.0):  Fundamental structural changes, dimension reorganization</li><li>Minor version (1.0 → 1.1):  New frameworks added,
+dimensions expanded</li><li>Patch version (1.1 → 1.1.1): 
+Corrections, clarifications, minor additions</li></ul>
+<p>Version Documentation:</p>
+<ul><li>Changelog documenting all
+additions/changes</li><li>Migration guides for users of previous versions</li><li>Archived copies of previous versions for reference</li></ul>
+<h3 id="tool-4-gap-identification-matrix">Tool 4: Gap Identification
+Matrix</h3>
+<p>Systematically identify missing content:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Framework Coverage</th>
+<th>Identified Gaps</th>
+<th>Priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>D0: Core Problem</td>
+<td>High</td>
+<td>Need more problem typologies</td>
+<td>Medium</td>
+</tr>
+<tr class="even">
+<td>D1: Archetypal</td>
+<td>High</td>
+<td>Could expand ATU tale types</td>
+<td>Low</td>
+</tr>
+<tr class="odd">
+<td>D2: Psychological</td>
+<td>Medium</td>
+<td>Need more trauma models</td>
+<td>High</td>
+</tr>
+<tr class="even">
+<td>D3: Cognitive</td>
+<td>Medium</td>
+<td>Could add persuasion frameworks</td>
+<td>Medium</td>
+</tr>
+<tr class="odd">
+<td>D4: Structural</td>
+<td>High</td>
+<td>Well-covered</td>
+<td>Low</td>
+</tr>
+<tr class="even">
+<td>D5: Expressive</td>
+<td>Low</td>
+<td>Need trope taxonomy expansion</td>
+<td>High</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-vii-immediate-deliverables-v1.0-launch">PART VII: IMMEDIATE
+DELIVERABLES (v1.0 Launch)</h2>
+<h3 id="deliverable-set-a-core-web-pages-complete">Deliverable Set A:
+Core Web Pages (COMPLETE)</h3>
+<p><strong>Status:</strong> 8 HTML pages built and styled</p>
+<ol type="1">
+<li>Master Outline (navigation hub)</li>
+<li>Section I: Orientation</li>
+<li>Section IIA: Story Structure Crosswalk</li>
+<li>Section II: Horizontal Axis</li>
+<li>Section III: Vertical Axis (Dimensions)</li>
+<li>Section IV: Intersection Logic</li>
+<li>Section V: Navigation Protocols</li>
+<li>Section VI: Practical Application <em>(existing HTML page in
+project)</em></li>
+</ol>
+<p>Next Steps:</p>
+<ul><li>Unify in single GitHub repository</li><li>Fix all internal navigation links</li><li>Deploy to GitHub Pages</li><li>Test on
+mobile devices</li><li>Cross-link Section VI practical templates with
+coordinate tools</li></ul>
+<hr/>
+<h3 id="deliverable-set-b-printable-resources-high-priority">Deliverable
+Set B: Printable Resources (HIGH PRIORITY)</h3>
+<p><strong>B1: Story Compass Blank Template (PDF)</strong></p>
+<ul><li>Full-page
+13×6 grid</li><li>Clean, printable design</li><li>Fillable spaces for coordinate
+notes</li><li>Usage instructions on reverse</li><li>Timeline:  Week
+1</li></ul>
+<p><strong>B2: Story Depth Dimensions Poster (PDF)</strong></p>
+<ul><li>Visual
+diagram of all 6 dimensions</li><li>Framework categories for each dimension</li><li>Hub node indicators</li><li>Cross-reference notation guide</li><li>Coordinate system
+integration</li><li>Printable at poster size (18×24” or A2)</li><li>Timeline:  Week 2</li></ul>
+<p><strong>B3: Coordinate Quick Reference (PDF)</strong></p>
+<ul><li>1-page cheat
+sheet</li><li>Key story positions (12:00, 3:00, 6:00, 9:00, 12:00)</li><li>Dimension
+overview with key questions</li><li>Notation examples</li><li>Lamination-friendly
+design</li><li>Timeline:  Week 1</li></ul>
+<p><strong>B4: Dimensional Framework Guides (6 PDFs)</strong></p>
+<ul><li>One
+detailed guide per dimension</li><li>Complete framework listings</li><li>Cross-references to other dimensions</li><li>Examples and applications</li><li>Timeline:  Weeks 3-4</li></ul>
+<p><strong>B5: Hub Nodes Reference Document (PDF)  -
+Comprehensive list of all identified hub nodes</strong></p>
+<ul><li>Cross-dimensional
+mapping for each</li><li>Usage guidance and examples</li><li>Visual connection
+diagrams</li><li>Timeline:  Week 4</li></ul>
+<p><strong>B6: Analysis Templates from Section VI (PDF Set)</strong></p>
+<p>Based on Section VI: Practical Application HTML page, these printable
+templates include:</p>
+<p>Logging Templates:</p>
+<ul><li>Scene Log Format with Coordinates
+(basic version)</li><li>Condensed Scene Log (quick logging)</li><li>Multi-Film
+Comparison Template</li><li>Dimension Analysis Worksheet</li><li>Cross-Reference
+Tracking Sheet</li><li>Intersection Analysis Template</li></ul>
+<p>Organizational Tools:</p>
+<ul><li>Spreadsheet system templates</li><li>Visual mapping guides</li><li>Comparative analysis frameworks</li><li>Presentation
+format guides (academic, blog, video essay)</li></ul>
+<ul>
+<li><strong>Timeline:</strong> Week 3</li>
+</ul>
+<hr/>
+<h3 id="deliverable-set-c-simple-web-tools-medium-priority">Deliverable
+Set C: Simple Web Tools (MEDIUM PRIORITY)</h3>
+<p><strong>C1: Coordinate Notation Generator (Web Form)</strong></p>
+<p>Function:</p>
+<ul><li>User selects Story Position (dropdown:
+12:00 through 12:00)</li><li>User selects Dimension (dropdown: D0-D5)</li><li>Tool
+generates notation:  <span class="coord-tag">[6:00 / D3]</span></li><li>Tool displays: “Midpoint,
+Cognitive &amp; Rhetorical Dynamics”</li><li>Tool shows: Brief description +
+link to full dimension page</li></ul>
+<p><strong>Tech Stack:</strong> Vanilla HTML/CSS/JS (no framework
+needed) <strong>Timeline:</strong> Week 2</p>
+<hr/>
+<p><strong>C2: Interactive Story Compass (SVG/Canvas)</strong></p>
+<p>Function:</p>
+<ul><li>Visual clock face with 13 position
+markers</li><li>6 concentric rings (dimensions)</li><li>Click a position →
+highlights that column</li><li>Click a dimension ring → highlights that row</li><li>Intersection highlights with coordinate notation</li><li>“Learn more” button
+links to relevant content</li></ul>
+<p><strong>Tech Stack:</strong> SVG + vanilla JavaScript
+<strong>Timeline:</strong> Week 3</p>
+<hr/>
+<p><strong>C3: Analysis Template Generator (Form →
+Markdown)</strong></p>
+<p>Function:</p>
+<ul><li>User enters: Story title, scene
+description, coordinate</li><li>Tool generates pre-populated analysis template
+with:</li><li>Dimensional analysis questions for selected coordinate</li><li>Framework checklists</li><li>Notes section</li><li>Export options: Markdown, plain
+text, print view</li></ul>
+<p><strong>Tech Stack:</strong> HTML form + JavaScript
+<strong>Timeline:</strong> Week 4</p>
+<hr/>
+<p><strong>C4: Site-Wide Search (Static)</strong></p>
+<p>Function:</p>
+<ul><li>Search across all HTML pages</li><li>Highlight
+coordinate notation matches</li><li>Filter by dimension</li><li>Jump to results on
+page</li></ul>
+<p><strong>Tech Stack:</strong> Pagefind (static site search, no
+backend) <strong>Timeline:</strong> Week 2</p>
+<hr/>
+<h3 id="deliverable-set-d-depth-dimensions-diagram-lower-priority">Deliverable
+Set D: Depth Dimensions Diagram (LOWER PRIORITY)</h3>
+<p>Phase 1: Static SVG  (Week 5)</p>
+<ul><li>Clean reference
+diagram</li><li>All dimensions labeled</li><li>Printable</li></ul>
+<p>Phase 2: Clickable Regions  (Weeks 6-8)</p>
+<ul><li>Click
+dimension → expands with framework list</li><li>Hover for tooltip descriptions</li><li>Links to detailed dimension pages</li><li>Hub nodes visually highlighted</li></ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-viii-longer-term-deliverables-v2.0-and-beyond">PART VIII:
+LONGER-TERM DELIVERABLES (v2.0 and beyond)</h2>
+<h3 id="user-accounts-saved-analyses">User Accounts + Saved
+Analyses</h3>
+<p>Requirements:</p>
+<ul><li>Backend database (Supabase
+recommended)</li><li>User authentication</li><li>Story library (user creates entries
+for each story analyzed)</li><li>Coordinate-based note system</li><li>Export to
+PDF</li></ul>
+<p><strong>Timeline:</strong> Months 4-6</p>
+<hr/>
+<h3 id="shared-template-library">Shared Template Library</h3>
+<p>Requirements:</p>
+<ul><li>Public/private sharing options</li><li>Community-submitted analysis templates</li><li>Rating/commenting system</li><li>Search and filter</li><li>Moderation tools</li></ul>
+<p><strong>Timeline:</strong> Months 6-9</p>
+<hr/>
+<h3 id="advanced-visualization-tools">Advanced Visualization Tools</h3>
+<p>Possible Features:</p>
+<ul><li>Heat maps showing story
+activity distribution</li><li>Transformation arc tracker across dimensions</li><li>Comparative analysis (two stories side-by-side)</li><li>Timeline mapper with
+drag-and-drop beats</li></ul>
+<p><strong>Timeline:</strong> Months 9-12</p>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-ix-deployment-roadmap">PART IX: DEPLOYMENT ROADMAP</h2>
+<h3 id="week-1-unify-deploy-static-site">Week 1: Unify &amp; Deploy
+Static Site</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Create GitHub
+repository</label></li>
+<li><label><input type="checkbox"/>Consolidate 8 HTML
+files</label></li>
+<li><label><input type="checkbox"/>Fix navigation links</label></li>
+<li><label><input type="checkbox"/>Test locally</label></li>
+<li><label><input type="checkbox"/>Deploy to GitHub Pages</label></li>
+<li><label><input type="checkbox"/>Custom domain
+(optional)</label></li>
+</ul>
+<h3 id="week-2-add-essential-tools">Week 2: Add Essential Tools</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Coordinate Notation
+Generator</label></li>
+<li><label><input type="checkbox"/>Site-wide search
+(Pagefind)</label></li>
+<li><label><input type="checkbox"/>Story Compass blank PDF</label></li>
+<li><label><input type="checkbox"/>Quick Reference PDF</label></li>
+</ul>
+<h3 id="week-3-4-enhancement-phase">Week 3-4: Enhancement Phase</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Interactive Story Compass
+(SVG)</label></li>
+<li><label><input type="checkbox"/>Story Depth Dimensions
+Poster</label></li>
+<li><label><input type="checkbox"/>Analysis Template
+Generator</label></li>
+<li><label><input type="checkbox"/>Dimensional Framework Guides
+(start)</label></li>
+</ul>
+<h3 id="week-5-8-polish-feedback">Week 5-8: Polish &amp; Feedback</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Static Depth Dimensions
+diagram</label></li>
+<li><label><input type="checkbox"/>Clickable diagram
+regions</label></li>
+<li><label><input type="checkbox"/>Mobile optimization</label></li>
+<li><label><input type="checkbox"/>User testing</label></li>
+<li><label><input type="checkbox"/>Iteration based on
+feedback</label></li>
+</ul>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-x-decision-points-open-questions">PART X: DECISION POINTS
+&amp; OPEN QUESTIONS</h2>
+<h3 id="story-compass-granularity">Story Compass Granularity</h3>
+<p><strong>Decision:</strong> Start with 13 positions, design for future
+expansion to 24</p>
+<p><strong>Rationale:</strong> 78 cells is manageable complexity; can
+add finer increments later</p>
+<h3 id="dimensional-reference-poster-priority">Dimensional Reference
+Poster Priority</h3>
+<p><strong>Decision:</strong> Static first, interactive later</p>
+<p><strong>Rationale:</strong> Users need stable reference image
+immediately; interactivity is enhancement</p>
+<h3 id="tool-priority-order">Tool Priority Order</h3>
+<p><strong>Decision:</strong> Printables → Simple web tools → Backend
+features</p>
+<p><strong>Rationale:</strong> Maximum utility with minimum development
+time; gather user feedback before building complex features</p>
+<hr/>
+<div class="page-break"></div>
+<h2 id="part-xi-success-metrics-how-to-know-its-working">PART XI:
+SUCCESS METRICS (How to know it’s working)</h2>
+<h3 id="phase-1-success-indicators-weeks-1-4">Phase 1 Success Indicators
+(Weeks 1-4)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Site is live and
+navigable</label></li>
+<li><label><input type="checkbox"/>All internal links work</label></li>
+<li><label><input type="checkbox"/>At least 1 printable PDF
+available</label></li>
+<li><label><input type="checkbox"/>Basic coordinate notation tool
+functional</label></li>
+<li><label><input type="checkbox"/>5-10 beta testers can successfully
+navigate system</label></li>
+</ul>
+<h3 id="phase-2-success-indicators-weeks-5-8">Phase 2 Success Indicators
+(Weeks 5-8)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Users report using printed
+templates</label></li>
+<li><label><input type="checkbox"/>Interactive compass sees regular
+use</label></li>
+<li><label><input type="checkbox"/>Search functionality works
+reliably</label></li>
+<li><label><input type="checkbox"/>Feedback identifies next priority
+features</label></li>
+</ul>
+<h3 id="long-term-success-indicators-months-3-12">Long-Term Success
+Indicators (Months 3-12)</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Users return multiple times to
+analyze different stories</label></li>
+<li><label><input type="checkbox"/>Community begins sharing analysis
+templates</label></li>
+<li><label><input type="checkbox"/>System proves extensible (new
+frameworks added cleanly)</label></li>
+<li><label><input type="checkbox"/>Users report it changes how they
+think about story</label></li>
+</ul>
+<hr/>
+<h3 id="appendix-a-terminology-glossary">APPENDIX A: TERMINOLOGY
+GLOSSARY</h3>
+<p><strong>Story Compass:</strong> 2D coordinate grid tracking position
+(horizontal) × dimension (vertical)</p>
+<p><strong>Coordinate:</strong> Specific intersection point, notated as
+<code class="strong-code">[Story Timeline Position / Story Depth Dimension]</code></p>
+<p><strong>Story Depth Dimension:</strong> One of six analytical depths
+(0-5) in the Coordinate Compass system</p>
+<p><strong>Hub Node:</strong> Concept appearing in 3+ dimensions,
+serving as connection point</p>
+<p><strong>Equivalence Mapping:</strong> Direct 80%+ overlap between
+concepts from different systems</p>
+<p><strong>Resonance Notation:</strong> Indicating similarity without
+claiming equivalence</p>
+<p><strong>Cross-Dimensional Analysis:</strong> Examining a coordinate
+across multiple dimensions simultaneously</p>
+<hr/>
+<h3 id="appendix-b-coordinate-notation-examples">APPENDIX B: COORDINATE
+NOTATION EXAMPLES</h3>
+<p><strong>Single coordinate:</strong> <code><span class="coord-tag">[6:00 / D2]</span></code> =
+Midpoint at Psychological dimension</p>
+<p><strong>Range notation:</strong> <code>[3:00-6:00 / D4]</code> = Act
+II examined structurally</p>
+<p><strong>Multi-dimensional:</strong> <code><span class="coord-tag">[9:00 / D1+D2]</span></code> =
+Crisis examined mythically AND psychologically</p>
+<p><strong>Full story scan:</strong> <code>[All / D0]</code> = Examining
+Core Problem across entire timeline</p>
+<p><strong>Deep dive:</strong> <code><span class="coord-tag">[6:00 / All]</span></code> = Midpoint
+examined across all six dimensions</p>
+<hr/>
+<h3 id="appendix-c-framework-source-references">APPENDIX C: FRAMEWORK
+SOURCE REFERENCES</h3>
+<p><strong>See separate Framework Bibliography document</strong> <em>(to
+be developed as standalone HTML page)</em></p>
+<p>This comprehensive bibliography will include:</p>
+<ul><li>Primary source texts
+for all frameworks</li><li>Author attributions</li><li>Publication information</li><li>Recommended reading sequences</li><li>Framework family trees showing
+conceptual lineages</li></ul>
+<p>Dimensions to be documented:</p>
+<ul><li>Core Dimension 0 sources</li><li>Archetypal
+Dimension 1 sources (Campbell, Propp, Jung, ATU Index)</li><li>Psychological
+Dimension 2 sources (Enneagram, Temperaments, Defense Mechanisms)</li><li>Cognitive Dimension 3 sources (Kahneman, Cialdini, Fallacy compendiums)</li><li>Structural Dimension 4 sources (McKee, Dramatica, Save the Cat,
+Harmon)</li><li>Surface Dimension 5 sources (TV Tropes, Symbol dictionaries,
+Genre studies)</li></ul>
+<hr/>
+<h3 id="appendix-d-cross-system-mapping-tool-concept">APPENDIX D:
+CROSS-SYSTEM MAPPING TOOL (Concept)</h3>
+<p><strong>Purpose:</strong> Help users navigate between different
+narrative frameworks and identify overlaps/distinctions</p>
+<h3 id="practical-tool-vision">Practical Tool Vision</h3>
+<p><strong>Concept Comparison Tool (Web Interface)</strong></p>
+<p>User inputs:</p>
+<ul><li>Select Concept A (from any framework)</li><li>Select Concept
+B (from any framework)</li><li>System outputs: Similarity score, distinctions,
+usage contexts</li></ul>
+<p><strong>Example Interface:</strong></p>
+<pre><code>Compare: [Jung: Shadow ▼] with [Dramatica: Antagonist ▼]
+
+Similarity Score: 40% (Partial Overlap)
+
+Where they align:
+- Both represent opposing force
+- Both can be externalized
+
+Where they differ:
+- Shadow is internal/psychological
+- Antagonist is functional/plot role
+- Shadow is repressed self-aspect
+- Antagonist serves story argument
+
+When to use Shadow lens: Character psychology, internal conflict, individuation
+When to use Antagonist lens: Plot structure, ensemble balance, argument
+
+Related concepts you might also consider:
+- Defense mechanisms (Projection)
+- Cognitive biases (Confirmation bias)
+- Enneagram disintegration points</code></pre>
+<h3 id="framework-translator-tool-future-development">Framework
+Translator Tool (Future Development)</h3>
+<p><strong>Concept:</strong> Help users “translate” analysis from one
+system to another</p>
+<p><strong>Use Case:</strong> “I analyzed this character using Enneagram
+Type 4. What would that look like in Jungian terms?”</p>
+<p>System Response:</p>
+<ul><li>Maps Type 4 core wounds → Shadow
+material</li><li>Suggests relevant Jungian archetypes</li><li>Flags where direct
+translation isn’t possible</li><li>Recommends complementary frameworks</li></ul>
+<h3 id="implementation-notes">Implementation Notes</h3>
+<p>This tool would require:</p>
+<ul><li>Database of frameworks and concepts</li><li>Curated relationship mappings</li><li>Clear “confidence scores” for overlaps</li><li>Explicit documentation of where frameworks diverge</li></ul>
+<p><strong>Development Priority:</strong> Phase 3 (after core coordinate
+system is stable)</p>
+<hr/>
+<h3 id="appendix-e-implementation-checklist">APPENDIX E: IMPLEMENTATION
+CHECKLIST</h3>
+<h3 id="content-complete">Content Complete</h3>
+<ul class="task-list">
+<li><label><input checked="" type="checkbox"/>8 core HTML pages written
+and styled</label></li>
+<li><label><input checked="" type="checkbox"/>Dimensional framework
+documented</label></li>
+<li><label><input checked="" type="checkbox"/>Story Compass
+specifications defined</label></li>
+<li><label><input type="checkbox"/>All framework listings
+compiled</label></li>
+<li><label><input type="checkbox"/>Cross-system mappings
+documented</label></li>
+<li><label><input type="checkbox"/>Hub nodes identified and
+cross-referenced</label></li>
+</ul>
+<h3 id="technical-infrastructure">Technical Infrastructure</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>GitHub repository
+created</label></li>
+<li><label><input type="checkbox"/>All files unified with working
+links</label></li>
+<li><label><input type="checkbox"/>GitHub Pages deployment
+configured</label></li>
+<li><label><input type="checkbox"/>Custom domain connected
+(optional)</label></li>
+<li><label><input type="checkbox"/>Mobile responsiveness
+tested</label></li>
+</ul>
+<h3 id="user-facing-tools">User-Facing Tools</h3>
+<ul class="task-list">
+<li><label><input type="checkbox"/>Coordinate notation generator
+built</label></li>
+<li><label><input type="checkbox"/>Story Compass blank PDF
+created</label></li>
+<li><label><input type="checkbox"/>NCM reference poster
+designed</label></li>
+<li><label><input type="checkbox"/>Quick reference card
+created</label></li>
+<li><label><input type="checkbox"/>Site search implemented</label></li>
+</ul>
+<h3 id="documentation">Documentation</h3>
+<ul class="task-list">
+<li><label><input checked="" type="checkbox"/>Implementation guide
+written (this document)</label></li>
+<li><label><input type="checkbox"/>User guide/tutorial
+created</label></li>
+<li><label><input type="checkbox"/>Framework addition protocol
+documented</label></li>
+<li><label><input type="checkbox"/>Changelog system
+established</label></li>
+</ul>
+<hr/>
+<p><strong>END OF IMPLEMENTATION GUIDE v1.0</strong></p>
+<p><em>This document consolidates working materials from multiple drafts
+and serves as the definitive reference for building out the Story
+Analysis Coordinate System. Update version number as system
+evolves.</em></p>
+<ul><li>D0: Point of no return, irreversible choice</li><li>D4: Structural turning point, act break</li></ul>
+<ul><li>D2: Character identity expression</li><li>D3: Rhetorical authority, ethos</li></ul>
+<ul><li>D0: Core realization about problem</li><li>D2: Identity shift moment</li><li>D3: Pattern recognition, belief revision</li></ul>
+  </div>
+
+<nav class="section-nav">
+    <a href={`${base}/compass/practical-application/`} class="section-nav__link section-nav__link--prev">
+      <svg class="section-nav__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      <div>
+        <div class="section-nav__label">Previous</div>
+        <div class="section-nav__title">VI. Practical Application</div>
+      </div>
+    </a>
+    
+  </nav>
+
+</PortalLayout>

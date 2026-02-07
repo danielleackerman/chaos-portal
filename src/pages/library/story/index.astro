@@ -1,0 +1,77 @@
+---
+import PortalLayout from '../../../layouts/PortalLayout.astro';
+import { NAV_DATA, SUB_LABELS } from '../../../data/library.js';
+
+const base = import.meta.env.BASE_URL;
+const catData = NAV_DATA.story || {};
+const subs = Object.keys(catData);
+
+const iconMap = {
+  "tools": "🔧",
+  "reference": "📚",
+  "craft": "✍️"
+};
+---
+
+<PortalLayout title="Story Library" currentPage="library">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <strong>Story Library</strong>
+  </nav>
+
+  <div class="page-hero page-hero--teal">
+    <div class="eyebrow eyebrow--teal">LIBRARY</div>
+    <h1>Story Library</h1>
+    <p class="subtitle">Craft techniques, tools, and references for storytelling</p>
+  </div>
+
+  <div class="pill-tabs">
+    <a href={`${base}/library/music/`} class="pill-tab" style="text-decoration:none;">🎵 Music</a>
+    <a href={`${base}/library/story/`} class="pill-tab active--teal" style="text-decoration:none;">📖 Story</a>
+  </div>
+
+  {subs.map((sub, i) => {
+    const items = catData[sub];
+    const label = SUB_LABELS[sub] || sub;
+    const icon = iconMap[sub] || "📁";
+    const totalLinks = items.reduce((s, p) => s + p.count, 0);
+
+    return (
+      <div class={`accordion-item animate-in animate-in-${Math.min(i+1, 3)}`}>
+        <details>
+          <summary class="accordion-toggle accordion-toggle--teal">
+            <div class="accordion-toggle__icon accordion-toggle__icon--teal">
+              <span style="font-size:1rem;">{icon}</span>
+            </div>
+            <div class="accordion-toggle__label">
+              <div class="accordion-toggle__title">{label}</div>
+              <div class="accordion-toggle__meta">{items.length} pages · {totalLinks} links</div>
+            </div>
+            <svg class="accordion-toggle__chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </summary>
+          <div class="accordion-body">
+            <div class="card-grid">
+              {items.map(page => {
+                const slug = page.id;
+                return (
+                  <a href={`${base}/library/${slug}/`} class="page-nav-card page-nav-card--teal">
+                    <div>
+                      <div class="page-nav-card__title">{page.title}</div>
+                      {page.scope && <div class="page-nav-card__scope">{page.scope}</div>}
+                    </div>
+                    <span class="page-nav-card__count page-nav-card__count--teal">{page.count}</span>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </details>
+      </div>
+    );
+  })}
+
+</PortalLayout>
+
+

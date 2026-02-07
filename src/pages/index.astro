@@ -1,0 +1,78 @@
+---
+import PortalLayout from '../layouts/PortalLayout.astro';
+import { getCategoryStats } from '../data/library.js';
+
+const musicStats = getCategoryStats('music');
+const storyStats = getCategoryStats('story');
+const base = import.meta.env.BASE_URL;
+---
+
+<PortalLayout title="Home" currentPage="home">
+
+  <div style="text-align:center; padding:3.5rem 0 3rem;">
+    <div class="eyebrow eyebrow--amber" style="font-size:0.6875rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; margin-bottom:1rem; color:var(--semantic-h);">
+      CREATIVE FRAMEWORK PORTAL
+    </div>
+    <h1 style="margin-bottom:1rem;">Story <strong>&</strong> Music</h1>
+    <p style="font-size:1.0625rem; color:var(--text-2); max-width:500px; margin:0 auto; line-height:1.6;">
+      A coordinate system for navigating narrative structure, music theory, and the bridges between them.
+    </p>
+  </div>
+
+  <!-- Main tool cards -->
+  <div class="card-grid card-grid--3 animate-in" style="margin-bottom:2.5rem;">
+
+    <a href={`${base}/library/music/`} class="cat-card cat-card--amber">
+      <div class="cat-card__icon cat-card__icon--amber">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div class="cat-card__title">Music Library</div>
+      <div class="cat-card__count">{musicStats.links} resources · {musicStats.pages} pages</div>
+    </a>
+
+    <a href={`${base}/library/story/`} class="cat-card cat-card--teal">
+      <div class="cat-card__icon cat-card__icon--teal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      </div>
+      <div class="cat-card__title">Story Library</div>
+      <div class="cat-card__count">{storyStats.links} resources · {storyStats.pages} pages</div>
+    </a>
+
+    <a href={`${base}/compass/`} class="cat-card cat-card--purple">
+      <div class="cat-card__icon cat-card__icon--purple">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      </div>
+      <div class="cat-card__title">Story Compass</div>
+      <div class="cat-card__count">8 sections · Complete framework</div>
+    </a>
+
+  </div>
+
+  <!-- Coming soon -->
+  <div class="card-grid card-grid--2 animate-in animate-in-2" style="margin-bottom:3rem;">
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      </div>
+      <div class="coming-card__title">Creativity Engine</div>
+      <p class="coming-card__desc">Generative tools for ideation and composition</p>
+    </div>
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/></svg>
+      </div>
+      <div class="coming-card__title">Voice Matrix</div>
+      <p class="coming-card__desc">Character voice development and analysis</p>
+    </div>
+
+  </div>
+
+</PortalLayout>
