@@ -543,6 +543,22 @@ pre code {
 .page-hero--teal { border-left-color: var(--semantic-v); }
 .page-hero--purple { border-left-color: var(--accent-purple); }
 
+/* Gradient hero — ties to axis system instead of arbitrary purple */
+.page-hero--gradient {
+  border-left-color: transparent;
+}
+.page-hero--gradient::before {
+  content: "";
+  position: absolute;
+  left: -1px;
+  top: -1px;
+  bottom: -1px;
+  width: 6px;
+  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
+  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+  z-index: 1;
+}
+
 .page-hero h1 {
   margin-bottom: 0.5rem;
 }
@@ -707,6 +723,18 @@ pre code {
 }
 
 /* ===== TABLES — from Compass — WAS MISSING ===== */
+
+/* Overflow wrapper for wide tables */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 25px 0;
+  border-radius: var(--radius-md);
+}
+.table-wrap table {
+  margin: 0;
+}
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -715,6 +743,14 @@ table {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
+}
+
+/* Make tables inside compass-content scrollable automatically */
+.compass-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: nowrap;
 }
 
 thead {
@@ -756,6 +792,8 @@ tbody tr:nth-child(even) {
 .checklist div {
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
+  color: var(--accent-green);
+  font-weight: 500;
 }
 
 .checklist div:last-child {
@@ -802,6 +840,11 @@ tbody tr:nth-child(even) {
   background: color-mix(in srgb, var(--semantic-h) 4%, var(--surface-elevated));
   border-radius: var(--radius-sm);
 }
+.dimension-horizontal h4,
+.dimension-horizontal h3,
+.dimension-horizontal h2 {
+  color: var(--text);
+}
 
 .dimension-vertical {
   border-left: 4px solid var(--semantic-v);
@@ -809,6 +852,11 @@ tbody tr:nth-child(even) {
   margin: 16px 0;
   background: color-mix(in srgb, var(--semantic-v) 4%, var(--surface-elevated));
   border-radius: var(--radius-sm);
+}
+.dimension-vertical h4,
+.dimension-vertical h3,
+.dimension-vertical h2 {
+  color: var(--text);
 }
 
 /* Protocol, pattern, intersection, template, example boxes */
@@ -841,20 +889,24 @@ tbody tr:nth-child(even) {
 .dimension-number {
   font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--semantic-v);
+  color: var(--text-2);
   font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
 }
 
 .dimension-title {
   font-weight: 600;
   font-size: 1rem;
+  color: var(--text);
 }
 
 .dimension-position {
-  font-family: var(--font-mono);
-  font-weight: 700;
-  color: var(--semantic-h);
-  font-size: 0.85em;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-2);
+  font-size: 0.95em;
 }
 
 /* Coordinate notation */
@@ -940,6 +992,51 @@ tbody tr:nth-child(even) {
 }
 
 /* ===== CARD GRID ===== */
+
+/* TOC Card Grid — "On This Page" navigation */
+.toc-grid {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.toc-grid__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 1rem;
+}
+
+.toc-grid__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.625rem;
+}
+
+.toc-grid__link {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: var(--surface-inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.toc-grid__link:hover {
+  border-color: var(--border-accent);
+  color: var(--text);
+  background: var(--surface-elevated);
+  text-decoration: none;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

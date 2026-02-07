@@ -4,14 +4,14 @@ import PortalLayout from '../../layouts/PortalLayout.astro';
 const base = import.meta.env.BASE_URL;
 
 const sections = [
-  { num: "I", slug: "orientation", title: "Orientation", desc: "What the coordinate system does, how to navigate, relationship to supporting documents", status: "complete" },
-  { num: "II", slug: "horizontal-axis", title: "Horizontal Axis", desc: "Story timeline position — clock positions, act structures, beat markers, symmetry points", status: "complete" },
-  { num: "IIA", slug: "story-structure", title: "Story Structure", desc: "Detailed structural frameworks — Save the Cat, Hero's Journey, story grid integration", status: "complete" },
-  { num: "III", slug: "vertical-axis", title: "Vertical Axis", desc: "Story depth dimensions — surface to core, 6 dimension layers of narrative analysis", status: "complete" },
-  { num: "IV", slug: "intersection-logic", title: "Intersection Logic", desc: "How horizontal and vertical axes combine — coordinate reading, pattern recognition", status: "complete" },
-  { num: "V", slug: "navigation-protocols", title: "Navigation Protocols", desc: "Movement patterns through the coordinate space — drilling, zooming, diagonal tracking", status: "complete" },
-  { num: "VI", slug: "practical-application", title: "Practical Application", desc: "Real-world usage — analysis workflows, writing applications, teaching frameworks", status: "complete" },
-  { num: "VII", slug: "implementation-guide", title: "Implementation Guide", desc: "Technical implementation — building tools, digital integration, scaling the system", status: "complete" },
+  { num: "I", slug: "orientation", title: "Orientation", desc: "What the coordinate system does, how to navigate, relationship to supporting documents" },
+  { num: "II", slug: "horizontal-axis", title: "Horizontal Axis", desc: "Story timeline position — clock positions, act structures, beat markers, symmetry points" },
+  { num: "IIA", slug: "story-structure", title: "Story Structure", desc: "Detailed structural frameworks — Save the Cat, Hero's Journey, story grid integration" },
+  { num: "III", slug: "vertical-axis", title: "Vertical Axis", desc: "Story depth dimensions — surface to core, 6 dimension layers of narrative analysis" },
+  { num: "IV", slug: "intersection-logic", title: "Intersection Logic", desc: "How horizontal and vertical axes combine — coordinate reading, pattern recognition" },
+  { num: "V", slug: "navigation-protocols", title: "Navigation Protocols", desc: "Movement patterns through the coordinate space — drilling, zooming, diagonal tracking" },
+  { num: "VI", slug: "practical-application", title: "Practical Application", desc: "Real-world usage — analysis workflows, writing applications, teaching frameworks" },
+  { num: "VII", slug: "implementation-guide", title: "Implementation Guide", desc: "Technical implementation — building tools, digital integration, scaling the system" },
 ];
 ---
 
@@ -23,8 +23,8 @@ const sections = [
     <strong>Story Coordinate Compass</strong>
   </nav>
 
-  <div class="page-hero page-hero--purple">
-    <div class="eyebrow eyebrow--purple">FRAMEWORK</div>
+  <div class="page-hero page-hero--gradient">
+    <div class="eyebrow">FRAMEWORK</div>
     <h1>Story Coordinate Compass</h1>
     <p class="subtitle">A two-dimensional system for mapping and navigating narrative structure</p>
   </div>
@@ -53,10 +53,7 @@ const sections = [
       <a href={`${base}/compass/${s.slug}/`} class="compass-card">
         <div class="compass-card__num">{s.num}</div>
         <div class="compass-card__body">
-          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.25rem;">
-            <span class="compass-card__title">{s.title}</span>
-            <span class="status-tag status-tag--complete">{s.status}</span>
-          </div>
+          <div class="compass-card__title">{s.title}</div>
           <div class="compass-card__desc">{s.desc}</div>
         </div>
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3); margin-top:0.25rem; flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
