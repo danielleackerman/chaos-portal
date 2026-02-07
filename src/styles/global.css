@@ -296,12 +296,12 @@ a:hover {
 
 /* LISTS */
 ul, ol {
-  margin: 20px 0 20px 25px;
-  line-height: 1.8;
+  margin: 16px 0 16px 25px;
+  line-height: 1.5;
 }
 
 li {
-  margin-bottom: 10px;
+  margin-bottom: 4px;
 }
 
 /* HR */
@@ -543,6 +543,9 @@ h1 code, h2 code, h3 code, h4 code {
 /* Gradient hero — ties to axis system instead of arbitrary purple */
 .page-hero--gradient {
   border-left-color: transparent;
+  background: var(--surface);
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
 }
 .page-hero--gradient::before {
   content: "";
@@ -554,6 +557,11 @@ h1 code, h2 code, h3 code, h4 code {
   background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
   z-index: 1;
+}
+
+.dark-mode .page-hero--gradient {
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.06), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.06), transparent 60%);
 }
 
 .page-hero h1 {
@@ -1139,13 +1147,15 @@ tbody tr:nth-child(even) {
   font-size: 0.875rem;
   font-weight: 500;
   transition: all 0.2s ease;
+  box-shadow: var(--shadow-subtle);
 }
 
 .toc-grid__link:hover {
   border-color: var(--semantic-v);
   color: var(--text);
   background: var(--surface);
-  box-shadow: 0 0 0 1px var(--semantic-v);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+  transform: translateY(-2px);
   text-decoration: none;
 }
 
@@ -1756,12 +1766,12 @@ details[open] .accordion-toggle__chevron {
 }
 
 .compass-content ul {
-  margin: 1rem 0 1rem 1.5rem;
-  line-height: 1.8;
+  margin: 12px 0 12px 1.5rem;
+  line-height: 1.5;
 }
 
 .compass-content li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 4px;
 }
 
 /* Status tags in Compass content */
