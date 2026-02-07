@@ -130,6 +130,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Offset anchor targets below sticky header */
+[id] {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
+}
+
 body {
   font-family: var(--font-sans);
   font-size: 1rem;
@@ -340,15 +345,7 @@ h1 code, h2 code, h3 code, h4 code {
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
-/* Don't style code blocks as tokens */
-pre code {
-  background: transparent;
-  border: 0;
-  padding: 0;
-  font-weight: 400;
-  display: block;
-  box-shadow: none;
-}
+/* Don't style code blocks as tokens - handled in pre/callout sections above */
 
 /* SOURCE TAG — from Compass — WAS MISSING */
 .source-tag {
@@ -609,14 +606,18 @@ pre code {
 
 /* Base callout (structured: icon + label + body) */
 .callout {
-  display: flex;
-  gap: 20px;
   background: var(--surface-elevated);
   border-radius: var(--radius-md);
   padding: 25px;
   margin: 25px 0;
   box-shadow: var(--shadow-subtle);
   transition: all 0.3s ease;
+}
+
+/* When callout has icon child, use flex layout */
+.callout:has(> .icon) {
+  display: flex;
+  gap: 20px;
 }
 
 .callout .icon {
@@ -641,6 +642,81 @@ pre code {
 
 .callout p {
   margin-bottom: 0;
+}
+
+/* Callout body — for hub node / ASCII art callouts */
+.callout-body {
+  margin-top: 0;
+}
+
+/* Pre blocks inside callouts — preserve ASCII art */
+.callout pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin: 0 0 12px 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+.callout pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  color: var(--text);
+}
+
+.callout-body pre {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.callout-body pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* General pre block styling */
+pre {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  overflow-x: auto;
+  margin: 20px 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre;
+  color: var(--text);
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  font-size: inherit;
+  color: inherit;
 }
 
 /* Editorial (gray) */
@@ -834,11 +910,29 @@ tbody tr:nth-child(even) {
 }
 
 .dimension-horizontal {
-  border-left: 4px solid var(--semantic-h);
-  padding: 16px 16px 16px 20px;
-  margin: 16px 0;
-  background: color-mix(in srgb, var(--semantic-h) 4%, var(--surface-elevated));
-  border-radius: var(--radius-sm);
+  border-left: 5px solid var(--semantic-h);
+  padding: 25px 25px 25px 70px;
+  margin: 25px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow: var(--shadow-subtle);
+}
+.dimension-horizontal::before {
+  content: "→";
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--semantic-h);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 700;
 }
 .dimension-horizontal h4,
 .dimension-horizontal h3,
@@ -847,11 +941,29 @@ tbody tr:nth-child(even) {
 }
 
 .dimension-vertical {
-  border-left: 4px solid var(--semantic-v);
-  padding: 16px 16px 16px 20px;
-  margin: 16px 0;
-  background: color-mix(in srgb, var(--semantic-v) 4%, var(--surface-elevated));
-  border-radius: var(--radius-sm);
+  border-left: 5px solid var(--semantic-v);
+  padding: 25px 25px 25px 70px;
+  margin: 25px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow: var(--shadow-subtle);
+}
+.dimension-vertical::before {
+  content: "↓";
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--semantic-v);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 700;
 }
 .dimension-vertical h4,
 .dimension-vertical h3,
@@ -1020,8 +1132,8 @@ tbody tr:nth-child(even) {
 .toc-grid__link {
   display: block;
   padding: 0.75rem 1rem;
-  background: var(--surface-inset);
-  border: 1px solid var(--border);
+  background: var(--surface-elevated);
+  border: none;
   border-radius: var(--radius-md);
   text-decoration: none;
   color: var(--text-2);
@@ -1031,9 +1143,9 @@ tbody tr:nth-child(even) {
 }
 
 .toc-grid__link:hover {
-  border-color: var(--border-accent);
   color: var(--text);
-  background: var(--surface-elevated);
+  background: var(--surface-inset);
+  box-shadow: var(--shadow-subtle);
   text-decoration: none;
 }
 
@@ -1128,6 +1240,7 @@ tbody tr:nth-child(even) {
 .cat-card--amber:hover { border-color: var(--semantic-h); }
 .cat-card--teal:hover { border-color: var(--semantic-v); }
 .cat-card--purple:hover { border-color: var(--accent-purple); }
+.cat-card--gradient:hover { border-color: var(--semantic-v); }
 
 .cat-card__icon {
   width: 2.5rem;
@@ -1142,6 +1255,10 @@ tbody tr:nth-child(even) {
 .cat-card__icon--amber { background: #F59E0B18; color: var(--semantic-h); }
 .cat-card__icon--teal { background: #14B8A618; color: var(--semantic-v); }
 .cat-card__icon--purple { background: #8B5CF618; color: var(--accent-purple); }
+.cat-card__icon--gradient {
+  background: linear-gradient(135deg, #F59E0B18, #14B8A618);
+  color: var(--semantic-v);
+}
 
 .cat-card__title {
   font-size: 1rem;
@@ -1388,22 +1505,23 @@ details[open] .accordion-toggle__chevron {
 }
 
 .compass-card:hover {
-  border-color: var(--accent-purple);
+  border-color: var(--semantic-v);
   text-decoration: none;
+  box-shadow: var(--shadow-subtle);
 }
 
 .compass-card__num {
   width: 2.5rem;
   height: 2.5rem;
   border-radius: 0.625rem;
-  background: #8B5CF618;
+  background: linear-gradient(135deg, #F59E0B18, #14B8A618);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
   font-size: 0.875rem;
   font-weight: 700;
-  color: var(--accent-purple);
+  color: var(--text);
   font-family: var(--font-display);
 }
 
@@ -1559,7 +1677,7 @@ details[open] .accordion-toggle__chevron {
 }
 
 .section-nav__link:hover {
-  border-color: var(--accent-purple);
+  border-color: var(--semantic-v);
   transform: translateY(-1px);
   box-shadow: var(--shadow-subtle);
   text-decoration: none;
@@ -1576,7 +1694,7 @@ details[open] .accordion-toggle__chevron {
 }
 
 .section-nav__arrow {
-  color: var(--accent-purple);
+  color: var(--semantic-v);
   flex-shrink: 0;
 }
 
@@ -1659,7 +1777,7 @@ details[open] .accordion-toggle__chevron {
 }
 
 .compass-content .nav-link {
-  color: var(--accent-purple);
+  color: var(--info-blue);
   text-decoration: none;
   font-weight: 600;
 }
