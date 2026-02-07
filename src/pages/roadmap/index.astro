@@ -1,0 +1,542 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<PortalLayout title="Implementation Roadmap" currentPage="compass">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <strong>Implementation Roadmap</strong>
+  </nav>
+
+  <div class="page-hero page-hero--gradient">
+    <div class="eyebrow">LIVING DOCUMENT</div>
+    <h1>Implementation Roadmap</h1>
+    <p class="subtitle">Architecture, features, and north-star vision — crystallized from design critiques, multi-model analysis, and build sessions. This page is a working reference, not a finished plan.</p>
+  </div>
+
+  <div class="compass-content">
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- TOC -->
+    <!-- ═══════════════════════════════════════════ -->
+    <nav class="toc-grid">
+      <div class="toc-grid__label">On This Page</div>
+      <div class="toc-grid__items">
+        <a href="#architecture" class="toc-grid__link">Architecture Model</a>
+        <a href="#four-chambers" class="toc-grid__link">The Four Chambers</a>
+        <a href="#navigation" class="toc-grid__link">Navigation Architecture</a>
+        <a href="#authority" class="toc-grid__link">Authority & Voice</a>
+        <a href="#features" class="toc-grid__link">Interactive Feature Tiers</a>
+        <a href="#bridges" class="toc-grid__link">Cross-Domain Bridges</a>
+        <a href="#governance" class="toc-grid__link">Content Governance</a>
+        <a href="#execution" class="toc-grid__link">Execution Phases</a>
+        <a href="#critic-synthesis" class="toc-grid__link">Critic Synthesis</a>
+        <a href="#completed" class="toc-grid__link">What's Been Built</a>
+      </div>
+    </nav>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 1. ARCHITECTURE MODEL -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="architecture">
+      <h2>Architecture Model</h2>
+      <p>Every piece of content in the portal exists at the intersection of three independent layers. Keeping these layers separate is the architectural decision that prevents the system from collapsing as it scales.</p>
+
+      <div class="callout callout--editorial">
+        <div class="callout__header">
+          <span class="callout__icon">◈</span>
+          <span class="callout__title">The Core Principle</span>
+        </div>
+        <div class="callout__body">
+          <p>Three kinds of structure must coexist without fighting: <strong>what content does</strong> (Function), <strong>where it's presented</strong> (Surface), and <strong>what system it belongs to</strong> (Module). Conflating any two causes role collapse — the actual source of perceived chaos.</p>
+        </div>
+      </div>
+
+      <h3 id="layer-1-function">Layer 1 — Function (The Five Lenses)</h3>
+      <p>These are <strong>editorial tags</strong>, not folders. Any page or section can carry one or more. They answer: <em>what does this content do for the person encountering it?</em></p>
+
+      <table>
+        <thead>
+          <tr><th>Lens</th><th>Question It Answers</th><th>Content Types</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="token token--amber">🔍 Orientation</span></td>
+            <td>"What is this? How do I use it?"</td>
+            <td>Explainers, maps, on-ramps, vocabulary</td>
+          </tr>
+          <tr>
+            <td><span class="token token--amber">🧠 Depth</span></td>
+            <td>"What's the canonical understanding?"</td>
+            <td>Long essays, theory, books, foundational references</td>
+          </tr>
+          <tr>
+            <td><span class="token token--amber">🛠 Application</span></td>
+            <td>"How do I do the thing?"</td>
+            <td>Steps, workflows, templates, tutorials, tools</td>
+          </tr>
+          <tr>
+            <td><span class="token token--teal">✨ Signal</span></td>
+            <td>"What exemplifies quality?"</td>
+            <td>Taste anchors, best-of, exemplars, inspiration</td>
+          </tr>
+          <tr>
+            <td><span class="token token--teal">🧩 Bridge</span></td>
+            <td>"How does this connect to that?"</td>
+            <td>Cross-domain connectors, synthesis, pattern links</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p><strong>Key rule:</strong> Functions are orthogonal to topic. A page about harmonic theory can be Orientation (for beginners), Depth (for theorists), and Bridge (connecting music to narrative) simultaneously — those are sections within the page, not separate pages.</p>
+
+      <h3 id="layer-2-surface">Layer 2 — Surface (Presentation Modes)</h3>
+      <p>Surfaces are <strong>curated views</strong> over the underlying content. They select and frame — they never duplicate.</p>
+
+      <table>
+        <thead>
+          <tr><th>Surface</th><th>Dominant Functions</th><th>Promise to Visitor</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Field Guide</strong></td>
+            <td>🔍 Orientation + 🛠 Application</td>
+            <td>"You won't get lost here."</td>
+          </tr>
+          <tr>
+            <td><strong>Atlas</strong></td>
+            <td>🧠 Depth + ✨ Signal + 🧩 Bridge</td>
+            <td>"I've already filtered the noise."</td>
+          </tr>
+          <tr>
+            <td><strong>Workbench</strong></td>
+            <td>🛠 Application + 🧩 Bridge</td>
+            <td>"This is what's actually working right now."</td>
+          </tr>
+          <tr>
+            <td><strong>Archive</strong></td>
+            <td>All (unfiltered)</td>
+            <td>"Everything is here if you need it."</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 id="layer-3-module">Layer 3 — Module (Systems)</h3>
+      <p>Modules are the actual subsystems. Each does a different job. Surfaces pull from modules — modules don't know about surfaces.</p>
+
+      <table>
+        <thead>
+          <tr><th>Module</th><th>Role</th><th>Metaphor</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Library</strong></td><td>Storage + knowledge substrate</td><td>Archives &amp; storage rooms</td></tr>
+          <tr><td><strong>Compass</strong></td><td>Meaning + navigation model</td><td>The coordinate grid / map</td></tr>
+          <tr><td><strong>Creativity Engine</strong></td><td>Workflow + generation</td><td>The docent + toolkit</td></tr>
+          <tr><td><strong>Matrices</strong></td><td>Practice tools + tracking</td><td>Training rigs / practice stations</td></tr>
+        </tbody>
+      </table>
+
+      <div class="callout callout--horizontal">
+        <div class="callout__header">
+          <span class="callout__icon">↔</span>
+          <span class="callout__title">How a single concept travels the system</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>"Voice leading in pop melody writing"</strong> exists differently in each layer:</p>
+          <p><strong>Library</strong> → link clusters (articles, videos, books) · <strong>Compass</strong> → coordinate mapping (structural vs. psychological tension) · <strong>Field Guide</strong> → beginner on-ramp ("how to study this") · <strong>Atlas</strong> → curated best-of path with annotations · <strong>Workbench</strong> → working exercises and prompts · <strong>Piano Matrix</strong> → concrete drills, logged and tracked</p>
+          <p>One concept, multiple surfaces, different intentions. This is how you avoid chaos.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 2. THE FOUR CHAMBERS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="four-chambers">
+      <h2>The Four Chambers</h2>
+      <p>The portal organizes into four distinct modes of engagement. Each should feel visually different — not just categorically different. A visitor should <em>know</em> which chamber they're in from the page's texture alone.</p>
+
+      <div class="callout callout--vertical">
+        <div class="callout__header">
+          <div class="callout__icon-circle"><span>I</span></div>
+          <span class="callout__title">The Field Guide — "The Manual"</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Purpose:</strong> Orientation, definitions, operating instructions. The entry point.</p>
+          <p><strong>Content:</strong> "How to use this portal," core philosophy, glossary of terms, dimension explanations, "how to read the Compass," "how to use a Matrix."</p>
+          <p><strong>Vibe:</strong> Clean, instructional, stable. High authority. Every deep page links back here for definitions.</p>
+          <p><strong>Social signal:</strong> <em>Trustworthiness.</em> This is the page people bookmark.</p>
+          <p><strong>Status:</strong> <span class="token token--amber">Not yet built</span> — the Compass Orientation section partially serves this role but lacks the full editorial voice and portal-wide scope.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--vertical">
+        <div class="callout__header">
+          <div class="callout__icon-circle"><span>II</span></div>
+          <span class="callout__title">The Curated Atlas — "The Showroom"</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Purpose:</strong> The highest quality, most finished content. The gold standard.</p>
+          <p><strong>Content:</strong> Compass sections, "Top 20" lists, Bridge pages (Music ↔ Story crosswalks), annotated collections. Expressed as regions, routes, landmarks, and bridges — not as a phonebook.</p>
+          <p><strong>Vibe:</strong> Polished, visual, "coffee table book" layout. The destination you send people to impress them.</p>
+          <p><strong>Social signal:</strong> <em>Discernment.</em> This is the page people share.</p>
+          <p><strong>Key distinction from Library:</strong> Atlas is "what you'd be proud to show someone." Library is "everything you refuse to lose." Atlas publishes maps, not lists.</p>
+          <p><strong>Status:</strong> <span class="token token--amber">Partially exists</span> — the Compass is Atlas-grade content living in a Library-grade container.</p>
+        </div>
+      </div>
+
+      <div class="callout callout--vertical">
+        <div class="callout__header">
+          <div class="callout__icon-circle"><span>III</span></div>
+          <span class="callout__title">The Workbench — "The Lab"</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Purpose:</strong> Active experiments, prototypes, evolving tools, "in progress" material.</p>
+          <p><strong>Content:</strong> Current builds, half-baked theories, daily logs, active projects. Where the Creativity Engine and matrices live as use-cases, not just descriptions.</p>
+          <p><strong>Vibe:</strong> Monospaced fonts, grid lines, raw. Distinct "Work in Progress" indicators. The engine room.</p>
+          <p><strong>Social signal:</strong> <em>Builder energy.</em> This is the page collaborators pay attention to.</p>
+          <p><strong>Status:</strong> <span class="token token--teal">Not yet built</span></p>
+        </div>
+      </div>
+
+      <div class="callout callout--vertical">
+        <div class="callout__header">
+          <div class="callout__icon-circle"><span>IV</span></div>
+          <span class="callout__title">The Archive — "The Stack"</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Purpose:</strong> The bulk library. The 1,476 links. Everything you refuse to lose.</p>
+          <p><strong>Content:</strong> Generated lists, raw data, reference dumps. Accessible via search, not promoted in main navigation.</p>
+          <p><strong>Vibe:</strong> High-density, low-chrome. Utility-focused (search + filter). The basement — vital, but not the hallway.</p>
+          <p><strong>Status:</strong> <span class="token token--teal">This is essentially the current Library section</span> — it exists but lacks the visual distinction and the framing that separates it from Atlas content.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 3. NAVIGATION ARCHITECTURE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="navigation">
+      <h2>Navigation Architecture</h2>
+      <p>For content at this density, a single-column scroll is insufficient. The portal needs a "cockpit layout" — multiple panes providing simultaneous context at different scales.</p>
+
+      <h3 id="three-pane">The Three-Pane Layout</h3>
+
+      <div class="callout callout--portal">
+        <div class="callout__header">
+          <span class="callout__icon">⬡</span>
+          <span class="callout__title">Target Desktop Layout (1200px+)</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Left margin (future)</strong> — Supplementary content: dimension definitions, "see also" cross-links, framework quick-reference cards, editorial asides. Tufte-style marginal notes that sit <em>alongside</em> content instead of interrupting it.</p>
+          <p><strong>Center (current)</strong> — Main reading column. Optimized for long-form. Horizontal breakers (tabs, carousels, accordions) prevent wall-of-text monotony.</p>
+          <p><strong>Right sidebar (v3.4)</strong> — "On This Page" TOC with scroll-spy highlighting + sibling navigation (Compass sections I–VII). Persistent orientation while scrolling. Answers "where am I?" at all times.</p>
+        </div>
+      </div>
+
+      <h4>Responsive collapse</h4>
+      <p><strong>Tablet (768–1200px):</strong> Center + right sidebar. Left margin notes collapse inline as styled asides. <strong>Mobile (&lt;768px):</strong> Single column. Right sidebar becomes slide-out drawer via hamburger. Margin notes become expandable accordions or tap-to-reveal tooltips.</p>
+
+      <h3 id="nav-components">Navigation Components</h3>
+
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Status</th><th>Function</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Top nav bar</td><td><span class="token token--teal">✅ Built</span></td><td>Global wayfinding: Home, Library, Compass, Style Guide</td></tr>
+          <tr><td>Breadcrumbs</td><td><span class="token token--teal">✅ Built</span></td><td>Hierarchical context</td></tr>
+          <tr><td>TOC cards (top of page)</td><td><span class="token token--teal">✅ Built</span></td><td>Landing orientation — "what's on this page"</td></tr>
+          <tr><td>Right sidebar TOC</td><td><span class="token token--teal">✅ v3.4</span></td><td>Persistent "On This Page" with scroll-spy</td></tr>
+          <tr><td>Compass sibling nav</td><td><span class="token token--teal">✅ v3.4</span></td><td>Jump between sections I–VII without backtracking</td></tr>
+          <tr><td>Back-to-top button</td><td><span class="token token--teal">✅ v3.4</span></td><td>Quick return on long pages</td></tr>
+          <tr><td>Sticky footer</td><td><span class="token token--teal">✅ v3.4</span></td><td>GitHub link, always visible</td></tr>
+          <tr><td>Pagefind search</td><td><span class="token token--teal">✅ Built</span></td><td>Full-text search across 82 pages</td></tr>
+          <tr><td>Left margin notes</td><td><span class="token token--amber">◻ Future</span></td><td>Definitions, cross-links, editorial asides alongside content</td></tr>
+          <tr><td>Tooltips for terms</td><td><span class="token token--amber">◻ Future</span></td><td>Hover/tap definitions from shared glossary file</td></tr>
+          <tr><td>Chamber switcher</td><td><span class="token token--amber">◻ Future</span></td><td>Top-level toggle: Field Guide / Atlas / Workbench / Archive</td></tr>
+        </tbody>
+      </table>
+
+      <h3 id="margin-notes">The Margin Notes Pattern</h3>
+      <p>This is the single highest-impact layout change remaining. The Compass pages are analytically dense — the reader tracks the main argument while absorbing framework references, dimension definitions, coordinate examples, and cross-links. Right now all of that is stacked vertically. Every callout and aside interrupts reading flow.</p>
+      <p>A left margin column lets secondary material sit <em>next to</em> the relevant content instead of <em>between</em> it. Content that belongs in the margin: dimension definitions when referenced, coordinate examples, "see also" cross-links, framework quick-reference cards, key term definitions, and editorial callouts that currently interrupt flow.</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 4. AUTHORITY & VOICE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="authority">
+      <h2>Authority & Voice</h2>
+
+      <div class="callout callout--editorial">
+        <div class="callout__header">
+          <span class="callout__icon">◈</span>
+          <span class="callout__title">The Warehouse → Showroom Problem</span>
+        </div>
+        <div class="callout__body">
+          <p>The portal currently has the inventory of a warehouse (1,476 links, 82 pages, 8 Compass sections) but the presentation of one. A visitor lands in the middle of a dense aisle without knowing <em>who</em> built this, <em>why</em> they should trust it, or <em>how</em> to use it.</p>
+          <p><strong>Authority comes from opinionated curation, not volume.</strong></p>
+        </div>
+      </div>
+
+      <h3>What's Missing: The Editor's Hand</h3>
+      <p>The portal currently feels generated. To feel like an <em>authority</em>, the user needs to feel a human presence guiding them — telling them <em>what matters</em> before showing them <em>what exists</em>. This is the difference between a phonebook and a map.</p>
+
+      <h3>The Entry Sequence</h3>
+      <p>The portal needs a "Start Here" experience that establishes expertise before showing data. This is not a splash page — it's a <strong>reader contract</strong>:</p>
+      <p>→ What this portal is · → Why it exists · → How to use it (read vs. reference vs. tool) · → What to explore first · → Where to go next (Compass? Library? Specific domain?)</p>
+
+      <h3>Visual Distinction Between Chambers</h3>
+      <p>Atlas pages should feel physically heavier and more permanent than Workbench pages. Options: subtle background color shifts per chamber, distinct header/hero treatments, badge system ("Core Atlas" vs. "Library" vs. "WIP"), different typography pairings (serif for Compass authority, sans for Library utility).</p>
+
+      <h3>Micro-Annotations: The Clout Move</h3>
+      <p>The transition from collector to cartographer happens when links carry <em>your voice</em>. Not just "here's a resource" but "here's why this resource matters, what it connects to, and when to use it." Even 1–2 lines per link transforms a list into a judgment. This is what makes the Atlas shareable — people don't share phonebooks, they share maps with commentary.</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 5. INTERACTIVE FEATURE TIERS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="features">
+      <h2>Interactive Feature Tiers</h2>
+      <p>Arranged from "build this now" to "north-star vision." Each tier is independently valuable — you don't need Tier 4 for Tier 1 to matter.</p>
+
+      <h3 id="tier-0">Tier 0 — Reading Experience (now)</h3>
+      <p>Fix usability as reading <em>before</em> adding interactivity. This addresses 70% of critique without changing content.</p>
+      <p>→ Persistent sidebar with scroll-spy <span class="token token--teal">✅ v3.4</span> · → Progressive disclosure within sections (tabs/accordions for repeated patterns: Definition, Use When, Key Questions, Framework Links, Example Coordinates, Failure Modes, Bridge Links) · → Remove duplicate structural elements (stacked breadcrumbs, repeated headings) · → Tabbed panels for framework crosswalks — collapses the longest pages by ~60%</p>
+
+      <h3 id="tier-1">Tier 1 — The Coordinate System Made Tangible</h3>
+      <p>The smallest interactive proof that the portal is an <em>instrument</em>, not a document.</p>
+
+      <div class="callout callout--portal">
+        <div class="callout__header">
+          <span class="callout__icon">⬡</span>
+          <span class="callout__title">MVP Coordinate Picker</span>
+        </div>
+        <div class="callout__body">
+          <p>A single widget. No database needed. No backend.</p>
+          <p><strong>Inputs:</strong> Depth Dimension (0–5) via vertical slider or buttons. Story Clock position (12:00, 3:00, 6:00, 9:00…) via clock dial or dropdown.</p>
+          <p><strong>Outputs:</strong> The notation (<code>[6:00] / [Psychological Dimension 2]</code>). A "Jump to section" link that scrolls to the matching dimension anchor. A "Highlight this dimension" toggle that temporarily collapses other dimensions.</p>
+          <p>That single widget proves the promise without becoming a whole app.</p>
+        </div>
+      </div>
+
+      <p>Also in Tier 1: <strong>Dimension Legend &amp; Filter</strong> — persistent, color-coded key for the 6 Depth Dimensions. Clicking a color highlights related content. <strong>Story Clock visualization</strong> — interactive element showing 8+ narrative positions; hovering reveals universal meaning across all dimensions.</p>
+
+      <h3 id="tier-2">Tier 2 — Dimension-Specific Visualizations</h3>
+      <p>Each analytical layer gets its own visual language:</p>
+      <p>→ <strong>Structural (4):</strong> Beat map — horizontal timeline showing cause-effect chains, act breaks, beat functions · → <strong>Cognitive (3):</strong> Fallacy &amp; bias network — node diagram mapping "signature distortion" to rhetorical mode · → <strong>Psychological (2):</strong> Character arc graph — line chart tracking internal state across timeline, crisis points marked · → <strong>Archetypal (1):</strong> Mythic pattern overlay — alignment against Campbell, Propp, showing convergence/divergence</p>
+
+      <h3 id="tier-3">Tier 3 — Cross-Dimensional Connections</h3>
+      <p>Where the system's true power becomes visible:</p>
+      <p>→ <strong>Moment Drill-Down Panel:</strong> When a story moment is plotted, this shows analysis across all 6 dimensions simultaneously — compact dashboard or radial diagram with 6 segments · → <strong>Connection Webbing:</strong> Force-directed graph. Nodes = frameworks, concepts, or story moments. Lines connect related nodes across dimensions. Visually answers "How does Jung relate to the 6:00 midpoint?"</p>
+
+      <h3 id="tier-4">Tier 4 — The Instrument</h3>
+      <p>North-star vision. The portal stops describing a coordinate system and <em>becomes</em> one.</p>
+      <p>→ <strong>Comparative Analysis Slider:</strong> Plot two characters/moments, overlay dimensional profiles · → <strong>Framework Integration Matrix:</strong> Heatmap showing which frameworks (Dramatica, Harmon, Truby) are most relevant to which dimensions and clock positions · → <strong>User Analysis Canvas:</strong> Personal workspace — plot moments from your own story, save coordinates, export the map · → <strong>Moment Workbench:</strong> Drop in a story or musical moment → select coordinates → portal assembles side-by-side analysis → export shareable "analysis card"</p>
+
+      <div class="callout callout--editorial">
+        <div class="callout__header">
+          <span class="callout__icon">◈</span>
+          <span class="callout__title">The Ultimate Unified Interface</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>Left panel:</strong> Master 2-axis plotter. <strong>Central canvas:</strong> Moment Drill-Down or Character Arc Graph, updating dynamically as you move the point. <strong>Right panel:</strong> Dimension filter + connection webbing. <strong>Bottom:</strong> Scrubbable story timeline with key beats marked.</p>
+          <p>This is the moment the portal becomes what Dramatica promised: a working model, not a lecture about story.</p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 6. CROSS-DOMAIN BRIDGES -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="bridges">
+      <h2>Cross-Domain Bridges</h2>
+
+      <div class="callout callout--editorial">
+        <div class="callout__header">
+          <span class="callout__icon">◈</span>
+          <span class="callout__title">The Rarest and Most Valuable Layer</span>
+        </div>
+        <div class="callout__body">
+          <p>Your wikis aren't separate domains — they're two views of the same creative principles. Music and story both create emotional experiences through structure, use pattern and variation, build tension and release, develop themes/motifs, balance constraint and freedom. The cross-links shouldn't just be references — they should reveal the <strong>unified theory underneath</strong>. Your Creativity Engine is that unified theory. The wikis are the application domains.</p>
+          <p>If you can make these bridges <em>usable</em> (not just poetic), you become the person who didn't just collect frameworks — you <strong>integrated</strong> them.</p>
+        </div>
+      </div>
+
+      <h3>Structural Parallels (Theory ↔ Craft)</h3>
+      <p>→ Song structure (verse/chorus/bridge) mirrors story structure (setup/conflict/resolution) · → Rhythmic patterns = sentence cadence and paragraph flow; syncopation = unexpected narrative beats · → Melodic contour = narrative arc; motif development = character theme/leitmotif · → Jazz improvisation within structure = character agency within plot; call-and-response = dialogue structure</p>
+
+      <h3>Emotional Architecture (Psychology ↔ Expression)</h3>
+      <p>→ Musical dynamics create emotional curves ↔ character emotional arcs follow similar patterns · → Major/minor tonality = emotional valence in character states · → Vocal timbre = written character voice; vocal range = character emotional range · → Gospel tension/release = story climax/denouement; communal call-and-response = ensemble cast dynamics</p>
+
+      <h3>Craft Techniques (Creation Process)</h3>
+      <p>→ <strong>Highest priority bridge:</strong> Lyric writing ↔ literary devices (rhyme schemes = prose rhythm; lyrical metaphor = literary metaphor; song narrative = microfiction) · → Songwriting "card" methods ↔ story beat sheets · → Tonnetz harmonic relationship networks ↔ character relationship mapping · → Constraint-based creativity transfers: what rhyme/meter does for songs, structure does for short fiction</p>
+
+      <h3>Tools & Workflow</h3>
+      <p>→ DAW session view ↔ Scrivener corkboard (non-linear editing, version control, organization) · → Ear training (pattern recognition) ↔ "story sense" development (deliberate practice transfers) · → How you organize influences affects creation — this Obsidian vault / portal IS the proof</p>
+
+      <h3>Universal Patterns</h3>
+      <table>
+        <thead>
+          <tr><th>Pattern</th><th>In Music</th><th>In Story</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Tension &amp; Release</td><td>Dissonance → consonance</td><td>Conflict → resolution</td></tr>
+          <tr><td>Rule of Three</td><td>Repetition with variation (AAB, ABA)</td><td>Three-act structure, rhetorical threes</td></tr>
+          <tr><td>Voice &amp; Character</td><td>Timbre, register, style</td><td>Diction, syntax, POV</td></tr>
+          <tr><td>Structure &amp; Form</td><td>Verse / Chorus / Bridge</td><td>Setup / Confrontation / Resolution</td></tr>
+          <tr><td>Development</td><td>Motif development, theme &amp; variations</td><td>Character arc, plot variations</td></tr>
+          <tr><td>Constraint → Freedom</td><td>12 notes, fixed forms, meter</td><td>Genre rules, word count, POV</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Priority Bridge Pages to Build</h3>
+      <p>1. <code>/bridges/narrative-music.md</code> — Song as story, story as song · 2. <code>/bridges/rhythm-pacing.md</code> — Syncopation, rubato, polyrhythm as narrative tools · 3. <code>/bridges/emotion-expression.md</code> — Emotional arcs, key changes as character transformation · 4. <code>/bridges/constraint-creativity.md</code> — How limits drive invention in both domains · 5. <code>/bridges/patterns.md</code> — The universal patterns catalog</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 7. CONTENT GOVERNANCE -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="governance">
+      <h2>Content Governance</h2>
+
+      <h3>The Five Rules</h3>
+      <p><strong>Rule 1 — Don't duplicate content, duplicate views.</strong> Write once in the module, present many times in surfaces via links, embeds, featured lists, and index pages.</p>
+      <p><strong>Rule 2 — Topic is the file; function is the label.</strong> Folder/page name = what it's about. Function tags/sections = how it's used.</p>
+      <p><strong>Rule 3 — Atlas is not everything.</strong> Atlas is "what you'd be proud to show someone." Library is "everything you refuse to lose."</p>
+      <p><strong>Rule 4 — Compass defines the language.</strong> Compass is where definitions live and stay stable. Everything else references Compass terms, never reinvents them.</p>
+      <p><strong>Rule 5 — Matrices are tools, not categories.</strong> They reference Library/Compass; they produce practice actions. They don't become dumping grounds for theory links.</p>
+
+      <h3>The Two Axes of Every Piece of Content</h3>
+      <p><strong>Axis 1 — Role (structural):</strong> Where does this live? Pages, repos, and URLs are organized by role (Atlas / Field Guide / Workbench / Archive).</p>
+      <p><strong>Axis 2 — Function (editorial):</strong> Why would someone use this? Links within pages are annotated by function (🔍🧠🛠✨🧩). No link gets more than one primary function.</p>
+      <p>This prevents taxonomy explosion, tagging fatigue, and future regret.</p>
+
+      <h3>AI Usage Boundaries</h3>
+      <div class="callout callout--horizontal">
+        <div class="callout__header">
+          <span class="callout__icon">↔</span>
+          <span class="callout__title">AI is a code monkey, not an architect</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>AI is safe for:</strong> structural templates, data transformation (CSV → JSON), metadata extraction, batch operations, code generation, pattern detection, alternative phrasing when YOU provide semantic intent.</p>
+          <p><strong>AI should not be trusted with:</strong> semantic consolidation ("merge similar content"), taxonomy design, content summarization, link structure decisions, priority decisions ("what's important"), conceptual relationships.</p>
+          <p><strong>The rule:</strong> You make the strategic decision. You specify the exact outcome. AI executes mechanical transformation. You verify against your mental model.</p>
+        </div>
+      </div>
+
+      <h3>The Role Hats</h3>
+      <p>When working solo on a multi-track project, name the hat you're wearing:</p>
+      <p><strong>Editor-in-Chief:</strong> Defines the "why." Curates Atlas. Writes Field Guide. Asks: "Does this feel authoritative? Is the voice consistent?"</p>
+      <p><strong>Frontend Architect:</strong> Builds layout, sidebar logic, margin note components. Asks: "Does the layout break on mobile? Is the sticky TOC smooth?"</p>
+      <p><strong>Digital Librarian:</strong> Manages tags, metadata, link generation. Asks: "Are we using consistent naming? How do we automate See Also links?"</p>
+      <p><strong>Product Builder:</strong> Defines MVP features for Engine/Matrices. Asks: "What's the data model? What's the minimal viable interaction?"</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 8. EXECUTION PHASES -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="execution">
+      <h2>Execution Phases</h2>
+
+      <div class="callout callout--editorial">
+        <div class="callout__header">
+          <span class="callout__icon">◈</span>
+          <span class="callout__title">The Strategy: Facade First, Structure Later</span>
+        </div>
+        <div class="callout__body">
+          <p>Don't move files yet. Build the <em>navigation layer</em> to simulate the new structure. This prevents link rot, content paralysis ("I'm waiting for the new system"), and complexity overload. The grand rewrite trap has killed more ambitious projects than lack of ambition ever did.</p>
+          <p><strong>We map first. We annotate second. We sort last.</strong></p>
+        </div>
+      </div>
+
+      <h3>Phase 1 — The Frame (Layout &amp; Navigation)</h3>
+      <p><strong>Goal:</strong> Make the current content <em>feel</em> like a portal without moving a single markdown file.</p>
+      <p>→ Global 3-pane layout component <span class="token token--teal">✅ v3.4 (2-pane: content + right sidebar)</span> · → Right sidebar with auto-TOC + scroll spy + sibling nav <span class="token token--teal">✅ v3.4</span> · → Mobile collapse to slide-out drawer <span class="token token--teal">✅ v3.4</span> · → Sticky footer with GitHub <span class="token token--teal">✅ v3.4</span> · → Back-to-top button <span class="token token--teal">✅ v3.4</span> · → Reserve left margin space in CSS grid (empty for now) <span class="token token--amber">◻ Next</span></p>
+
+      <h3>Phase 2 — The Gateway (Authority Surfaces)</h3>
+      <p><strong>Goal:</strong> Create the entry experience. Establish the editor's hand.</p>
+      <p>→ "Start Here" page — high-design manifesto explaining why Chaos Portal exists · → Curated Atlas index — hand-picked 10–15 best Compass sections with editorial annotations · → Visual distinction system — CSS classes to mark pages as "Core Atlas" vs. "Library/Archive" · → Badge or colored border system per chamber · → Micro-annotations on key Library pages (1–2 lines per link explaining <em>why it's here</em>)</p>
+
+      <h3>Phase 3 — The Engine (Deep Features)</h3>
+      <p><strong>Goal:</strong> Enable the complex features that make the portal an instrument.</p>
+      <p>→ Margin notes engine — processor that scans for <code>[[Definition:...]]</code> tags and renders in left rail · → Bridge pages — Music ↔ Story crosswalks using tabbed panels · → Progressive disclosure components (tabs, accordions within dimension sections) · → Tooltips for framework terms — shared definitions file, hover/tap anywhere · → MVP Coordinate Picker widget · → URL refactor into <code>/atlas/</code>, <code>/workbench/</code> with redirects (only after Phases 1–2 are stable)</p>
+
+      <h3>Phase 4 — The Instrument (Interactive Tools)</h3>
+      <p><strong>Goal:</strong> The portal stops being a reference and starts being a device.</p>
+      <p>→ Coordinate Plotter (Tier 1 visualization) · → Dimension-specific visualizations (Tier 2) · → Creativity Engine integration (sessions, maps, prompts) · → Matrix tool integration (practice plans, tracking) · → Cross-domain connection webbing (Tier 3) · → User analysis canvas (Tier 4)</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 9. CRITIC SYNTHESIS -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="critic-synthesis">
+      <h2>Critic Synthesis</h2>
+      <p>This section distills input from Claude, GPT-4, Gemini, and DeepSeek. Where they agree, the signal is strong. Where they diverge, the tension is instructive.</p>
+
+      <h3>Universal Consensus (All Four)</h3>
+      <p>→ Persistent navigation is mandatory for content at this density · → The portal needs an editorial "entry sequence" that establishes authority before showing data · → Three-pane layout (left nav / center content / right context) is the correct structural pattern · → Current hierarchy is too flat — Atlas-grade and Library-grade content shouldn't share visual weight · → Progressive disclosure (tabs, accordions) is necessary to break 1,000+ line pages · → Mobile strategy should prioritize search + navigation, not reading dense pages on phone · → Bridge content (music ↔ story) is the rarest and most valuable layer — it's the signature · → "Facade first, structure later" — build navigation facade before moving files</p>
+
+      <h3>Strong Agreement (3 of 4)</h3>
+      <p>→ The coordinate system should eventually be interactive, not just described · → Color coding dimensions serves wayfinding, not decoration · → Margin notes pattern (Tufte-style) is highest-impact remaining layout change · → Micro-annotations transform lists into maps — the "clout move" · → The system should be built in layers, not all at once</p>
+
+      <h3>Productive Disagreement</h3>
+
+      <div class="callout callout--horizontal">
+        <div class="callout__header">
+          <span class="callout__icon">↔</span>
+          <span class="callout__title">Where the critics diverge</span>
+        </div>
+        <div class="callout__body">
+          <p><strong>How interactive, how soon?</strong> DeepSeek demands a full coordinate plotter immediately ("the medium fights the message"). GPT/Claude say: fix navigation and disclosure first, add a tiny coordinate widget as proof-of-concept, defer the full instrument. Gemini sits between — build the CSS grid first, then the interactive tools. <em>Resolution: Layer 0 (reading) → Layer 1 (MVP picker) → Layer 2+ (instrument). Don't build the starship before the runway.</em></p>
+          <p><strong>Left sidebar vs. right sidebar?</strong> Gemini/DeepSeek propose conventional left-side navigation. The portal uses right-side. <em>Resolution: Right sidebar for TOC/scroll-spy (unconventional, reserves left for future margin notes). This is a deliberate design choice, not an oversight.</em></p>
+          <p><strong>Atlas substrate first vs. public surface first?</strong> One thread argues to build the truthful substrate before any public curation. The build sessions shipped a public portal first. <em>Resolution: Both are correct for different tracks. The portal IS the public surface. The substrate work (annotation, taxonomy, governance) happens in parallel as content matures.</em></p>
+        </div>
+      </div>
+
+      <h3>DeepSeek's Harshest Critique (and what's fair about it)</h3>
+      <p>"The fundamental thesis is a coordinate system. The design presents a flat, linear scroll. This isn't a minor oversight; it's a complete philosophical breakdown." — This is the most important sentence in 4,800 lines of feedback. It identifies the central tension: a spatial concept trapped in a linear medium. Every interactive feature in Tiers 1–4 is an answer to this critique. The question is sequencing, not validity.</p>
+      <p>What DeepSeek gets wrong: it pretends you've already promised an app. You haven't. You've built a portal foundation — and it's a good one. The next step is persistent navigation + progressive disclosure + one small interactive proof. Not a cosmic instrument dashboard.</p>
+    </section>
+
+
+    <!-- ═══════════════════════════════════════════ -->
+    <!-- 10. WHAT'S BEEN BUILT -->
+    <!-- ═══════════════════════════════════════════ -->
+    <section id="completed">
+      <h2>What's Been Built</h2>
+      <p>A running inventory of what exists versus what's been discussed.</p>
+
+      <h3>Shipped (Live on GitHub Pages)</h3>
+      <p>→ 82-page static site (Astro + Pagefind) · → Music Library: 54 pages, 1,248 links · → Story Library: 15 pages, 228 links · → Story Coordinate Compass: 8 sections with full HTML integration · → Unified design system: amber/teal axis colors, dark mode, hero glow, TOC cards · → Search: full-text via Pagefind with ⌘K modal · → v3.4: Right sidebar (auto-TOC + scroll spy + Compass sibling nav), sticky footer, back-to-top, mobile drawer · → Style guide page: living component reference · → GitHub Pages CI/CD: push-to-deploy</p>
+
+      <h3>Designed but Not Yet Built</h3>
+      <p>→ Field Guide ("Start Here") page · → Curated Atlas index with editorial annotations · → Workbench section · → Visual chamber distinction (badges, backgrounds per surface type) · → Left margin notes column · → Progressive disclosure (tabs/accordions within Compass sections) · → Tooltips for framework terms · → Bridge pages (music ↔ story crosswalks) · → Coordinate Picker widget · → Creativity Engine integration · → Matrix tool integration</p>
+
+      <h3>The One-Sentence North Star</h3>
+      <div class="callout callout--portal">
+        <div class="callout__header">
+          <span class="callout__icon">⬡</span>
+          <span class="callout__title">Vision</span>
+        </div>
+        <div class="callout__body">
+          <p>A public-facing, interactive, map-like creative portal where a user can <strong>plot moments, navigate depth, pull relevant references, and export insight</strong> — all while your curated Atlas establishes taste and authority.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</PortalLayout>
