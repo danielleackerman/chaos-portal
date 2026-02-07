@@ -2,7 +2,7 @@
 
 **A spatial navigation system for story analysis and creative frameworks.**
 
-Chaos Portal is a reference environment for writers, analysts, and narrative theorists. It combines a two-axis coordinate system for mapping story structure with a curated library of 1,476 resources across music theory and storytelling.
+Chaos Portal is a creation and reference environment for writers, musicians, and creative artists. It combines a two-axis coordinate system for mapping story structure with a curated library of 1,476 resources across music theory and storytelling.
 
 ### **[→ Explore the live site](https://danielleackerman.github.io/chaos-portal/)**
 

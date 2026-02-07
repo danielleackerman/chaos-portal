@@ -41,6 +41,10 @@ const base = import.meta.env.BASE_URL;
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
           Compass
         </a>
+        <a href={`${base}/style-guide/`} aria-current={currentPage === 'styleguide' ? 'page' : undefined}>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+          Style Guide
+        </a>
       </nav>
       <div style="display:flex; gap:0.5rem; align-items:center;">
         <button class="global-search-trigger" id="search-trigger" type="button">

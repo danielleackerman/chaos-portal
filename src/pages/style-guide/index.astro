@@ -1,0 +1,419 @@
+---
+import PortalLayout from '../../layouts/PortalLayout.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<PortalLayout title="Style Guide" currentPage="styleguide">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <strong>Style Guide</strong>
+  </nav>
+
+  <div class="page-hero page-hero--gradient">
+    <div class="eyebrow">REFERENCE</div>
+    <h1>Style Guide</h1>
+    <p class="subtitle">Living inventory of every component in the Chaos Portal design system (v3.2)</p>
+  </div>
+
+  <nav class="toc-grid">
+    <div class="toc-grid__label">On This Page</div>
+    <div class="toc-grid__items">
+      <a href="#colors" class="toc-grid__link">Color Tokens</a>
+      <a href="#typography" class="toc-grid__link">Typography</a>
+      <a href="#heroes" class="toc-grid__link">Page Heroes</a>
+      <a href="#toc-cards" class="toc-grid__link">TOC Cards</a>
+      <a href="#callouts" class="toc-grid__link">Axis Callouts</a>
+      <a href="#callout-types" class="toc-grid__link">Info / Example / Warning</a>
+      <a href="#cards" class="toc-grid__link">Cards</a>
+      <a href="#tables" class="toc-grid__link">Tables</a>
+      <a href="#tokens-tags" class="toc-grid__link">Tokens &amp; Tags</a>
+      <a href="#lists" class="toc-grid__link">Lists &amp; Checklists</a>
+      <a href="#dimension-cards" class="toc-grid__link">Dimension Cards</a>
+      <a href="#navigation" class="toc-grid__link">Navigation</a>
+    </div>
+  </nav>
+
+  <div class="compass-content">
+
+    <!-- ==================== COLORS ==================== -->
+    <div class="section" id="colors">
+      <h2>Color Tokens</h2>
+      <p>The semantic color system is derived from the Compass coordinate axes.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px; margin:20px 0;">
+        <div style="background:var(--semantic-h); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Signal Amber</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--semantic-h</code><br>
+          <small>#F59E0B</small>
+        </div>
+        <div style="background:var(--semantic-v); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Clarity Teal</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--semantic-v</code><br>
+          <small>#14B8A6</small>
+        </div>
+        <div style="background:var(--accent-purple); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Accent Purple</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--accent-purple</code><br>
+          <small>#8B5CF6</small>
+        </div>
+        <div style="background:var(--accent-green); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Accent Green</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--accent-green</code><br>
+          <small>#10B981</small>
+        </div>
+        <div style="background:var(--info-blue); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Info Blue</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--info-blue</code><br>
+          <small>#3B82F6</small>
+        </div>
+        <div style="background:var(--warn-red); border-radius:var(--radius-md); padding:16px; color:white;">
+          <strong>Warn Red</strong><br>
+          <code style="background:rgba(0,0,0,0.2); color:white;">--warn-red</code><br>
+          <small>#EF4444</small>
+        </div>
+      </div>
+
+      <h3>Surface Tokens</h3>
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:12px; margin:20px 0;">
+        <div style="background:var(--bg); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px;">
+          <strong>--bg</strong><br><small>Page background</small>
+        </div>
+        <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px;">
+          <strong>--surface</strong><br><small>Card background</small>
+        </div>
+        <div style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px;">
+          <strong>--surface-elevated</strong><br><small>Elevated panels</small>
+        </div>
+        <div style="background:var(--surface-inset); border:1px solid var(--border); border-radius:var(--radius-md); padding:16px;">
+          <strong>--surface-inset</strong><br><small>Inset areas</small>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== TYPOGRAPHY ==================== -->
+    <div class="section" id="typography">
+      <h2>Typography</h2>
+
+      <h1>H1 — DM Serif Display</h1>
+      <h2>H2 — Section Heading</h2>
+      <h3>H3 — Subsection Heading</h3>
+      <h4>H4 — Minor Heading (serif italic)</h4>
+      <h5>H5 — Label Heading (mono uppercase)</h5>
+
+      <p>Body text uses the system font stack (Helvetica Neue / system-ui). This is a paragraph showing the standard body text treatment with <strong>bold</strong>, <em>italic</em>, and <a href="#">link styling</a>. Line height is 1.65 for comfortable reading across long analytical content.</p>
+
+      <p>A second paragraph showing spacing between paragraphs. The <code>code</code> element renders inline as a token. Longer code blocks use <code>pre</code> elements:</p>
+
+      <pre><code>[6:00 / Dimension 2] — Midpoint / Psychological Interior
+Examine: What is the character discovering about themselves?</code></pre>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== HEROES ==================== -->
+    <div class="section" id="heroes">
+      <h2>Page Heroes</h2>
+
+      <h3>Gradient Hero (Compass pages)</h3>
+      <div class="page-hero page-hero--gradient" style="position:relative;">
+        <div class="eyebrow">SECTION LABEL</div>
+        <h1 style="font-size:1.75rem;">Page Title Here</h1>
+        <p class="subtitle">Subtitle description text</p>
+      </div>
+
+      <h3>Amber Hero</h3>
+      <div class="page-hero page-hero--amber">
+        <div class="eyebrow">HORIZONTAL</div>
+        <h1 style="font-size:1.75rem;">Amber Variant</h1>
+      </div>
+
+      <h3>Teal Hero</h3>
+      <div class="page-hero page-hero--teal">
+        <div class="eyebrow">VERTICAL</div>
+        <h1 style="font-size:1.75rem;">Teal Variant</h1>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== TOC CARDS ==================== -->
+    <div class="section" id="toc-cards">
+      <h2>TOC Cards</h2>
+      <p>In-page navigation grid. Cards have subtle elevation at rest, teal border + lift on hover.</p>
+
+      <nav class="toc-grid">
+        <div class="toc-grid__label">On This Page</div>
+        <div class="toc-grid__items">
+          <a href="#" class="toc-grid__link">First Section</a>
+          <a href="#" class="toc-grid__link">Second Section</a>
+          <a href="#" class="toc-grid__link">Third Section</a>
+          <a href="#" class="toc-grid__link">Fourth Section</a>
+        </div>
+      </nav>
+
+      <p><strong>Markup:</strong> <code>.toc-grid</code> → <code>.toc-grid__label</code> + <code>.toc-grid__items</code> → <code>.toc-grid__link</code></p>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== AXIS CALLOUTS ==================== -->
+    <div class="section" id="callouts">
+      <h2>Axis Callouts</h2>
+      <p>Used when content relates to a specific axis. Icon circle is generated via CSS <code>::before</code> pseudo-element.</p>
+
+      <div class="dimension-horizontal">
+        <h4>HORIZONTAL AXIS (Story Timeline Position):</h4>
+        <p>Content about the horizontal axis goes here. The amber left border and → icon indicate timeline/position content.</p>
+      </div>
+
+      <div class="dimension-vertical">
+        <h4>VERTICAL AXIS (Story Depth Dimension):</h4>
+        <p>Content about the vertical axis goes here. The teal left border and ↓ icon indicate depth/dimension content.</p>
+      </div>
+
+      <p><strong>Markup:</strong> <code>.dimension-horizontal</code> or <code>.dimension-vertical</code> wrapper. Any content inside gets the treatment.</p>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== INFO / EXAMPLE / WARNING ==================== -->
+    <div class="section" id="callout-types">
+      <h2>Callout Types</h2>
+
+      <div class="callout-info">
+        <h4>Info Callout</h4>
+        <p>Used for important conceptual notes or definitions. Blue left border.</p>
+        <p><strong>Class:</strong> <code>.callout-info</code></p>
+      </div>
+
+      <div class="callout-example">
+        <h4>Example Callout</h4>
+        <p>Used to show worked examples or demonstrations. Green left border.</p>
+        <p><strong>Class:</strong> <code>.callout-example</code></p>
+      </div>
+
+      <div class="callout-warning">
+        <h4>Warning / Caution Callout</h4>
+        <p>Used for caveats, edge cases, or things to watch out for. Red left border.</p>
+        <p><strong>Class:</strong> <code>.callout-warning</code></p>
+      </div>
+
+      <div class="callout-editorial">
+        <h4>Editorial Callout</h4>
+        <p>Used for authorial commentary or meta-discussion about the framework itself.</p>
+        <p><strong>Class:</strong> <code>.callout-editorial</code></p>
+      </div>
+
+      <h3>Structured Callout (with ASCII art)</h3>
+      <div class="callout">
+        <pre><code>┌─────────────────────────────────────────┐
+│ EXAMPLE BOX TITLE                       │
+└─────────────────────────────────────────┘</code></pre>
+        <div class="callout-body">
+          <pre><code>Content line one
+Content line two
+Content line three</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== CARDS ==================== -->
+    <div class="section" id="cards">
+      <h2>Cards</h2>
+
+      <h3>Category Cards (Home Page)</h3>
+      <div class="card-grid" style="margin-bottom:24px;">
+        <div class="cat-card cat-card--amber" style="pointer-events:none;">
+          <div class="cat-card__icon cat-card__icon--amber">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="cat-card__title">Amber Card</div>
+          <div class="cat-card__count">Music / Horizontal</div>
+        </div>
+        <div class="cat-card cat-card--teal" style="pointer-events:none;">
+          <div class="cat-card__icon cat-card__icon--teal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          </div>
+          <div class="cat-card__title">Teal Card</div>
+          <div class="cat-card__count">Story / Vertical</div>
+        </div>
+        <div class="cat-card cat-card--gradient" style="pointer-events:none;">
+          <div class="cat-card__icon cat-card__icon--gradient">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+          </div>
+          <div class="cat-card__title">Gradient Card</div>
+          <div class="cat-card__count">Compass / Both axes</div>
+        </div>
+      </div>
+
+      <h3>Compass Section Card</h3>
+      <div style="max-width:500px;">
+        <a href="#" class="compass-card" style="pointer-events:none;">
+          <div class="compass-card__num">IV</div>
+          <div class="compass-card__body">
+            <div class="compass-card__title">Section Title</div>
+            <div class="compass-card__desc">Description text for the section card component</div>
+          </div>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--text-3); flex-shrink:0;"><polyline points="9 18 15 12 9 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== TABLES ==================== -->
+    <div class="section" id="tables">
+      <h2>Tables</h2>
+      <p>Standard table styling. Wide tables inside <code>.compass-content</code> automatically get horizontal scroll.</p>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Name</th>
+            <th>Function</th>
+            <th>Dimension</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="token">3:00</span></td>
+            <td>First Threshold</td>
+            <td>Point of no return — commitment to the journey</td>
+            <td>Archetypal (D1)</td>
+          </tr>
+          <tr>
+            <td><span class="token">6:00</span></td>
+            <td>Midpoint Revelation</td>
+            <td>Core truth exposed — stakes transformed</td>
+            <td>Psychological (D2)</td>
+          </tr>
+          <tr>
+            <td><span class="token">9:00</span></td>
+            <td>Crisis Point</td>
+            <td>Maximum pressure — all dimensions converge</td>
+            <td>Core (D0)</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== TOKENS & TAGS ==================== -->
+    <div class="section" id="tokens-tags">
+      <h2>Tokens &amp; Tags</h2>
+
+      <h3>Inline Tokens</h3>
+      <p>Coordinates and key terms use the <code>.token</code> class: <span class="token">6:00</span> <span class="token">Dimension 2</span> <span class="token">Midpoint</span></p>
+
+      <h3>Source Tags</h3>
+      <p>Mark content origin: <span class="source-tag">COMPASS</span> <span class="source-tag">LIBRARY</span></p>
+
+      <h3>Schema Labels</h3>
+      <p>
+        <span class="schema-label" style="background:var(--semantic-h); color:white;">Horizontal</span>
+        <span class="schema-label" style="background:var(--semantic-v); color:white;">Vertical</span>
+        <span class="schema-label" style="background:var(--accent-purple); color:white;">Compass</span>
+      </p>
+
+      <h3>Cross Links</h3>
+      <p>Reference links to other framework concepts: <a class="cross-link" href="#">Hero's Journey</a> · <a class="cross-link" href="#">Save the Cat</a> · <a class="cross-link" href="#">Dramatica</a></p>
+
+      <h3>Eyebrow Labels</h3>
+      <p><span class="eyebrow" style="display:inline-block;">SECTION LABEL</span></p>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== LISTS & CHECKLISTS ==================== -->
+    <div class="section" id="lists">
+      <h2>Lists &amp; Checklists</h2>
+
+      <h3>Standard List</h3>
+      <ul>
+        <li>First list item with standard spacing</li>
+        <li>Second item — notice the tighter line height (1.5)</li>
+        <li>Third item with <strong>bold</strong> and <a href="#">link</a> inline</li>
+        <li>Fourth item to show vertical rhythm</li>
+      </ul>
+
+      <h3>Checklist (gray box + green text)</h3>
+      <div class="checklist">
+        <div>✓ Coordinate system orientation complete</div>
+        <div>✓ Horizontal axis frameworks mapped</div>
+        <div>✓ Vertical axis dimensions defined</div>
+        <div>✓ Intersection logic documented</div>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== DIMENSION CARDS ==================== -->
+    <div class="section" id="dimension-cards">
+      <h2>Dimension Cards</h2>
+      <p>Used on the Vertical Axis page to present each of the six story depth dimensions.</p>
+
+      <div class="dimension-card">
+        <span class="dimension-number">SURFACE DIMENSION 5</span>
+        <h2 class="dimension-title">Expressive / Symbolic</h2>
+        <p class="dimension-position">What you directly see and hear</p>
+        <p>Observable phenomena — what literally appears, is said, shown, heard. The concrete surface of the story.</p>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== NAVIGATION ==================== -->
+    <div class="section" id="navigation">
+      <h2>Navigation Components</h2>
+
+      <h3>Breadcrumb</h3>
+      <nav class="breadcrumb">
+        <a href="#">Home</a>
+        <span class="sep">›</span>
+        <a href="#">Compass</a>
+        <span class="sep">›</span>
+        <strong>Current Page</strong>
+      </nav>
+
+      <h3>Section Nav (Prev / Next)</h3>
+      <nav class="section-nav" style="pointer-events:none;">
+        <a href="#" class="section-nav__link section-nav__link--prev">
+          <span class="section-nav__arrow">←</span>
+          <span>
+            <span class="section-nav__label">Previous</span>
+            <span class="section-nav__title">Orientation</span>
+          </span>
+        </a>
+        <a href="#" class="section-nav__link section-nav__link--next">
+          <span>
+            <span class="section-nav__label">Next</span>
+            <span class="section-nav__title">Vertical Axis</span>
+          </span>
+          <span class="section-nav__arrow">→</span>
+        </a>
+      </nav>
+
+      <h3>Axis Boxes (Compass Index)</h3>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:20px 0;">
+        <div class="axis-box axis-box--h">
+          <div class="axis-box__label axis-box__label--h">HORIZONTAL →</div>
+          <p class="axis-box__text">Story Position / Timeline</p>
+        </div>
+        <div class="axis-box axis-box--v">
+          <div class="axis-box__label axis-box__label--v">VERTICAL ↓</div>
+          <p class="axis-box__text">Story Depth / Dimensions</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</PortalLayout>
