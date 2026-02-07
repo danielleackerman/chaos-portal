@@ -1,3 +1,8 @@
+/* ========================================================
+   CHAOS PORTAL — GLOBAL STYLESHEET v3.2
+   Merged: Portal v3.1 shell + Compass v3.0 content styles
+   ======================================================== */
+
 /* ===== RESET ===== */
 *, *::before, *::after {
   margin: 0;
@@ -5,22 +10,24 @@
   box-sizing: border-box;
 }
 
-/* ===== CSS VARIABLES — Extended from Compass ===== */
+/* ===== CSS VARIABLES — Merged from Compass + Portal ===== */
 :root {
-  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  /* TYPOGRAPHY */
+  --font-sans: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-display: 'DM Serif Display', Georgia, serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
 
   /* LIGHT MODE */
   --bg: #F8F9FA;
   --surface: #FFFFFF;
   --surface-elevated: #F1F3F5;
   --surface-inset: #FAFAFA;
-  --text: #1a1a2e;
+  --text: #2D3436;
   --text-2: #636E72;
-  --text-3: #9ca3af;
-  --border: #e5e7eb;
-  --border-accent: #d1d5db;
+  --text-3: #B2BEC3;
+  --border: #DFE6E9;
+  --border-accent: #CED4DA;
 
   /* SEMANTIC — from Compass */
   --semantic-h: #F59E0B;
@@ -32,16 +39,43 @@
   /* GRADIENTS */
   --gradient-h: #F5B04B;
   --gradient-v: #2AC7B8;
+  --gradient-opacity: 0.7;
   --gradient-brand: linear-gradient(135deg, #F59E0B, #14B8A6);
 
-  /* INFO */
+  /* INFORMATION — from Compass */
   --info-blue: #3B82F6;
+  --info-gray: #6B7280;
 
-  /* SPACING */
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
+  /* UI INTERACTION — from Compass */
+  --ui-primary: #334155;
+  --ui-hover: #1E293B;
+  --ui-muted: #94A3B8;
+
+  /* TABLE — from Compass */
+  --table-header-bg: #E5E7EB;
+  --table-header-text: #000000;
+  --table-border: #D1D5DB;
+  --table-row-alt: #F9FAFB;
+
+  /* TOKEN — from Compass */
+  --token-bg: #ededf1;
+  --token-border: #d0d0d8;
+  --token-text: #2D3436;
+
+  /* SPACING — 8px scale from Compass */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 64px;
+
+  /* RADIUS */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
   --radius-pill: 999px;
+
+  /* SHADOWS */
   --shadow-subtle: 0 2px 8px rgba(0,0,0,0.06);
   --shadow-card: 0 4px 16px rgba(0,0,0,0.08);
   --shadow-deep: 0 8px 32px rgba(0,0,0,0.12);
@@ -51,7 +85,7 @@
   --header-height: 56px;
 }
 
-/* DARK MODE */
+/* DARK MODE — Merged */
 .dark-mode {
   --bg: #0F0F14;
   --surface: #1A1A23;
@@ -60,10 +94,28 @@
   --text: #F0F0F5;
   --text-2: #B0B0C0;
   --text-3: #707084;
-  --border: #2a2a3a;
-  --border-accent: #3a3a4a;
+  --border: #3A3A4A;
+  --border-accent: #4A4A5A;
+
+  --gradient-h: #F59E0B;
+  --gradient-v: #14B8A6;
+  --gradient-opacity: 1;
 
   --info-blue: #60A5FA;
+  --info-gray: #9CA3AF;
+
+  --ui-primary: #CBD5E1;
+  --ui-hover: #E2E8F0;
+  --ui-muted: #64748B;
+
+  --table-header-bg: #2D2D3A;
+  --table-header-text: #FFFFFF;
+  --table-border: #3A3A4A;
+  --table-row-alt: #1F1F2A;
+
+  --token-bg: #2D2D3A;
+  --token-border: #4A4A5A;
+  --token-text: #F0F0F5;
 
   --shadow-subtle: 0 2px 8px rgba(0,0,0,0.2);
   --shadow-card: 0 4px 16px rgba(0,0,0,0.3);
@@ -88,28 +140,36 @@ body {
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ===== TYPOGRAPHY ===== */
-h1, h2, h3, h4, h5, h6 {
+/* ===== TYPOGRAPHY — Merged ===== */
+h1, h2, h3, h4, h5, h6, p, strong {
   transition: color 0.3s ease;
 }
 
+/* H1: DM Serif Display (v3.1) at Compass scale */
 h1 {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: 3.2em;
   font-weight: 400;
   letter-spacing: -0.03em;
   line-height: 1.1;
   color: var(--text);
+  margin-bottom: 20px;
 }
 
+h1 strong {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* H2: Helvetica Neue (Compass) with gradient underline */
 h2 {
-  font-size: 1.75rem;
+  font-size: 2.2em;
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.2;
   color: var(--text);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
   position: relative;
 }
 
@@ -117,47 +177,209 @@ h2::after {
   content: "";
   position: absolute;
   left: 0;
-  bottom: 0;
+  bottom: -2px;
   width: 100%;
   height: 2px;
-  background: var(--gradient-brand);
-  opacity: 0.5;
+  background: linear-gradient(90deg, var(--gradient-h), var(--gradient-v));
+  opacity: var(--gradient-opacity);
+  transition: background 0.3s ease, opacity 0.3s ease;
 }
 
+/* H3: Compass sizing */
 h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.6em;
+  font-weight: 550;
   letter-spacing: -0.01em;
   line-height: 1.3;
-  margin: 2rem 0 1rem;
+  color: var(--text);
+  margin: 40px 0 20px 0;
+}
+
+/* H4: Compass uppercase treatment — WAS MISSING */
+h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  line-height: 1.4;
+  color: var(--text);
+  margin: 30px 0 15px 0;
+}
+
+/* H5: Compass */
+h5 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 20px 0 10px 0;
+}
+
+/* H5 minor-head variant — WAS MISSING */
+h5.minor-head {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-2);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin: 16px 0 8px 0;
 }
 
 p {
-  margin-bottom: 1rem;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: -0.01em;
   line-height: 1.7;
+  margin-bottom: 20px;
 }
 
+strong {
+  font-weight: 550;
+  color: var(--text);
+}
+
+em {
+  font-style: italic;
+}
+
+/* SUBHEAD — Georgia italic (Compass) — WAS MISSING */
+.subhead {
+  font-family: var(--font-serif);
+  font-size: 1.1em;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 0 0 20px 0;
+  letter-spacing: -0.01em;
+  transition: color 0.3s ease;
+}
+
+/* EYEBROW — from Compass */
+.eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--text-3);
+  margin-bottom: 0.35rem;
+}
+.eyebrow--amber { color: var(--semantic-h); }
+.eyebrow--teal { color: var(--semantic-v); }
+.eyebrow--purple { color: var(--accent-purple); }
+
+/* LINKS */
 a {
   color: var(--info-blue);
   text-decoration: none;
-  transition: opacity 0.18s ease;
+  transition: opacity 0.18s ease, transform 0.18s ease;
 }
 a:hover {
   text-decoration: underline;
 }
 
-strong {
-  font-weight: 600;
-  color: var(--text);
+/* CROSS-REFERENCE LINKS — from Compass — WAS MISSING */
+.cross-link {
+  color: var(--info-blue);
+  text-decoration: none;
+  border-bottom: 1px dotted var(--info-blue);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+.cross-link:hover {
+  color: var(--ui-hover);
+  border-bottom: 1px solid var(--ui-hover);
+  text-decoration: none;
 }
 
-code {
+/* LISTS */
+ul, ol {
+  margin: 20px 0 20px 25px;
+  line-height: 1.8;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+/* HR */
+hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 60px 0;
+  transition: background 0.3s ease;
+}
+
+/* ===== INLINE TOKENS — from Compass — WAS MISSING ===== */
+.token {
   font-family: var(--font-mono);
-  font-size: 0.875em;
-  background: var(--surface-elevated);
-  padding: 2px 6px;
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
   border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  font-size: 0.85em;
+  color: var(--token-text);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Inline code — styled as tokens */
+code,
+p code, li code, td code, th code,
+h1 code, h2 code, h3 code, h4 code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+  font-size: 0.85em;
+  color: var(--token-text);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Don't style code blocks as tokens */
+pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+}
+
+/* SOURCE TAG — from Compass — WAS MISSING */
+.source-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--surface-elevated);
   border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  color: var(--text-2);
+  display: inline-block;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+/* SCHEMA LABEL — from Compass — WAS MISSING */
+.schema-label {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  color: var(--token-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
 }
 
 /* ===== LAYOUT CONTAINERS ===== */
@@ -171,6 +393,24 @@ code {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+/* Content block — from Compass .content wrapper */
+.content {
+  background: var(--surface);
+  padding: 50px;
+  margin: 0 40px 60px 40px;
+  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 70px;
+}
+.section:last-child {
+  margin-bottom: 0;
 }
 
 /* ===== SITE HEADER ===== */
@@ -208,10 +448,9 @@ code {
 }
 
 .site-brand__title {
-  font-family: var(--font-display);
   font-weight: 700;
-  font-size: 1.1rem;
-  letter-spacing: -0.02em;
+  font-size: 15px;
+  letter-spacing: 0.02em;
   background: var(--gradient-brand);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -222,7 +461,7 @@ code {
   font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--text-3);
+  color: var(--text-2);
 }
 
 /* NAV */
@@ -348,6 +587,356 @@ code {
 .breadcrumb .sep {
   color: var(--text-3);
   font-size: 0.75rem;
+}
+
+/* ===== CALLOUT SYSTEM — from Compass — WAS MISSING ===== */
+
+/* Base callout (structured: icon + label + body) */
+.callout {
+  display: flex;
+  gap: 20px;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.3s ease;
+}
+
+.callout .icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.callout .label {
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.callout p {
+  margin-bottom: 0;
+}
+
+/* Editorial (gray) */
+.callout--editorial {
+  border-left: 5px solid var(--info-gray);
+}
+.callout--editorial .icon {
+  background: var(--info-gray);
+  color: white;
+}
+.callout--editorial .label {
+  color: var(--info-gray);
+}
+
+/* Horizontal axis (amber) */
+.callout--horizontal {
+  border-left: 5px solid var(--semantic-h);
+}
+.callout--horizontal .icon {
+  background: var(--semantic-h);
+  color: white;
+}
+.callout--horizontal .label {
+  color: var(--semantic-h);
+}
+
+/* Vertical axis (teal) */
+.callout--vertical {
+  border-left: 5px solid var(--semantic-v);
+}
+.callout--vertical .icon {
+  background: var(--semantic-v);
+  color: white;
+}
+.callout--vertical .label {
+  color: var(--semantic-v);
+}
+
+/* Portal (purple) — NEW in v3.2 */
+.callout--portal {
+  border-left: 5px solid var(--accent-purple);
+}
+.callout--portal .icon {
+  background: var(--accent-purple);
+  color: white;
+}
+.callout--portal .label {
+  color: var(--accent-purple);
+}
+
+/* Legacy callout variants — used in existing Compass HTML */
+.callout-info {
+  background: var(--surface-elevated);
+  border-left: 5px solid var(--info-blue);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--info-blue) 5%, transparent), transparent);
+}
+
+.callout-example,
+.callout-code {
+  background: var(--surface-elevated);
+  border-left: 5px solid var(--info-gray);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+}
+
+.callout-warning {
+  background: var(--surface-elevated);
+  border-left: 5px solid #EF4444;
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  background-image: linear-gradient(90deg, color-mix(in srgb, #EF4444 5%, transparent), transparent);
+}
+
+/* ===== TABLES — from Compass — WAS MISSING ===== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+thead {
+  background: var(--table-header-bg);
+}
+
+th {
+  text-align: left;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--table-header-text);
+  border-bottom: 2px solid var(--table-border);
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--table-border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--table-row-alt);
+}
+
+/* ===== CHECKLISTS — from Compass — WAS MISSING ===== */
+.checklist {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  padding: 20px 25px;
+  margin: 25px 0;
+}
+
+.checklist div {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.checklist div:last-child {
+  border-bottom: none;
+}
+
+/* ===== STRUCTURAL CONTAINERS — from Compass — WAS MISSING ===== */
+
+/* Crosswalk dimension blocks */
+.crosswalk-dimension {
+  padding: 16px;
+  margin: 16px 0;
+  border-left: 3px solid var(--border-accent);
+  background: var(--surface-elevated);
+  border-radius: var(--radius-sm);
+}
+
+/* Framework definition blocks */
+.framework-def {
+  padding: 20px;
+  margin: 20px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+}
+
+/* Dimension cards */
+.dimension-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin: 0.75rem 0;
+  transition: all 0.2s ease;
+}
+.dimension-card:hover {
+  border-color: var(--semantic-v);
+  box-shadow: var(--shadow-card);
+}
+
+.dimension-horizontal {
+  border-left: 4px solid var(--semantic-h);
+  padding: 16px 16px 16px 20px;
+  margin: 16px 0;
+  background: color-mix(in srgb, var(--semantic-h) 4%, var(--surface-elevated));
+  border-radius: var(--radius-sm);
+}
+
+.dimension-vertical {
+  border-left: 4px solid var(--semantic-v);
+  padding: 16px 16px 16px 20px;
+  margin: 16px 0;
+  background: color-mix(in srgb, var(--semantic-v) 4%, var(--surface-elevated));
+  border-radius: var(--radius-sm);
+}
+
+/* Protocol, pattern, intersection, template, example boxes */
+.protocol-box,
+.pattern-card,
+.intersection-box,
+.template-box,
+.example-box {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin: 20px 0;
+  transition: all 0.2s ease;
+}
+
+.protocol-box:hover,
+.pattern-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Dimension metadata */
+.dim-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dimension-number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--semantic-v);
+  font-size: 0.85em;
+}
+
+.dimension-title {
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.dimension-position {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--semantic-h);
+  font-size: 0.85em;
+}
+
+/* Coordinate notation */
+.coord-list {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+}
+
+.coord-line {
+  padding: 4px 0;
+}
+
+.coord-tag {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-size: 0.85em;
+  color: var(--token-text);
+}
+
+/* Hub meta info */
+.hub-meta {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin: 8px 0;
+}
+
+/* Strong code */
+.strong-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Task list */
+.task-list {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.task-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.check {
+  color: var(--accent-green);
+  margin-right: 4px;
+}
+
+/* Page break (for long Compass pages) */
+.page-break {
+  margin: 60px 0;
+  border-top: 2px solid var(--border);
+}
+
+/* Subsection indent */
+.subsection {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* Fixed-column layout */
+.fixed-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .fixed-cols {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ===== CARD GRID ===== */
@@ -851,101 +1440,6 @@ details[open] .accordion-toggle__chevron {
   color: var(--text-3);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 768px) {
-  .site-header__inner {
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
-
-  .page-hero {
-    padding: 1.5rem 2rem;
-    margin: 1rem 0 1.5rem;
-  }
-
-  .page-hero h1 {
-    font-size: 1.75rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  .card-grid--3 {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ===== COMPASS CONTENT (ported) ===== */
-.compass-content {
-  background: var(--surface);
-  padding: 2.5rem 3rem;
-  margin: 0 0 2.5rem;
-  box-shadow: var(--shadow-subtle);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border);
-}
-
-.compass-content h2 {
-  font-size: 1.75rem;
-}
-
-.compass-content h3 {
-  font-size: 1.25rem;
-  margin: 2rem 0 1rem;
-}
-
-.compass-content .callout-info {
-  background: var(--surface-elevated);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.compass-content .subsection {
-  padding-left: 1rem;
-  border-left: 2px solid var(--border);
-  margin: 1rem 0;
-}
-
-.compass-content .intro {
-  background: var(--surface-elevated);
-  padding: 1.5rem;
-  border-radius: var(--radius-md);
-  margin-bottom: 2rem;
-}
-
-.compass-content ul {
-  margin: 1rem 0 1rem 1.5rem;
-  line-height: 1.8;
-}
-
-.compass-content li {
-  margin-bottom: 0.5rem;
-}
-
-/* Status tags in Compass content */
-.compass-content .status-tag.status-complete {
-  background: #10B98118;
-  color: #10B981;
-  font-size: 0.625rem;
-  padding: 0.125rem 0.5rem;
-  border-radius: var(--radius-pill);
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.compass-content .nav-link {
-  color: var(--accent-purple);
-  text-decoration: none;
-  font-weight: 600;
-}
-.compass-content .nav-link:hover {
-  text-decoration: underline;
-}
-
 /* ===== PREV/NEXT NAVIGATION ===== */
 .section-nav {
   display: grid;
@@ -1012,6 +1506,68 @@ details[open] .accordion-toggle__chevron {
     flex-direction: row;
     text-align: left;
   }
+}
+
+/* ===== COMPASS CONTENT (ported pages) ===== */
+.compass-content {
+  background: var(--surface);
+  padding: 2.5rem 3rem;
+  margin: 0 0 2.5rem;
+  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.compass-content h2 {
+  font-size: 1.75rem;
+}
+
+.compass-content h3 {
+  font-size: 1.25rem;
+  margin: 2rem 0 1rem;
+}
+
+.compass-content .subsection {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  margin: 1rem 0;
+}
+
+.compass-content .intro {
+  background: var(--surface-elevated);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+}
+
+.compass-content ul {
+  margin: 1rem 0 1rem 1.5rem;
+  line-height: 1.8;
+}
+
+.compass-content li {
+  margin-bottom: 0.5rem;
+}
+
+/* Status tags in Compass content */
+.compass-content .status-tag.status-complete {
+  background: #10B98118;
+  color: #10B981;
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.compass-content .nav-link {
+  color: var(--accent-purple);
+  text-decoration: none;
+  font-weight: 600;
+}
+.compass-content .nav-link:hover {
+  text-decoration: underline;
 }
 
 /* ===== GLOBAL SEARCH MODAL ===== */
@@ -1091,6 +1647,44 @@ details[open] .accordion-toggle__chevron {
   --pagefind-ui-border-width: 1px;
   --pagefind-ui-border-radius: 8px;
   --pagefind-ui-font: var(--font-sans);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .site-header__inner {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .page-hero {
+    padding: 1.5rem 2rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .page-hero h1 {
+    font-size: 1.75rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.8em;
+  }
+
+  .card-grid--3 {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    margin: 20px 10px;
+    padding: 30px;
+  }
+
+  .compass-content {
+    padding: 1.5rem;
+  }
 }
 
 /* ===== ANIMATIONS ===== */
