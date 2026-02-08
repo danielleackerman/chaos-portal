@@ -734,6 +734,9 @@ pre code {
 /* Editorial (gray) */
 .callout--editorial {
   border-left: 5px solid var(--info-gray);
+  background: linear-gradient(90deg, 
+    color-mix(in srgb, var(--info-gray) 3%, var(--surface-elevated)), 
+    var(--surface-elevated) 30%);
 }
 .callout--editorial .icon {
   background: var(--info-gray);
@@ -746,6 +749,9 @@ pre code {
 /* Horizontal axis (amber) */
 .callout--horizontal {
   border-left: 5px solid var(--semantic-h);
+  background: linear-gradient(90deg, 
+    color-mix(in srgb, var(--semantic-h) 3%, var(--surface-elevated)), 
+    var(--surface-elevated) 30%);
 }
 .callout--horizontal .icon {
   background: var(--semantic-h);
@@ -758,6 +764,9 @@ pre code {
 /* Vertical axis (teal) */
 .callout--vertical {
   border-left: 5px solid var(--semantic-v);
+  background: linear-gradient(90deg, 
+    color-mix(in srgb, var(--semantic-v) 3%, var(--surface-elevated)), 
+    var(--surface-elevated) 30%);
 }
 .callout--vertical .icon {
   background: var(--semantic-v);
@@ -770,6 +779,9 @@ pre code {
 /* Portal (purple) — NEW in v3.2 */
 .callout--portal {
   border-left: 5px solid var(--accent-purple);
+  background: linear-gradient(90deg, 
+    color-mix(in srgb, var(--accent-purple) 3%, var(--surface-elevated)), 
+    var(--surface-elevated) 30%);
 }
 .callout--portal .icon {
   background: var(--accent-purple);
@@ -880,12 +892,15 @@ tbody tr:nth-child(even) {
 .checklist div {
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
-  color: var(--accent-green);
-  font-weight: 500;
+  color: var(--text);
 }
 
 .checklist div:last-child {
   border-bottom: none;
+}
+
+.checklist div strong {
+  color: var(--text);
 }
 
 /* ===== STRUCTURAL CONTAINERS — from Compass — WAS MISSING ===== */
