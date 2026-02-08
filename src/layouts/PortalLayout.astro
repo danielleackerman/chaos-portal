@@ -4,10 +4,9 @@ import '../styles/global.css';
 interface Props {
   title: string;
   currentPage?: string;
-  sidebarDefault?: 'open' | 'closed';
 }
 
-const { title, currentPage = '', sidebarDefault } = Astro.props;
+const { title, currentPage = '' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const compassSections = [
@@ -24,13 +23,6 @@ const compassSections = [
 const url = Astro.url.pathname;
 const currentSlug = url.split('/compass/')[1]?.replace(/\/$/, '') || '';
 const isCompassSection = currentPage === 'compass' && currentSlug !== '';
-
-const isIndexPage = (
-  currentPage === 'home' ||
-  !!url.match(/\/library\/(music|story)\/?$/) ||
-  (currentPage === 'compass' && currentSlug === '')
-);
-const resolvedDefault = sidebarDefault || (isIndexPage ? 'closed' : 'open');
 ---
 
 <!DOCTYPE html>
@@ -64,14 +56,6 @@ const resolvedDefault = sidebarDefault || (isIndexPage ? 'closed' : 'open');
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
           Compass
         </a>
-        <a href={`${base}/style-guide/`} aria-current={currentPage === 'styleguide' ? 'page' : undefined}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
-          Style Guide
-        </a>
-        <a href={`${base}/roadmap/`} aria-current={currentPage === 'roadmap' ? 'page' : undefined}>
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: -2px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          Roadmap
-        </a>
       </nav>
       <div style="display:flex; gap:0.5rem; align-items:center;">
         <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Toggle sidebar" title="Toggle sidebar">
@@ -97,41 +81,41 @@ const resolvedDefault = sidebarDefault || (isIndexPage ? 'closed' : 'open');
     </div>
   </div>
 
-  <div class="page-layout" id="page-layout" data-sidebar-default={resolvedDefault}>
-    <aside class="page-sidebar" id="page-sidebar">
-      <div class="sidebar-inner">
-        <button class="sidebar-close" id="sidebar-close" type="button" aria-label="Close sidebar">✕</button>
-        <nav class="sidebar-toc" id="sidebar-toc">
-          <div class="sidebar-section__label">On This Page</div>
-          <ul class="sidebar-toc__list" id="sidebar-toc-list"></ul>
+  <!-- Sidebar: fixed overlay, never in page flow -->
+  <aside class="page-sidebar" id="page-sidebar">
+    <div class="sidebar-inner">
+      <button class="sidebar-close" id="sidebar-close" type="button" aria-label="Close sidebar">✕</button>
+      <nav class="sidebar-toc" id="sidebar-toc">
+        <div class="sidebar-section__label">On This Page</div>
+        <ul class="sidebar-toc__list" id="sidebar-toc-list"></ul>
+      </nav>
+      {isCompassSection && (
+        <nav class="sidebar-siblings">
+          <button class="sidebar-section__toggle" id="siblings-toggle" type="button">
+            <span class="sidebar-section__label">Compass Sections</span>
+            <svg class="sidebar-section__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <ul class="sidebar-siblings__list" id="siblings-list">
+            {compassSections.map(s => (
+              <li>
+                <a href={`${base}/compass/${s.slug}/`}
+                   class={`sidebar-siblings__link ${currentSlug === s.slug ? 'is-active' : ''}`}>
+                  <span class="sidebar-siblings__num">{s.num}</span>
+                  {s.title}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
-        {isCompassSection && (
-          <nav class="sidebar-siblings">
-            <button class="sidebar-section__toggle" id="siblings-toggle" type="button">
-              <span class="sidebar-section__label">Compass Sections</span>
-              <svg class="sidebar-section__chevron" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-            </button>
-            <ul class="sidebar-siblings__list" id="siblings-list">
-              {compassSections.map(s => (
-                <li>
-                  <a href={`${base}/compass/${s.slug}/`}
-                     class={`sidebar-siblings__link ${currentSlug === s.slug ? 'is-active' : ''}`}>
-                    <span class="sidebar-siblings__num">{s.num}</span>
-                    {s.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        )}
-      </div>
-    </aside>
-    <main class="page-content" data-pagefind-body>
-      <slot />
-    </main>
-  </div>
-
+      )}
+    </div>
+  </aside>
   <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- Page content: always full width, centered -->
+  <main class="page-content" data-pagefind-body>
+    <slot />
+  </main>
 
   <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">
     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"/></svg>
@@ -157,8 +141,34 @@ const resolvedDefault = sidebarDefault || (isIndexPage ? 'closed' : 'open');
     // === SIDEBAR TOC + SCROLL SPY ===
     (function(){var tl=document.getElementById('sidebar-toc-list'),tn=document.getElementById('sidebar-toc');if(!tl)return;var ct=document.querySelector('.page-content');if(!ct)return;var items=[];var gl=ct.querySelectorAll('.toc-grid__link');if(gl.length>0){gl.forEach(function(l){var h=l.getAttribute('href');if(h&&h.startsWith('#'))items.push({id:h.substring(1),text:l.textContent.trim()})})}else{ct.querySelectorAll('h2[id], h3[id]').forEach(function(h){var t=h.textContent.trim();if(t.length>0&&t.length<80)items.push({id:h.id,text:t,level:h.tagName})})}if(items.length===0){ct.querySelectorAll('.section[id]').forEach(function(s){var h=s.querySelector('h2,h3');if(h)items.push({id:s.id,text:h.textContent.trim()})})}if(items.length===0){if(tn)tn.style.display='none';return}items.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#'+i.id;a.className='sidebar-toc__link'+(i.level==='H3'?' sidebar-toc__link--sub':'');a.textContent=i.text;a.setAttribute('data-target',i.id);li.appendChild(a);tl.appendChild(li)});var links=tl.querySelectorAll('.sidebar-toc__link'),tgts=[];items.forEach(function(i){var e=document.getElementById(i.id);if(e)tgts.push({id:i.id,el:e})});function spy(){var sp=window.scrollY+120,aid='';for(var i=tgts.length-1;i>=0;i--){if(tgts[i].el.offsetTop<=sp){aid=tgts[i].id;break}}links.forEach(function(l){l.classList.toggle('is-active',l.getAttribute('data-target')===aid)})}var tick=false;window.addEventListener('scroll',function(){if(!tick){requestAnimationFrame(function(){spy();tick=false});tick=true}});spy()})();
 
-    // === SIDEBAR TOGGLE ===
-    (function(){var lay=document.getElementById('page-layout'),sb=document.getElementById('page-sidebar'),tog=document.getElementById('sidebar-toggle'),cls=document.getElementById('sidebar-close'),ov=document.getElementById('sidebar-overlay'),SK='chaos-portal-sidebar';if(!lay||!sb||!tog)return;var pd=lay.getAttribute('data-sidebar-default')||'open';function gs(){try{return localStorage.getItem(SK)}catch(e){return null}}function ss(v){try{localStorage.setItem(SK,v)}catch(e){}}var saved=gs();var initOpen=pd==='closed'?false:(saved!==null?(saved==='open'):true);function desk(open){if(open){lay.classList.add('sidebar-open');lay.classList.remove('sidebar-closed')}else{lay.classList.remove('sidebar-open');lay.classList.add('sidebar-closed')}}function mobOpen(){sb.classList.add('is-open');if(ov)ov.classList.add('is-open');document.body.style.overflow='hidden'}function mobClose(){sb.classList.remove('is-open');if(ov)ov.classList.remove('is-open');document.body.style.overflow=''}if(window.innerWidth>=1080)desk(initOpen);tog.addEventListener('click',function(){if(window.innerWidth>=1080){var o=lay.classList.contains('sidebar-open');desk(!o);if(pd!=='closed')ss(!o?'open':'closed')}else{sb.classList.contains('is-open')?mobClose():mobOpen()}});if(cls)cls.addEventListener('click',mobClose);if(ov)ov.addEventListener('click',mobClose);window.addEventListener('resize',function(){if(window.innerWidth>=1080)mobClose()})})();
+    // === SIDEBAR TOGGLE (overlay at all sizes) ===
+    (function(){
+      var sb = document.getElementById('page-sidebar');
+      var tog = document.getElementById('sidebar-toggle');
+      var cls = document.getElementById('sidebar-close');
+      var ov = document.getElementById('sidebar-overlay');
+      if (!sb || !tog) return;
+
+      function open() {
+        sb.classList.add('is-open');
+        if (ov) ov.classList.add('is-open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        sb.classList.remove('is-open');
+        if (ov) ov.classList.remove('is-open');
+        document.body.style.overflow = '';
+      }
+
+      tog.addEventListener('click', function() {
+        sb.classList.contains('is-open') ? close() : open();
+      });
+      if (cls) cls.addEventListener('click', close);
+      if (ov) ov.addEventListener('click', close);
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && sb.classList.contains('is-open')) close();
+      });
+    })();
 
     // === SIBLINGS TOGGLE ===
     (function(){var t=document.getElementById('siblings-toggle'),l=document.getElementById('siblings-list');if(!t||!l)return;l.style.display='none';t.addEventListener('click',function(){var h=l.style.display==='none';l.style.display=h?'block':'none';t.classList.toggle('is-expanded',h)})})();
