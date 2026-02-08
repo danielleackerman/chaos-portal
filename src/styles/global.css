@@ -544,28 +544,12 @@ h1 code, h2 code, h3 code, h4 code {
 .page-hero--teal { border-left-color: var(--semantic-v); }
 .page-hero--purple { border-left-color: var(--accent-purple); }
 
-/* Gradient hero — ties to axis system instead of arbitrary purple */
+/* Gradient hero — COMPASS PAGES ONLY - smooth gradient, no white edge */
 .page-hero--gradient {
-  border-left-color: transparent;
   background: var(--surface);
-  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
-                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
-}
-.page-hero--gradient::before {
-  content: "";
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  bottom: -1px;
-  width: 6px;
-  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-  z-index: 1;
-}
-
-.dark-mode .page-hero--gradient {
-  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.06), transparent 60%),
-                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.06), transparent 60%);
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-image: linear-gradient(180deg, var(--semantic-h), var(--semantic-v)) 1;
 }
 
 .page-hero h1 {

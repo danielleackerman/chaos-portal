@@ -10,310 +10,565 @@ const title = 'Style Guide';
   </div>
 
   <div class="content">
-    
-    <!-- INTRODUCTION -->
-    <div class="section">
-      <h2>About This Design System</h2>
-      <p>This design system defines the complete visual language for the Chaos Portal framework. It establishes typography, color, spacing, and component patterns that create consistency across all documentation pages.</p>
-      <div class="callout callout--editorial">
-        <div class="icon">!</div>
-        <div>
-          <div class="label">CANONICAL SYSTEM</div>
-          <p>All project pages must conform to these rules. This guide is the single source of truth for visual design decisions.</p>
-        </div>
-      </div>
-    </div>
-    
-    <hr/>
-    
-    <!-- IMPLEMENTATION RULES -->
-    <div class="section">
-      <h2>I. IMPLEMENTATION RULES</h2>
-      <h3>Color Application Rules</h3>
-      <div class="checklist">
-        <div><strong>Signal Amber (#F59E0B):</strong> Horizontal Axis ONLY — timeline, position, progression, structure</div>
-        <div><strong>Clarity Teal (#14B8A6):</strong> Vertical Axis ONLY — depth, dimensions (D0–D5), layers</div>
-        <div><strong>Info Blue (#3B82F6):</strong> System callouts, general UI elements NOT axis-associated</div>
-        <div><strong>Warn Red (#EF4444):</strong> Caution states, deprecation notices</div>
-        <div><strong>Accent Purple (#8B5CF6):</strong> Cross-domain bridges, Creativity Engine elements</div>
-        <div><strong>UI Colors:</strong> Links, buttons, navigation ONLY — never for semantic content</div>
-      </div>
-      
-      <h3>Typography Rules</h3>
-      <div class="checklist">
-        <div>H1 uses DM Serif Display at 3.2em — page titles and hero headings only</div>
-        <div>Body uses system sans stack (Helvetica Neue / system-ui) at 1rem, line-height 1.65</div>
-        <div>H4 uses Georgia italic for editorial / explanatory subheadings</div>
-        <div>Monospace (ui-monospace) for coordinates, tokens, and technical notation only</div>
-        <div>Never use pure black (#000) for text — use var(--text) which adapts to theme</div>
-      </div>
-      
-      <h3>Spacing Rules</h3>
-      <p>All spacing follows an 8px-based scale: xs (8px), sm (16px), md (24px), lg (48px), xl (64px). Maintain consistent rhythm throughout pages.</p>
-    </div>
-    
-    <hr/>
-    
-    <!-- COLOR SYSTEM -->
-    <div class="section">
-      <h2>II. COLOR SYSTEM</h2>
-      
-      <h3>Semantic Colors</h3>
-      <p>These colors have specific meanings tied to the coordinate system axes:</p>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>COLOR</th>
-            <th>HEX</th>
-            <th>USAGE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Signal Amber</strong></td>
-            <td><code>#F59E0B</code></td>
-            <td>Horizontal Axis (story timeline/position)</td>
-          </tr>
-          <tr>
-            <td><strong>Clarity Teal</strong></td>
-            <td><code>#14B8A6</code></td>
-            <td>Vertical Axis (story depth/dimensions)</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <h3>Information Colors</h3>
-      <p>These colors indicate system elements unrelated to narrative axes:</p>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>COLOR</th>
-            <th>HEX</th>
-            <th>USAGE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Information Blue</strong></td>
-            <td><code>#3B82F6</code></td>
-            <td>System callouts, navigation, general UI</td>
-          </tr>
-          <tr>
-            <td><strong>Information Gray</strong></td>
-            <td><code>#6B7280</code></td>
-            <td>Editorial notes, meta-information</td>
-          </tr>
-          <tr>
-            <td><strong>Accent Purple</strong></td>
-            <td><code>#8B5CF6</code></td>
-            <td>Cross-domain bridges, portal features</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <h3>Gradient Usage</h3>
-      <p>Gradients flow from Horizontal (amber) to Vertical (teal), symbolizing the coordinate system. <strong>Gradients are ONLY used on Compass pages</strong> to reinforce the dual-axis framework.</p>
-      
-      <div class="callout callout--editorial">
-        <div class="icon">!</div>
-        <div>
-          <div class="label">IMPORTANT</div>
-          <p>Page headers outside of Compass should use solid gray (var(--info-gray)) for left borders, NOT gradients. Gradients are exclusively for Compass navigation and content.</p>
-        </div>
-      </div>
-    </div>
-    
-    <hr/>
-    
-    <!-- COORDINATE NOTATION -->
-    <div class="section">
-      <h2>III. COORDINATE NOTATION</h2>
-      <p>Coordinates are the core technical notation of this system. They always appear as tokens with monospace typography.</p>
-      
-      <h3>Basic Format</h3>
-      <p>Standard coordinate: <code>Position / Dimension</code></p>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>POSITION</th>
-            <th>DIMENSION</th>
-            <th>COORDINATE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>12:00</td>
-            <td>Surface Dimension 5</td>
-            <td><code>12:00 / D5</code></td>
-          </tr>
-          <tr>
-            <td>3:00</td>
-            <td>Psychological Dimension 2</td>
-            <td><code>3:00 / D2</code></td>
-          </tr>
-          <tr>
-            <td>6:00</td>
-            <td>Cognitive Dimension 3</td>
-            <td><code>6:00 / D3</code></td>
-          </tr>
-          <tr>
-            <td>9:00</td>
-            <td>Archetype Dimension 1</td>
-            <td><code>9:00 / D1</code></td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <h3>Usage Examples</h3>
-      <ul>
-        <li>Single coordinate: <code>3:00 / D2</code></li>
-        <li>Multiple: <code>3:00 / D2, D3, D4</code></li>
-        <li>Vertical stack: <code>6:00 / D0-D5</code></li>
-      </ul>
-    </div>
-    
-    <hr/>
-    
-    <!-- LAYOUT & SPACING -->
-    <div class="section">
-      <h2>IV. LAYOUT & SPACING</h2>
-      
-      <h3>Spacing Scale (8px base)</h3>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>SIZE</th>
-            <th>VALUE</th>
-            <th>USAGE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>xs</code></td>
-            <td>8px</td>
-            <td>Tight spacing, list items, inline elements</td>
-          </tr>
-          <tr>
-            <td><code>sm</code></td>
-            <td>16px</td>
-            <td>Paragraph spacing, component padding</td>
-          </tr>
-          <tr>
-            <td><code>md</code></td>
-            <td>24px</td>
-            <td>Section spacing, callout margins</td>
-          </tr>
-          <tr>
-            <td><code>lg</code></td>
-            <td>48px</td>
-            <td>Major section breaks, header padding</td>
-          </tr>
-          <tr>
-            <td><code>xl</code></td>
-            <td>64px</td>
-            <td>Page-level divisions</td>
-          </tr>
-        </tbody>
-      </table>
-      
-      <h3>Content Width</h3>
-      <p>Maximum content width: 1100px (centered). Content containers use 50px padding for comfortable reading zones.</p>
-      
-      <h3>Border Radius</h3>
-      <ul>
-        <li>Small (3px): Tokens, inline code</li>
-        <li>Medium (6px): Callouts, cards, tables</li>
-        <li>Large (10px): Headers, main containers</li>
-      </ul>
-    </div>
-    
-    <hr/>
-    
-    <!-- COMPONENTS -->
-    <div class="section">
-      <h2>V. COMPONENTS</h2>
-      
-      <h3>Callouts</h3>
-      <p>Callouts highlight important information with contextual color coding and subtle gradient backgrounds for visual depth.</p>
-      
-      <div class="callout callout--editorial">
-        <div class="icon">!</div>
-        <div>
-          <div class="label">EDITORIAL</div>
-          <p>Editorial callouts use Information Gray and provide meta-commentary about the framework itself. Note the subtle left-to-right gradient background that creates depth without overwhelming the content.</p>
-        </div>
-      </div>
-      
-      <h3>Axis Callouts (Canonical Pattern)</h3>
-      <p>Axis Callouts are the <strong>canonical pattern</strong> for all axis-level signaling. They provide clear semantic ownership and visual consistency across all documentation pages.</p>
-      
-      <div class="callout callout--horizontal">
-        <div class="icon">→</div>
-        <div>
-          <div class="label">HORIZONTAL AXIS</div>
-          <p>Horizontal Axis Callouts use Signal Amber (#F59E0B) and signal content related to <strong>story timeline, position, progression, and structure</strong>.</p>
-        </div>
-      </div>
-      
-      <div class="callout callout--vertical">
-        <div class="icon">↓</div>
-        <div>
-          <div class="label">VERTICAL AXIS</div>
-          <p>Vertical Axis Callouts use Clarity Teal (#14B8A6) and signal content related to <strong>story depth, dimensions, and layers</strong>.</p>
-        </div>
-      </div>
-      
-      <h3>Tables</h3>
-      <p>Tables use alternating row colors, clear headers, and subtle borders:</p>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>ELEMENT</th>
-            <th>DESCRIPTION</th>
-            <th>EXAMPLE</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Header</td>
-            <td>Uppercase, bold, colored background</td>
-            <td>See above</td>
-          </tr>
-          <tr>
-            <td>Data rows</td>
-            <td>Alternating backgrounds for readability</td>
-            <td>This row</td>
-          </tr>
-          <tr>
-            <td>Borders</td>
-            <td>Subtle, consistent with theme</td>
-            <td>Around table</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    
-    <hr/>
-    
-    <!-- DARK MODE -->
-    <div class="section">
-      <h2>VI. DARK MODE</h2>
-      <p>The design system supports both light and dark modes with adaptive color palettes. Use the toggle button in the site header to switch themes.</p>
-      
-      <h3>Dark Mode Principles</h3>
-      <ul>
-        <li>Semantic colors (amber, teal) remain consistent across themes</li>
-        <li>Neutral palette adapts completely (backgrounds, text, borders)</li>
-        <li>Gradients become more vibrant in dark mode (full opacity)</li>
-        <li>Shadows become deeper for better contrast</li>
-        <li>User preference is saved to localStorage</li>
-      </ul>
-    </div>
-    
+
+<!-- INTRODUCTION -->
+<div class="section">
+<h2>About This Design System</h2>
+<p>This design system defines the complete visual language for the Story Coordinate Compass framework. It establishes typography, color, spacing, and component patterns that create consistency across all documentation pages.</p>
+<div class="callout callout--editorial">
+<div class="icon">!</div>
+<div>
+<div class="label">CANONICAL SYSTEM</div>
+<p>All project pages must conform to these rules. This guide is the single source of truth for visual design decisions.</p>
+</div>
+</div>
+</div>
+<hr/>
+<!-- IMPLEMENTATION RULES -->
+<div class="section">
+<h2>I. IMPLEMENTATION RULES</h2>
+<h3>Color Application Rules</h3>
+<div class="checklist">
+<div><strong>Signal Amber (#F59E0B):</strong> Horizontal Axis ONLY — timeline, position, progression, structure</div>
+<div><strong>Clarity Teal (#14B8A6):</strong> Vertical Axis ONLY — depth, dimensions (D0–D5), layers</div>
+<div><strong>Info Blue (#3B82F6):</strong> System callouts, general UI elements NOT axis-associated</div>
+<div><strong>Warn Red (#EF4444):</strong> Caution states, deprecation notices</div>
+<div><strong>Accent Purple (#8B5CF6):</strong> Cross-domain bridges, Creativity Engine elements</div>
+<div><strong>UI Colors:</strong> Links, buttons, navigation ONLY — never for semantic content</div>
+</div>
+<h3>Typography Rules</h3>
+<div class="checklist">
+<div>H1 uses DM Serif Display at 3.2em — page titles and hero headings only</div>
+<div>Body uses system sans stack (Helvetica Neue / system-ui) at 1rem, line-height 1.65</div>
+<div>H4 uses Georgia italic for editorial / explanatory subheadings</div>
+<div>Monospace (ui-monospace) for coordinates, tokens, and technical notation only</div>
+<div>Never use pure black (#000) for text — use var(--text) which adapts to theme</div>
+</div>
+<h3>Spacing Rules</h3>
+<p>All spacing follows an 8px-based scale: xs (8px), sm (16px), md (24px), lg (48px), xl (64px). Maintain consistent rhythm throughout pages.</p>
+</div>
+<hr/>
+<!-- COLOR SYSTEM -->
+<div class="section">
+<h2>II. COLOR SYSTEM</h2>
+<h3>Semantic Colors</h3>
+<p>These colors have specific meanings tied to the coordinate system axes:</p>
+<div class="color-grid">
+<div class="color-card">
+<div class="swatch" style="background: #F59E0B; color: white;">SIGNAL AMBER</div>
+<div class="color-info">
+<div class="color-name">Signal Amber</div>
+<div class="color-hex">#F59E0B</div>
+<div class="color-usage">Horizontal Axis (story timeline/position)</div>
+</div>
+</div>
+<div class="color-card">
+<div class="swatch" style="background: #14B8A6; color: white;">CLARITY TEAL</div>
+<div class="color-info">
+<div class="color-name">Clarity Teal</div>
+<div class="color-hex">#14B8A6</div>
+<div class="color-usage">Vertical Axis (story depth/dimensions)</div>
+</div>
+</div>
+</div>
+<h3>Information Colors</h3>
+<p>These colors indicate system elements unrelated to narrative axes:</p>
+<div class="color-grid">
+<div class="color-card">
+<div class="swatch" style="background: #3B82F6; color: white;">INFORMATION BLUE</div>
+<div class="color-info">
+<div class="color-name">Information Blue</div>
+<div class="color-hex">#3B82F6</div>
+<div class="color-usage">System callouts, navigation, general UI</div>
+</div>
+</div>
+<div class="color-card">
+<div class="swatch" style="background: #6B7280; color: white;">INFORMATION GRAY</div>
+<div class="color-info">
+<div class="color-name">Information Gray</div>
+<div class="color-hex">#6B7280</div>
+<div class="color-usage">Editorial notes, meta-information</div>
+</div>
+</div>
+</div>
+<h3>Neutral Palette</h3>
+<p>Adaptive neutrals that change with light/dark mode:</p>
+<div class="color-grid">
+<div class="color-card">
+<div class="swatch neutral-primary-bg" style="background: #FAFAFA; color: #000000;">VAPOR</div>
+<div class="color-info">
+<div class="color-name">Primary Background</div>
+<div class="color-hex neutral-primary-bg-hex">#FAFAFA</div>
+<div class="color-usage">Page background</div>
+</div>
+</div>
+<div class="color-card">
+<div class="swatch neutral-surface" style="background: #FFFFFF; color: #000000;">WHITE</div>
+<div class="color-info">
+<div class="color-name">Canvas Surface</div>
+<div class="color-hex neutral-surface-hex">#FFFFFF</div>
+<div class="color-usage">Content containers</div>
+</div>
+</div>
+<div class="color-card">
+<div class="swatch neutral-surface-elevated" style="background: #F1F3F5; color: #000000;">LIGHT GRAY</div>
+<div class="color-info">
+<div class="color-name">Elevated Surface</div>
+<div class="color-hex neutral-surface-elevated-hex">#F1F3F5</div>
+<div class="color-usage">Callouts, tables, elevated elements</div>
+</div>
+</div>
+<div class="color-card">
+<div class="swatch neutral-text" style="background: #222222; color: #FFFFFF;">OBSIDIAN</div>
+<div class="color-info">
+<div class="color-name">Primary Text</div>
+<div class="color-hex neutral-text-hex">#222222</div>
+<div class="color-usage">Body text, headings</div>
+</div>
+</div>
+</div>
+<h3>Gradient Usage</h3>
+<p>Gradients flow from Horizontal (amber) to Vertical (teal), symbolizing the coordinate system. <strong>Gradients are ONLY used on Compass pages</strong> to reinforce the dual-axis framework.</p>
+<div class="gradient-demo gradient-horizontal">
+                Horizontal → Vertical Gradient
+            </div>
+<p><em>Used for: Compass page hero headers, h2 section underlines on Compass pages only. Never use gradients for Library, Home, or Style Guide pages.</em></p>
+<div class="callout callout--editorial">
+<div class="icon">!</div>
+<div>
+<div class="label">IMPORTANT</div>
+<p>Page headers outside of Compass should use solid gray (var(--info-gray)) for left borders, NOT gradients. Gradients are exclusively for Compass navigation and content.</p>
+</div>
+</div>
+</div>
+<hr/>
+<!-- TYPOGRAPHY -->
+<div class="section">
+<h2>III. TYPOGRAPHY</h2>
+<h3>Type Scale</h3>
+<p>A clear hierarchical scale ensures readability and visual rhythm:</p>
+<div class="type-scale-demo">
+<h1>Display Heading (H1)</h1>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 3.2em, 300 weight<br/>
+<strong>Usage:</strong> Page titles, main headings<br/>
+<strong>Letter-spacing:</strong> -0.03em
+            </div>
+<div class="type-scale-demo">
+<h2>Section Heading (H2)</h2>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 2.2em, 600 weight<br/>
+<strong>Usage:</strong> Major section breaks<br/>
+<strong>Special:</strong> Gradient underline
+            </div>
+<div class="type-scale-demo">
+<h3>Subsection Heading (H3)</h3>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 1.6em, 550 weight<br/>
+<strong>Usage:</strong> Subsections within major sections<br/>
+<strong>Letter-spacing:</strong> -0.01em
+            </div>
+<div class="type-scale-demo">
+<h4>Detail Heading (H4)</h4>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 1.125rem, 600 weight<br/>
+<strong>Usage:</strong> Detailed subsections, framework names
+            </div>
+<div class="type-scale-demo">
+<h5>Small Heading (H5)</h5>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 1rem, 600 weight<br/>
+<strong>Usage:</strong> Minor sections, fine-grained hierarchy
+            </div>
+<div class="type-scale-demo">
+<h5 class="minor-head">Minor Head (H5 Variant)</h5>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 0.9rem, 600 weight, uppercase<br/>
+<strong>Usage:</strong> Subsection labels like "Definition", "Examples"<br/>
+<strong>Letter-spacing:</strong> 0.04em
+            </div>
+<h3>Special Typography</h3>
+<div class="type-scale-demo">
+<div class="subhead">This is a subhead in Georgia Italic</div>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Georgia, 1.1em, 400 weight, italic<br/>
+<strong>Usage:</strong> Supplementary explanations below headings
+            </div>
+<div class="type-scale-demo">
+<div class="eyebrow">EYEBROW LABEL</div>
+</div>
+<div class="type-details">
+<strong>Font:</strong> Helvetica Neue, 0.72rem, 600 weight, uppercase<br/>
+<strong>Usage:</strong> Category labels, meta-information<br/>
+<strong>Letter-spacing:</strong> 0.14em
+            </div>
+<h3>Body Text</h3>
+<p>Body text uses Helvetica Neue at 16px with 1.7 line-height for optimal readability. Paragraphs have 20px bottom margin for breathing room.</p>
+<h3>Monospace / Tokens</h3>
+<p>Technical notation like coordinates uses monospace: <code>3:00 / D4</code></p>
+<div class="type-details">
+<strong>Font:</strong> ui-monospace, 0.85em, 700 weight<br/>
+<strong>Usage:</strong> Coordinates, technical tokens, code<br/>
+<strong>Style:</strong> Token background with border
+            </div>
+<h3>Source Tags</h3>
+<p>Source attribution tags appear inline: <span class="source-tag">COMPASS</span> <span class="source-tag">ORIGINAL</span></p>
+<h3>Schema Labels</h3>
+<p>Schema labels identify analytical sections and dimension classifiers: <span class="schema-label">Core Dimension 0</span> <span class="schema-label">Archetype Dimension 1</span></p>
+</div>
+<hr/>
+<!-- COORDINATE NOTATION -->
+<div class="section">
+<h2>IV. COORDINATE NOTATION</h2>
+<p>Coordinates are the core technical notation of this system. They always appear as tokens with monospace typography.</p>
+<h3>Basic Format</h3>
+<p>Standard coordinate: <code>Position / Dimension</code></p>
+<table>
+<thead>
+<tr>
+<th>POSITION</th>
+<th>DIMENSION</th>
+<th>COORDINATE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>12:00</td>
+<td>Surface Dimension 5</td>
+<td><span class="token">12:00 / D5</span></td>
+</tr>
+<tr>
+<td>3:00</td>
+<td>Psychological Dimension 2</td>
+<td><span class="token">3:00 / D2</span></td>
+</tr>
+<tr>
+<td>6:00</td>
+<td>Cognitive Dimension 3</td>
+<td><span class="token">6:00 / D3</span></td>
+</tr>
+<tr>
+<td>9:00</td>
+<td>Archetype Dimension 1</td>
+<td><span class="token">9:00 / D1</span></td>
+</tr>
+</tbody>
+</table>
+<h3>Extended Notation</h3>
+<p>Multiple coordinates or ranges:</p>
+<ul>
+<li>Range: <code>3:00-6:00 / D3</code></li>
+<li>Multiple: <code>3:00 / D2, D3, D4</code></li>
+<li>Vertical stack: <code>6:00 / D0-D5</code></li>
+</ul>
+</div>
+<hr/>
+<!-- LAYOUT & SPACING -->
+<div class="section">
+<h2>V. LAYOUT &amp; SPACING</h2>
+<h3>Spacing Scale</h3>
+<p>Consistent 8px-based spacing scale:</p>
+<table>
+<thead>
+<tr>
+<th>SIZE</th>
+<th>VALUE</th>
+<th>USAGE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>xs</td>
+<td>8px</td>
+<td>Tight spacing, list items, inline elements</td>
+</tr>
+<tr>
+<td>sm</td>
+<td>16px</td>
+<td>Paragraph spacing, component padding</td>
+</tr>
+<tr>
+<td>md</td>
+<td>24px</td>
+<td>Section spacing, callout margin</td>
+</tr>
+<tr>
+<td>lg</td>
+<td>48px</td>
+<td>Major section breaks, header padding</td>
+</tr>
+<tr>
+<td>xl</td>
+<td>64px</td>
+<td>Page-level divisions</td>
+</tr>
+</tbody>
+</table>
+<h3>Content Width</h3>
+<p>Maximum content width: 1100px (centered). Content containers use 50px padding for comfortable reading zones.</p>
+<h3>Border Radius</h3>
+<ul>
+<li>Small (3px): Tokens, inline code</li>
+<li>Medium (6px): Callouts, cards, tables</li>
+<li>Large (8px): Headers, main containers</li>
+</ul>
+</div>
+<hr/>
+<!-- COMPONENTS -->
+<div class="section">
+<h2>VI. COMPONENTS</h2>
+<h3>Sticky Header</h3>
+<p>The site header remains visible while scrolling, providing persistent navigation and theme control. It uses a semi-transparent background with blur for depth without obscuring content.</p>
+<div class="callout callout--editorial">
+<div class="icon">!</div>
+<div>
+<div class="label">REUSABLE PATTERN</div>
+<p>This sticky header pattern is designed to be copied to all pages. Update the <code>aria-current</code> attribute on navigation links to indicate the active page.</p>
+</div>
+</div>
+<h3>Breadcrumb Navigation</h3>
+<p>Breadcrumbs show the current page's location within the documentation hierarchy. They appear below the sticky header and use subtle styling to avoid visual competition.</p>
+<h3>Callouts</h3>
+<p>Callouts highlight important information with contextual color coding and subtle gradient backgrounds for visual depth.</p>
+<div class="callout callout--editorial">
+<div class="icon">!</div>
+<div>
+<div class="label">EDITORIAL</div>
+<p>Editorial callouts use Information Gray and provide meta-commentary about the framework itself. Note the subtle left-to-right gradient background that creates depth without overwhelming the content.</p>
+</div>
+</div>
+<h3>Axis Callouts (Canonical Pattern)</h3>
+<p>Axis Callouts are the <strong>canonical pattern</strong> for all axis-level signaling in v3. They provide clear semantic ownership and visual consistency across all documentation pages.</p>
+<div class="callout callout--horizontal">
+<div class="icon">→</div>
+<div>
+<div class="label">HORIZONTAL AXIS</div>
+<p>Horizontal Axis Callouts use Signal Amber (#F59E0B) and signal content related to <strong>story timeline, position, progression, and structure</strong>.</p>
+</div>
+</div>
+<div class="callout callout--vertical">
+<div class="icon">↓</div>
+<div>
+<div class="label">VERTICAL AXIS</div>
+<p>Vertical Axis Callouts use Clarity Teal (#14B8A6) and signal content related to <strong>story depth, dimensions, and layers</strong>.</p>
+</div>
+</div>
+<div class="callout callout--editorial">
+<div class="icon">!</div>
+<div>
+<div class="label">SEMANTIC OWNERSHIP</div>
+<p><strong>Horizontal Axis:</strong> Story timeline, position, progression, structure, clock positions, acts, beats</p>
+<p style="margin-top: 8px;"><strong>Vertical Axis:</strong> Story depth, dimensions (D0-D5), layers, thematic depth, psychological complexity</p>
+<p style="margin-top: 12px;"><strong>Note:</strong> "Dimension" language refers specifically to vertical axis depth layers (D0-D5), not to axis-level framing.</p>
+</div>
+</div>
+<div class="callout callout--editorial">
+<div class="icon">⚠</div>
+<div>
+<div class="label">V3 DEPRECATION NOTICE</div>
+<p>The <code>.dimension-horizontal</code> and <code>.dimension-vertical</code> CSS classes are <strong>formally deprecated</strong> in v3 and must not be used.</p>
+<p style="margin-top: 8px;">All axis-level signaling must use Axis Callouts (<code>.callout--horizontal</code>, <code>.callout--vertical</code>) with full structure: icon, label, and content.</p>
+</div>
+</div>
+<h3>Cross-Reference Links</h3>
+<p>Links to other frameworks or sections use the <code>.cross-link</code> class for distinct styling: <a class="cross-link" href="#">Campbell's Hero's Journey</a>, <a class="cross-link" href="#">Save the Cat</a>.</p>
+<h3>Structural Containers</h3>
+<h4>Crosswalk Dimension</h4>
+<p>Crosswalk dimension blocks organize dimension-specific analysis:</p>
+<div class="crosswalk-dimension">
+<div class="schema-label">Example Dimension</div>
+<p>This is example content within a crosswalk dimension container. It provides visual grouping and subtle left-border accent.</p>
+</div>
+<h4>Framework Definition</h4>
+<p>Framework definition blocks contain structured analytical content:</p>
+<div class="framework-def">
+<h5 class="minor-head">Definition</h5>
+<p><strong>Structural Function:</strong> Example structural function description.</p>
+<p><strong>Defining Logic:</strong> Example defining logic description.</p>
+</div>
+<h3>Tables</h3>
+<p>Tables use alternating row colors, clear headers, and subtle borders:</p>
+<table>
+<thead>
+<tr>
+<th>ELEMENT</th>
+<th>DESCRIPTION</th>
+<th>EXAMPLE</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Header</td>
+<td>Uppercase, bold, colored background</td>
+<td>See above</td>
+</tr>
+<tr>
+<td>Data rows</td>
+<td>Alternating backgrounds for readability</td>
+<td>This row</td>
+</tr>
+<tr>
+<td>Borders</td>
+<td>Subtle, consistent with theme</td>
+<td>Around table</td>
+</tr>
+</tbody>
+</table>
+<h3>Checklists</h3>
+<p>Checklists present grouped rules or requirements:</p>
+<div class="checklist">
+<div>First rule or requirement</div>
+<div>Second rule or requirement</div>
+<div>Third rule or requirement</div>
+</div>
+</div>
+<hr/>
+<!-- DARK MODE -->
+<div class="section">
+<h2>VII. DARK MODE</h2>
+<p>The design system supports both light and dark modes with adaptive color palettes. Use the toggle button in the site header to switch themes.</p>
+<h3>Dark Mode Principles</h3>
+<ul>
+<li>Semantic colors (amber, teal) remain consistent across themes</li>
+<li>Neutral palette adapts completely (backgrounds, text, borders)</li>
+<li>Gradients become more vibrant in dark mode (full opacity)</li>
+<li>Shadows become deeper for better contrast</li>
+<li>User preference is saved to localStorage</li>
+</ul>
+<h3>Technical Implementation</h3>
+<p>Dark mode uses CSS custom properties (CSS variables) that are overridden when the <code>dark-mode</code> class is applied to the body element. JavaScript handles the toggle, state persistence, and initial theme detection based on system preferences.</p>
+</div>
+</div>
+<footer>
+<p>STORY COORDINATE COMPASS • DESIGN SYSTEM</p>
+<p class="text-small">Version 2.0 Beta • Updated: </p>
+</footer>
+<script>
+        // Shared theme toggle for Story Coordinate Compass
+        (function () {
+            const STORAGE_KEY = 'darkMode';
+
+            function getToggleButton() {
+                return document.getElementById('theme-toggle') || document.querySelector('.theme-toggle');
+            }
+
+            function setButtonState(isDark) {
+                const btn = getToggleButton();
+                if (!btn) return;
+                btn.textContent = isDark ? '☀️ Light Mode' : '🌙 Dark Mode';
+                btn.title = isDark ? 'Switch to light mode' : 'Switch to dark mode';
+                btn.setAttribute('aria-pressed', String(isDark));
+            }
+
+            function applyTheme(isDark, persist) {
+                document.body.classList.toggle('dark-mode', !!isDark);
+                setButtonState(!!isDark);
+                if (persist) {
+                    try { localStorage.setItem(STORAGE_KEY, String(!!isDark)); } catch (e) {}
+                }
+                // Update neutral palette swatches if they exist
+                if (typeof updateNeutralPalette === 'function') {
+                    try { updateNeutralPalette(!!isDark); } catch (e) {}
+                }
+            }
+
+            function readInitialTheme() {
+                try {
+                    const saved = localStorage.getItem(STORAGE_KEY);
+                    if (saved === 'true') return true;
+                    if (saved === 'false') return false;
+                } catch (e) {}
+                // Default to OS preference if no saved preference
+                return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+            }
+
+            function init() {
+                const initial = readInitialTheme();
+                applyTheme(initial, false);
+
+                const btn = getToggleButton();
+                if (btn) {
+                    btn.addEventListener('click', function () {
+                        const isDark = document.body.classList.contains('dark-mode');
+                        applyTheme(!isDark, true);
+                    });
+                }
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
+            }
+        })();
+
+        // Function to update neutral palette swatches when theme changes
+        function updateNeutralPalette(isDarkMode) {
+            const lightMode = {
+                primaryBg: { color: '#FAFAFA', name: 'VAPOR', textColor: '#000000' },
+                surface: { color: '#FFFFFF', name: 'WHITE', textColor: '#000000' },
+                surfaceElevated: { color: '#F1F3F5', name: 'LIGHT GRAY', textColor: '#000000' },
+                text: { color: '#222222', name: 'OBSIDIAN', textColor: '#FFFFFF' }
+            };
+            
+            const darkMode = {
+                primaryBg: { color: '#0F0F14', name: 'NIGHT', textColor: '#FFFFFF' },
+                surface: { color: '#1A1A23', name: 'DARK SURFACE', textColor: '#FFFFFF' },
+                surfaceElevated: { color: '#252533', name: 'DARK ELEVATED', textColor: '#000000' },
+                text: { color: '#F0F0F5', name: 'LIGHT', textColor: '#000000' }
+            };
+            
+            const colors = isDarkMode ? darkMode : lightMode;
+            
+            // Update primary background
+            const primaryBgSwatch = document.querySelector('.neutral-primary-bg');
+            const primaryBgHex = document.querySelector('.neutral-primary-bg-hex');
+            if (primaryBgSwatch) {
+                primaryBgSwatch.style.background = colors.primaryBg.color;
+                primaryBgSwatch.style.color = colors.primaryBg.textColor;
+                primaryBgSwatch.textContent = colors.primaryBg.name;
+            }
+            if (primaryBgHex) primaryBgHex.textContent = colors.primaryBg.color;
+            
+            // Update surface
+            const surfaceSwatch = document.querySelector('.neutral-surface');
+            const surfaceHex = document.querySelector('.neutral-surface-hex');
+            if (surfaceSwatch) {
+                surfaceSwatch.style.background = colors.surface.color;
+                surfaceSwatch.style.color = colors.surface.textColor;
+                surfaceSwatch.textContent = colors.surface.name;
+            }
+            if (surfaceHex) surfaceHex.textContent = colors.surface.color;
+            
+            // Update elevated surface
+            const elevatedSwatch = document.querySelector('.neutral-surface-elevated');
+            const elevatedHex = document.querySelector('.neutral-surface-elevated-hex');
+            if (elevatedSwatch) {
+                elevatedSwatch.style.background = colors.surfaceElevated.color;
+                elevatedSwatch.style.color = colors.surfaceElevated.textColor;
+                elevatedSwatch.textContent = colors.surfaceElevated.name;
+            }
+            if (elevatedHex) elevatedHex.textContent = colors.surfaceElevated.color;
+            
+            // Update text
+            const textSwatch = document.querySelector('.neutral-text');
+            const textHex = document.querySelector('.neutral-text-hex');
+            if (textSwatch) {
+                textSwatch.style.background = colors.text.color;
+                textSwatch.style.color = colors.text.textColor;
+                textSwatch.textContent = colors.text.name;
+            }
+            if (textHex) textHex.textContent = colors.text.color;
+        }
+    </script>
+<script defer="" src="assets/site.js"></script>
+
   </div>
 </PortalLayout>
