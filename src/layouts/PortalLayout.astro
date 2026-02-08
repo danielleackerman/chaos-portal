@@ -58,9 +58,6 @@ const isCompassSection = currentPage === 'compass' && currentSlug !== '';
         </a>
       </nav>
       <div style="display:flex; gap:0.5rem; align-items:center;">
-        <button class="sidebar-toggle" id="sidebar-toggle" type="button" aria-label="Toggle sidebar" title="Toggle sidebar">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
-        </button>
         <button class="global-search-trigger" id="search-trigger" type="button">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           Search
@@ -81,7 +78,27 @@ const isCompassSection = currentPage === 'compass' && currentSlug !== '';
     </div>
   </div>
 
-  <!-- Sidebar: fixed overlay, never in page flow -->
+  <!-- Sidebar: thin icon rail (always visible) + expandable panel -->
+  <aside class="sidebar-rail" id="sidebar-rail">
+    <div class="rail-icons">
+      <button class="rail-icon" id="rail-expand" type="button" aria-label="Expand sidebar" title="Expand sidebar">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="9" y1="3" x2="9" y2="21"/></svg>
+      </button>
+      <a class="rail-icon" href={`${base}/`} title="Home">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      </a>
+      <a class="rail-icon" href={`${base}/library/music/`} title="Library">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+      </a>
+      <a class="rail-icon" href={`${base}/compass/`} title="Compass">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      </a>
+      <button class="rail-icon" id="rail-search" type="button" title="Search">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </button>
+    </div>
+  </aside>
+
   <aside class="page-sidebar" id="page-sidebar">
     <div class="sidebar-inner">
       <button class="sidebar-close" id="sidebar-close" type="button" aria-label="Close sidebar">✕</button>
@@ -141,30 +158,34 @@ const isCompassSection = currentPage === 'compass' && currentSlug !== '';
     // === SIDEBAR TOC + SCROLL SPY ===
     (function(){var tl=document.getElementById('sidebar-toc-list'),tn=document.getElementById('sidebar-toc');if(!tl)return;var ct=document.querySelector('.page-content');if(!ct)return;var items=[];var gl=ct.querySelectorAll('.toc-grid__link');if(gl.length>0){gl.forEach(function(l){var h=l.getAttribute('href');if(h&&h.startsWith('#'))items.push({id:h.substring(1),text:l.textContent.trim()})})}else{ct.querySelectorAll('h2[id], h3[id]').forEach(function(h){var t=h.textContent.trim();if(t.length>0&&t.length<80)items.push({id:h.id,text:t,level:h.tagName})})}if(items.length===0){ct.querySelectorAll('.section[id]').forEach(function(s){var h=s.querySelector('h2,h3');if(h)items.push({id:s.id,text:h.textContent.trim()})})}if(items.length===0){if(tn)tn.style.display='none';return}items.forEach(function(i){var li=document.createElement('li'),a=document.createElement('a');a.href='#'+i.id;a.className='sidebar-toc__link'+(i.level==='H3'?' sidebar-toc__link--sub':'');a.textContent=i.text;a.setAttribute('data-target',i.id);li.appendChild(a);tl.appendChild(li)});var links=tl.querySelectorAll('.sidebar-toc__link'),tgts=[];items.forEach(function(i){var e=document.getElementById(i.id);if(e)tgts.push({id:i.id,el:e})});function spy(){var sp=window.scrollY+120,aid='';for(var i=tgts.length-1;i>=0;i--){if(tgts[i].el.offsetTop<=sp){aid=tgts[i].id;break}}links.forEach(function(l){l.classList.toggle('is-active',l.getAttribute('data-target')===aid)})}var tick=false;window.addEventListener('scroll',function(){if(!tick){requestAnimationFrame(function(){spy();tick=false});tick=true}});spy()})();
 
-    // === SIDEBAR TOGGLE (overlay at all sizes) ===
+    // === SIDEBAR RAIL + PANEL ===
     (function(){
       var sb = document.getElementById('page-sidebar');
-      var tog = document.getElementById('sidebar-toggle');
+      var rail = document.getElementById('sidebar-rail');
+      var expand = document.getElementById('rail-expand');
       var cls = document.getElementById('sidebar-close');
       var ov = document.getElementById('sidebar-overlay');
-      if (!sb || !tog) return;
+      var railSearch = document.getElementById('rail-search');
+      if (!sb || !expand) return;
 
       function open() {
         sb.classList.add('is-open');
         if (ov) ov.classList.add('is-open');
-        document.body.style.overflow = 'hidden';
       }
       function close() {
         sb.classList.remove('is-open');
         if (ov) ov.classList.remove('is-open');
-        document.body.style.overflow = '';
       }
 
-      tog.addEventListener('click', function() {
+      expand.addEventListener('click', function() {
         sb.classList.contains('is-open') ? close() : open();
       });
       if (cls) cls.addEventListener('click', close);
       if (ov) ov.addEventListener('click', close);
+      if (railSearch) railSearch.addEventListener('click', function() {
+        var t = document.getElementById('search-trigger');
+        if (t) t.click();
+      });
       document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && sb.classList.contains('is-open')) close();
       });

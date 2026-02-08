@@ -145,6 +145,7 @@ body {
   display: flex;
   flex-direction: column;
   transition: background 0.3s ease, color 0.3s ease;
+  padding-left: 48px;
 }
 
 /* ===== TYPOGRAPHY — Merged ===== */
@@ -416,7 +417,7 @@ h1 code, h2 code, h3 code, h4 code {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 50;
   background: color-mix(in srgb, var(--bg) 92%, transparent);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -428,9 +429,9 @@ h1 code, h2 code, h3 code, h4 code {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: 0.75rem 1.5rem;
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
 }
 
@@ -468,6 +469,7 @@ h1 code, h2 code, h3 code, h4 code {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  justify-self: center;
 }
 
 .site-nav a,
@@ -1703,20 +1705,61 @@ details[open] .accordion-toggle__chevron {
   width: 100%;
 }
 
-/* ===== SIDEBAR: FIXED OVERLAY (never in page flow) ===== */
+/* ===== ICON RAIL: always visible thin strip on left ===== */
+.sidebar-rail {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 100vh;
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  z-index: 110;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 0.75rem;
+}
+.rail-icons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+.rail-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: none;
+  background: none;
+  color: var(--text-3);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.15s, background 0.15s;
+}
+.rail-icon:hover {
+  color: var(--text);
+  background: var(--bg);
+  text-decoration: none;
+}
+
+/* ===== SIDEBAR PANEL: slides from left, overlaps rail ===== */
 .page-sidebar {
   position: fixed;
   top: 0;
-  right: -300px;
+  left: -280px;
   width: 280px;
   height: 100vh;
   background: var(--surface);
-  border-left: 1px solid var(--border);
-  z-index: 100;
+  border-right: 1px solid var(--border);
+  z-index: 105;
   padding: 3.5rem 1rem 1rem;
   overflow-y: auto;
-  transition: right 0.25s ease;
-  box-shadow: -4px 0 20px rgba(0,0,0,0.15);
+  transition: left 0.25s ease;
+  box-shadow: 4px 0 20px rgba(0,0,0,0.15);
   scrollbar-width: thin;
   scrollbar-color: var(--border) transparent;
 }
@@ -1724,7 +1767,7 @@ details[open] .accordion-toggle__chevron {
 .page-sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 
 .page-sidebar.is-open {
-  right: 0;
+  left: 48px;
 }
 
 .sidebar-inner {
@@ -1752,8 +1795,8 @@ details[open] .accordion-toggle__chevron {
   display: none;
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 90;
+  background: rgba(0,0,0,0.3);
+  z-index: 100;
 }
 .sidebar-overlay.is-open { display: block; }
 
@@ -1865,22 +1908,7 @@ details[open] .accordion-toggle__chevron {
   color: var(--semantic-v);
 }
 
-/* Sidebar toggle button — always visible */
-.sidebar-toggle {
-  display: flex;
-  align-items: center;
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  padding: 0.35rem;
-  cursor: pointer;
-  color: var(--text-2);
-  transition: color 0.15s, border-color 0.15s;
-}
-.sidebar-toggle:hover {
-  color: var(--semantic-v);
-  border-color: var(--semantic-v);
-}
+/* (sidebar toggle removed — using icon rail instead) */
 
 /* ===== BACK TO TOP ===== */
 .back-to-top {
