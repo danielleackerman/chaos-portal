@@ -2202,3 +2202,113 @@ details[open] .accordion-toggle__chevron {
 .animate-in-1 { animation-delay: 0.05s; }
 .animate-in-2 { animation-delay: 0.1s; }
 .animate-in-3 { animation-delay: 0.15s; }
+
+/* ===== PROGRESSIVE DISCLOSURE — Dimension Accordions (v3.5) ===== */
+
+.dim-accordion {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  margin: 1.5rem 0;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.dim-accordion:hover {
+  border-color: var(--border-accent);
+}
+.dim-accordion[open] {
+  box-shadow: var(--shadow-subtle);
+}
+
+.dim-accordion summary {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  cursor: pointer;
+  background: var(--surface-elevated);
+  list-style: none;
+  user-select: none;
+  transition: background 0.15s;
+}
+.dim-accordion summary::-webkit-details-marker { display: none; }
+.dim-accordion summary::marker { display: none; content: ''; }
+
+.dim-accordion summary:hover {
+  background: var(--surface-inset);
+}
+
+.dim-accordion__chevron {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--text-3);
+  transition: transform 0.2s ease;
+}
+.dim-accordion[open] .dim-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+.dim-accordion__num {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--semantic-v);
+  min-width: 2rem;
+}
+
+.dim-accordion__title {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--text);
+  flex: 1;
+}
+
+.dim-accordion__subtitle {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  font-style: italic;
+  display: none;
+}
+@media (min-width: 600px) {
+  .dim-accordion__subtitle { display: inline; }
+}
+
+.dim-accordion__body {
+  padding: 0.5rem 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Preserve content styles inside accordion */
+.dim-accordion__body h3 { margin-top: 1.5rem; }
+.dim-accordion__body h3:first-child { margin-top: 0.5rem; }
+.dim-accordion__body h4 { margin-top: 1.25rem; }
+
+/* Expand/collapse all controls */
+.accordion-controls {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0 0.5rem;
+  justify-content: flex-end;
+}
+.accordion-controls button {
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.3rem 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  transition: all 0.15s;
+}
+.accordion-controls button:hover {
+  color: var(--text);
+  border-color: var(--border-accent);
+  background: var(--surface-elevated);
+}
