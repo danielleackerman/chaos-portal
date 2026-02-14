@@ -583,17 +583,7 @@ h1 code, h2 code, h3 code, h4 code {
   background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
                      radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
 }
-.page-hero--gradient::before {
-  content: "";
-  position: absolute;
-  left: -1px;
-  top: -1px;
-  bottom: -1px;
-  width: 6px;
-  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-  z-index: 1;
-}
+
 
 .dark-mode .page-hero--gradient {
   background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.06), transparent 60%),
