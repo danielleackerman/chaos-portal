@@ -1,0 +1,116 @@
+---
+interface ExpandingCardItem {
+  id: string;
+  label: string;
+  title: string;
+  description: string;
+  accentToken?: string;
+}
+
+interface Props {
+  items: ExpandingCardItem[];
+  orientation?: 'horizontal' | 'vertical';
+  defaultActive?: string;
+}
+
+const {
+  items = [],
+  orientation = 'vertical',
+  defaultActive,
+} = Astro.props;
+
+const initialActive = defaultActive && items.some((item) => item.id === defaultActive)
+  ? defaultActive
+  : items[0]?.id;
+---
+
+<div
+  class={`expanding-cards expanding-cards--${orientation}`}
+  data-expanding-cards
+  data-orientation={orientation}
+  data-default-active={initialActive}
+>
+  {items.map((item) => (
+    <article
+      class="expanding-cards__card"
+      data-expanding-card
+      data-card-id={item.id}
+      data-accent-token={item.accentToken}
+      style={item.accentToken ? `--accent-fill: ${item.accentToken};` : undefined}
+      aria-expanded={item.id === initialActive ? 'true' : 'false'}
+      tabindex="0"
+      role="button"
+    >
+      <div class="expanding-cards__label">{item.label}</div>
+      <div class="expanding-cards__content">
+        <h4>{item.title}</h4>
+        <p>{item.description}</p>
+      </div>
+    </article>
+  ))}
+</div>
+
+<script>
+  const BOUND_ATTRIBUTE = 'data-expanding-cards-bound';
+
+  const isMobile = () => window.matchMedia('(max-width: 900px)').matches;
+
+  const syncOrientation = (deck) => {
+    const baseOrientation = deck.dataset.orientation === 'horizontal' ? 'horizontal' : 'vertical';
+    const activeOrientation = isMobile() ? 'vertical' : baseOrientation;
+
+    deck.classList.remove('expanding-cards--horizontal', 'expanding-cards--vertical');
+    deck.classList.add(`expanding-cards--${activeOrientation}`);
+    deck.dataset.activeOrientation = activeOrientation;
+  };
+
+  const setActiveCard = (deck, cardId) => {
+    const cards = deck.querySelectorAll('[data-expanding-card]');
+
+    cards.forEach((card) => {
+      const isActive = card.dataset.cardId === cardId;
+      card.setAttribute('aria-expanded', isActive ? 'true' : 'false');
+      card.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  };
+
+  const bindDeck = (deck) => {
+    if (deck.getAttribute(BOUND_ATTRIBUTE) === 'true') {
+      syncOrientation(deck);
+      return;
+    }
+
+    const cards = deck.querySelectorAll('[data-expanding-card]');
+    if (!cards.length) {
+      return;
+    }
+
+    const defaultActive = deck.dataset.defaultActive || cards[0].dataset.cardId;
+    setActiveCard(deck, defaultActive);
+    syncOrientation(deck);
+
+    cards.forEach((card) => {
+      const activate = () => setActiveCard(deck, card.dataset.cardId);
+
+      card.addEventListener('click', activate);
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activate();
+        }
+      });
+    });
+
+    deck.setAttribute(BOUND_ATTRIBUTE, 'true');
+  };
+
+  const initExpandingCards = () => {
+    document.querySelectorAll('[data-expanding-cards]').forEach(bindDeck);
+  };
+
+  document.addEventListener('astro:page-load', initExpandingCards);
+  document.addEventListener('astro:after-swap', initExpandingCards);
+  window.addEventListener('resize', initExpandingCards);
+
+  initExpandingCards();
+</script>
