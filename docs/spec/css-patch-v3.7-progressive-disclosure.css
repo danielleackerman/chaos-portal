@@ -1,0 +1,512 @@
+/* ============================================================
+   CSS PATCH — Progressive Disclosure v4
+   Append to bottom of global.css (before any @media queries)
+   ============================================================ */
+
+/* ===== DIMENSION DEPTH SCALE (Teal Opacity) ===== */
+/* Same hue, deepening saturation. D5 = lightest (surface), D0 = deepest (core). */
+:root {
+  --dim-5: rgba(20, 184, 166, 0.35);
+  --dim-4: rgba(20, 184, 166, 0.48);
+  --dim-3: rgba(20, 184, 166, 0.61);
+  --dim-2: rgba(20, 184, 166, 0.74);
+  --dim-1: rgba(20, 184, 166, 0.87);
+  --dim-0: rgba(20, 184, 166, 1.00);
+}
+
+.dark-mode {
+  --dim-5: rgba(20, 184, 166, 0.25);
+  --dim-4: rgba(20, 184, 166, 0.38);
+  --dim-3: rgba(20, 184, 166, 0.51);
+  --dim-2: rgba(20, 184, 166, 0.64);
+  --dim-1: rgba(20, 184, 166, 0.77);
+  --dim-0: rgba(20, 184, 166, 0.90);
+}
+
+/* ===== POSITION INTENSITY SCALE (Amber Opacity) ===== */
+/* Origin (12:00) = calm/lightest. Crisis (9:00) = maximum intensity. */
+:root {
+  --pos-12: rgba(245, 158, 11, 0.35);
+  --pos-1:  rgba(245, 158, 11, 0.45);
+  --pos-3:  rgba(245, 158, 11, 0.60);
+  --pos-6:  rgba(245, 158, 11, 0.80);
+  --pos-9:  rgba(245, 158, 11, 1.00);
+  --pos-11: rgba(245, 158, 11, 0.45);
+}
+
+.dark-mode {
+  --pos-12: rgba(245, 158, 11, 0.25);
+  --pos-1:  rgba(245, 158, 11, 0.35);
+  --pos-3:  rgba(245, 158, 11, 0.50);
+  --pos-6:  rgba(245, 158, 11, 0.70);
+  --pos-9:  rgba(245, 158, 11, 0.90);
+  --pos-11: rgba(245, 158, 11, 0.35);
+}
+
+
+/* ===== HERO FIX — Gradient stripe ===== */
+/* PROBLEM: The ::before pseudo-element creates a ribbon effect with a thin
+   white gap between the gradient stripe and the card border.
+   FIX: Use border-image-source on the native border-left instead.
+   Delete the old ::before rule entirely. */
+
+/* REPLACE the existing .page-hero--gradient block with this: */
+.page-hero--gradient {
+  border-left-color: var(--semantic-h); /* fallback for browsers without border-image */
+  border-image-source: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
+  border-image-slice: 1;
+  background: var(--surface);
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
+}
+
+/* DELETE the old ::before rule — no longer needed */
+/* .page-hero--gradient::before { ... } — REMOVE THIS ENTIRELY */
+
+.dark-mode .page-hero--gradient {
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.06), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.06), transparent 60%);
+}
+
+/* NOTE: border-image disables border-radius on the left edge in most browsers.
+   This is actually fine — it makes the gradient stripe flush like the amber/teal
+   variants already are, since border-left with border-radius only rounds the
+   outer corner anyway. If you want the card corners rounded AND a gradient stripe,
+   use the same ::before approach but fix the positioning — see alternative below. */
+
+/* ALTERNATIVE if you want rounded corners + gradient stripe (no white gap): */
+/*
+.page-hero--gradient {
+  border-left-color: transparent;
+  background: var(--surface);
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
+  overflow: hidden;
+}
+.page-hero--gradient::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
+  z-index: 1;
+}
+*/
+
+
+/* ===== NEUTRAL HERO — for Style Guide, Roadmap, meta pages ===== */
+/* Uses --border-accent (a mid-gray already in the system) so it reads as
+   "system page, not axis-specific content." Doesn't compete with amber/teal. */
+.page-hero--neutral {
+  border-left-color: var(--border-accent);
+}
+
+.page-hero .eyebrow--neutral {
+  color: var(--text-2);
+}
+
+
+/* ===== TABS COMPONENT ===== */
+.tabs {
+  margin: var(--space-sm) 0;
+}
+
+.tabs__strip {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.tabs__strip::-webkit-scrollbar {
+  display: none;
+}
+
+.tabs__tab {
+  background: none;
+  border: none;
+  padding: 0.625rem 1rem;
+  font-family: var(--font-sans);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--text-3);
+  cursor: pointer;
+  white-space: nowrap;
+  position: relative;
+  transition: color 0.2s ease;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; /* overlap the strip border */
+}
+
+.tabs__tab:hover {
+  color: var(--text-2);
+}
+
+.tabs__tab[aria-selected="true"] {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* Accent color variants */
+.tabs--teal .tabs__tab[aria-selected="true"] {
+  border-bottom-color: var(--semantic-v);
+}
+.tabs--amber .tabs__tab[aria-selected="true"] {
+  border-bottom-color: var(--semantic-h);
+}
+.tabs--blue .tabs__tab[aria-selected="true"] {
+  border-bottom-color: var(--info-blue);
+}
+.tabs--gradient .tabs__tab[aria-selected="true"] {
+  border-image-source: linear-gradient(90deg, var(--semantic-h), var(--semantic-v));
+  border-image-slice: 1;
+}
+
+.tabs__panel {
+  padding: var(--space-sm) 0;
+}
+
+.tabs__panel[hidden] {
+  display: none;
+}
+
+/* No-JS fallback: show all panels stacked */
+.no-js .tabs__panel {
+  display: block !important;
+}
+.no-js .tabs__panel::before {
+  content: attr(aria-label);
+  display: block;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--text-2);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+
+/* ===== EXPANDING CARDS ===== */
+.expanding-cards {
+  display: flex;
+  gap: 2px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--border); /* gap color = border color */
+}
+
+/* Vertical orientation */
+.expanding-cards--vertical {
+  flex-direction: column;
+}
+
+.expanding-cards__card {
+  background: var(--surface-elevated);
+  cursor: pointer;
+  overflow: hidden;
+  transition: flex 0.4s ease, background 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  flex: 0 0 auto;
+  display: flex;
+}
+
+/* Horizontal collapsed strip */
+.expanding-cards:not(.expanding-cards--vertical) .expanding-cards__card {
+  width: 56px;
+  min-height: 280px;
+  flex-direction: column;
+}
+
+/* Vertical collapsed strip */
+.expanding-cards--vertical .expanding-cards__card {
+  height: 56px;
+  flex-direction: row;
+}
+
+/* Active/expanded card */
+.expanding-cards__card[aria-expanded="true"] {
+  flex: 1 1 auto;
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  cursor: default;
+}
+
+.expanding-cards__card:not([aria-expanded="true"]):hover {
+  background: var(--surface);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Label (visible when collapsed) */
+.expanding-cards__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Horizontal: label is rotated */
+.expanding-cards:not(.expanding-cards--vertical) .expanding-cards__label {
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+  width: 56px;
+  padding: var(--space-sm) 0;
+}
+
+/* Vertical: label is horizontal */
+.expanding-cards--vertical .expanding-cards__label {
+  height: 56px;
+  padding: 0 var(--space-sm);
+  min-width: 120px;
+}
+
+/* Content (visible when expanded) */
+.expanding-cards__content {
+  flex: 1;
+  padding: var(--space-sm);
+  opacity: 0;
+  transition: opacity 0.3s ease 0.1s;
+  overflow-y: auto;
+}
+
+.expanding-cards__card[aria-expanded="true"] .expanding-cards__content {
+  opacity: 1;
+}
+
+.expanding-cards__card:not([aria-expanded="true"]) .expanding-cards__content {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+/* Accent stripe — uses dimension depth or position intensity */
+.expanding-cards__card::before {
+  content: "";
+  flex-shrink: 0;
+}
+
+/* Horizontal cards: left accent stripe */
+.expanding-cards:not(.expanding-cards--vertical) .expanding-cards__card::before {
+  width: 3px;
+  min-height: 100%;
+}
+
+/* Vertical cards: top accent stripe */
+.expanding-cards--vertical .expanding-cards__card::before {
+  height: 3px;
+  min-width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+/* Dimension depth colors (teal) */
+.expanding-cards__card[data-depth="5"]::before { background: var(--dim-5); }
+.expanding-cards__card[data-depth="4"]::before { background: var(--dim-4); }
+.expanding-cards__card[data-depth="3"]::before { background: var(--dim-3); }
+.expanding-cards__card[data-depth="2"]::before { background: var(--dim-2); }
+.expanding-cards__card[data-depth="1"]::before { background: var(--dim-1); }
+.expanding-cards__card[data-depth="0"]::before { background: var(--dim-0); }
+
+/* Position intensity colors (amber) */
+.expanding-cards__card[data-position="12"]::before { background: var(--pos-12); }
+.expanding-cards__card[data-position="1"]::before  { background: var(--pos-1); }
+.expanding-cards__card[data-position="3"]::before  { background: var(--pos-3); }
+.expanding-cards__card[data-position="6"]::before  { background: var(--pos-6); }
+.expanding-cards__card[data-position="9"]::before  { background: var(--pos-9); }
+.expanding-cards__card[data-position="11"]::before { background: var(--pos-11); }
+
+/* Fallback accent colors when no depth/position specified */
+.expanding-cards--teal .expanding-cards__card::before { background: var(--semantic-v); }
+.expanding-cards--amber .expanding-cards__card::before { background: var(--semantic-h); }
+
+/* Active card accent intensifies */
+.expanding-cards__card[aria-expanded="true"]::before {
+  filter: brightness(1.1);
+}
+
+/* Mobile: always vertical, becomes accordion-like */
+@media (max-width: 768px) {
+  .expanding-cards:not(.expanding-cards--vertical) {
+    flex-direction: column;
+  }
+  .expanding-cards:not(.expanding-cards--vertical) .expanding-cards__card {
+    width: auto;
+    min-height: auto;
+    flex-direction: row;
+  }
+  .expanding-cards:not(.expanding-cards--vertical) .expanding-cards__label {
+    writing-mode: horizontal-tb;
+    transform: none;
+    width: auto;
+    height: 56px;
+    padding: 0 var(--space-sm);
+    min-width: 120px;
+  }
+  .expanding-cards:not(.expanding-cards--vertical) .expanding-cards__card::before {
+    width: auto;
+    min-height: auto;
+    height: 3px;
+    min-width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}
+
+
+/* ===== FLIP CARD ===== */
+.flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.flip-card__inner {
+  position: relative;
+  transition: transform 0.4s ease;
+  transform-style: preserve-3d;
+}
+
+.flip-card[aria-expanded="true"] .flip-card__inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card__face {
+  backface-visibility: hidden;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+}
+
+.flip-card__front {
+  position: relative;
+}
+
+.flip-card__back {
+  position: absolute;
+  inset: 0;
+  transform: rotateY(180deg);
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm);
+  overflow-y: auto;
+}
+
+/* Accent stripe on top */
+.flip-card__face::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.flip-card--teal .flip-card__face::before { background: var(--semantic-v); }
+.flip-card--amber .flip-card__face::before { background: var(--semantic-h); }
+.flip-card--blue .flip-card__face::before { background: var(--info-blue); }
+
+/* Flip hint icon */
+.flip-card__hint {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.75rem;
+  font-size: 0.75rem;
+  color: var(--text-3);
+  pointer-events: none;
+}
+
+/* Hover state */
+.flip-card:hover .flip-card__front {
+  box-shadow: var(--shadow-subtle);
+}
+
+.flip-card[aria-expanded="true"] .flip-card__back {
+  box-shadow: var(--shadow-card);
+}
+
+/* No-JS fallback: both faces visible stacked */
+.no-js .flip-card__inner {
+  transform: none !important;
+}
+.no-js .flip-card__back {
+  position: relative;
+  transform: none;
+  margin-top: var(--space-xs);
+}
+
+/* Flip card strip (multiple in a row) */
+.flip-card-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--space-sm);
+}
+
+
+/* ===== ENHANCED ACCORDION ===== */
+/* Expand/Collapse All controls */
+.accordion-controls {
+  display: flex;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-sm);
+}
+
+.accordion-controls__btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 0.375rem 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-2);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.accordion-controls__btn:hover {
+  background: var(--surface-elevated);
+  border-color: var(--border-accent);
+  color: var(--text);
+}
+
+
+/* ===== DEPTH SCALE DEMO (Style Guide only) ===== */
+.sg-depth-strip {
+  display: flex;
+  gap: 2px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+.sg-depth-swatch {
+  flex: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
