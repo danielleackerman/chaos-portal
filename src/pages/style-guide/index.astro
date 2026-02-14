@@ -1,6 +1,56 @@
 ---
 import PortalLayout from '../../layouts/PortalLayout.astro';
+import ExpandingCards from '../../components/ui/ExpandingCards.astro';
 const base = import.meta.env.BASE_URL;
+
+
+const dimensionCards = [
+  {
+    id: 'surface',
+    label: 'Card A',
+    title: 'Surface Layer',
+    description: 'Visible details and direct observations that anyone can identify quickly.',
+    accentToken: 'var(--dim-5)',
+  },
+  {
+    id: 'structure',
+    label: 'Card B',
+    title: 'Structural Layer',
+    description: 'Underlying arrangement and sequencing that shapes the experience.',
+    accentToken: 'var(--dim-3)',
+  },
+  {
+    id: 'core',
+    label: 'Card C',
+    title: 'Core Layer',
+    description: 'Foundational meaning and intent that informs every other layer.',
+    accentToken: 'var(--dim-0)',
+  },
+];
+
+const positionCards = [
+  {
+    id: 'origin',
+    label: 'Step 1',
+    title: 'Origin',
+    description: 'Initial context and calm baseline before momentum builds.',
+    accentToken: 'var(--pos-12)',
+  },
+  {
+    id: 'threshold',
+    label: 'Step 2',
+    title: 'Threshold',
+    description: 'Commitment moment where the path is chosen and pressure rises.',
+    accentToken: 'var(--pos-6)',
+  },
+  {
+    id: 'crisis',
+    label: 'Step 3',
+    title: 'Crisis',
+    description: 'Maximum tension where tradeoffs are unavoidable and decisions matter.',
+    accentToken: 'var(--pos-9)',
+  },
+];
 ---
 
 <PortalLayout title="Style Guide" currentPage="styleguide">
@@ -11,7 +61,7 @@ const base = import.meta.env.BASE_URL;
     <strong>Style Guide</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--neutral">
     <div class="eyebrow">REFERENCE</div>
     <h1>Style Guide</h1>
     <p class="subtitle">Living inventory of every component in the Chaos Portal design system (v3.5)</p>
@@ -443,6 +493,18 @@ Examine: What is the character discovering about themselves?</code></pre>
         <p class="dimension-position">What you directly see and hear</p>
         <p>Observable phenomena — what literally appears, is said, shown, heard. The concrete surface of the story.</p>
       </div>
+
+
+      <h3>Expanding Cards</h3>
+      <p>Interactive one-open-at-a-time cards for progressive disclosure.</p>
+
+      <h4>Expanding Cards (Vertical)</h4>
+      <p>Deck flows left to right with standing collapsed rails.</p>
+      <ExpandingCards items={dimensionCards} orientation="vertical" defaultActive="structure" />
+
+      <h4>Expanding Cards (Horizontal)</h4>
+      <p>Deck flows top to bottom with laying collapsed rails.</p>
+      <ExpandingCards items={positionCards} orientation="horizontal" defaultActive="threshold" />
     </div>
 
     <hr/>
