@@ -1,4 +1,3 @@
-cat > src/components/ui/Tabs.astro <<'EOF'
 ---
 /**
  * Tabs.astro — Mutually exclusive tab panels.
@@ -36,11 +35,31 @@ const actualCount = Math.min(labels.length, maxSupported);
 function slugify(str: string): string {
   return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 }
+
+const visibleLabels = labels.slice(0, actualCount);
+
+const panelEntries = await Promise.all(
+  Array.from({ length: actualCount }, async (_, i) => {
+    const slotName = `tab-${i}`;
+    if (!Astro.slots.has(slotName)) return null;
+
+    const html = await Astro.slots.render(slotName);
+    if (!html) return null;
+
+    return {
+      i,
+      label: visibleLabels[i],
+      html,
+    };
+  }),
+);
+
+const panels = panelEntries.filter((panel): panel is NonNullable<typeof panel> => Boolean(panel));
 ---
 
 <div class={`tabs tabs--${accent}`} id={id} data-tabs>
   <div class="tabs__strip" role="tablist" aria-label={`${id} tabs`}>
-    {labels.slice(0, maxSupported).map((label, i) => (
+    {visibleLabels.map((label, i) => (
       <button
         class="tabs__tab"
         role="tab"
@@ -56,53 +75,18 @@ function slugify(str: string): string {
     ))}
   </div>
 
-  {actualCount >= 1 && Astro.slots.has('tab-0') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-0`} aria-labelledby={`${id}-btn-0`} aria-label={labels[0]} hidden={defaultIndex !== 0}>
-      <slot name="tab-0" />
+  {panels.map((panel) => (
+    <div
+      class="tabs__panel"
+      role="tabpanel"
+      id={`${id}-panel-${panel.i}`}
+      aria-labelledby={`${id}-btn-${panel.i}`}
+      aria-label={panel.label}
+      hidden={defaultIndex !== panel.i}
+    >
+      <Fragment set:html={panel.html} />
     </div>
-  )}
-
-  {actualCount >= 2 && Astro.slots.has('tab-1') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-1`} aria-labelledby={`${id}-btn-1`} aria-label={labels[1]} hidden={defaultIndex !== 1}>
-      <slot name="tab-1" />
-    </div>
-  )}
-
-  {actualCount >= 3 && Astro.slots.has('tab-2') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-2`} aria-labelledby={`${id}-btn-2`} aria-label={labels[2]} hidden={defaultIndex !== 2}>
-      <slot name="tab-2" />
-    </div>
-  )}
-
-  {actualCount >= 4 && Astro.slots.has('tab-3') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-3`} aria-labelledby={`${id}-btn-3`} aria-label={labels[3]} hidden={defaultIndex !== 3}>
-      <slot name="tab-3" />
-    </div>
-  )}
-
-  {actualCount >= 5 && Astro.slots.has('tab-4') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-4`} aria-labelledby={`${id}-btn-4`} aria-label={labels[4]} hidden={defaultIndex !== 4}>
-      <slot name="tab-4" />
-    </div>
-  )}
-
-  {actualCount >= 6 && Astro.slots.has('tab-5') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-5`} aria-labelledby={`${id}-btn-5`} aria-label={labels[5]} hidden={defaultIndex !== 5}>
-      <slot name="tab-5" />
-    </div>
-  )}
-
-  {actualCount >= 7 && Astro.slots.has('tab-6') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-6`} aria-labelledby={`${id}-btn-6`} aria-label={labels[6]} hidden={defaultIndex !== 6}>
-      <slot name="tab-6" />
-    </div>
-  )}
-
-  {actualCount >= 8 && Astro.slots.has('tab-7') && (
-    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-7`} aria-labelledby={`${id}-btn-7`} aria-label={labels[7]} hidden={defaultIndex !== 7}>
-      <slot name="tab-7" />
-    </div>
-  )}
+  ))}
 </div>
 
 <script>
@@ -174,4 +158,3 @@ function slugify(str: string): string {
 
   initTabs();
 </script>
-EOF
