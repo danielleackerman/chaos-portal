@@ -1,0 +1,330 @@
+---
+/**
+ * CoordinatePicker.astro — MVP Coordinate Picker instrument.
+ *
+ * Two dropdowns: Story Position (clock) + Depth Dimension (D0–D5).
+ * Outputs coordinate notation string.
+ * "Jump to section" scrolls to matching accordion + opens it.
+ * Optional "highlight dimension" toggle.
+ */
+---
+
+<div class="coord-picker" data-coord-picker>
+  <div class="coord-picker__header">
+    <span class="coord-picker__icon" aria-hidden="true">⬡</span>
+    <span class="coord-picker__title">Coordinate Picker</span>
+  </div>
+
+  <div class="coord-picker__controls">
+    <div class="coord-picker__field">
+      <label class="coord-picker__label" for="coord-position">Position</label>
+      <select class="coord-picker__select" id="coord-position" data-coord-position>
+        <option value="12:00">12:00 — Origin</option>
+        <option value="1:00">1:00 — Catalyst</option>
+        <option value="3:00">3:00 — Threshold</option>
+        <option value="6:00" selected>6:00 — Midpoint</option>
+        <option value="9:00">9:00 — Crisis</option>
+        <option value="12:00-R">12:00 — Return</option>
+      </select>
+    </div>
+
+    <span class="coord-picker__divider" aria-hidden="true">/</span>
+
+    <div class="coord-picker__field">
+      <label class="coord-picker__label" for="coord-dimension">Dimension</label>
+      <select class="coord-picker__select" id="coord-dimension" data-coord-dimension>
+        <option value="d5">D5 — Surface / Expressive</option>
+        <option value="d4">D4 — Structural</option>
+        <option value="d3">D3 — Cognitive</option>
+        <option value="d2" selected>D2 — Psychological</option>
+        <option value="d1">D1 — Archetypal</option>
+        <option value="d0">D0 — Core</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="coord-picker__output">
+    <code class="coord-picker__notation" data-coord-output>[6:00] / [Dimension 2]</code>
+    <div class="coord-picker__actions">
+      <button class="coord-picker__btn coord-picker__btn--jump" data-coord-jump type="button">
+        Jump to section ↓
+      </button>
+      <button class="coord-picker__btn coord-picker__btn--highlight" data-coord-highlight type="button" aria-pressed="false">
+        Highlight dimension
+      </button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .coord-picker {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-sm);
+    margin-bottom: var(--space-md);
+    border-left: 3px solid;
+    border-image-source: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
+    border-image-slice: 1;
+  }
+
+  .coord-picker__header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .coord-picker__icon {
+    font-size: 1rem;
+    color: var(--semantic-v);
+  }
+
+  .coord-picker__title {
+    font-family: var(--font-serif, 'DM Serif Display', Georgia, serif);
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--text);
+    letter-spacing: 0.01em;
+  }
+
+  .coord-picker__controls {
+    display: flex;
+    align-items: flex-end;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .coord-picker__field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1;
+    min-width: 140px;
+  }
+
+  .coord-picker__label {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-3);
+  }
+
+  .coord-picker__select {
+    background: var(--surface-elevated);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.5rem 0.625rem;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    color: var(--text);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+    width: 100%;
+    appearance: auto;
+  }
+
+  .coord-picker__select:hover {
+    border-color: var(--border-accent);
+  }
+  .coord-picker__select:focus-visible {
+    outline: 2px solid var(--semantic-v);
+    outline-offset: 1px;
+  }
+
+  .coord-picker__divider {
+    font-size: 1.125rem;
+    color: var(--text-3);
+    font-weight: 300;
+    padding-bottom: 0.5rem;
+    flex-shrink: 0;
+  }
+
+  .coord-picker__output {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .coord-picker__notation {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--token-bg);
+    border: 1px solid var(--token-border);
+    border-radius: var(--radius-sm);
+    padding: 0.375rem 0.75rem;
+    letter-spacing: 0.02em;
+  }
+
+  .coord-picker__actions {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .coord-picker__btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.375rem 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-2);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .coord-picker__btn:hover {
+    background: var(--surface-elevated);
+    border-color: var(--border-accent);
+    color: var(--text);
+  }
+
+  .coord-picker__btn:focus-visible {
+    outline: 2px solid var(--semantic-v);
+    outline-offset: 1px;
+  }
+
+  .coord-picker__btn--jump {
+    color: var(--semantic-v);
+    border-color: var(--semantic-v);
+  }
+  .coord-picker__btn--jump:hover {
+    background: var(--semantic-v);
+    color: white;
+  }
+
+  .coord-picker__btn--highlight[aria-pressed="true"] {
+    background: var(--semantic-v);
+    color: white;
+    border-color: var(--semantic-v);
+  }
+
+  @media (max-width: 600px) {
+    .coord-picker__controls {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .coord-picker__divider {
+      display: none;
+    }
+    .coord-picker__output {
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+</style>
+
+<script>
+  function initCoordPicker() {
+    document.querySelectorAll('[data-coord-picker]').forEach((picker) => {
+      if (picker.hasAttribute('data-coord-bound')) return;
+
+      const posSelect = picker.querySelector('[data-coord-position]');
+      const dimSelect = picker.querySelector('[data-coord-dimension]');
+      const output = picker.querySelector('[data-coord-output]');
+      const jumpBtn = picker.querySelector('[data-coord-jump]');
+      const highlightBtn = picker.querySelector('[data-coord-highlight]');
+
+      if (!posSelect || !dimSelect || !output) return;
+
+      const dimensionNames = {
+        d5: 'Surface Dimension 5',
+        d4: 'Structural Dimension 4',
+        d3: 'Cognitive Dimension 3',
+        d2: 'Psychological Dimension 2',
+        d1: 'Archetype Dimension 1',
+        d0: 'Core Dimension 0',
+      };
+
+      const dimensionAnchors = {
+        d5: 'd5-expressive',
+        d4: 'd4-structural',
+        d3: 'd3-cognitive',
+        d2: 'd2-psychological',
+        d1: 'd1-archetypal',
+        d0: 'd0-core',
+      };
+
+      function updateOutput() {
+        const pos = posSelect.value.replace('-R', '');
+        const dim = dimSelect.value;
+        const dimName = dimensionNames[dim] || dim;
+        output.textContent = `[${pos}] / [${dimName}]`;
+      }
+
+      posSelect.addEventListener('change', updateOutput);
+      dimSelect.addEventListener('change', updateOutput);
+
+      // Jump to section
+      if (jumpBtn) {
+        jumpBtn.addEventListener('click', () => {
+          const dim = dimSelect.value;
+          const anchor = dimensionAnchors[dim];
+          if (!anchor) return;
+
+          // Open the accordion/details containing this dimension
+          const target = document.getElementById(anchor);
+          if (!target) return;
+
+          // Open enclosing <details> if it's inside one
+          const details = target.closest('details');
+          if (details && !details.open) {
+            details.open = true;
+          }
+
+          // Scroll into view
+          requestAnimationFrame(() => {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+        });
+      }
+
+      // Highlight dimension toggle
+      if (highlightBtn) {
+        highlightBtn.addEventListener('click', () => {
+          const isActive = highlightBtn.getAttribute('aria-pressed') === 'true';
+          highlightBtn.setAttribute('aria-pressed', isActive ? 'false' : 'true');
+
+          const dim = dimSelect.value;
+          const anchor = dimensionAnchors[dim];
+
+          // Remove previous highlights
+          document.querySelectorAll('.dimension-highlighted').forEach((el) => {
+            el.classList.remove('dimension-highlighted');
+          });
+          document.querySelectorAll('.dimension-dimmed').forEach((el) => {
+            el.classList.remove('dimension-dimmed');
+          });
+
+          if (!isActive && anchor) {
+            // Dim everything, highlight the target
+            document.querySelectorAll('[data-accordion-group="dimensions"] .accordion-item').forEach((item) => {
+              const details = item.querySelector('details');
+              const sectionId = details ? details.querySelector('[id]')?.id : null;
+              if (sectionId === anchor) {
+                item.classList.add('dimension-highlighted');
+              } else {
+                item.classList.add('dimension-dimmed');
+              }
+            });
+          }
+        });
+      }
+
+      picker.setAttribute('data-coord-bound', 'true');
+    });
+  }
+
+  document.addEventListener('astro:page-load', initCoordPicker);
+  document.addEventListener('astro:after-swap', initCoordPicker);
+  initCoordPicker();
+</script>

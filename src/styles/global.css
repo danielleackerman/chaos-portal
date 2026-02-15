@@ -2484,3 +2484,122 @@ details[open] .accordion-toggle__chevron {
 .animate-in-1 { animation-delay: 0.05s; }
 .animate-in-2 { animation-delay: 0.1s; }
 .animate-in-3 { animation-delay: 0.15s; }
+
+/* ============================================================
+   V3.72 IMPLEMENTATION ADDITIONS
+   ============================================================ */
+
+/* ===== COORDINATE PICKER HIGHLIGHT/DIM ===== */
+/* This logic handles the "Highlight Dimension" feature */
+[data-accordion-group="dimensions"] .accordion-item {
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+}
+
+/* When a dimension is highlighted, dim everything else */
+.dimension-dimmed {
+  opacity: 0.35;
+  filter: grayscale(0.8) blur(0.5px);
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.dimension-highlighted {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.02);
+  z-index: 10;
+  box-shadow: 0 0 0 2px var(--semantic-v), var(--shadow-deep);
+}
+
+/* ===== SECTION NAVIGATION (V3.72 Refresh) ===== */
+.section-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 4rem 0 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.section-nav__link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none !important;
+  color: var(--text-2);
+  transition: all 0.2s ease;
+  max-width: 48%;
+  background: var(--surface-inset);
+}
+
+.section-nav__link:hover {
+  border-color: var(--semantic-v);
+  background: var(--surface);
+  box-shadow: var(--shadow-subtle);
+  color: var(--text);
+  transform: translateY(-1px);
+}
+
+.section-nav__link--next {
+  margin-left: auto;
+  text-align: right;
+  flex-direction: row-reverse;
+}
+
+.section-nav__arrow {
+  font-size: 1.25rem;
+  color: var(--semantic-v);
+  flex-shrink: 0;
+}
+
+.section-nav__label {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+}
+
+.section-nav__title {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: inherit;
+}
+
+/* ===== HERO VARIANTS ===== */
+.page-hero--teal {
+  border-left: 6px solid var(--semantic-v);
+  background: linear-gradient(to right, rgba(20, 184, 166, 0.03), transparent);
+}
+
+/* ===== FLIP CARD STRIP ===== */
+/* Responsive grid for displaying multiple flip cards */
+.flip-card-strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+/* ===== MOBILE TABS ACCESSIBILITY ===== */
+@media (max-width: 600px) {
+  .tabs__strip {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* Hide scrollbar Firefox */
+  }
+  .tabs__strip::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
+  
+  .section-nav {
+    flex-direction: column;
+  }
+  .section-nav__link {
+    max-width: 100%;
+  }
+}
