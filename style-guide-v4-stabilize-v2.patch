@@ -1,0 +1,700 @@
+diff --git a/src/pages/style-guide/index.astro b/src/pages/style-guide/index.astro
+index 9eecee3..767c70e 100644
+--- a/src/pages/style-guide/index.astro
++++ b/src/pages/style-guide/index.astro
+@@ -6,50 +6,92 @@ const base = import.meta.env.BASE_URL;
+ 
+ const dimensionCards = [
+   {
+-    id: 'surface',
+-    label: 'Card A',
+-    title: 'Surface Layer',
+-    description: 'Visible details and direct observations that anyone can identify quickly.',
++    id: 'd5-surface',
++    label: 'D5',
++    title: 'Surface / Expressive',
++    description: 'What you directly see and hear — dialogue, visuals, music, editing patterns.',
+     accentToken: 'var(--dim-5)',
+   },
+   {
+-    id: 'structure',
+-    label: 'Card B',
+-    title: 'Structural Layer',
+-    description: 'Underlying arrangement and sequencing that shapes the experience.',
++    id: 'd4-structural',
++    label: 'D4',
++    title: 'Structural',
++    description: 'How the story is organized — act structure, scene sequences, plot architecture.',
++    accentToken: 'var(--dim-4)',
++  },
++  {
++    id: 'd3-cognitive',
++    label: 'D3',
++    title: 'Cognitive / Thematic',
++    description: 'Ideas the story explores — themes, questions, intellectual arguments.',
+     accentToken: 'var(--dim-3)',
+   },
+   {
+-    id: 'core',
+-    label: 'Card C',
+-    title: 'Core Layer',
+-    description: 'Foundational meaning and intent that informs every other layer.',
++    id: 'd2-psychological',
++    label: 'D2',
++    title: 'Psychological',
++    description: 'Character interiority — motivation, desire, fear, transformation arcs.',
++    accentToken: 'var(--dim-2)',
++  },
++  {
++    id: 'd1-archetypal',
++    label: 'D1',
++    title: 'Archetypal / Mythic',
++    description: 'Universal patterns — hero, shadow, threshold guardians, collective resonance.',
++    accentToken: 'var(--dim-1)',
++  },
++  {
++    id: 'd0-core',
++    label: 'D0',
++    title: 'Core / Existential',
++    description: 'Foundational meaning — why the story exists, what it ultimately says about being alive.',
+     accentToken: 'var(--dim-0)',
+   },
+ ];
+ 
+ const positionCards = [
+   {
+-    id: 'origin',
+-    label: 'Step 1',
+-    title: 'Origin',
+-    description: 'Initial context and calm baseline before momentum builds.',
++    id: 'pos-12',
++    label: '12:00',
++    title: 'Origin / Ordinary World',
++    description: 'Calm baseline — the world before the story acts on it.',
+     accentToken: 'var(--pos-12)',
+   },
+   {
+-    id: 'threshold',
+-    label: 'Step 2',
+-    title: 'Threshold',
+-    description: 'Commitment moment where the path is chosen and pressure rises.',
++    id: 'pos-1',
++    label: '1:00',
++    title: 'Catalyst / Inciting Incident',
++    description: 'First disruption — something shifts the equilibrium.',
++    accentToken: 'var(--pos-1)',
++  },
++  {
++    id: 'pos-3',
++    label: '3:00',
++    title: 'First Threshold',
++    description: 'Commitment — the protagonist crosses into the unknown.',
++    accentToken: 'var(--pos-3)',
++  },
++  {
++    id: 'pos-6',
++    label: '6:00',
++    title: 'Midpoint Revelation',
++    description: 'Maximum intensity — core truth exposed, stakes transform, no turning back.',
+     accentToken: 'var(--pos-6)',
+   },
+   {
+-    id: 'crisis',
+-    label: 'Step 3',
+-    title: 'Crisis',
+-    description: 'Maximum tension where tradeoffs are unavoidable and decisions matter.',
++    id: 'pos-9',
++    label: '9:00',
++    title: 'Crisis / Dark Night',
++    description: 'Tension easing — aftermath of the midpoint, reorientation begins.',
+     accentToken: 'var(--pos-9)',
+   },
++  {
++    id: 'pos-12-return',
++    label: '12:00',
++    title: 'Resolution / Return',
++    description: 'New equilibrium — the arc completes, calm restored at a new level.',
++    accentToken: 'var(--pos-12)',
++  },
+ ];
+ ---
+ 
+@@ -62,9 +104,9 @@ const positionCards = [
+   </nav>
+ 
+   <div class="page-hero page-hero--neutral">
+-    <div class="eyebrow">REFERENCE</div>
++    <div class="eyebrow eyebrow--neutral">REFERENCE</div>
+     <h1>Style Guide</h1>
+-    <p class="subtitle">Living inventory of every component in the Chaos Portal design system (v3.5)</p>
++    <p class="subtitle">Living inventory of every component in the Chaos Portal design system (v4.0)</p>
+   </div>
+ 
+   <nav class="toc-grid">
+@@ -220,6 +262,38 @@ const positionCards = [
+         </div>
+       </div>
+ 
++      <h3>Dimension Depth Scale (Teal)</h3>
++      <p>The 6 vertical dimensions use teal at increasing opacity to communicate analytical depth. Surface (D5) is lightest; Core (D0) is deepest. Same hue, no new colors.</p>
++      <div class="sg-depth-strip">
++        <div class="sg-depth-swatch" style="background:var(--dim-5);">D5</div>
++        <div class="sg-depth-swatch" style="background:var(--dim-4);">D4</div>
++        <div class="sg-depth-swatch" style="background:var(--dim-3);">D3</div>
++        <div class="sg-depth-swatch" style="background:var(--dim-2);">D2</div>
++        <div class="sg-depth-swatch" style="background:var(--dim-1);">D1</div>
++        <div class="sg-depth-swatch" style="background:var(--dim-0);">D0</div>
++      </div>
++      <div class="sg-type-details">
++        <strong>Variables:</strong> <code>--dim-5</code> through <code>--dim-0</code> &nbsp;·&nbsp;
++        <strong>Usage:</strong> Accent borders/stripes only &nbsp;·&nbsp;
++        <strong>Rule:</strong> Never as full card background fills.
++      </div>
++
++      <h3>Position Intensity Scale (Amber)</h3>
++      <p>Clock positions use amber at varying intensity. Origin (12:00) is calm; Midpoint (6:00) is maximum intensity. Intensity eases from 9:00 back to 12:00.</p>
++      <div class="sg-depth-strip">
++        <div class="sg-depth-swatch" style="background:var(--pos-12);">12:00</div>
++        <div class="sg-depth-swatch" style="background:var(--pos-1);">1:00</div>
++        <div class="sg-depth-swatch" style="background:var(--pos-3);">3:00</div>
++        <div class="sg-depth-swatch" style="background:var(--pos-6);">6:00</div>
++        <div class="sg-depth-swatch" style="background:var(--pos-9);">9:00</div>
++        <div class="sg-depth-swatch" style="background:var(--pos-12);">12:00</div>
++      </div>
++      <div class="sg-type-details">
++        <strong>Variables:</strong> <code>--pos-12</code> through <code>--pos-9</code> &nbsp;·&nbsp;
++        <strong>Usage:</strong> Accent borders/stripes only &nbsp;·&nbsp;
++        <strong>Pattern:</strong> Intensity peaks at 6:00 then eases back to 12:00.
++      </div>
++
+       <h3>Gradient Usage</h3>
+       <p>Gradients flow from Horizontal (amber) to Vertical (teal), symbolizing the coordinate system:</p>
+       <div class="sg-gradient-demo">Horizontal → Vertical Gradient</div>
+@@ -384,6 +458,18 @@ Examine: What is the character discovering about themselves?</code></pre>
+         <div class="eyebrow">VERTICAL</div>
+         <h1 style="font-size:1.75rem;">Teal Variant</h1>
+       </div>
++
++      <h3>Neutral Hero (Meta pages)</h3>
++      <div class="page-hero page-hero--neutral">
++        <div class="eyebrow eyebrow--neutral">REFERENCE</div>
++        <h1 style="font-size:1.75rem;">Neutral Variant</h1>
++        <p class="subtitle">For Style Guide, Roadmap, and other system-level pages that aren't axis-specific.</p>
++      </div>
++      <div class="sg-type-details">
++        <strong>Class:</strong> <code>page-hero--neutral</code> &nbsp;·&nbsp;
++        <strong>Stripe color:</strong> <code>var(--border-accent)</code> (mid-gray) &nbsp;·&nbsp;
++        <strong>Use when:</strong> Page is about the system itself, not about axis content
++      </div>
+     </div>
+ 
+     <hr/>
+@@ -495,16 +581,205 @@ Examine: What is the character discovering about themselves?</code></pre>
+       </div>
+ 
+ 
+-      <h3>Expanding Cards</h3>
++      <hr/>
++
++      <h3 id="progressive-disclosure">Progressive Disclosure Components</h3>
++      <p>Interactive components that collapse content walls into navigable, scannable units. All share identical chrome — same borders, backgrounds, shadows, corners, and spacing. Only the behavior and accent color change.</p>
++
++      <h4>Expanding Cards</h4>
+       <p>Interactive one-open-at-a-time cards for progressive disclosure.</p>
+ 
+-      <h4>Expanding Cards (Vertical)</h4>
+-      <p>Deck flows left to right with standing collapsed rails.</p>
+-      <ExpandingCards items={dimensionCards} orientation="vertical" defaultActive="structure" />
++      <h5>Expanding Cards (Vertical)</h5>
++      <p>Deck flows left to right with standing collapsed rails. All 6 depth dimensions from Surface (D5) to Core (D0).</p>
++      <ExpandingCards items={dimensionCards} orientation="vertical" defaultActive="d4-structural" />
++
++      <h5>Expanding Cards (Horizontal)</h5>
++      <p>Deck flows top to bottom with laying collapsed rails. All 6 clock positions from Origin (12:00) through Midpoint (6:00) peak back to Return (12:00).</p>
++      <ExpandingCards items={positionCards} orientation="horizontal" defaultActive="pos-6" />
++
++      <hr/>
++
++      <!-- ===== TABS DEMO ===== -->
++      <h4>Tabs</h4>
++      <p>Mutually exclusive panels. One panel visible at a time. Arrow keys navigate, Enter/Space activates. No-JS fallback shows all panels stacked.</p>
++
++      <h5>Teal Variant (Vertical Axis content)</h5>
++      <div class="tabs tabs--teal" id="demo-tabs-teal">
++        <div class="tabs__strip" role="tablist" aria-label="Teal demo tabs">
++          <button class="tabs__tab" role="tab" aria-selected="true" aria-controls="demo-tab-teal-0" id="demo-tabs-teal-btn-0">Overview</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-teal-1" id="demo-tabs-teal-btn-1" tabindex="-1">Frameworks</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-teal-2" id="demo-tabs-teal-btn-2" tabindex="-1">Questions</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-teal-3" id="demo-tabs-teal-btn-3" tabindex="-1">When to Use</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-teal-4" id="demo-tabs-teal-btn-4" tabindex="-1">Examples</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-teal-5" id="demo-tabs-teal-btn-5" tabindex="-1">Connections</button>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-0" aria-labelledby="demo-tabs-teal-btn-0" aria-label="Overview">
++          <p><strong>Overview.</strong> In production, this holds the dimension definition and content summary. First tab is active by default. Each dimension (D5–D0) gets this same 6-tab layout inside its expanded card.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-1" aria-labelledby="demo-tabs-teal-btn-1" aria-label="Frameworks" hidden>
++          <p><strong>Frameworks.</strong> Lists applicable analytical frameworks for this dimension — Hero's Journey, Save the Cat, Dramatica, and others mapped to this depth layer.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-2" aria-labelledby="demo-tabs-teal-btn-2" aria-label="Questions" hidden>
++          <p><strong>Questions.</strong> Analysis questions to ask when working at this depth level. What should the analyst be looking for? What patterns emerge here?</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-3" aria-labelledby="demo-tabs-teal-btn-3" aria-label="When to Use" hidden>
++          <p><strong>When to Use.</strong> Practical guidance on when this dimension is most relevant — first viewing vs. deep analysis, genre considerations, context signals.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-4" aria-labelledby="demo-tabs-teal-btn-4" aria-label="Examples" hidden>
++          <p><strong>Examples.</strong> Concrete film/story examples demonstrating this dimension in action. Each example is a worked analysis showing the insight this depth reveals.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-teal-5" aria-labelledby="demo-tabs-teal-btn-5" aria-label="Connections" hidden>
++          <p><strong>Connections.</strong> Cross-references to adjacent dimensions and horizontal positions where this depth layer typically activates. Links to related Compass sections.</p>
++        </div>
++      </div>
++
++      <div class="sg-type-details">
++        <strong>Markup:</strong> <code>.tabs.tabs--teal</code> (or <code>--amber</code>, <code>--blue</code>, <code>--gradient</code>) &nbsp;·&nbsp;
++        <strong>Active indicator:</strong> 2px bottom border in accent color &nbsp;·&nbsp;
++        <strong>Keyboard:</strong> Arrow keys navigate, Enter/Space activates &nbsp;·&nbsp;
++        <strong>No-JS:</strong> All panels visible stacked
++      </div>
++
++      <h5>Amber Variant (Horizontal Axis content)</h5>
++      <div class="tabs tabs--amber" id="demo-tabs-amber">
++        <div class="tabs__strip" role="tablist" aria-label="Amber demo tabs">
++          <button class="tabs__tab" role="tab" aria-selected="true" aria-controls="demo-tab-amber-0" id="demo-tabs-amber-btn-0">Clock</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-amber-1" id="demo-tabs-amber-btn-1" tabindex="-1">Acts</button>
++          <button class="tabs__tab" role="tab" aria-selected="false" aria-controls="demo-tab-amber-2" id="demo-tabs-amber-btn-2" tabindex="-1">Beats</button>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-amber-0" aria-labelledby="demo-tabs-amber-btn-0" aria-label="Clock">
++          <p><strong>Clock measurement.</strong> 12-hour story positions mapped to narrative events. Origin at 12:00, peak intensity at 6:00, easing back to 12:00.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-amber-1" aria-labelledby="demo-tabs-amber-btn-1" aria-label="Acts" hidden>
++          <p><strong>Act structure.</strong> Three-act, four-act, and five-act breakdowns mapped to clock positions. How act turns align with position markers.</p>
++        </div>
++        <div class="tabs__panel" role="tabpanel" id="demo-tab-amber-2" aria-labelledby="demo-tabs-amber-btn-2" aria-label="Beats" hidden>
++          <p><strong>Beat markers.</strong> Granular story beats within acts — pinch points, midpoint shifts, dark night moments, and climactic sequences.</p>
++        </div>
++      </div>
++
++      <hr/>
++
++      <!-- ===== ACCORDION DEMO ===== -->
++      <h4>Accordion</h4>
++      <p>Native <code>&lt;details&gt;</code>-based disclosure with expand/collapse all, axis accents, and keyboard support. Supports nesting with Tabs or ExpandingCards inside.</p>
++
++      <div class="accordion-controls">
++        <button class="accordion-controls__btn" data-accordion-group="demo-acc" data-action="expand">Expand All</button>
++        <button class="accordion-controls__btn" data-accordion-group="demo-acc" data-action="collapse">Collapse All</button>
++      </div>
++
++      <div class="accordion-item" data-accordion-group="demo-acc">
++        <details>
++          <summary class="accordion-toggle accordion-toggle--teal">
++            <span class="accordion-toggle__icon accordion-toggle__icon--teal">↓</span>
++            <span class="accordion-toggle__label">
++              <span class="accordion-toggle__title">D5 — Surface / Expressive</span>
++              <span class="accordion-toggle__meta">What you directly see and hear</span>
++            </span>
++            <span class="accordion-toggle__chevron">▾</span>
++          </summary>
++          <div class="accordion-body">
++            <p>The most accessible layer. Observable phenomena — dialogue, visual composition, music, editing patterns. In production, this body would contain <strong>Tabs</strong> for sub-sections.</p>
++          </div>
++        </details>
++      </div>
++
++      <div class="accordion-item" data-accordion-group="demo-acc">
++        <details>
++          <summary class="accordion-toggle accordion-toggle--teal">
++            <span class="accordion-toggle__icon accordion-toggle__icon--teal">↓</span>
++            <span class="accordion-toggle__label">
++              <span class="accordion-toggle__title">D4 — Structural</span>
++              <span class="accordion-toggle__meta">How the story is organized</span>
++            </span>
++            <span class="accordion-toggle__chevron">▾</span>
++          </summary>
++          <div class="accordion-body">
++            <p>Act structure, scene sequences, plot architecture, pacing patterns. Accordion body can nest any other component inside.</p>
++          </div>
++        </details>
++      </div>
++
++      <div class="accordion-item" data-accordion-group="demo-acc">
++        <details>
++          <summary class="accordion-toggle accordion-toggle--amber">
++            <span class="accordion-toggle__icon accordion-toggle__icon--amber">→</span>
++            <span class="accordion-toggle__label">
++              <span class="accordion-toggle__title">Hero's Journey Framework</span>
++              <span class="accordion-toggle__meta">Amber variant — horizontal axis content</span>
++            </span>
++            <span class="accordion-toggle__chevron">▾</span>
++          </summary>
++          <div class="accordion-body">
++            <p>This shows the amber variant for horizontal axis content. Each framework gets its own accordion on the Story Structure page. The body can contain ExpandingCards for D0–D5 crosswalks.</p>
++          </div>
++        </details>
++      </div>
++
++      <div class="sg-type-details">
++        <strong>Markup:</strong> <code>&lt;details&gt;</code> with <code>.accordion-toggle--teal</code> or <code>--amber</code> &nbsp;·&nbsp;
++        <strong>Controls:</strong> Expand/Collapse All via <code>data-accordion-group</code> &nbsp;·&nbsp;
++        <strong>Nesting:</strong> Any component can live inside <code>.accordion-body</code>
++      </div>
+ 
+-      <h4>Expanding Cards (Horizontal)</h4>
+-      <p>Deck flows top to bottom with laying collapsed rails.</p>
+-      <ExpandingCards items={positionCards} orientation="horizontal" defaultActive="threshold" />
++      <hr/>
++
++      <!-- ===== CHROME PROOF ===== -->
++      <h4>Chrome Proof</h4>
++      <p>All progressive disclosure components share identical chrome. This table proves it — only behavior and accent color change.</p>
++
++      <table class="chrome-proof-table">
++        <thead>
++          <tr>
++            <th>Property</th>
++            <th>Value</th>
++            <th>Rule</th>
++          </tr>
++        </thead>
++        <tbody>
++          <tr>
++            <td>Border</td>
++            <td><code>1px solid var(--border)</code></td>
++            <td>Every card, panel, and container</td>
++          </tr>
++          <tr>
++            <td>Radius (cards)</td>
++            <td><code>var(--radius-md)</code> = 6px</td>
++            <td>All card-like elements</td>
++          </tr>
++          <tr>
++            <td>Radius (containers)</td>
++            <td><code>var(--radius-lg)</code> = 10px</td>
++            <td>Outer wrappers only</td>
++          </tr>
++          <tr>
++            <td>Background</td>
++            <td><code>var(--surface)</code> / <code>var(--surface-elevated)</code></td>
++            <td>Active = surface, collapsed = surface-elevated</td>
++          </tr>
++          <tr>
++            <td>Text colors</td>
++            <td><code>--text</code>, <code>--text-2</code>, <code>--text-3</code></td>
++            <td>Three levels only. Never raw hex.</td>
++          </tr>
++          <tr>
++            <td>Shadow</td>
++            <td><code>--shadow-subtle</code> / <code>--shadow-card</code></td>
++            <td>Hover = subtle, active = card</td>
++          </tr>
++          <tr>
++            <td>Transition</td>
++            <td><code>0.2s</code> hover / <code>0.3–0.4s</code> expand</td>
++            <td>Nothing slower than 0.5s, nothing instant</td>
++          </tr>
++          <tr>
++            <td>Axis accent</td>
++            <td>Border stripe only (left or top)</td>
++            <td>Never background fill</td>
++          </tr>
++        </tbody>
++      </table>
+     </div>
+ 
+     <hr/>
+@@ -767,3 +1042,50 @@ Examine: What is the character discovering about themselves?</code></pre>
+     color: var(--text);
+   }
+ </style>
++
++<script>
++  // ===== TABS =====
++  document.querySelectorAll('.tabs').forEach(tabGroup => {
++    const tabs = tabGroup.querySelectorAll('[role="tab"]');
++    const panels = tabGroup.querySelectorAll('[role="tabpanel"]');
++
++    tabs.forEach(tab => {
++      tab.addEventListener('click', () => {
++        tabs.forEach(t => {
++          t.setAttribute('aria-selected', 'false');
++          t.setAttribute('tabindex', '-1');
++        });
++        panels.forEach(p => p.hidden = true);
++
++        tab.setAttribute('aria-selected', 'true');
++        tab.removeAttribute('tabindex');
++        const panel = document.getElementById(tab.getAttribute('aria-controls'));
++        if (panel) panel.hidden = false;
++      });
++
++      tab.addEventListener('keydown', (e) => {
++        const tabsArray = Array.from(tabs);
++        const index = tabsArray.indexOf(tab);
++        let newIndex;
++
++        if (e.key === 'ArrowRight') newIndex = (index + 1) % tabsArray.length;
++        else if (e.key === 'ArrowLeft') newIndex = (index - 1 + tabsArray.length) % tabsArray.length;
++        else return;
++
++        e.preventDefault();
++        tabsArray[newIndex].click();
++        tabsArray[newIndex].focus();
++      });
++    });
++  });
++
++  // ===== ACCORDION EXPAND/COLLAPSE ALL =====
++  document.querySelectorAll('.accordion-controls__btn').forEach(btn => {
++    btn.addEventListener('click', () => {
++      const group = btn.dataset.accordionGroup;
++      const action = btn.dataset.action;
++      const items = document.querySelectorAll(`[data-accordion-group="${group}"] details`);
++      items.forEach(d => d.open = action === 'expand');
++    });
++  });
++</script>
+diff --git a/src/styles/global.css b/src/styles/global.css
+index f4d49a0..750c404 100644
+--- a/src/styles/global.css
++++ b/src/styles/global.css
+@@ -79,12 +79,12 @@
+   --dim-0: rgba(20, 184, 166, 1.00);
+ 
+   /* POSITION INTENSITY SCALE (Horizontal Axis — amber at varying intensity) */
+-  --pos-12: rgba(245, 158, 11, 0.35);
+-  --pos-1:  rgba(245, 158, 11, 0.45);
++  --pos-12: rgba(245, 158, 11, 0.25);
++  --pos-1:  rgba(245, 158, 11, 0.40);
+   --pos-3:  rgba(245, 158, 11, 0.60);
+-  --pos-6:  rgba(245, 158, 11, 0.80);
+-  --pos-9:  rgba(245, 158, 11, 1.00);
+-  --pos-11: rgba(245, 158, 11, 0.45);
++  --pos-6:  rgba(245, 158, 11, 1.00);
++  --pos-9:  rgba(245, 158, 11, 0.60);
++  --pos-11: rgba(245, 158, 11, 0.35);
+ 
+   /* RADIUS */
+   --radius-sm: 3px;
+@@ -142,12 +142,12 @@
+   --dim-1: rgba(20, 184, 166, 0.77);
+   --dim-0: rgba(20, 184, 166, 0.90);
+ 
+-  --pos-12: rgba(245, 158, 11, 0.25);
++  --pos-12: rgba(245, 158, 11, 0.20);
+   --pos-1:  rgba(245, 158, 11, 0.35);
+   --pos-3:  rgba(245, 158, 11, 0.50);
+-  --pos-6:  rgba(245, 158, 11, 0.70);
+-  --pos-9:  rgba(245, 158, 11, 0.90);
+-  --pos-11: rgba(245, 158, 11, 0.35);
++  --pos-6:  rgba(245, 158, 11, 0.90);
++  --pos-9:  rgba(245, 158, 11, 0.50);
++  --pos-11: rgba(245, 158, 11, 0.30);
+ 
+   --shadow-subtle: 0 2px 8px rgba(0,0,0,0.2);
+   --shadow-card: 0 4px 16px rgba(0,0,0,0.3);
+@@ -575,6 +575,7 @@ h1 code, h2 code, h3 code, h4 code {
+ .page-hero--amber { border-left-color: var(--semantic-h); }
+ .page-hero--teal { border-left-color: var(--semantic-v); }
+ .page-hero--purple { border-left-color: var(--accent-purple); }
++.page-hero--neutral { border-left-color: #8B95A1; }
+ 
+ /* Gradient hero — ties to axis system instead of arbitrary purple */
+ .page-hero--gradient {
+@@ -582,6 +583,18 @@ h1 code, h2 code, h3 code, h4 code {
+   background: var(--surface);
+   background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
+                      radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
++  overflow: hidden;
++  position: relative;
++}
++.page-hero--gradient::before {
++  content: "";
++  position: absolute;
++  left: 0;
++  top: 0;
++  bottom: 0;
++  width: 6px;
++  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
++  z-index: 1;
+ }
+ 
+ 
+@@ -611,6 +624,7 @@ h1 code, h2 code, h3 code, h4 code {
+ .page-hero .eyebrow--amber { color: var(--semantic-h); }
+ .page-hero .eyebrow--teal { color: var(--semantic-v); }
+ .page-hero .eyebrow--purple { color: var(--accent-purple); }
++.page-hero .eyebrow--neutral { color: var(--text-2); }
+ 
+ /* ===== BREADCRUMB ===== */
+ .breadcrumb {
+@@ -855,12 +869,10 @@ table {
+   box-shadow: var(--shadow-subtle);
+ }
+ 
+-/* Make tables inside compass-content scrollable automatically */
++/* Make tables inside compass-content scrollable on mobile */
+ .compass-content table {
+-  display: block;
+   overflow-x: auto;
+   -webkit-overflow-scrolling: touch;
+-  white-space: nowrap;
+ }
+ 
+ thead {
+@@ -902,7 +914,7 @@ tbody tr:nth-child(even) {
+ .checklist div {
+   padding: 10px 0;
+   border-bottom: 1px solid var(--border);
+-  color: var(--accent-green);
++  color: var(--text);
+   font-weight: 500;
+ }
+ 
+@@ -2280,6 +2292,147 @@ details[open] .accordion-toggle__chevron {
+   --pagefind-ui-font: var(--font-sans);
+ }
+ 
++/* ===== TABS ===== */
++.tabs {
++  margin: 1rem 0 1.75rem;
++  border: 1px solid var(--border);
++  border-radius: var(--radius-lg);
++  overflow: hidden;
++}
++
++.tabs__strip {
++  display: flex;
++  background: var(--surface-elevated);
++  border-bottom: 1px solid var(--border);
++  overflow-x: auto;
++}
++
++.tabs__tab {
++  flex: 1;
++  padding: 0.75rem 1rem;
++  font-family: var(--font-sans);
++  font-size: 0.8125rem;
++  font-weight: 600;
++  color: var(--text-2);
++  background: transparent;
++  border: none;
++  border-bottom: 2px solid transparent;
++  cursor: pointer;
++  white-space: nowrap;
++  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
++}
++
++.tabs__tab:hover {
++  color: var(--text);
++  background: var(--surface);
++}
++
++.tabs__tab[aria-selected="true"] {
++  color: var(--text);
++  background: var(--surface);
++}
++
++/* Accent variants */
++.tabs--teal .tabs__tab[aria-selected="true"] { border-bottom-color: var(--semantic-v); }
++.tabs--amber .tabs__tab[aria-selected="true"] { border-bottom-color: var(--semantic-h); }
++.tabs--blue .tabs__tab[aria-selected="true"] { border-bottom-color: var(--info-blue); }
++.tabs--gradient .tabs__tab[aria-selected="true"] {
++  border-image-source: linear-gradient(90deg, var(--semantic-h), var(--semantic-v));
++  border-image-slice: 1;
++}
++
++.tabs__panel {
++  padding: var(--space-sm);
++  background: var(--surface);
++}
++
++.tabs__panel p {
++  margin-bottom: 0;
++}
++
++/* No-JS fallback: all panels visible stacked */
++.no-js .tabs__panel { display: block !important; }
++.no-js .tabs__panel[hidden] { display: block !important; }
++
++/* ===== DEPTH SCALE DEMO (Style Guide) ===== */
++.sg-depth-strip {
++  display: flex;
++  gap: 2px;
++  border-radius: var(--radius-md);
++  overflow: hidden;
++  margin: 1rem 0;
++}
++
++.sg-depth-swatch {
++  flex: 1;
++  height: 48px;
++  display: flex;
++  align-items: center;
++  justify-content: center;
++  font-size: 0.7rem;
++  font-weight: 700;
++  letter-spacing: 0.04em;
++  color: white;
++  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
++}
++
++/* ===== ACCORDION CONTROLS ===== */
++.accordion-controls {
++  display: flex;
++  gap: var(--space-xs);
++  margin-bottom: var(--space-sm);
++}
++
++.accordion-controls__btn {
++  background: var(--surface);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-sm);
++  padding: 0.375rem 0.75rem;
++  font-family: var(--font-sans);
++  font-size: 0.75rem;
++  font-weight: 500;
++  color: var(--text-2);
++  cursor: pointer;
++  transition: all 0.2s ease;
++}
++
++.accordion-controls__btn:hover {
++  background: var(--surface-elevated);
++  border-color: var(--border-accent);
++  color: var(--text);
++}
++
++/* ===== CHROME PROOF TABLE ===== */
++.chrome-proof-table {
++  width: 100%;
++  border-collapse: collapse;
++  margin: 1rem 0 1.75rem;
++  font-size: 0.85rem;
++}
++
++.chrome-proof-table th {
++  text-align: left;
++  padding: 0.625rem 0.75rem;
++  font-weight: 600;
++  font-size: 0.8rem;
++  letter-spacing: 0.04em;
++  text-transform: uppercase;
++  color: var(--table-header-text);
++  background: var(--table-header-bg);
++  border-bottom: 2px solid var(--table-border);
++}
++
++.chrome-proof-table td {
++  padding: 0.5rem 0.75rem;
++  border-bottom: 1px solid var(--table-border);
++  vertical-align: top;
++}
++
++.chrome-proof-table tbody tr:nth-child(even) {
++  background: var(--table-row-alt);
++}
++
++
+ /* ===== RESPONSIVE ===== */
+ @media (max-width: 768px) {
+   .site-header__inner {
