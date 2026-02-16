@@ -1,19 +1,19 @@
 ---
-/**
- * Tabs.astro — Mutually exclusive tab panels.
- *
- * Props:
- *   id     – Required. Base ID for ARIA relationships and deep linking.
- *   accent – 'teal' | 'amber' | 'blue' | 'gradient' (default: 'teal')
- *   labels – string[] of tab labels (e.g. ['Overview', 'Frameworks', 'Questions'])
- *
- * Slots:
- *   tab-0, tab-1, tab-2, ... — Content for each tab panel
- *
- * Deep linking:
- *   #id--label (slugified) activates that tab on load.
- *   e.g. #d5-tabs--frameworks
- */
+<!
+  Tabs.astro — Mutually exclusive tab panels.
+ 
+  Props:
+    id     – Required. Base ID for ARIA relationships and deep linking.
+    accent – 'teal' | 'amber' | 'blue' | 'gradient' (default: 'teal')
+    labels – string[] of tab labels (e.g. ['Overview', 'Frameworks', 'Questions'])
+ 
+  Slots:
+    tab-0, tab-1, tab-2, ... — Content for each tab panel
+ 
+  Deep linking:
+    #id--label (slugified) activates that tab on load.
+    e.g. #d5-tabs--frameworks
+ >
 
 interface Props {
   id: string;

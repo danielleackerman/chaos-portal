@@ -1,4 +1,4 @@
-cat > src/components/ui/Tabs.astro <<'EOF'
+
 ---
 /**
  * Tabs.astro — Mutually exclusive tab panels.
@@ -15,7 +15,7 @@ cat > src/components/ui/Tabs.astro <<'EOF'
  * Deep linking:
  *   #id--label (slugified) activates that tab on load.
  *   e.g. #d5-tabs--framework-references
- */
+ **/
 interface Props {
   id: string;
   accent?: 'teal' | 'amber' | 'blue' | 'gradient';
@@ -174,4 +174,3 @@ function slugify(str: string): string {
 
   initTabs();
 </script>
-EOF
