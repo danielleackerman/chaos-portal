@@ -1,6 +1,7 @@
 ---
 import PortalLayout from '../../layouts/PortalLayout.astro';
 import ExpandingCards from '../../components/ui/ExpandingCards.astro';
+import FlipCard from '../../components/ui/FlipCard.astro';
 const base = import.meta.env.BASE_URL;
 
 
@@ -597,6 +598,107 @@ Examine: What is the character discovering about themselves?</code></pre>
       <p>Deck flows top to bottom with laying collapsed rails. All 6 clock positions from Origin (12:00) through Midpoint (6:00) peak back to Return (12:00).</p>
       <ExpandingCards items={positionCards} orientation="horizontal" defaultActive="pos-6" />
 
+ <!-- ===== FLIP CARD DEMO ===== -->
+      <h4 id="flip-cards">Flip Cards</h4>
+      <p>Two-sided cards that flip on click/tap. Used for summary→detail pairs: axis descriptions, worked examples, viewing protocols. Supports <code>horizontal</code> (rotateY — page turning sideways) and <code>vertical</code> (rotateX — page turning down) flip directions.</p>
+
+      <h5>Horizontal Flip — Teal (Vertical Axis content)</h5>
+      <div class="flip-card-strip" style="max-width: 700px;">
+        <FlipCard id="demo-flip-teal" accent="teal" flipDirection="horizontal">
+          <div slot="front">
+            <h4 style="margin:0 0 0.5rem;">Vertical Axis</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.875rem;">Story depth — 6 dimensions from surface to core</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0 0 0.5rem; font-weight:600;">Dimensions (surface → core):</p>
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2); line-height:1.6;">
+              D5 Expressive/Symbolic → D4 Structural → D3 Cognitive → D2 Psychological → D1 Archetypal → D0 Thematic Core
+            </p>
+          </div>
+        </FlipCard>
+      </div>
+
+      <h5>Horizontal Flip — Amber (Horizontal Axis content)</h5>
+      <div class="flip-card-strip" style="max-width: 700px;">
+        <FlipCard id="demo-flip-amber" accent="amber" flipDirection="horizontal">
+          <div slot="front">
+            <h4 style="margin:0 0 0.5rem;">Horizontal Axis</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.875rem;">Story timeline — clock positions from origin through crisis to return</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0 0 0.5rem; font-weight:600;">Clock Positions:</p>
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2); line-height:1.6;">
+              12:00 Origin → 1:00 Catalyst → 3:00 Threshold → 6:00 Midpoint → 9:00 Crisis → 12:00 Return
+            </p>
+          </div>
+        </FlipCard>
+      </div>
+
+      <h5>Vertical Flip — Blue (Navigation Protocol content)</h5>
+      <div class="flip-card-strip" style="max-width: 700px;">
+        <FlipCard id="demo-flip-blue" accent="blue" flipDirection="vertical">
+          <div slot="front">
+            <h4 style="margin:0 0 0.5rem;">Top-Down Analysis</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.875rem;">Start with what's visible, drill toward meaning</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2); line-height:1.6;">
+              <strong>Protocol:</strong> Observe surface (D5) → Identify structure (D4) → Analyze reasoning (D3) → Explore psychology (D2) → Find archetype (D1) → Discover core (D0)
+            </p>
+          </div>
+        </FlipCard>
+      </div>
+
+      <h5>Gradient Variant — FlipCard Strip (multiple cards in row)</h5>
+      <p>Multiple cards in a responsive grid. Used for viewing protocols on the Practical Application page.</p>
+      <div class="flip-card-strip">
+        <FlipCard id="demo-flip-first" accent="gradient" flipDirection="horizontal">
+          <div slot="front">
+            <h4 style="margin:0 0 0.25rem;">First Viewing</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.8125rem;">Intuitive response</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2);">Watch without interruption. Note only major reactions. Mark timestamps of significant moments. Let the film work on you.</p>
+          </div>
+        </FlipCard>
+        <FlipCard id="demo-flip-second" accent="gradient" flipDirection="horizontal">
+          <div slot="front">
+            <h4 style="margin:0 0 0.25rem;">Second Viewing</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.8125rem;">Analytical pass</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2);">Pause and log scenes. Document coordinates. Apply frameworks. Build structured notes.</p>
+          </div>
+        </FlipCard>
+        <FlipCard id="demo-flip-third" accent="gradient" flipDirection="horizontal">
+          <div slot="front">
+            <h4 style="margin:0 0 0.25rem;">Third+ Viewing</h4>
+            <p style="margin:0; color:var(--text-2); font-size:0.8125rem;">Targeted deep dive</p>
+          </div>
+          <div slot="back">
+            <p style="margin:0; font-size:0.8125rem; color:var(--text-2);">Focus on specific dimensions. Check mirror relationships. Verify patterns. Fill gaps in analysis.</p>
+          </div>
+        </FlipCard>
+      </div>
+
+      <div class="sg-type-details">
+        <strong>Component:</strong> <code>&lt;FlipCard id="..." accent="teal|amber|blue|gradient" flipDirection="horizontal|vertical"&gt;</code> &nbsp;·&nbsp;
+        <strong>Slots:</strong> <code>front</code>, <code>back</code> &nbsp;·&nbsp;
+        <strong>Interaction:</strong> Click/tap to flip &nbsp;·&nbsp;
+        <strong>Keyboard:</strong> Enter/Space toggles &nbsp;·&nbsp;
+        <strong>ARIA:</strong> <code>aria-expanded</code> toggles on wrapper &nbsp;·&nbsp;
+        <strong>Animation:</strong> <code>rotateY(180deg)</code> horizontal, <code>rotateX(180deg)</code> vertical, <code>0.4s ease</code> &nbsp;·&nbsp;
+        <strong>Deep-link:</strong> <code>#card-id</code> opens flipped on load &nbsp;·&nbsp;
+        <strong>No-JS:</strong> Both faces visible stacked &nbsp;·&nbsp;
+        <strong>Strip:</strong> <code>.flip-card-strip</code> wraps multiple cards in a responsive grid
+      </div>
+
+      <h5>flipDirection Spatial Metaphor</h5>
+      <p>
+        <strong>Horizontal (rotateY)</strong> — card turns like a page sideways. Use for horizontal-axis content, general summary→detail pairs.<br/>
+        <strong>Vertical (rotateX)</strong> — card turns like a page flipping down. Use for vertical-axis content, top→bottom conceptual movement, protocol steps.
+      </p>
+      <p>This matches the coordinate system metaphor: horizontal flip reinforces the horizontal axis spatial model; vertical flip reinforces the vertical axis spatial model.</p>
       <hr/>
 
       <!-- ===== TABS DEMO ===== -->

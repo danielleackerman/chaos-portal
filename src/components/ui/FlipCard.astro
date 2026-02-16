@@ -1,0 +1,247 @@
+---
+/**
+ * FlipCard.astro — Two-sided card with click/tap toggle.
+ *
+ * Props:
+ *   id         – Required. Used for deep-linking (#id opens flipped).
+ *   accent     – 'teal' | 'amber' | 'blue' | 'gradient' (default: 'teal')
+ *   flipDirection – 'horizontal' (rotateY) | 'vertical' (rotateX) (default: 'horizontal')
+ *
+ * Slots:
+ *   front – Content for the front face
+ *   back  – Content for the back face
+ *
+ * Chrome Invariants:
+ *   Border: 1px solid var(--border)
+ *   Radius: var(--radius-md) = 6px
+ *   Background: var(--surface) front, var(--surface-elevated) back
+ *   Shadow: var(--shadow-subtle) hover, var(--shadow-card) flipped
+ *   Transition: 0.4s ease
+ *   Accent: 3px top border stripe only
+ */
+
+interface Props {
+  id: string;
+  accent?: 'teal' | 'amber' | 'blue' | 'gradient';
+  flipDirection?: 'horizontal' | 'vertical';
+}
+
+const {
+  id,
+  accent = 'teal',
+  flipDirection = 'horizontal',
+} = Astro.props;
+---
+
+<div
+  class={`flip-card flip-card--${accent} flip-card--${flipDirection}`}
+  id={id}
+  data-flip-card
+  data-flip-direction={flipDirection}
+  role="button"
+  tabindex="0"
+  aria-expanded="false"
+  aria-label="Flip card — press Enter or Space to flip"
+>
+  <div class="flip-card__inner">
+    <div class="flip-card__face flip-card__front">
+      <slot name="front" />
+      <span class="flip-card__hint" aria-hidden="true">↻ flip</span>
+    </div>
+    <div class="flip-card__face flip-card__back">
+      <slot name="back" />
+      <span class="flip-card__hint" aria-hidden="true">↻ back</span>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* ===== FLIP CARD CORE ===== */
+  .flip-card {
+    position: relative;
+    perspective: 1000px;
+    min-height: 180px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .flip-card__inner {
+    position: relative;
+    width: 100%;
+    min-height: inherit;
+    transition: transform 0.4s ease;
+    transform-style: preserve-3d;
+  }
+
+  /* Horizontal flip = rotateY */
+  .flip-card--horizontal[aria-expanded="true"] .flip-card__inner {
+    transform: rotateY(180deg);
+  }
+
+  /* Vertical flip = rotateX */
+  .flip-card--vertical[aria-expanded="true"] .flip-card__inner {
+    transform: rotateX(180deg);
+  }
+
+  /* ===== FACES ===== */
+  .flip-card__front {
+    position: relative;  /* front sets the height */
+  }
+
+  .flip-card__back {
+    position: absolute;
+    inset: 0;
+  }
+
+  .flip-card__face {
+    width: 100%;
+    min-height: inherit;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: box-shadow 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  /* Accent stripe — top border */
+  .flip-card__face::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  /* Front face */
+  .flip-card__front {
+    background: var(--surface);
+    z-index: 2;
+  }
+
+  /* Back face — horizontal rotates on Y, vertical on X */
+  .flip-card__back {
+    background: var(--surface-elevated);
+    z-index: 1;
+    overflow-y: auto;
+  }
+  .flip-card--horizontal .flip-card__back {
+    transform: rotateY(180deg);
+  }
+  .flip-card--vertical .flip-card__back {
+    transform: rotateX(180deg);
+  }
+
+  /* ===== ACCENT COLORS ===== */
+  .flip-card--teal .flip-card__face::before {
+    background: var(--semantic-v);
+  }
+  .flip-card--amber .flip-card__face::before {
+    background: var(--semantic-h);
+  }
+  .flip-card--blue .flip-card__face::before {
+    background: var(--info-blue, #3B82F6);
+  }
+  .flip-card--gradient .flip-card__face::before {
+    background: linear-gradient(90deg, var(--semantic-h), var(--semantic-v));
+  }
+
+  /* ===== HOVER + ACTIVE STATES ===== */
+  .flip-card:hover .flip-card__front {
+    box-shadow: var(--shadow-subtle);
+  }
+  .flip-card[aria-expanded="true"] .flip-card__back {
+    box-shadow: var(--shadow-card);
+  }
+
+  /* ===== FOCUS ===== */
+  .flip-card:focus-visible {
+    outline: 2px solid var(--semantic-v);
+    outline-offset: 2px;
+    border-radius: var(--radius-md);
+  }
+
+  /* ===== HINT ICON ===== */
+  .flip-card__hint {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.75rem;
+    font-size: 0.7rem;
+    color: var(--text-3);
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+  }
+  .flip-card:hover .flip-card__hint {
+    opacity: 1;
+  }
+
+  /* ===== NO-JS FALLBACK ===== */
+  :global(.no-js) .flip-card__inner {
+    transform: none !important;
+  }
+  :global(.no-js) .flip-card__back {
+    position: relative;
+    transform: none;
+    margin-top: var(--space-xs);
+  }
+
+  /* ===== FLIP CARD STRIP (grid of multiple cards) ===== */
+  :global(.flip-card-strip) {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: var(--space-sm);
+  }
+</style>
+
+<script>
+  function initFlipCards() {
+    document.querySelectorAll('[data-flip-card]').forEach((card) => {
+      if (card.hasAttribute('data-flip-bound')) return;
+
+      // Click/tap toggle
+      card.addEventListener('click', () => {
+        const isFlipped = card.getAttribute('aria-expanded') === 'true';
+        card.setAttribute('aria-expanded', isFlipped ? 'false' : 'true');
+      });
+
+      // Keyboard: Enter/Space
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+
+      card.setAttribute('data-flip-bound', 'true');
+    });
+
+    // Deep linking: if hash matches a flip card ID, open it
+    handleFlipCardHash();
+  }
+
+  function handleFlipCardHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+
+    const card = document.querySelector(`[data-flip-card]#${CSS.escape(hash)}`);
+    if (card) {
+      card.setAttribute('aria-expanded', 'true');
+      requestAnimationFrame(() => {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
+    }
+  }
+
+  // Initialize on page load + Astro transitions
+  document.addEventListener('astro:page-load', initFlipCards);
+  document.addEventListener('astro:after-swap', initFlipCards);
+  window.addEventListener('hashchange', handleFlipCardHash);
+  initFlipCards();
+</script>

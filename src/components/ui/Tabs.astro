@@ -1,0 +1,176 @@
+
+---
+/**
+ * Tabs.astro — Mutually exclusive tab panels.
+ *
+ * Props:
+ *   id          – required
+ *   accent      – 'teal' | 'amber' | 'blue' | 'gradient' (default: 'teal')
+ *   labels      – string[] of tab labels
+ *   defaultIndex – 0-based index (default: 0)
+ *
+ * Slots:
+ *   tab-0, tab-1, tab-2, ... tab-7
+ *
+ * Deep linking:
+ *   #id--label (slugified) activates that tab on load.
+ *   e.g. #d5-tabs--framework-references
+ **/
+interface Props {
+  id: string;
+  accent?: 'teal' | 'amber' | 'blue' | 'gradient';
+  labels: string[];
+  defaultIndex?: number;
+}
+
+const {
+  id,
+  accent = 'teal',
+  labels = [],
+  defaultIndex = 0,
+} = Astro.props;
+
+const maxSupported = 8;
+const actualCount = Math.min(labels.length, maxSupported);
+
+function slugify(str: string): string {
+  return str.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+---
+
+<div class={`tabs tabs--${accent}`} id={id} data-tabs>
+  <div class="tabs__strip" role="tablist" aria-label={`${id} tabs`}>
+    {labels.slice(0, maxSupported).map((label, i) => (
+      <button
+        class="tabs__tab"
+        role="tab"
+        aria-selected={i === defaultIndex ? 'true' : 'false'}
+        aria-controls={`${id}-panel-${i}`}
+        id={`${id}-btn-${i}`}
+        data-tab-slug={slugify(label)}
+        tabindex={i === defaultIndex ? '0' : '-1'}
+        type="button"
+      >
+        {label}
+      </button>
+    ))}
+  </div>
+
+  {actualCount >= 1 && Astro.slots.has('tab-0') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-0`} aria-labelledby={`${id}-btn-0`} aria-label={labels[0]} hidden={defaultIndex !== 0}>
+      <slot name="tab-0" />
+    </div>
+  )}
+
+  {actualCount >= 2 && Astro.slots.has('tab-1') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-1`} aria-labelledby={`${id}-btn-1`} aria-label={labels[1]} hidden={defaultIndex !== 1}>
+      <slot name="tab-1" />
+    </div>
+  )}
+
+  {actualCount >= 3 && Astro.slots.has('tab-2') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-2`} aria-labelledby={`${id}-btn-2`} aria-label={labels[2]} hidden={defaultIndex !== 2}>
+      <slot name="tab-2" />
+    </div>
+  )}
+
+  {actualCount >= 4 && Astro.slots.has('tab-3') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-3`} aria-labelledby={`${id}-btn-3`} aria-label={labels[3]} hidden={defaultIndex !== 3}>
+      <slot name="tab-3" />
+    </div>
+  )}
+
+  {actualCount >= 5 && Astro.slots.has('tab-4') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-4`} aria-labelledby={`${id}-btn-4`} aria-label={labels[4]} hidden={defaultIndex !== 4}>
+      <slot name="tab-4" />
+    </div>
+  )}
+
+  {actualCount >= 6 && Astro.slots.has('tab-5') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-5`} aria-labelledby={`${id}-btn-5`} aria-label={labels[5]} hidden={defaultIndex !== 5}>
+      <slot name="tab-5" />
+    </div>
+  )}
+
+  {actualCount >= 7 && Astro.slots.has('tab-6') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-6`} aria-labelledby={`${id}-btn-6`} aria-label={labels[6]} hidden={defaultIndex !== 6}>
+      <slot name="tab-6" />
+    </div>
+  )}
+
+  {actualCount >= 8 && Astro.slots.has('tab-7') && (
+    <div class="tabs__panel" role="tabpanel" id={`${id}-panel-7`} aria-labelledby={`${id}-btn-7`} aria-label={labels[7]} hidden={defaultIndex !== 7}>
+      <slot name="tab-7" />
+    </div>
+  )}
+</div>
+
+<script>
+  function initTabs() {
+    document.querySelectorAll('[data-tabs]').forEach((tabGroup) => {
+      if (tabGroup.hasAttribute('data-tabs-bound')) return;
+
+      const tabs = tabGroup.querySelectorAll('[role="tab"]');
+      const panels = tabGroup.querySelectorAll('[role="tabpanel"]');
+
+      function activateTab(tab) {
+        tabs.forEach((t) => {
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+        });
+        panels.forEach((p) => { p.hidden = true; });
+
+        tab.setAttribute('aria-selected', 'true');
+        tab.removeAttribute('tabindex');
+
+        const controls = tab.getAttribute('aria-controls') || '';
+        const panel = document.getElementById(controls);
+        if (panel) panel.hidden = false;
+      }
+
+      tabs.forEach((tab) => {
+        tab.addEventListener('click', () => activateTab(tab));
+
+        tab.addEventListener('keydown', (e) => {
+          if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
+          e.preventDefault();
+
+          const arr = Array.from(tabs);
+          const idx = arr.indexOf(tab);
+          const delta = e.key === 'ArrowRight' ? 1 : -1;
+          const nextIdx = (idx + delta + arr.length) % arr.length;
+
+          activateTab(arr[nextIdx]);
+          arr[nextIdx].focus();
+        });
+      });
+
+      tabGroup.setAttribute('data-tabs-bound', 'true');
+    });
+
+    handleTabHash();
+  }
+
+  function handleTabHash() {
+    const hash = location.hash.slice(1);
+    if (!hash || !hash.includes('--')) return;
+
+    const [groupId, tabSlug] = hash.split('--');
+    const group = document.getElementById(groupId);
+    if (!group) return;
+
+    const target = group.querySelector(`[data-tab-slug="${tabSlug}"]`);
+    if (target) {
+      target.click();
+      requestAnimationFrame(() => {
+        group.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
+
+  document.addEventListener('astro:page-load', initTabs);
+  document.addEventListener('astro:after-swap', initTabs);
+  window.addEventListener('hashchange', handleTabHash);
+
+  initTabs();
+</script>
