@@ -1,12 +1,14 @@
 .coord-picker {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-sm);
-  margin-bottom: var(--space-md);
-  border-left: 3px solid;
-  border-image-source: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
-  border-image-slice: 1;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+
+  /* explicitly kill the gradient border system */
+  border-left: 0;
+  border-image: none;
 }
 
 .coord-picker__header {
@@ -22,11 +24,8 @@
 }
 
 .coord-picker__title {
-  font-family: var(--font-serif, 'DM Serif Display', Georgia, serif);
-  font-size: 0.9375rem;
-  font-weight: 400;
-  color: var(--text);
-  letter-spacing: 0.01em;
+  margin: 0;          /* kill default h5 margins */
+  color: var(--text); /* keep your color */
 }
 
 .coord-picker__controls {
@@ -162,3 +161,4 @@
     align-items: stretch;
   }
 }
+

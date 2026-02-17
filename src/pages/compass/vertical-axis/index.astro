@@ -23,8 +23,16 @@ const base = import.meta.env.BASE_URL;
 
   <div class="compass-content">
 
-    <!-- ===== COORDINATE PICKER ===== -->
-    <CoordinatePicker />
+   <!-- ===== COORDINATE PICKER ===== -->
+<div class="dimension-card dimension-card--coord-picker">
+  <div class="coord-picker-card__header">
+    <span class="coord-picker__icon" aria-hidden="true">⬡</span>
+    <h5 class="coord-picker-card__title">Coordinate Picker</h5>
+  </div>
+  <p class="dimension-position">Choose position + dimension</p>
+  <CoordinatePicker />
+</div>
+
 
     <!-- ===== INTRODUCTION ===== -->
     <div class="section">

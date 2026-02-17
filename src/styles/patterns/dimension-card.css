@@ -243,3 +243,31 @@
   box-shadow: 0 0 0 2px var(--semantic-v), var(--shadow-deep);
 }
 
+/* Coordinate Picker card wrapper */
+.dimension-card--coord-picker{
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.dimension-card--coord-picker .dimension-position{
+  margin: 0;
+}
+
+/* Wrapper header layout */
+.coord-picker-card__header{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.coord-picker-card__title{
+  margin: 0;
+}
+
+/* Hide the component's internal header ONLY when inside this card */
+.dimension-card--coord-picker .coord-picker .coord-picker__header{
+  display: none;
+}
+
