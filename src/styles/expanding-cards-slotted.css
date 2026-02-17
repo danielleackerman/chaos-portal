@@ -1,38 +1,135 @@
+
+
 /* ============================================================
-   CSS ADDITIONS — ExpandingCards Slotted Mode
-   Merge into src/styles/global.css after existing expanding-cards rules.
+   CSS — ExpandingCards Slotted Mode (DESKTOP DECK)
+   Loaded by pages that use ExpandingCards with cards= prop
+   (rich slot content like Tabs inside each card).
+   All selectors gated under .expanding-cards--slotted.
    ============================================================ */
+/* ===== DESKTOP POLISH: labels + fills + timing ===== */
 
+/* Give each depth an accent fill even if the page didn't pass accentToken */
+.expanding-cards--slotted .expanding-cards__card[data-depth="5"] { --accent-fill: var(--dim-5); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="4"] { --accent-fill: var(--dim-4); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="3"] { --accent-fill: var(--dim-3); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="2"] { --accent-fill: var(--dim-2); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="1"] { --accent-fill: var(--dim-1); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="0"] { --accent-fill: var(--dim-0); }
 
-/* ===== SLOTTED MODE: rich content (Tabs, etc.) ===== */
-/* Overrides the 220px max-height for cards with slot content */
-
-.expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
-  max-height: none;
-  overflow-y: auto;
+/* Slow the animation a bit (deck feels “snappier” than it should) */
+.expanding-cards--slotted .expanding-cards__card {
+  transition-property: flex-basis, box-shadow, border-color, background-color, background;
+  transition-duration: 340ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Collapsed cards in slotted mode: fully hide content */
-.expanding-cards--slotted .expanding-cards__card:not([aria-expanded='true']) .expanding-cards__content {
+.expanding-cards--slotted .expanding-cards__content {
+  transition-property: max-height, opacity, transform;
+  transition-duration: 280ms;
+  transition-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+  height: 100%;
+  width: 100%;
+}
+
+/* ===== DESKTOP DECK LAYOUT: side-by-side (do NOT stack) ===== */
+/* Base --vertical should already be row; we keep it explicit for safety. */
+.expanding-cards--slotted.expanding-cards--vertical {
+  flex-direction: row;
+
+  /* thinner collapsed rails */
+  --expanding-rail: 44px; /* try 40px if you want tighter */
+}
+
+/* ===== CARD: avoid global “overflow: visible” ===== */
+/* Keep deck tidy; let the CONTENT scroll, not the whole card. */
+/* (If you truly need overflow visible for something specific, we can target it later.) */
+
+
+/* ===== EXPANDED CARD: take remaining width, show content ===== */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
+  flex: 1 1 auto;
+}
+/* Expanded card stacks header/tabs/content vertically */
+.expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='true'] {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+
+/* Make sure expanded content is actually visible + not height-capped */
+.expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+  max-height: none;
+  min-height: 0;
+  position: relative;
+  opacity: 1;
+  overflow: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* ===== COLLAPSED CARDS: thin VERTICAL rails (desktop deck) ===== */
+/* IMPORTANT: only collapse when aria-expanded is explicitly false
+   (avoid :not([aria-expanded='true']) because it can match missing attrs). */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] {
+  flex: 0 0 var(--expanding-rail, 44px);
+  padding: 0;
+
+  /* teal fill + subtle gradient */
+  background: var(--accent-fill, transparent);
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-fill) 35%, white),
+    color-mix(in srgb, var(--accent-fill) 70%, white)
+  );
+
+  border-radius: 10px;
+}
+
+
+/* Hide content only for explicitly-collapsed cards */
+.expanding-cards--slotted .expanding-cards__card[aria-expanded='false'] .expanding-cards__content {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
   padding: 0;
   pointer-events: none;
 }
+/* Vertical labels like Style Guide */
+/* Collapsed rails: label fills the rail and is centered */
+.expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-/* Expanded card in slotted vertical mode takes available space */
-.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
-  flex: 1 1 auto;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
 }
 
-/* Collapsed cards shrink to rail height */
-.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card:not([aria-expanded='true']) {
-  flex: 0 0 56px;
+/* Expanded card: label should NOT fill the whole card */
+.expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='true'] .expanding-cards__label {
+  height: auto;
+  width: auto;
+  display: block;
+
+  writing-mode: horizontal-tb;
+  text-orientation: initial;
+
+  /* optional: make it a small header row */
+  padding: 14px 18px 8px;
 }
+
+
 
 /* ===== DIMENSION DEPTH SCALE ACCENTS ===== */
-/* Override: when slotted, use teal accent from depth scale on expanded card border */
 .expanding-cards--slotted .expanding-cards__card[data-depth="5"][aria-expanded='true'] {
   border-left-color: var(--dim-5);
 }
@@ -52,19 +149,92 @@
   border-left-color: var(--dim-0);
 }
 
+
 /* ===== TABS INSIDE EXPANDING CARDS ===== */
-/* Give tabs panels enough breathing room inside the card */
 .expanding-cards--slotted .tabs__panel {
   padding: var(--space-sm) 0;
 }
 
-/* Ensure tab strip doesn't get clipped */
+/* Tabs bar stays pinned while the panel scrolls */
 .expanding-cards--slotted .tabs__strip {
-  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #fff;
+
+  /* keep one row on desktop */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
 }
 
+/* Prevent tab labels wrapping */
+.expanding-cards--slotted .tabs__tab,
+.expanding-cards--slotted .tabs__trigger {
+  white-space: nowrap;
+}
+
+
+/* Reduce box-in-box look for Tabs inside cards */
+.expanding-cards--slotted .tabs {
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+}
+
+.expanding-cards--slotted .tabs__strip {
+  background: transparent;
+}
+
+.expanding-cards--slotted .tabs__panel {
+  border: 0;
+  background: transparent;
+  padding: 16px 0 0;
+}
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__label {
+  width: 100%;
+  height: 100%;
+  color: rgba(0,0,0,0.55);
+}
+
+/* Flatten Tabs styling inside cards */
+.expanding-cards--slotted .tabs,
+.expanding-cards--slotted .tabs__panel,
+.expanding-cards--slotted .tabs__strip {
+  background: transparent;
+  box-shadow: none;
+  border: 0;
+}
+/* Sticky Tabs bar INSIDE the expanded panel */
+.expanding-cards--slotted .tabs__strip {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+
+  /* keeps text readable as content scrolls under it */
+  background: var(--surface-0, #fff);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+
+  /* counteract the content padding so the sticky bar spans full width */
+  margin: 0 -18px;
+  padding: 10px 18px;
+
+  /* keep it one row */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+}
+
+/* Prevent tab labels breaking/wrapping */
+.expanding-cards--slotted .tabs__tab,
+.expanding-cards--slotted .tabs__trigger {
+  white-space: nowrap;
+}
+
+
 /* ===== COORDINATE PICKER → EXPANDING CARDS INTEGRATION ===== */
-/* Highlight/dim now targets expanding cards, not accordion items */
 .expanding-cards__card.dimension-highlighted {
   position: relative;
   z-index: 1;
@@ -78,4 +248,31 @@
 
 .expanding-cards__card.dimension-dimmed:hover {
   opacity: 0.7;
+}
+
+/* ===== DECK SIZING: stop the “mile long page” and make panel scroll ===== */
+.expanding-cards--slotted.expanding-cards--vertical {
+  align-items: stretch;
+
+  /* choose a stable desktop height for the deck */
+  height: min(72vh, 760px);
+  min-height: 520px;
+}
+
+/* Make each card a column so the label sits above (or alongside) scrollable content */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;  /* prevents weird overflow in flex rows */
+}
+
+/* Single-scroll mode: page scroll only (no internal panel scrolling) */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__content {
+  flex: 0 0 auto;
+  min-height: auto;
+  overflow: visible;
+}
+
+  /* optional: makes the inside feel less cramped */
+  padding: 16px 18px;
 }
