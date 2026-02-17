@@ -90,28 +90,19 @@ const dimensionCards = [
       defaultActive="d5-expressive"
     >
 
-      <!-- D5 — SURFACE / EXPRESSIVE -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D5 — SURFACE / EXPRESSIVE               -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d5-expressive">
-        <Tabs id="d5-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">SURFACE DIMENSION 5</span>
+          <h3 class="dimension-title">Expressive / Symbolic</h3>
+          <p class="dimension-position">What you directly see and hear</p>
+        </div>
+
+        <Tabs id="d5-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">SURFACE DIMENSION 5</span>
-              <h3 class="dimension-title">Expressive / Symbolic</h3>
-              <p class="dimension-position">What you directly see and hear</p>
-              <p><strong>What This Dimension Examines:</strong> Observable phenomena — what literally appears, is said, shown, heard. The concrete surface of the story.</p>
-            </div>
-          </div>
-          <div slot="tab-1">
-            <h4>Framework References</h4>
-            <ul>
-              <li>Semiotics (Barthes, Peirce)</li>
-              <li>Film craft analysis (cinematography, editing, sound)</li>
-              <li>Visual symbolism catalogs</li>
-              <li>Trope databases (TVTropes, etc.)</li>
-              <li>Genre surface conventions</li>
-            </ul>
-          </div>
-          <div slot="tab-2">
+            <p><strong>What This Dimension Examines:</strong> Observable phenomena — what literally appears, is said, shown, heard. The concrete surface of the story.</p>
             <h4>Contents</h4>
             <ul>
               <li>Visual composition (framing, color, lighting, mise-en-scène)</li>
@@ -124,7 +115,17 @@ const dimensionCards = [
               <li>Cinematography choices</li>
             </ul>
           </div>
-          <div slot="tab-3">
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>Semiotics (Barthes, Peirce)</li>
+              <li>Film craft analysis (cinematography, editing, sound)</li>
+              <li>Visual symbolism catalogs</li>
+              <li>Trope databases (TVTropes, etc.)</li>
+              <li>Genre surface conventions</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What literally appears on screen?</li>
@@ -135,9 +136,7 @@ const dimensionCards = [
               <li>How is space used?</li>
               <li>What is the pacing/rhythm?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>First viewing/initial logging</li>
               <li>Tracking visual motifs</li>
@@ -146,16 +145,7 @@ const dimensionCards = [
               <li>Building observational foundation for deeper dimensions</li>
             </ul>
           </div>
-          <div slot="tab-5">
-            <h4>Cross-Dimension Connections</h4>
-            <ul>
-              <li>Surface manifestations always express deeper dimensions</li>
-              <li>Symbols at Surface Dimension 5 point toward Archetype Dimension 1</li>
-              <li>Visual repetition often maps to Structural Dimension 4 beats</li>
-              <li>Character behavior reveals Psychological Dimension 2 state</li>
-            </ul>
-          </div>
-          <div slot="tab-6">
+          <div slot="tab-3">
             <div class="callout-example">
               <h4>Notation Example</h4>
               <p><code>[00:23:15] / [3:00] / [Surface Dimension 5]</code></p>
@@ -165,20 +155,41 @@ const dimensionCards = [
               <p><strong>Color:</strong> Warm tones→cool blues</p>
               <p><strong>→</strong> Threshold crossing made visible</p>
             </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Surface manifestations always express deeper dimensions</li>
+              <li>Symbols at Surface Dimension 5 point toward Archetype Dimension 1</li>
+              <li>Visual repetition often maps to Structural Dimension 4 beats</li>
+              <li>Character behavior reveals Psychological Dimension 2 state</li>
+            </ul>
           </div>
         </Tabs>
       </div>
 
-      <!-- D4 — STRUCTURAL / FUNCTIONAL -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D4 — STRUCTURAL / FUNCTIONAL             -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d4-structural">
-        <Tabs id="d4-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">STRUCTURAL DIMENSION 4</span>
+          <h3 class="dimension-title">Structural / Functional Mechanics</h3>
+          <p class="dimension-position">Story architecture and narrative engineering</p>
+        </div>
+
+        <Tabs id="d4-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">STRUCTURAL DIMENSION 4</span>
-              <h3 class="dimension-title">Structural / Functional Mechanics</h3>
-              <p class="dimension-position">Story architecture and narrative engineering</p>
-              <p><strong>What This Dimension Examines:</strong> How the narrative machine functions — the engineering behind story movement, beat structure, character function assignments, and plot geometry.</p>
-            </div>
+            <p><strong>What This Dimension Examines:</strong> How the narrative machine functions — the engineering behind story movement, beat structure, character function assignments, and plot geometry.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Act structure and turning points</li>
+              <li>Beat sequences and scene functions</li>
+              <li>Character function assignments (protagonist, antagonist, contagonist, etc.)</li>
+              <li>Plot geometry and mirroring patterns</li>
+              <li>Pacing architecture</li>
+              <li>Plant/payoff chains</li>
+              <li>Stakes escalation mechanics</li>
+              <li>Genre beat compliance/subversion</li>
+            </ul>
           </div>
           <div slot="tab-1">
             <h4>Framework References</h4>
@@ -194,19 +205,6 @@ const dimensionCards = [
             </ul>
           </div>
           <div slot="tab-2">
-            <h4>Contents</h4>
-            <ul>
-              <li>Act structure and turning points</li>
-              <li>Beat sequences and scene functions</li>
-              <li>Character function assignments (protagonist, antagonist, contagonist, etc.)</li>
-              <li>Plot geometry and mirroring patterns</li>
-              <li>Pacing architecture</li>
-              <li>Plant/payoff chains</li>
-              <li>Stakes escalation mechanics</li>
-              <li>Genre beat compliance/subversion</li>
-            </ul>
-          </div>
-          <div slot="tab-3">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What structural beat is this?</li>
@@ -217,9 +215,7 @@ const dimensionCards = [
               <li>How do the stakes change?</li>
               <li>What genre expectations are being met or subverted?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>Mapping story architecture</li>
               <li>Analyzing pacing and rhythm</li>
@@ -228,15 +224,7 @@ const dimensionCards = [
               <li>Comparing frameworks (how Hero's Journey maps to Save the Cat)</li>
             </ul>
           </div>
-          <div slot="tab-5">
-            <h4>Cross-Dimension Connections</h4>
-            <ul>
-              <li>Structural beats trigger psychological shifts (Psychological Dimension 2)</li>
-              <li>Mechanical functions express thematic arguments (Core Dimension 0)</li>
-              <li>Character roles relate to archetypal patterns (Archetype Dimension 1)</li>
-            </ul>
-          </div>
-          <div slot="tab-6">
+          <div slot="tab-3">
             <div class="callout-example">
               <h4>Notation Example</h4>
               <p><code>[00:45:00] / [6:00] / [Structural Dimension 4]</code></p>
@@ -250,20 +238,42 @@ const dimensionCards = [
               <p><strong>→</strong> Harmon: FIND step</p>
               <p><strong>→</strong> Dramatica: IC pressure peaks</p>
             </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Structural beats trigger psychological shifts (Psychological Dimension 2)</li>
+              <li>Mechanical functions express thematic arguments (Core Dimension 0)</li>
+              <li>Character roles relate to archetypal patterns (Archetype Dimension 1)</li>
+            </ul>
           </div>
         </Tabs>
       </div>
 
-      <!-- D3 — COGNITIVE / LOGICAL -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D3 — COGNITIVE / LOGICAL                 -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d3-cognitive">
-        <Tabs id="d3-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">COGNITIVE DIMENSION 3</span>
+          <h3 class="dimension-title">Cognitive / Logical / Rational</h3>
+          <p class="dimension-position">Thought patterns and belief systems</p>
+        </div>
+
+        <Tabs id="d3-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">COGNITIVE DIMENSION 3</span>
-              <h3 class="dimension-title">Cognitive / Logical / Rational</h3>
-              <p class="dimension-position">Thought patterns and belief systems</p>
-              <p><strong>What This Dimension Examines:</strong> How characters think, reason, distort, persuade, and defend their worldview.</p>
-            </div>
+            <p><strong>What This Dimension Examines:</strong> How characters think, reason, distort, persuade, and defend their worldview.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Logical fallacies employed</li>
+              <li>Cognitive biases active</li>
+              <li>Rhetorical modes/strategies</li>
+              <li>Thought patterns and reasoning errors</li>
+              <li>Ego states (Parent/Adult/Child)</li>
+              <li>Moral intuitions/foundations</li>
+              <li>Worldview/value systems (Spiral Dynamics)</li>
+              <li>Belief structures</li>
+              <li>Epistemic stance (how they know what they "know")</li>
+              <li>Self-justification mechanisms</li>
+            </ul>
           </div>
           <div slot="tab-1">
             <h4>Framework References</h4>
@@ -279,21 +289,6 @@ const dimensionCards = [
             </ul>
           </div>
           <div slot="tab-2">
-            <h4>Contents</h4>
-            <ul>
-              <li>Logical fallacies employed</li>
-              <li>Cognitive biases active</li>
-              <li>Rhetorical modes/strategies</li>
-              <li>Thought patterns and reasoning errors</li>
-              <li>Ego states (Parent/Adult/Child)</li>
-              <li>Moral intuitions/foundations</li>
-              <li>Worldview/value systems (Spiral Dynamics)</li>
-              <li>Belief structures</li>
-              <li>Epistemic stance (how they know what they "know")</li>
-              <li>Self-justification mechanisms</li>
-            </ul>
-          </div>
-          <div slot="tab-3">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What fallacies does the character employ?</li>
@@ -305,9 +300,7 @@ const dimensionCards = [
               <li>What ego state is dominant?</li>
               <li>What moral foundations are activated?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>Understanding character reasoning</li>
               <li>Analyzing dialogue for persuasion/manipulation</li>
@@ -316,16 +309,7 @@ const dimensionCards = [
               <li>Analyzing ensemble dynamics (who thinks how)</li>
             </ul>
           </div>
-          <div slot="tab-5">
-            <h4>Cross-Dimension Connections</h4>
-            <ul>
-              <li>Cognitive patterns emerge from psychological wounds (Psychological Dimension 2)</li>
-              <li>Fallacies express thematic conflicts (Core Dimension 0)</li>
-              <li>Reasoning errors drive plot mistakes (Structural Dimension 4)</li>
-              <li>Rhetorical modes shape dialogue (Surface Dimension 5)</li>
-            </ul>
-          </div>
-          <div slot="tab-6">
+          <div slot="tab-3">
             <div class="callout-example">
               <h4>Notation Example</h4>
               <p><code>[01:15:00] / [9:00] / [Cognitive Dimension 3]</code></p>
@@ -349,20 +333,43 @@ const dimensionCards = [
               <li><strong>Skeptic:</strong> Slippery Slope + Projection</li>
             </ul>
             <p>This creates distinct "thinking voices" for each character.</p>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Cognitive patterns emerge from psychological wounds (Psychological Dimension 2)</li>
+              <li>Fallacies express thematic conflicts (Core Dimension 0)</li>
+              <li>Reasoning errors drive plot mistakes (Structural Dimension 4)</li>
+              <li>Rhetorical modes shape dialogue (Surface Dimension 5)</li>
+            </ul>
           </div>
         </Tabs>
       </div>
 
-      <!-- D2 — PSYCHOLOGICAL / EMOTIONAL -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D2 — PSYCHOLOGICAL / EMOTIONAL           -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d2-psychological">
-        <Tabs id="d2-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">PSYCHOLOGICAL DIMENSION 2</span>
+          <h3 class="dimension-title">Psychological / Emotional / Affective</h3>
+          <p class="dimension-position">Internal character landscape</p>
+        </div>
+
+        <Tabs id="d2-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">PSYCHOLOGICAL DIMENSION 2</span>
-              <h3 class="dimension-title">Psychological / Emotional / Affective</h3>
-              <p class="dimension-position">Internal character landscape</p>
-              <p><strong>What This Dimension Examines:</strong> The internal landscape of character — psyche, wounds, desire, identity.</p>
-            </div>
+            <p><strong>What This Dimension Examines:</strong> The internal landscape of character — psyche, wounds, desire, identity.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Jungian archetype (which of 12)</li>
+              <li>Shadow content (repressed material)</li>
+              <li>Anima/animus dynamics</li>
+              <li>Enneagram type and movement</li>
+              <li>Core wound and defensive structure</li>
+              <li>Attachment style</li>
+              <li>Want vs Need (conscious vs unconscious desire)</li>
+              <li>Defense mechanisms active</li>
+              <li>Temperament under stress</li>
+              <li>Identity crisis/integration moments</li>
+            </ul>
           </div>
           <div slot="tab-1">
             <h4>Framework References</h4>
@@ -378,21 +385,6 @@ const dimensionCards = [
             </ul>
           </div>
           <div slot="tab-2">
-            <h4>Contents</h4>
-            <ul>
-              <li>Jungian archetype (which of 12)</li>
-              <li>Shadow content (repressed material)</li>
-              <li>Anima/animus dynamics</li>
-              <li>Enneagram type and movement</li>
-              <li>Core wound and defensive structure</li>
-              <li>Attachment style</li>
-              <li>Want vs Need (conscious vs unconscious desire)</li>
-              <li>Defense mechanisms active</li>
-              <li>Temperament under stress</li>
-              <li>Identity crisis/integration moments</li>
-            </ul>
-          </div>
-          <div slot="tab-3">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What is the character's core wound?</li>
@@ -404,9 +396,7 @@ const dimensionCards = [
               <li>What Enneagram movement is happening?</li>
               <li>What is the internal transformation arc?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>Character-driven analysis</li>
               <li>Understanding motivation and desire</li>
@@ -416,16 +406,7 @@ const dimensionCards = [
               <li>Deep viewing (second/third pass)</li>
             </ul>
           </div>
-          <div slot="tab-5">
-            <h4>Cross-Dimension Connections</h4>
-            <ul>
-              <li>Psychological wounds express through cognitive distortions (D3)</li>
-              <li>Internal archetypes mirror mythic patterns (D1)</li>
-              <li>Character beliefs drive thematic argument (D0)</li>
-              <li>Psychological state influences behavior/dialogue (D5)</li>
-            </ul>
-          </div>
-          <div slot="tab-6">
+          <div slot="tab-3">
             <div class="callout-example">
               <h4>Notation Example</h4>
               <p><code>[01:03:42] / [6:00] / [Psychological Dimension 2]</code></p>
@@ -440,20 +421,41 @@ const dimensionCards = [
               <p><strong>→</strong> Maximum vulnerability moment</p>
               <p><strong>→</strong> Goddess archetype appears (external helper provides mirror)</p>
             </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Psychological wounds express through cognitive distortions (D3)</li>
+              <li>Internal archetypes mirror mythic patterns (D1)</li>
+              <li>Character beliefs drive thematic argument (D0)</li>
+              <li>Psychological state influences behavior/dialogue (D5)</li>
+            </ul>
           </div>
         </Tabs>
       </div>
 
-      <!-- D1 — ARCHETYPAL / MYTHIC -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D1 — ARCHETYPAL / MYTHIC                 -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d1-archetypal">
-        <Tabs id="d1-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">ARCHETYPE DIMENSION 1</span>
+          <h3 class="dimension-title">Archetypal / Universal / Primordial / Mythic</h3>
+          <p class="dimension-position">Ancient patterns and collective unconscious</p>
+        </div>
+
+        <Tabs id="d1-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">ARCHETYPE DIMENSION 1</span>
-              <h3 class="dimension-title">Archetypal / Universal / Primordial / Mythic</h3>
-              <p class="dimension-position">Ancient patterns and collective unconscious</p>
-              <p><strong>What This Dimension Examines:</strong> Universal patterns, ancestral story DNA, collective unconscious content.</p>
-            </div>
+            <p><strong>What This Dimension Examines:</strong> Universal patterns, ancestral story DNA, collective unconscious content.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Active mythic pattern (which ATU tale type, which monomyth stage)</li>
+              <li>Archetypal characters present (hero, shadow, trickster, mentor, etc.)</li>
+              <li>Universal symbols in play</li>
+              <li>Descent/ascent patterns</li>
+              <li>Threshold crossings</li>
+              <li>Death-rebirth motifs</li>
+              <li>Sacred marriage / divine encounter moments</li>
+              <li>Cultural mythology being referenced</li>
+            </ul>
           </div>
           <div slot="tab-1">
             <h4>Framework References</h4>
@@ -469,19 +471,6 @@ const dimensionCards = [
             </ul>
           </div>
           <div slot="tab-2">
-            <h4>Contents</h4>
-            <ul>
-              <li>Active mythic pattern (which ATU tale type, which monomyth stage)</li>
-              <li>Archetypal characters present (hero, shadow, trickster, mentor, etc.)</li>
-              <li>Universal symbols in play</li>
-              <li>Descent/ascent patterns</li>
-              <li>Threshold crossings</li>
-              <li>Death-rebirth motifs</li>
-              <li>Sacred marriage / divine encounter moments</li>
-              <li>Cultural mythology being referenced</li>
-            </ul>
-          </div>
-          <div slot="tab-3">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What universal story pattern is active?</li>
@@ -492,9 +481,7 @@ const dimensionCards = [
               <li>What universal symbol is operating?</li>
               <li>What cultural mythology is being referenced?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>Identifying universal resonance</li>
               <li>Cross-cultural analysis</li>
@@ -504,7 +491,14 @@ const dimensionCards = [
               <li>Teaching mythic structure</li>
             </ul>
           </div>
-          <div slot="tab-5">
+          <div slot="tab-3">
+            <h4>Mythic Weight by Position</h4>
+            <p>Certain clock positions carry greater archetypal/mythic weight:</p>
+            <ul>
+              <li><strong>3:00:</strong> Threshold guardian appears</li>
+              <li><strong>6:00:</strong> Divine encounter (goddess, god, wise figure)</li>
+              <li><strong>9:00:</strong> Death confrontation (literal or symbolic)</li>
+            </ul>
             <h4>Cross-Dimension Connections</h4>
             <ul>
               <li>Mythic patterns structure story mechanics (D4)</li>
@@ -513,28 +507,33 @@ const dimensionCards = [
               <li>Mythic journey expresses theme (D0)</li>
             </ul>
           </div>
-          <div slot="tab-6">
-            <h4>Mythic Weight by Position</h4>
-            <p>Certain clock positions carry greater archetypal/mythic weight:</p>
-            <ul>
-              <li><strong>3:00:</strong> Threshold guardian appears</li>
-              <li><strong>6:00:</strong> Divine encounter (goddess, god, wise figure)</li>
-              <li><strong>9:00:</strong> Death confrontation (literal or symbolic)</li>
-            </ul>
-          </div>
         </Tabs>
       </div>
 
-      <!-- D0 — THEMATIC CORE -->
+      <!-- ════════════════════════════════════════ -->
+      <!-- D0 — THEMATIC CORE                       -->
+      <!-- ════════════════════════════════════════ -->
       <div slot="d0-core">
-        <Tabs id="d0-tabs" accent="teal" labels={["Overview", "Framework References", "Contents", "Analysis Questions", "Use When", "Connections", "Examples"]}>
+        <div class="dimension-card">
+          <span class="dimension-number">CORE DIMENSION 0</span>
+          <h3 class="dimension-title">Thematic Core / Main Philosophical Conflict</h3>
+          <p class="dimension-position">Central meaning and purpose</p>
+        </div>
+
+        <Tabs id="d0-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
           <div slot="tab-0">
-            <div class="dimension-card">
-              <span class="dimension-number">CORE DIMENSION 0</span>
-              <h3 class="dimension-title">Thematic Core / Main Philosophical Conflict</h3>
-              <p class="dimension-position">Central meaning and purpose</p>
-              <p><strong>What This Dimension Examines:</strong> The central argument, philosophical question, core problem the story explores.</p>
-            </div>
+            <p><strong>What This Dimension Examines:</strong> The central argument, philosophical question, core problem the story explores.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Story's Central Question / Core Problem</li>
+              <li>Thematic argument (what the story says about the theme)</li>
+              <li>Moral premise</li>
+              <li>Philosophical conflict</li>
+              <li>Value tensions (System vs Eden, Control vs Surrender, etc.)</li>
+              <li>What the story is "really about"</li>
+              <li>The "truth" being explored</li>
+              <li>Existential/spiritual dimension</li>
+            </ul>
           </div>
           <div slot="tab-1">
             <h4>Framework References</h4>
@@ -548,19 +547,6 @@ const dimensionCards = [
             </ul>
           </div>
           <div slot="tab-2">
-            <h4>Contents</h4>
-            <ul>
-              <li>Story's Central Question / Core Problem</li>
-              <li>Thematic argument (what the story says about the theme)</li>
-              <li>Moral premise</li>
-              <li>Philosophical conflict</li>
-              <li>Value tensions (System vs Eden, Control vs Surrender, etc.)</li>
-              <li>What the story is "really about"</li>
-              <li>The "truth" being explored</li>
-              <li>Existential/spiritual dimension</li>
-            </ul>
-          </div>
-          <div slot="tab-3">
             <h4>Analysis Questions</h4>
             <ul>
               <li>What is the core question this story asks?</li>
@@ -572,9 +558,7 @@ const dimensionCards = [
               <li>How do all characters relate to the central problem?</li>
               <li>What answer does the story offer?</li>
             </ul>
-          </div>
-          <div slot="tab-4">
-            <h4>Use When</h4>
+            <h4>How to Use</h4>
             <ul>
               <li>Understanding story's purpose</li>
               <li>Analyzing what makes story meaningful</li>
@@ -584,18 +568,7 @@ const dimensionCards = [
               <li>Comparing thematic variations across films</li>
             </ul>
           </div>
-          <div slot="tab-5">
-            <h4>Cross-Dimension Connections</h4>
-            <ul>
-              <li>Core theme drives all dimensions above it</li>
-              <li>Archetypal patterns carry thematic weight (D1)</li>
-              <li>Psychological wounds test the theme (D2)</li>
-              <li>Cognitive fallacies embody false answers (D3)</li>
-              <li>Structural beats force thematic choice (D4)</li>
-              <li>Surface visuals make theme visible (D5)</li>
-            </ul>
-          </div>
-          <div slot="tab-6">
+          <div slot="tab-3">
             <h4>Common Core Problems / Themes</h4>
             <ul>
               <li>Identity (Who am I?)</li>
@@ -606,6 +579,15 @@ const dimensionCards = [
               <li>Order vs Chaos</li>
               <li>Nature vs Nurture</li>
               <li>Justice vs Mercy</li>
+            </ul>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Core theme drives all dimensions above it</li>
+              <li>Archetypal patterns carry thematic weight (D1)</li>
+              <li>Psychological wounds test the theme (D2)</li>
+              <li>Cognitive fallacies embody false answers (D3)</li>
+              <li>Structural beats force thematic choice (D4)</li>
+              <li>Surface visuals make theme visible (D5)</li>
             </ul>
           </div>
         </Tabs>
@@ -619,21 +601,14 @@ const dimensionCards = [
     <div class="accordion-item" data-accordion-group="post-dimensions">
       <details id="characteristics-details">
         <summary class="accordion-toggle accordion-toggle--teal">
-          <span class="accordion-toggle__icon accordion-toggle__icon--teal">⬡</span>
+          <span class="accordion-toggle__icon accordion-toggle__icon--teal">◈</span>
           <span class="accordion-toggle__label">
             <span class="accordion-toggle__title" id="depth-characteristics">Dimension Characteristics</span>
-            <span class="accordion-toggle__meta">How dimensions relate, depth specificity, entry questions, framework mapping</span>
+            <span class="accordion-toggle__meta">Consistent patterns across the vertical axis</span>
           </span>
           <span class="accordion-toggle__chevron">▾</span>
         </summary>
         <div class="accordion-body">
-          <h3>How Story Depth Dimensions Relate</h3>
-          <h4>Surface to Core Movement</h4>
-          <ul>
-            <li>Each dimension is an expression of the dimensions beneath it</li>
-            <li>Surface Dimension 5 makes visible what Core Dimension 0 contains</li>
-            <li>Analysis can start anywhere and move either direction</li>
-          </ul>
           <h4>Depth Increases Specificity</h4>
           <p>All describe same moment at different depths:</p>
           <ul>
