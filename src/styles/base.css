@@ -202,17 +202,6 @@ hr {
 
 /* ===== TABLES — from Compass — WAS MISSING ===== */
 
-/* Overflow wrapper for wide tables */
-.table-wrap {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  margin: 25px 0;
-  border-radius: var(--radius-md);
-}
-.table-wrap table {
-  margin: 0;
-}
-
 table {
   width: 100%;
   border-collapse: collapse;
@@ -221,12 +210,6 @@ table {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
-}
-
-/* Make tables inside compass-content scrollable on mobile */
-.compass-content table {
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 
 thead {
