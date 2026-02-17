@@ -1,0 +1,87 @@
+/* ===== INLINE TOKENS — from Compass — WAS MISSING ===== */
+.token {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  border-radius: var(--radius-sm);
+  padding: 3px 8px;
+  font-size: 0.85em;
+  color: var(--token-text);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Inline code — styled as tokens */
+code,
+p code, li code, td code, th code,
+h1 code, h2 code, h3 code, h4 code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  border-radius: var(--radius-sm);
+  padding: 1px 5px;
+  font-size: 0.85em;
+  color: var(--token-text);
+  letter-spacing: 0.02em;
+  display: inline-block;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+
+/* Don't style code blocks as tokens - handled in pre/callout sections above */
+
+/* SOURCE TAG — from Compass — WAS MISSING */
+.source-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  color: var(--text-2);
+  display: inline-block;
+  margin-left: 12px;
+  vertical-align: middle;
+}
+
+/* SCHEMA LABEL — from Compass — WAS MISSING */
+.schema-label {
+  display: inline-block;
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  color: var(--token-text);
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+}
+
+
+/* ===== STATUS TAGS ===== */
+.status-tag {
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.status-tag--complete {
+  background: #10B98118;
+  color: #10B981;
+}
+
+.status-tag--coming {
+  background: var(--surface-elevated);
+  color: var(--text-3);
+}
+

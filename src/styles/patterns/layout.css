@@ -1,0 +1,170 @@
+/* ===== LAYOUT CONTAINERS ===== */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.container-wide {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Content block — from Compass .content wrapper */
+.content {
+  background: var(--surface);
+  padding: 50px;
+  margin: 0 40px 60px 40px;
+  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-lg);
+  transition: all 0.3s ease;
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: 70px;
+}
+.section:last-child {
+  margin-bottom: 0;
+}
+
+/* ===== CARD GRID ===== */
+
+/* TOC Card Grid — "On This Page" navigation */
+.toc-grid {
+  background: transparent;
+  border: none;
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+}
+
+.toc-grid__label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  margin-bottom: 1rem;
+}
+
+.toc-grid__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.625rem;
+}
+
+.toc-grid__link {
+  display: block;
+  padding: 0.75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-2);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-subtle);
+}
+
+.toc-grid__link:hover {
+  border-color: var(--semantic-v);
+  color: var(--text);
+  background: var(--surface);
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.15);
+  transform: translateY(-2px);
+  text-decoration: none;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.75rem;
+}
+
+.card-grid--3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.card-grid--2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 768px) {
+  .card-grid--3,
+  .card-grid--2 {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    margin: 20px 10px;
+    padding: 30px;
+  }
+
+  .compass-content {
+    padding: 1.5rem;
+  }
+}
+
+/* ===== COMPASS CONTENT (ported pages) ===== */
+.compass-content {
+  background: var(--surface);
+  padding: 2.5rem 3rem;
+  margin: 0 0 2.5rem;
+  box-shadow: var(--shadow-subtle);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+}
+
+.compass-content h2 {
+  font-size: 1.75rem;
+}
+
+.compass-content h3 {
+  font-size: 1.25rem;
+  margin: 2rem 0 1rem;
+}
+
+.compass-content .subsection {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  margin: 1rem 0;
+}
+
+.compass-content .intro {
+  background: var(--surface-elevated);
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 2rem;
+}
+
+.compass-content ul {
+  margin: 12px 0 12px 1.5rem;
+  line-height: 1.5;
+}
+
+.compass-content li {
+  margin-bottom: 4px;
+}
+
+/* Status tags in Compass content */
+.compass-content .status-tag.status-complete {
+  background: #10B98118;
+  color: #10B981;
+  font-size: 0.625rem;
+  padding: 0.125rem 0.5rem;
+  border-radius: var(--radius-pill);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.compass-content .nav-link {
+  color: var(--info-blue);
+  text-decoration: none;
+  font-weight: 600;
+}
+.compass-content .nav-link:hover {
+  text-decoration: underline;
+}

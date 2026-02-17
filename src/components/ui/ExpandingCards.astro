@@ -7,47 +7,93 @@ interface ExpandingCardItem {
   accentToken?: string;
 }
 
+interface ExpandingCardSlot {
+  id: string;
+  label: string;
+  depth?: number;
+  position?: number;
+  accentToken?: string;
+}
+
 interface Props {
-  items: ExpandingCardItem[];
+  items?: ExpandingCardItem[];
+  cards?: ExpandingCardSlot[];
   orientation?: 'horizontal' | 'vertical';
   defaultActive?: string;
 }
 
 const {
   items = [],
+  cards = [],
   orientation = 'vertical',
   defaultActive,
 } = Astro.props;
 
-const initialActive = defaultActive && items.some((item) => item.id === defaultActive)
+const isSlotted = cards.length > 0;
+const allCards = isSlotted ? cards : items;
+
+const initialActive = defaultActive && allCards.some((c) => c.id === defaultActive)
   ? defaultActive
-  : items[0]?.id;
+  : allCards[0]?.id;
+
+const containerClass = [
+  'expanding-cards',
+  `expanding-cards--${orientation}`,
+  isSlotted ? 'expanding-cards--slotted' : '',
+].filter(Boolean).join(' ');
 ---
 
 <div
-  class={`expanding-cards expanding-cards--${orientation}`}
+  class={containerClass}
   data-expanding-cards
   data-orientation={orientation}
   data-default-active={initialActive}
 >
-  {items.map((item) => (
-    <article
-      class="expanding-cards__card"
-      data-expanding-card
-      data-card-id={item.id}
-      data-accent-token={item.accentToken}
-      style={item.accentToken ? `--accent-fill: ${item.accentToken};` : undefined}
-      aria-expanded={item.id === initialActive ? 'true' : 'false'}
-      tabindex="0"
-      role="button"
-    >
-      <div class="expanding-cards__label">{item.label}</div>
-      <div class="expanding-cards__content">
-        <h4>{item.title}</h4>
-        <p>{item.description}</p>
-      </div>
-    </article>
-  ))}
+  {isSlotted ? (
+    cards.map(async (card) => {
+      const hasSlot = Astro.slots.has(card.id);
+      const slotHtml = hasSlot ? await Astro.slots.render(card.id) : '';
+      return (
+        <article
+          class="expanding-cards__card"
+          id={card.id}
+          data-expanding-card
+          data-card-id={card.id}
+          data-depth={card.depth !== undefined ? String(card.depth) : undefined}
+          data-position={card.position !== undefined ? String(card.position) : undefined}
+          style={card.accentToken ? `--accent-fill: ${card.accentToken};` : undefined}
+          aria-expanded={card.id === initialActive ? 'true' : 'false'}
+          tabindex="0"
+          role="button"
+          aria-label={`${card.label} — click to expand`}
+        >
+          <div class="expanding-cards__label">{card.label}</div>
+          <div class="expanding-cards__content">
+            {hasSlot && <Fragment set:html={slotHtml} />}
+          </div>
+        </article>
+      );
+    })
+  ) : (
+    items.map((item) => (
+      <article
+        class="expanding-cards__card"
+        data-expanding-card
+        data-card-id={item.id}
+        data-accent-token={item.accentToken}
+        style={item.accentToken ? `--accent-fill: ${item.accentToken};` : undefined}
+        aria-expanded={item.id === initialActive ? 'true' : 'false'}
+        tabindex="0"
+        role="button"
+      >
+        <div class="expanding-cards__label">{item.label}</div>
+        <div class="expanding-cards__content">
+          <h4>{item.title}</h4>
+          <p>{item.description}</p>
+        </div>
+      </article>
+    ))
+  )}
 </div>
 
 <script>
@@ -92,8 +138,18 @@ const initialActive = defaultActive && items.some((item) => item.id === defaultA
     cards.forEach((card) => {
       const activate = () => setActiveCard(deck, card.dataset.cardId);
 
-      card.addEventListener('click', activate);
+      card.addEventListener('click', (e) => {
+        // If already expanded, ignore clicks inside content (e.g. Tab buttons)
+        if (card.getAttribute('aria-expanded') === 'true') {
+          const content = card.querySelector('.expanding-cards__content');
+          if (content && content.contains(e.target)) return;
+        }
+        activate();
+      });
+
       card.addEventListener('keydown', (event) => {
+        // Only handle keydown on the card element itself, not nested interactives
+        if (event.target !== card) return;
         if (event.key === 'Enter' || event.key === ' ') {
           event.preventDefault();
           activate();
@@ -104,13 +160,30 @@ const initialActive = defaultActive && items.some((item) => item.id === defaultA
     deck.setAttribute(BOUND_ATTRIBUTE, 'true');
   };
 
+  const handleExpandingHash = () => {
+    const hash = location.hash.slice(1);
+    if (!hash) return;
+
+    document.querySelectorAll('[data-expanding-cards]').forEach((deck) => {
+      const card = deck.querySelector(`[data-card-id="${hash}"]`);
+      if (card) {
+        setActiveCard(deck, hash);
+        requestAnimationFrame(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    });
+  };
+
   const initExpandingCards = () => {
     document.querySelectorAll('[data-expanding-cards]').forEach(bindDeck);
+    handleExpandingHash();
   };
 
   document.addEventListener('astro:page-load', initExpandingCards);
   document.addEventListener('astro:after-swap', initExpandingCards);
   window.addEventListener('resize', initExpandingCards);
+  window.addEventListener('hashchange', handleExpandingHash);
 
   initExpandingCards();
 </script>

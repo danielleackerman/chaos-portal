@@ -1,0 +1,87 @@
+/* ===== PAGE HERO ===== */
+.page-hero {
+  background: var(--surface);
+  padding: 2.5rem 3rem;
+  margin: 1.5rem 0 2.5rem;
+  position: relative;
+  border-left: 6px solid var(--text-3);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  transition: all 0.3s ease;
+}
+
+.page-hero--amber { border-left-color: var(--semantic-h); }
+.page-hero--teal { border-left-color: var(--semantic-v); }
+.page-hero--purple { border-left-color: var(--accent-purple); }
+.page-hero--neutral { border-left-color: #8B95A1; }
+
+/* Gradient hero — ties to axis system instead of arbitrary purple */
+.page-hero--gradient {
+  border-left-color: transparent;
+  background: var(--surface);
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.04), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.04), transparent 60%);
+  overflow: hidden;
+  position: relative;
+}
+.page-hero--gradient::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(180deg, var(--semantic-h), var(--semantic-v));
+  z-index: 1;
+}
+
+
+.dark-mode .page-hero--gradient {
+  background-image: radial-gradient(ellipse at 0% 50%, rgba(245, 158, 11, 0.06), transparent 60%),
+                     radial-gradient(ellipse at 100% 50%, rgba(20, 184, 166, 0.06), transparent 60%);
+}
+
+.page-hero h1 {
+  margin-bottom: 0.5rem;
+}
+
+.page-hero .subtitle {
+  font-size: 0.9375rem;
+  color: var(--text-2);
+  letter-spacing: 0.02em;
+  margin-bottom: 0;
+}
+
+.page-hero .eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+.page-hero .eyebrow--amber { color: var(--semantic-h); }
+.page-hero .eyebrow--teal { color: var(--semantic-v); }
+.page-hero .eyebrow--purple { color: var(--accent-purple); }
+.page-hero .eyebrow--neutral { color: var(--text-2); }
+
+
+/* ===== HERO VARIANTS ===== */
+.page-hero--teal {
+  border-left: 6px solid var(--semantic-v);
+  background: linear-gradient(to right, rgba(20, 184, 166, 0.03), transparent);
+}
+
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .page-hero {
+    padding: 1.5rem 2rem;
+    margin: 1rem 0 1.5rem;
+  }
+
+  .page-hero h1 {
+    font-size: 1.75rem;
+  }
+}

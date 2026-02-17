@@ -1,0 +1,414 @@
+/* ================================================================
+   EXPANDING CARDS — Base Component
+   Shared by all ExpandingCards instances (horizontal + vertical,
+   simple items + slotted rich content).
+   ================================================================ */
+
+/* ── Deck container ── */
+.expanding-cards {
+  display: flex;
+  gap: var(--space-xs);
+  margin: 1rem 0 1.75rem;
+}
+
+.expanding-cards--vertical {
+  flex-direction: row;
+}
+
+.expanding-cards--horizontal {
+  flex-direction: column;
+}
+
+/* ── Card (shared base) ── */
+.expanding-cards__card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-elevated);
+  padding: 0.95rem 1rem;
+  cursor: pointer;
+  overflow: hidden;
+  min-height: 120px;
+  transition: flex 0.35s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.expanding-cards__card:focus-visible {
+  outline: 2px solid var(--info-blue);
+  outline-offset: 2px;
+}
+
+/* Collapsed sizing — vertical (side-by-side) */
+.expanding-cards--vertical .expanding-cards__card {
+  flex: 0.7;
+}
+
+/* Collapsed sizing — horizontal (stacked) */
+.expanding-cards--horizontal .expanding-cards__card {
+  flex: 0 0 68px;
+  min-height: 68px;
+}
+
+/* ── Label ── */
+.expanding-cards__label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+}
+
+.expanding-cards--vertical .expanding-cards__label {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+}
+
+.expanding-cards--horizontal .expanding-cards__label {
+  writing-mode: horizontal-tb;
+}
+
+/* ── Content (collapsed = hidden) ── */
+.expanding-cards__content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.25s ease, max-height 0.3s ease, transform 0.25s ease;
+}
+
+.expanding-cards__content h4 {
+  margin: 0 0 0.35rem;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1rem;
+}
+
+.expanding-cards__content p {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+/* ── State: collapsed ── */
+.expanding-cards__card[aria-expanded='false'] {
+  background: var(--accent-fill, var(--surface-elevated));
+}
+
+/* ── State: expanded ── */
+.expanding-cards__card[aria-expanded='true'] {
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  cursor: default;
+}
+
+.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
+  flex: 2.3;
+  border-left: 6px solid var(--accent-fill, var(--border-accent));
+}
+
+.expanding-cards--horizontal .expanding-cards__card[aria-expanded='true'] {
+  flex-basis: 176px;
+  border-top: 6px solid var(--accent-fill, var(--border-accent));
+}
+
+.expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+  max-height: 500px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ── Coordinate Picker integration ── */
+.expanding-cards__card.dimension-highlighted {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 2px var(--semantic-v), 0 4px 16px rgba(20, 184, 166, 0.15);
+}
+
+.expanding-cards__card.dimension-dimmed {
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.expanding-cards__card.dimension-dimmed:hover {
+  opacity: 0.7;
+}
+
+/* ── Layout helper ── */
+@media (max-width: 768px) {
+  .fixed-cols {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ================================================================
+   ===== Vertical Axis: Expanding Cards (variation) =====
+
+   Slotted-mode overrides for the rich-content deck used on the
+   Vertical Axis page (/compass/vertical-axis/expanding-cards).
+
+   All selectors gated under .expanding-cards--slotted so they
+   cannot affect simple ExpandingCards instances elsewhere.
+   ================================================================ */
+
+/* ── Depth-level accent fills ── */
+.expanding-cards--slotted .expanding-cards__card[data-depth="5"] { --accent-fill: var(--dim-5); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="4"] { --accent-fill: var(--dim-4); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="3"] { --accent-fill: var(--dim-3); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="2"] { --accent-fill: var(--dim-2); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="1"] { --accent-fill: var(--dim-1); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="0"] { --accent-fill: var(--dim-0); }
+
+/* ── Slotted animation tuning ──
+   FIX: animate the `flex` shorthand instead of `flex-basis` alone,
+   because flex-basis cannot animate to/from `auto`.               */
+.expanding-cards--slotted .expanding-cards__card {
+  transition: flex 340ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              box-shadow 280ms ease,
+              border-color 280ms ease,
+              background 280ms ease;
+}
+
+.expanding-cards--slotted .expanding-cards__content {
+  transition: max-height 280ms cubic-bezier(0.2, 0.8, 0.2, 1),
+              opacity 280ms ease,
+              transform 280ms ease;
+}
+
+/* ── Desktop deck layout ── */
+.expanding-cards--slotted.expanding-cards--vertical {
+  flex-direction: row;
+  align-items: stretch;
+
+  /* FIX: removed fixed height: min(72vh, 760px). The expanded card's
+     content now determines deck height — no internal scrolling.      */
+  min-height: 420px;
+}
+
+/* ── Card structure (slotted) ──
+   FIX: display:flex + flex-direction:column so label sits above content.
+   min-width:0 prevents flex blowout.                                     */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Collapsed rail (slotted vertical) ── */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] {
+  flex: 0 0 44px;
+  padding: 0;
+  border-radius: 10px;
+  overflow: hidden;
+
+  /* teal gradient fill — uses var(--surface) not white for dark-mode compat */
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-fill, var(--dim-3)) 35%, var(--surface)),
+    color-mix(in srgb, var(--accent-fill, var(--dim-3)) 70%, var(--surface))
+  );
+}
+
+/* Collapsed content hidden */
+.expanding-cards--slotted .expanding-cards__card[aria-expanded='false'] .expanding-cards__content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* Collapsed label fills the rail, centered vertically */
+.expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  width: 100%;
+  height: 100%;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+/* ── Expanded card (slotted vertical) ──
+   FIX: overflow:visible on the expanded card so tall content is NOT clipped.
+   The base rule sets overflow:hidden — we must override it here.             */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Expanded label becomes horizontal header */
+.expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='true'] .expanding-cards__label {
+  display: block;
+  writing-mode: horizontal-tb;
+  text-orientation: initial;
+  height: auto;
+  width: auto;
+  padding: 14px 18px 8px;
+  color: var(--text-2);
+}
+
+/* Expanded content — visible, NO scroll, NO max-height cap */
+.expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+  max-height: none;
+  opacity: 1;
+  overflow: visible;
+  transform: translateY(0);
+  pointer-events: auto;
+  padding: 0 18px 18px;
+  flex: 0 0 auto;
+  min-height: 0;
+}
+
+/* ── Depth accent stripe on expanded card (left border) ── */
+.expanding-cards--slotted .expanding-cards__card[data-depth="5"][aria-expanded='true'] { border-left-color: var(--dim-5); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="4"][aria-expanded='true'] { border-left-color: var(--dim-4); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="3"][aria-expanded='true'] { border-left-color: var(--dim-3); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="2"][aria-expanded='true'] { border-left-color: var(--dim-2); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="1"][aria-expanded='true'] { border-left-color: var(--dim-1); }
+.expanding-cards--slotted .expanding-cards__card[data-depth="0"][aria-expanded='true'] { border-left-color: var(--dim-0); }
+
+
+/* ── Tabs inside slotted cards ──
+   FIX: single consolidated block (was 4 duplicate .tabs__strip definitions).
+   FIX: override .tabs overflow:hidden so tab content is not clipped.         */
+.expanding-cards--slotted .tabs {
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+  background: transparent;
+  overflow: visible;
+}
+
+.expanding-cards--slotted .tabs__strip {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: transparent;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  gap: 8px;
+}
+
+.expanding-cards--slotted .tabs__panel {
+  border: 0;
+  background: transparent;
+  padding: var(--space-sm) 0 0;
+}
+
+.expanding-cards--slotted .tabs__tab {
+  white-space: nowrap;
+}
+
+
+/* ── Page-context helpers ── */
+.dimension-strip-intro {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: var(--space-md);
+}
+
+.compass-content .expanding-cards--slotted.expanding-cards--vertical {
+  min-height: 500px;
+}
+
+
+/* ================================================================
+   ===== Vertical Axis: Expanding Cards — MOBILE (<=900px) =====
+   Slotted vertical cards stack top-to-bottom.
+   Collapsed rails become short horizontal bars.
+   ================================================================ */
+@media (max-width: 900px) {
+  .expanding-cards--slotted.expanding-cards--vertical {
+    flex-direction: column;
+    min-height: auto;
+    height: auto;
+  }
+
+  /* Collapsed rail -> short horizontal bar */
+  .expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] {
+    flex: 0 0 48px;
+    flex-direction: row;
+    border-radius: var(--radius-md);
+  }
+
+  /* Label reads horizontally on mobile */
+  .expanding-cards--slotted.expanding-cards--vertical
+    .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+    writing-mode: horizontal-tb;
+    text-orientation: initial;
+    padding: 0 var(--space-sm);
+    height: 48px;
+    width: auto;
+    flex: 0 0 auto;
+  }
+
+  /* Expanded card: natural height, accent on top border */
+  .expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
+    flex: 0 0 auto;
+    border-left-width: 1px;
+    border-top: 5px solid var(--accent-fill, var(--border-accent));
+  }
+
+  /* Depth colors on top border for mobile */
+  .expanding-cards--slotted .expanding-cards__card[data-depth="5"][aria-expanded='true'] { border-top-color: var(--dim-5); }
+  .expanding-cards--slotted .expanding-cards__card[data-depth="4"][aria-expanded='true'] { border-top-color: var(--dim-4); }
+  .expanding-cards--slotted .expanding-cards__card[data-depth="3"][aria-expanded='true'] { border-top-color: var(--dim-3); }
+  .expanding-cards--slotted .expanding-cards__card[data-depth="2"][aria-expanded='true'] { border-top-color: var(--dim-2); }
+  .expanding-cards--slotted .expanding-cards__card[data-depth="1"][aria-expanded='true'] { border-top-color: var(--dim-1); }
+  .expanding-cards--slotted .expanding-cards__card[data-depth="0"][aria-expanded='true'] { border-top-color: var(--dim-0); }
+
+  /* Content padding on mobile */
+  .expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+    padding: 0 var(--space-sm) var(--space-sm);
+  }
+
+  /* Tabs strip: reset negative margin on mobile */
+  .expanding-cards--slotted .tabs__strip {
+    margin: 0;
+    padding: 8px 0;
+  }
+}
+
+
+/* ================================================================
+   ===== Vertical Axis: Expanding Cards — DARK MODE =====
+   Fix gradient backgrounds and label contrast for dark theme.
+   ================================================================ */
+@media (prefers-color-scheme: dark) {
+  .expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] {
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--accent-fill, var(--dim-3)) 25%, var(--surface)),
+      color-mix(in srgb, var(--accent-fill, var(--dim-3)) 50%, var(--surface))
+    );
+  }
+
+  .expanding-cards--slotted.expanding-cards--vertical
+    .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+    color: rgba(255, 255, 255, 0.65);
+  }
+}
+
+/* Support .dark class toggle */
+.dark .expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='false'] {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--accent-fill, var(--dim-3)) 25%, var(--surface)),
+    color-mix(in srgb, var(--accent-fill, var(--dim-3)) 50%, var(--surface))
+  );
+}
+
+.dark .expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
+  color: rgba(255, 255, 255, 0.65);
+}

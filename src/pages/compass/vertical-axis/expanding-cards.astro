@@ -1,0 +1,773 @@
+---
+import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CoordinatePicker from '../../../components/ui/CoordinatePicker.astro';
+import Tabs from '../../../components/ui/Tabs.astro';
+import ExpandingCards from '../../../components/ui/ExpandingCards.astro';
+// CSS moved to src/styles/components/expanding-cards.css (imported via global.css)
+const base = import.meta.env.BASE_URL;
+
+const dimensionCards = [
+  { id: 'd5-expressive', label: 'D5', depth: 5 },
+  { id: 'd4-structural', label: 'D4', depth: 4 },
+  { id: 'd3-cognitive',  label: 'D3', depth: 3 },
+  { id: 'd2-psychological', label: 'D2', depth: 2 },
+  { id: 'd1-archetypal', label: 'D1', depth: 1 },
+  { id: 'd0-core',       label: 'D0', depth: 0 },
+];
+---
+
+<PortalLayout title="Vertical Axis | Compass" currentPage="compass">
+
+  <nav class="breadcrumb">
+    <a href={`${base}/`}>Home</a>
+    <span class="sep">›</span>
+    <a href={`${base}/compass/`}>Compass</a>
+    <span class="sep">›</span>
+    <strong>III. Vertical Axis</strong>
+  </nav>
+
+  <div class="page-hero page-hero--teal">
+    <div class="eyebrow">SECTION III</div>
+    <h1>Vertical Axis</h1>
+    <p class="subtitle">Story Depth Dimensions — six layers from surface to core</p>
+  </div>
+
+  <div class="compass-content">
+
+   <!-- ===== COORDINATE PICKER ===== -->
+<div class="dimension-card dimension-card--coord-picker">
+  <div class="coord-picker-card__header">
+    <span class="coord-picker__icon" aria-hidden="true">⬡</span>
+    <h5 class="coord-picker-card__title">Coordinate Picker</h5>
+  </div>
+  <p class="dimension-position">Choose position + dimension</p>
+  <CoordinatePicker />
+</div>
+
+    <!-- ===== INTRODUCTION ===== -->
+    <div class="section">
+      <h2 id="introduction">Vertical Axis: Story Depth Dimensions</h2>
+      <p>The vertical axis consists of six story depth dimensions arranged from surface to core. Each dimension represents a different depth of analysis, using specific frameworks and asking specific analytical questions.</p>
+
+      <div class="dimension-vertical">
+        <h4>Dimension Numbering Convention</h4>
+        <p><strong>Surface Dimension 5</strong> (what you see first)</p>
+        <p><strong>Structural Dimension 4</strong> (narrative mechanics and architecture)</p>
+        <p><strong>Cognitive Dimension 3</strong> (how characters think and reason)</p>
+        <p><strong>Psychological Dimension 2</strong> (character's emotional interior)</p>
+        <p><strong>Archetype Dimension 1</strong> (universal primordial patterns)</p>
+        <p><strong>Core Dimension 0</strong> (deepest essence)</p>
+        <p style="margin-top: 16px;">Descending numbers indicate increasing depth: analyzing from Surface Dimension 5 → Core Dimension 0 means moving from surface toward core.</p>
+      </div>
+
+      <h3>Coordinate Notation</h3>
+      <p>Every analysis point can be located using coordinates that combine horizontal axis <code>[Story Timeline Position]</code> with vertical axis <code>[Story Depth Dimension]</code>.</p>
+      <p><strong>Standard notation:</strong> <code>[Story Timeline Position] / [Story Depth Dimension]</code></p>
+      <p><strong>Examples:</strong></p>
+      <ul>
+        <li><code>[12:00] / [Surface Dimension 5]</code> = Origin at surface level</li>
+        <li><code>[6:00] / [Psychological Dimension 2]</code> = Midpoint at psychological depth</li>
+        <li><code>[9:00] / [Core Dimension 0]</code> = Crisis at thematic core</li>
+      </ul>
+      <p><strong>Read as:</strong> "Position [X], Dimension [Y]"</p>
+      <ul>
+        <li>"Position six o'clock, Psychological Dimension two"</li>
+        <li>"Position nine o'clock, Core Dimension zero"</li>
+      </ul>
+    </div>
+
+    <hr/>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- THE SIX DIMENSIONS — ExpandingCards (vertical, slotted)  -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <h2 id="dimensions">The Six Dimensions</h2>
+    <p class="dimension-strip-intro">Click any dimension rail to expand it. All six are always visible — Surface (D5) at top, Core (D0) at bottom.</p>
+
+    <ExpandingCards
+      cards={dimensionCards}
+      orientation="vertical"
+      defaultActive="d5-expressive"
+    >
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D5 — SURFACE / EXPRESSIVE               -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d5-expressive">
+        <div class="dimension-card">
+          <span class="dimension-number">SURFACE DIMENSION 5</span>
+          <h3 class="dimension-title">Expressive / Symbolic</h3>
+          <p class="dimension-position">What you directly see and hear</p>
+        </div>
+
+        <Tabs id="d5-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> Observable phenomena — what literally appears, is said, shown, heard. The concrete surface of the story.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Visual composition (framing, color, lighting, mise-en-scène)</li>
+              <li>Dialogue (actual words spoken)</li>
+              <li>Sound design (music, effects, silence)</li>
+              <li>Performance (gesture, expression, movement)</li>
+              <li>Editing (cuts, transitions, rhythm)</li>
+              <li>Props and costumes</li>
+              <li>Setting and environment</li>
+              <li>Cinematography choices</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>Semiotics (Barthes, Peirce)</li>
+              <li>Film craft analysis (cinematography, editing, sound)</li>
+              <li>Visual symbolism catalogs</li>
+              <li>Trope databases (TVTropes, etc.)</li>
+              <li>Genre surface conventions</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What literally appears on screen?</li>
+              <li>What is said/shown/heard?</li>
+              <li>What visual motifs recur?</li>
+              <li>What colors dominate?</li>
+              <li>What objects appear repeatedly?</li>
+              <li>How is space used?</li>
+              <li>What is the pacing/rhythm?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>First viewing/initial logging</li>
+              <li>Tracking visual motifs</li>
+              <li>Analyzing craft/technique</li>
+              <li>Documenting concrete evidence</li>
+              <li>Building observational foundation for deeper dimensions</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <div class="callout-example">
+              <h4>Notation Example</h4>
+              <p><code>[00:23:15] / [3:00] / [Surface Dimension 5]</code></p>
+              <p><strong>Visual:</strong> Character crosses literal doorway, bright→dark</p>
+              <p><strong>Costume:</strong> Removes outer layer (coat)</p>
+              <p><strong>Sound:</strong> Ambient noise cuts to silence</p>
+              <p><strong>Color:</strong> Warm tones→cool blues</p>
+              <p><strong>→</strong> Threshold crossing made visible</p>
+            </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Surface manifestations always express deeper dimensions</li>
+              <li>Symbols at Surface Dimension 5 point toward Archetype Dimension 1</li>
+              <li>Visual repetition often maps to Structural Dimension 4 beats</li>
+              <li>Character behavior reveals Psychological Dimension 2 state</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D4 — STRUCTURAL / FUNCTIONAL             -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d4-structural">
+        <div class="dimension-card">
+          <span class="dimension-number">STRUCTURAL DIMENSION 4</span>
+          <h3 class="dimension-title">Structural / Functional Mechanics</h3>
+          <p class="dimension-position">Story architecture and narrative engineering</p>
+        </div>
+
+        <Tabs id="d4-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> How the narrative machine functions — the engineering behind story movement, beat structure, character function assignments, and plot geometry.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Act structure and turning points</li>
+              <li>Beat sequences and scene functions</li>
+              <li>Character function assignments (protagonist, antagonist, contagonist, etc.)</li>
+              <li>Plot geometry and mirroring patterns</li>
+              <li>Pacing architecture</li>
+              <li>Plant/payoff chains</li>
+              <li>Stakes escalation mechanics</li>
+              <li>Genre beat compliance/subversion</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>→ Section IIA (Story Structure Crosswalk) for detailed structural frameworks</li>
+              <li>Three-act structure (Syd Field, McKee)</li>
+              <li>Dan Harmon Story Circle (8 steps)</li>
+              <li>Save the Cat (Snyder's 15 beats)</li>
+              <li>Dramatica (throughlines, signposts, archetypes as functions)</li>
+              <li>John Truby (22 steps)</li>
+              <li>Genre conventions and expectations</li>
+              <li>Plot geometry (chiastic, ring, frame, braided)</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What structural beat is this?</li>
+              <li>What function does this scene serve?</li>
+              <li>What is the character's structural role?</li>
+              <li>How does this advance the plot mechanically?</li>
+              <li>What information is being planted or paid off?</li>
+              <li>How do the stakes change?</li>
+              <li>What genre expectations are being met or subverted?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>Mapping story architecture</li>
+              <li>Analyzing pacing and rhythm</li>
+              <li>Diagnosing structural problems</li>
+              <li>Understanding character function vs personality</li>
+              <li>Comparing frameworks (how Hero's Journey maps to Save the Cat)</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <div class="callout-example">
+              <h4>Notation Example</h4>
+              <p><code>[00:45:00] / [6:00] / [Structural Dimension 4]</code></p>
+              <p><strong>Act position:</strong> End of Act 2A / Start of Act 2B</p>
+              <p><strong>Function:</strong> Midpoint/Find Point</p>
+              <p><strong>Beat:</strong> Character locates the object/person/truth sought</p>
+              <p><strong>Story shift:</strong> From reactive→proactive</p>
+              <p><strong>Character role:</strong> Protagonist + Emotion hybrid</p>
+              <p><strong>Plant:</strong> Information that will pay off at 10:00</p>
+              <p><strong>Stakes:</strong> Raised, ticking clock introduced</p>
+              <p><strong>→</strong> Harmon: FIND step</p>
+              <p><strong>→</strong> Dramatica: IC pressure peaks</p>
+            </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Structural beats trigger psychological shifts (Psychological Dimension 2)</li>
+              <li>Mechanical functions express thematic arguments (Core Dimension 0)</li>
+              <li>Character roles relate to archetypal patterns (Archetype Dimension 1)</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D3 — COGNITIVE / LOGICAL                 -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d3-cognitive">
+        <div class="dimension-card">
+          <span class="dimension-number">COGNITIVE DIMENSION 3</span>
+          <h3 class="dimension-title">Cognitive / Logical / Rational</h3>
+          <p class="dimension-position">Thought patterns and belief systems</p>
+        </div>
+
+        <Tabs id="d3-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> How characters think, reason, distort, persuade, and defend their worldview.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Logical fallacies employed</li>
+              <li>Cognitive biases active</li>
+              <li>Rhetorical modes/strategies</li>
+              <li>Thought patterns and reasoning errors</li>
+              <li>Ego states (Parent/Adult/Child)</li>
+              <li>Moral intuitions/foundations</li>
+              <li>Worldview/value systems (Spiral Dynamics)</li>
+              <li>Belief structures</li>
+              <li>Epistemic stance (how they know what they "know")</li>
+              <li>Self-justification mechanisms</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>→ Narrative Cognition Map: Cognitive &amp; Rhetorical Patterns section</li>
+              <li>Logical fallacies (complete taxonomy)</li>
+              <li>Cognitive biases (Kahneman/Tversky, heuristics)</li>
+              <li>Rhetoric modes (Ethos, Pathos, Logos, Kairos, Mythos, Telos, Bios)</li>
+              <li>Transactional Analysis (Parent/Adult/Child ego states)</li>
+              <li>Moral Foundations Theory (Haidt)</li>
+              <li>Spiral Dynamics (value systems/worldviews)</li>
+              <li>Identity-protective cognition</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What fallacies does the character employ?</li>
+              <li>What biases are influencing perception?</li>
+              <li>What rhetorical mode dominates?</li>
+              <li>What is the character's reasoning strategy?</li>
+              <li>How does the character justify their actions?</li>
+              <li>What worldview/value system is operating?</li>
+              <li>What ego state is dominant?</li>
+              <li>What moral foundations are activated?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>Understanding character reasoning</li>
+              <li>Analyzing dialogue for persuasion/manipulation</li>
+              <li>Tracking cognitive shifts (bias → insight)</li>
+              <li>Mapping argument structures in scenes</li>
+              <li>Analyzing ensemble dynamics (who thinks how)</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <div class="callout-example">
+              <h4>Notation Example</h4>
+              <p><code>[01:15:00] / [9:00] / [Cognitive Dimension 3]</code></p>
+              <p><strong>Fallacy dominant:</strong> Sunk Cost Fallacy</p>
+              <p><strong>Bias:</strong> Confirmation bias + identity-protective cognition</p>
+              <p><strong>Rhetoric mode:</strong> Ethos failing → Pathos (desperation)</p>
+              <p><strong>Ego state:</strong> Critical Parent → Wounded Child</p>
+              <p><strong>Moral foundation:</strong> Authority/Loyalty challenged by Care/Fairness</p>
+              <p><strong>Spiral Dynamics:</strong> Blue (order) → Orange (achievement) crisis</p>
+              <p><strong>Worldview:</strong> "Control ensures safety" → "Control created danger"</p>
+              <p><strong>→</strong> Thought pattern breakdown triggers psychological crisis (D2)</p>
+              <p><strong>→</strong> Prepares for thematic revelation (D0)</p>
+            </div>
+            <h4>Character Differentiation</h4>
+            <p>In ensemble casts, assign different cognitive signatures:</p>
+            <ul>
+              <li><strong>Hero:</strong> Appeal to Emotion + Sunk Cost Fallacy</li>
+              <li><strong>Antagonist:</strong> Appeal to Authority + False Dilemma</li>
+              <li><strong>Mentor:</strong> Logos + No True Scotsman</li>
+              <li><strong>Sidekick:</strong> Bandwagon Fallacy + Groupthink</li>
+              <li><strong>Skeptic:</strong> Slippery Slope + Projection</li>
+            </ul>
+            <p>This creates distinct "thinking voices" for each character.</p>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Cognitive patterns emerge from psychological wounds (Psychological Dimension 2)</li>
+              <li>Fallacies express thematic conflicts (Core Dimension 0)</li>
+              <li>Reasoning errors drive plot mistakes (Structural Dimension 4)</li>
+              <li>Rhetorical modes shape dialogue (Surface Dimension 5)</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D2 — PSYCHOLOGICAL / EMOTIONAL           -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d2-psychological">
+        <div class="dimension-card">
+          <span class="dimension-number">PSYCHOLOGICAL DIMENSION 2</span>
+          <h3 class="dimension-title">Psychological / Emotional / Affective</h3>
+          <p class="dimension-position">Internal character landscape</p>
+        </div>
+
+        <Tabs id="d2-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> The internal landscape of character — psyche, wounds, desire, identity.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Jungian archetype (which of 12)</li>
+              <li>Shadow content (repressed material)</li>
+              <li>Anima/animus dynamics</li>
+              <li>Enneagram type and movement</li>
+              <li>Core wound and defensive structure</li>
+              <li>Attachment style</li>
+              <li>Want vs Need (conscious vs unconscious desire)</li>
+              <li>Defense mechanisms active</li>
+              <li>Temperament under stress</li>
+              <li>Identity crisis/integration moments</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>→ Narrative Cognition Map: Psychological Archetypes section</li>
+              <li>Jungian archetypes (12 types, shadow, anima/animus)</li>
+              <li>Enneagram (9 types, core fears, growth/stress lines)</li>
+              <li>Temperament theory (4 temperaments)</li>
+              <li>Attachment theory (secure, anxious, avoidant, disorganized)</li>
+              <li>Lacan (mirror stage, Real/Symbolic/Imaginary)</li>
+              <li>Defense mechanisms (Freudian taxonomy)</li>
+              <li>Character wound systems</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What is the character's core wound?</li>
+              <li>What defense mechanisms are visible?</li>
+              <li>What does the character want vs need?</li>
+              <li>What shadow material is being projected?</li>
+              <li>What attachment pattern drives relationships?</li>
+              <li>How is identity being challenged?</li>
+              <li>What Enneagram movement is happening?</li>
+              <li>What is the internal transformation arc?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>Character-driven analysis</li>
+              <li>Understanding motivation and desire</li>
+              <li>Tracking internal transformation arcs</li>
+              <li>Analyzing relationship dynamics</li>
+              <li>Diagnosing why characters make choices</li>
+              <li>Deep viewing (second/third pass)</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <div class="callout-example">
+              <h4>Notation Example</h4>
+              <p><code>[01:03:42] / [6:00] / [Psychological Dimension 2]</code></p>
+              <p><strong>Jungian archetype:</strong> Innocent → Hero transition</p>
+              <p><strong>Enneagram:</strong> Type 9 moving toward Type 3 (growth line)</p>
+              <p><strong>Temperament:</strong> Phlegmatic expressing Choleric under pressure</p>
+              <p><strong>Wound:</strong> Abandonment trauma activated</p>
+              <p><strong>Shadow content:</strong> Anger previously repressed now surfacing</p>
+              <p><strong>Defense:</strong> Reaction formation breaking down</p>
+              <p><strong>Need vs Want:</strong> Wants safety / Needs authentic self-expression</p>
+              <p><strong>Belief challenged:</strong> "If I don't make waves, I'll be loved"</p>
+              <p><strong>→</strong> Maximum vulnerability moment</p>
+              <p><strong>→</strong> Goddess archetype appears (external helper provides mirror)</p>
+            </div>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Psychological wounds express through cognitive distortions (D3)</li>
+              <li>Internal archetypes mirror mythic patterns (D1)</li>
+              <li>Character beliefs drive thematic argument (D0)</li>
+              <li>Psychological state influences behavior/dialogue (D5)</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D1 — ARCHETYPAL / MYTHIC                 -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d1-archetypal">
+        <div class="dimension-card">
+          <span class="dimension-number">ARCHETYPE DIMENSION 1</span>
+          <h3 class="dimension-title">Archetypal / Universal / Primordial / Mythic</h3>
+          <p class="dimension-position">Ancient patterns and collective unconscious</p>
+        </div>
+
+        <Tabs id="d1-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> Universal patterns, ancestral story DNA, collective unconscious content.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Active mythic pattern (which ATU tale type, which monomyth stage)</li>
+              <li>Archetypal characters present (hero, shadow, trickster, mentor, etc.)</li>
+              <li>Universal symbols in play</li>
+              <li>Descent/ascent patterns</li>
+              <li>Threshold crossings</li>
+              <li>Death-rebirth motifs</li>
+              <li>Sacred marriage / divine encounter moments</li>
+              <li>Cultural mythology being referenced</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>→ Narrative Cognition Map: Mythic Patterns + Global Mythos sections</li>
+              <li>ATU tale-type index</li>
+              <li>Propp's 31 functions</li>
+              <li>Campbell's monomyth stages</li>
+              <li>World mythology (Norse, Yoruba, Hindu, Celtic, etc.)</li>
+              <li>Jungian collective unconscious (archetypes as inherited patterns)</li>
+              <li>Sacred narrative patterns</li>
+              <li>Fairy tale structures</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What universal story pattern is active?</li>
+              <li>Which mythic archetype is the character embodying?</li>
+              <li>What fairy tale or myth does this echo?</li>
+              <li>What collective unconscious material is being accessed?</li>
+              <li>Is this a descent, ascent, or threshold moment?</li>
+              <li>What universal symbol is operating?</li>
+              <li>What cultural mythology is being referenced?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>Identifying universal resonance</li>
+              <li>Cross-cultural analysis</li>
+              <li>Understanding why stories "feel" powerful</li>
+              <li>Tracking hero's journey stages</li>
+              <li>Analyzing symbolic weight of key moments</li>
+              <li>Teaching mythic structure</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <h4>Mythic Weight by Position</h4>
+            <p>Certain clock positions carry greater archetypal/mythic weight:</p>
+            <ul>
+              <li><strong>3:00:</strong> Threshold guardian appears</li>
+              <li><strong>6:00:</strong> Divine encounter (goddess, god, wise figure)</li>
+              <li><strong>9:00:</strong> Death confrontation (literal or symbolic)</li>
+            </ul>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Mythic patterns structure story mechanics (D4)</li>
+              <li>Archetypal energies shape psychology (D2)</li>
+              <li>Universal symbols appear in visuals (D5)</li>
+              <li>Mythic journey expresses theme (D0)</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+      <!-- ════════════════════════════════════════ -->
+      <!-- D0 — THEMATIC CORE                       -->
+      <!-- ════════════════════════════════════════ -->
+      <div slot="d0-core">
+        <div class="dimension-card">
+          <span class="dimension-number">CORE DIMENSION 0</span>
+          <h3 class="dimension-title">Thematic Core / Main Philosophical Conflict</h3>
+          <p class="dimension-position">Central meaning and purpose</p>
+        </div>
+
+        <Tabs id="d0-tabs" accent="teal" labels={["Overview", "Frameworks", "Questions", "Examples"]}>
+          <div slot="tab-0">
+            <p><strong>What This Dimension Examines:</strong> The central argument, philosophical question, core problem the story explores.</p>
+            <h4>Contents</h4>
+            <ul>
+              <li>Story's Central Question / Core Problem</li>
+              <li>Thematic argument (what the story says about the theme)</li>
+              <li>Moral premise</li>
+              <li>Philosophical conflict</li>
+              <li>Value tensions (System vs Eden, Control vs Surrender, etc.)</li>
+              <li>What the story is "really about"</li>
+              <li>The "truth" being explored</li>
+              <li>Existential/spiritual dimension</li>
+            </ul>
+          </div>
+          <div slot="tab-1">
+            <h4>Framework References</h4>
+            <ul>
+              <li>→ Universal Structure doc: System vs Eden, Core Problem</li>
+              <li>→ Narrative Cognition Map: Core (Center) section</li>
+              <li>Moral Premise (Stanley Williams)</li>
+              <li>Thematic frameworks</li>
+              <li>Central Question (Truby)</li>
+              <li>Dramatica (Story Problem element)</li>
+            </ul>
+          </div>
+          <div slot="tab-2">
+            <h4>Analysis Questions</h4>
+            <ul>
+              <li>What is the core question this story asks?</li>
+              <li>What philosophical problem/conflict is being explored?</li>
+              <li>What is this story really about (beneath plot)?</li>
+              <li>What moral argument is being made?</li>
+              <li>What value system is being tested?</li>
+              <li>What truth is revealed?</li>
+              <li>How do all characters relate to the central problem?</li>
+              <li>What answer does the story offer?</li>
+            </ul>
+            <h4>How to Use</h4>
+            <ul>
+              <li>Understanding story's purpose</li>
+              <li>Analyzing what makes story meaningful</li>
+              <li>Teaching thematic construction</li>
+              <li>Understanding character relationship to theme</li>
+              <li>Evaluating story's philosophical depth</li>
+              <li>Comparing thematic variations across films</li>
+            </ul>
+          </div>
+          <div slot="tab-3">
+            <h4>Common Core Problems / Themes</h4>
+            <ul>
+              <li>Identity (Who am I?)</li>
+              <li>Freedom vs Security</li>
+              <li>Truth vs Comfort</li>
+              <li>Love vs Power</li>
+              <li>Individual vs Collective</li>
+              <li>Order vs Chaos</li>
+              <li>Nature vs Nurture</li>
+              <li>Justice vs Mercy</li>
+            </ul>
+            <h4>Cross-Dimension Connections</h4>
+            <ul>
+              <li>Core theme drives all dimensions above it</li>
+              <li>Archetypal patterns carry thematic weight (D1)</li>
+              <li>Psychological wounds test the theme (D2)</li>
+              <li>Cognitive fallacies embody false answers (D3)</li>
+              <li>Structural beats force thematic choice (D4)</li>
+              <li>Surface visuals make theme visible (D5)</li>
+            </ul>
+          </div>
+        </Tabs>
+      </div>
+
+    </ExpandingCards>
+
+    <hr/>
+
+    <!-- POST-DIMENSION SECTIONS (remain as accordions) -->
+    <div class="accordion-item" data-accordion-group="post-dimensions">
+      <details id="characteristics-details">
+        <summary class="accordion-toggle accordion-toggle--teal">
+          <span class="accordion-toggle__icon accordion-toggle__icon--teal">◈</span>
+          <span class="accordion-toggle__label">
+            <span class="accordion-toggle__title" id="depth-characteristics">Dimension Characteristics</span>
+            <span class="accordion-toggle__meta">Consistent patterns across the vertical axis</span>
+          </span>
+          <span class="accordion-toggle__chevron">▾</span>
+        </summary>
+        <div class="accordion-body">
+          <h4>Depth Increases Specificity</h4>
+          <p>All describe same moment at different depths:</p>
+          <ul>
+            <li><strong>D5:</strong> "Character crosses doorway" (concrete)</li>
+            <li><strong>D4:</strong> "Threshold function executed" (structural)</li>
+            <li><strong>D3:</strong> "Old reasoning inadequate" (cognitive)</li>
+            <li><strong>D2:</strong> "Ego destabilization begins" (psychological)</li>
+            <li><strong>D1:</strong> "Hero crosses to special world" (mythic)</li>
+            <li><strong>D0:</strong> "Commitment to truth-seeking" (thematic)</li>
+          </ul>
+          <h4>Entry Questions for Each Dimension</h4>
+          <ul>
+            <li><strong>D5:</strong> "What do I see/hear?"</li>
+            <li><strong>D4:</strong> "What is this scene's function?"</li>
+            <li><strong>D3:</strong> "How is the character thinking?"</li>
+            <li><strong>D2:</strong> "What is happening inside the character?"</li>
+            <li><strong>D1:</strong> "What universal pattern is this?"</li>
+            <li><strong>D0:</strong> "What does this mean about the core question?"</li>
+          </ul>
+          <h4>Which Frameworks Belong to Which Dimension</h4>
+          <p><strong>D5 (Expressive/Symbolic):</strong></p>
+          <ul><li>Semiotics, visual symbolism, trope catalogs, film craft analysis</li></ul>
+          <p><strong>D4 (Structural):</strong></p>
+          <ul><li>Dramatica, Harmon, Truby, beat systems, genre conventions, plot geometry</li></ul>
+          <p><strong>D3 (Cognitive):</strong></p>
+          <ul><li>Logical fallacies, cognitive biases, rhetoric, TA, Moral Foundations, Spiral Dynamics</li></ul>
+          <p><strong>D2 (Psychological):</strong></p>
+          <ul><li>Jung, Enneagram, temperaments, Lacan, attachment theory, defense mechanisms</li></ul>
+          <p><strong>D1 (Archetypal):</strong></p>
+          <ul><li>ATU, Propp, Campbell, world mythologies, universal symbols</li></ul>
+          <p><strong>D0 (Core):</strong></p>
+          <ul><li>Moral Premise, thematic analysis, Central Question, philosophical frameworks</li></ul>
+        </div>
+      </details>
+    </div>
+
+    <div class="accordion-item" data-accordion-group="post-dimensions">
+      <details id="movement-details">
+        <summary class="accordion-toggle accordion-toggle--teal">
+          <span class="accordion-toggle__icon accordion-toggle__icon--teal">↕</span>
+          <span class="accordion-toggle__label">
+            <span class="accordion-toggle__title" id="vertical-movement">Vertical Movement Protocols</span>
+            <span class="accordion-toggle__meta">How to navigate between dimensions during analysis</span>
+          </span>
+          <span class="accordion-toggle__chevron">▾</span>
+        </summary>
+        <div class="accordion-body">
+          <h3>Top-Down Analysis (Surface → Core)</h3>
+          <p><strong>Protocol:</strong> Start with what's visible, drill toward meaning.</p>
+          <ol>
+            <li>Observe surface (D5) → what do I see?</li>
+            <li>Identify structure (D4) → how is it built?</li>
+            <li>Analyze reasoning (D3) → how does the character think?</li>
+            <li>Explore psychology (D2) → what drives the character?</li>
+            <li>Find archetype (D1) → what universal pattern?</li>
+            <li>Discover core (D0) → what does it mean?</li>
+          </ol>
+          <h3>Bottom-Up Analysis (Core → Surface)</h3>
+          <p><strong>Protocol:</strong> Start with the theme, trace how it expresses upward.</p>
+          <ol>
+            <li>State core question/problem (D0)</li>
+            <li>Ask: "What myth carries this?" (D1)</li>
+            <li>Ask: "What psychological wound creates this?" (D2)</li>
+            <li>Ask: "What cognitive error embodies this?" (D3)</li>
+            <li>Ask: "What structural beat reveals this?" (D4)</li>
+            <li>Ask: "How is this made visible?" (D5)</li>
+          </ol>
+          <div class="callout-example">
+            <h4>Example: Control vs Surrender Theme</h4>
+            <ul>
+              <li><strong>D0:</strong> Theme: Control vs Surrender</li>
+              <li><strong>D1:</strong> Dragon Slayer myth (confronting chaos)</li>
+              <li><strong>D2:</strong> Fear of vulnerability, abandonment wound</li>
+              <li><strong>D3:</strong> False Dilemma fallacy (control or die)</li>
+              <li><strong>D4:</strong> Crisis beat, forced choice moment</li>
+              <li><strong>D5:</strong> Visual: Character releases grip, lets go of object</li>
+            </ul>
+          </div>
+          <h3>Cross-Layer Analysis (Tracking Single Element)</h3>
+          <p><strong>Protocol:</strong> Track one element through all six dimensions simultaneously.</p>
+          <div class="callout-example">
+            <h4>Example: Tracking "The Key" (object/symbol)</h4>
+            <p><strong><code>[00:35:20] / [4:00] / [All Dimensions]</code></strong></p>
+            <p><strong>D5:</strong> Silver key, ornate, worn, character holds it carefully</p>
+            <p><strong>D4:</strong> Plant for payoff at 10:00, MacGuffin driving search</p>
+            <p><strong>D3:</strong> Symbol of "unlocking truth" vs staying ignorant</p>
+            <p><strong>D2:</strong> Represents access to repressed memory/identity</p>
+            <p><strong>D1:</strong> Archetypal key to underworld/forbidden knowledge</p>
+            <p><strong>D0:</strong> Truth is accessible but requires courage</p>
+            <hr style="margin: 24px 0; border-color: #4CAF50;"/>
+            <p><strong><code>[01:18:45] / [10:00] / [All Dimensions]</code></strong></p>
+            <p><strong>D5:</strong> Key used, door opens, light floods through</p>
+            <p><strong>D4:</strong> Payoff of plant, major revelation enabled</p>
+            <p><strong>D3:</strong> Choosing knowledge despite cost</p>
+            <p><strong>D2:</strong> Character accessing previously denied truth</p>
+            <p><strong>D1:</strong> Returning from underworld with treasure/knowledge</p>
+            <p><strong>D0:</strong> Theme resolved: Truth chosen over comfort</p>
+          </div>
+          <h3>When to Change Dimensions</h3>
+          <p><strong>Change dimensions when:</strong></p>
+          <h4>Current dimension exhausted</h4>
+          <ul>
+            <li>No more insights available at this depth</li>
+            <li>Questions answered</li>
+            <li>Pattern fully mapped</li>
+          </ul>
+          <h4>Different question emerges</h4>
+          <ul>
+            <li>"How does this function?" → switch to D4</li>
+            <li>"What does character believe?" → switch to D3</li>
+            <li>"What wound drives this?" → switch to D2</li>
+            <li>"What myth is this?" → switch to D1</li>
+            <li>"What is this really about?" → switch to D0</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
+  </div>
+
+  <!-- SECTION NAVIGATION -->
+  <nav class="section-nav">
+    <a href={`${base}/compass/horizontal-axis/`} class="section-nav__link section-nav__link--prev">
+      <span class="section-nav__arrow">←</span>
+      <span>
+        <span class="section-nav__label">Previous</span>
+        <span class="section-nav__title">II. Horizontal Axis</span>
+      </span>
+    </a>
+    <a href={`${base}/compass/intersection-logic/`} class="section-nav__link section-nav__link--next">
+      <span>
+        <span class="section-nav__label">Next</span>
+        <span class="section-nav__title">IV. Intersection Logic</span>
+      </span>
+      <span class="section-nav__arrow">→</span>
+    </a>
+  </nav>
+
+</PortalLayout>
+<script>
+  function openAccordionFromHash() {
+    const hash = window.location.hash.replace('#', '');
+    if (!hash) return;
+    const anchorMap = {
+      'depth-characteristics': 'characteristics-details',
+      'vertical-movement': 'movement-details',
+    };
+    const detailsId = anchorMap[hash];
+    if (detailsId) {
+      const details = document.getElementById(detailsId);
+      if (details) {
+        details.open = true;
+        requestAnimationFrame(() => {
+          const target = document.getElementById(hash);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
+    }
+  }
+  openAccordionFromHash();
+  window.addEventListener('hashchange', openAccordionFromHash);
+</script>
