@@ -386,10 +386,6 @@
   overflow: visible;
 }
 
-  /* optional: makes the inside feel less cramped */
-  padding: 16px 18px;
-}
-
 /* Page-specific: vertical-axis expanding cards */
 .dimension-strip-intro {
   font-size: 0.875rem;
