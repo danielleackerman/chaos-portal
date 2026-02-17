@@ -1,0 +1,196 @@
+/* ===== CALLOUT SYSTEM — from Compass — WAS MISSING ===== */
+
+/* Base callout (structured: icon + label + body) */
+.callout {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  transition: all 0.3s ease;
+}
+
+/* When callout has icon child, use flex layout */
+.callout:has(> .icon) {
+  display: flex;
+  gap: 20px;
+}
+
+.callout .icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.callout .label {
+  font-size: 0.75em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.callout p {
+  margin-bottom: 0;
+}
+
+/* Callout body — for hub node / ASCII art callouts */
+.callout-body {
+  margin-top: 0;
+}
+
+/* Pre blocks inside callouts — preserve ASCII art */
+.callout pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  overflow-x: auto;
+  margin: 0 0 12px 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  white-space: pre;
+}
+
+.callout pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  color: var(--text);
+}
+
+.callout-body pre {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.callout-body pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text);
+}
+
+/* General pre block styling */
+pre {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  overflow-x: auto;
+  margin: 20px 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  white-space: pre;
+  color: var(--text);
+}
+
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-weight: 400;
+  display: block;
+  box-shadow: none;
+  font-size: inherit;
+  color: inherit;
+}
+
+/* Editorial (gray) */
+.callout--editorial {
+  border-left: 5px solid var(--info-gray);
+}
+.callout--editorial .icon {
+  background: var(--info-gray);
+  color: white;
+}
+.callout--editorial .label {
+  color: var(--info-gray);
+}
+
+/* Horizontal axis (amber) */
+.callout--horizontal {
+  border-left: 5px solid var(--semantic-h);
+}
+.callout--horizontal .icon {
+  background: var(--semantic-h);
+  color: white;
+}
+.callout--horizontal .label {
+  color: var(--semantic-h);
+}
+
+/* Vertical axis (teal) */
+.callout--vertical {
+  border-left: 5px solid var(--semantic-v);
+}
+.callout--vertical .icon {
+  background: var(--semantic-v);
+  color: white;
+}
+.callout--vertical .label {
+  color: var(--semantic-v);
+}
+
+/* Portal (purple) — NEW in v3.2 */
+.callout--portal {
+  border-left: 5px solid var(--accent-purple);
+}
+.callout--portal .icon {
+  background: var(--accent-purple);
+  color: white;
+}
+.callout--portal .label {
+  color: var(--accent-purple);
+}
+
+/* Legacy callout variants — used in existing Compass HTML */
+.callout-info {
+  background: var(--surface-elevated);
+  border-left: 5px solid var(--info-blue);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  background-image: linear-gradient(90deg, color-mix(in srgb, var(--info-blue) 5%, transparent), transparent);
+}
+
+.callout-example,
+.callout-code {
+  background: var(--surface-elevated);
+  border-left: 5px solid var(--info-gray);
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+}
+
+.callout-warning {
+  background: var(--surface-elevated);
+  border-left: 5px solid #EF4444;
+  border-radius: var(--radius-md);
+  padding: 25px;
+  margin: 25px 0;
+  box-shadow: var(--shadow-subtle);
+  background-image: linear-gradient(90deg, color-mix(in srgb, #EF4444 5%, transparent), transparent);
+}
+

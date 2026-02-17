@@ -1,0 +1,36 @@
+/* ===== TABLE WRAPPER ===== */
+/* Overflow wrapper for wide tables */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 25px 0;
+  border-radius: var(--radius-md);
+}
+.table-wrap table {
+  margin: 0;
+}
+
+/* Make tables inside compass-content scrollable on mobile */
+.compass-content table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ===== CHECKLISTS ===== */
+.checklist {
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  padding: 20px 25px;
+  margin: 25px 0;
+}
+
+.checklist div {
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 500;
+}
+
+.checklist div:last-child {
+  border-bottom: none;
+}
