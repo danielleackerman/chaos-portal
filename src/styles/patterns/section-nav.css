@@ -176,3 +176,13 @@
 .page-nav-card__count--amber { background: #F59E0B12; color: var(--semantic-h); }
 .page-nav-card__count--teal { background: #14B8A612; color: var(--semantic-v); }
 
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .section-nav {
+    flex-direction: column;
+  }
+  .section-nav__link {
+    max-width: 100%;
+  }
+}

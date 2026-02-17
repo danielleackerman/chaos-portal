@@ -107,11 +107,4 @@
     scrollbar-width: none; /* Hide scrollbar Firefox */
   }
   .tabs__strip::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
-  
-  .section-nav {
-    flex-direction: column;
-  }
-  .section-nav__link {
-    max-width: 100%;
-  }
 }
