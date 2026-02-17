@@ -1,0 +1,144 @@
+/* ===== CSS VARIABLES — Merged from Compass + Portal ===== */
+:root {
+  /* TYPOGRAPHY */
+  --font-sans: 'Helvetica Neue', Helvetica, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+  /* LIGHT MODE */
+  --bg: #F8F9FA;
+  --surface: #FFFFFF;
+  --surface-elevated: #F1F3F5;
+  --surface-inset: #FAFAFA;
+  --text: #2D3436;
+  --text-2: #636E72;
+  --text-3: #B2BEC3;
+  --border: #DFE6E9;
+  --border-accent: #CED4DA;
+
+  /* SEMANTIC — from Compass */
+  --semantic-h: #F59E0B;
+  --semantic-v: #14B8A6;
+  --accent-purple: #8B5CF6;
+  --accent-green: #10B981;
+  --accent-amber: #F59E0B;
+
+  /* GRADIENTS */
+  --gradient-h: #F5B04B;
+  --gradient-v: #2AC7B8;
+  --gradient-opacity: 0.7;
+  --gradient-brand: linear-gradient(135deg, #F59E0B, #14B8A6);
+
+  /* INFORMATION — from Compass */
+  --info-blue: #3B82F6;
+  --info-gray: #6B7280;
+
+  /* UI INTERACTION — from Compass */
+  --ui-primary: #334155;
+  --ui-hover: #1E293B;
+  --ui-muted: #94A3B8;
+
+  /* TABLE — from Compass */
+  --table-header-bg: #E5E7EB;
+  --table-header-text: #000000;
+  --table-border: #D1D5DB;
+  --table-row-alt: #F9FAFB;
+
+  /* TOKEN — from Compass */
+  --token-bg: #ededf1;
+  --token-border: #d0d0d8;
+  --token-text: #2D3436;
+
+  /* SPACING — 8px scale from Compass */
+  --space-xs: 8px;
+  --space-sm: 16px;
+  --space-md: 24px;
+  --space-lg: 48px;
+  --space-xl: 64px;
+
+
+  /* DIMENSION DEPTH SCALE (Vertical Axis — teal at increasing opacity) */
+  --dim-5: rgba(20, 184, 166, 0.35);
+  --dim-4: rgba(20, 184, 166, 0.48);
+  --dim-3: rgba(20, 184, 166, 0.61);
+  --dim-2: rgba(20, 184, 166, 0.74);
+  --dim-1: rgba(20, 184, 166, 0.87);
+  --dim-0: rgba(20, 184, 166, 1.00);
+
+  /* POSITION INTENSITY SCALE (Horizontal Axis — amber at varying intensity) */
+  --pos-12: rgba(245, 158, 11, 0.25);
+  --pos-1:  rgba(245, 158, 11, 0.40);
+  --pos-3:  rgba(245, 158, 11, 0.60);
+  --pos-6:  rgba(245, 158, 11, 1.00);
+  --pos-9:  rgba(245, 158, 11, 0.60);
+  --pos-11: rgba(245, 158, 11, 0.35);
+
+  /* RADIUS */
+  --radius-sm: 3px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-pill: 999px;
+
+  /* SHADOWS */
+  --shadow-subtle: 0 2px 8px rgba(0,0,0,0.06);
+  --shadow-card: 0 4px 16px rgba(0,0,0,0.08);
+  --shadow-deep: 0 8px 32px rgba(0,0,0,0.12);
+
+  /* LAYOUT */
+  --max-width: 1100px;
+  --header-height: 56px;
+}
+
+/* DARK MODE — Merged */
+.dark-mode {
+  --bg: #0F0F14;
+  --surface: #1A1A23;
+  --surface-elevated: #252533;
+  --surface-inset: #16161f;
+  --text: #F0F0F5;
+  --text-2: #B0B0C0;
+  --text-3: #707084;
+  --border: #3A3A4A;
+  --border-accent: #4A4A5A;
+
+  --gradient-h: #F59E0B;
+  --gradient-v: #14B8A6;
+  --gradient-opacity: 1;
+
+  --info-blue: #60A5FA;
+  --info-gray: #9CA3AF;
+
+  --ui-primary: #CBD5E1;
+  --ui-hover: #E2E8F0;
+  --ui-muted: #64748B;
+
+  --table-header-bg: #2D2D3A;
+  --table-header-text: #FFFFFF;
+  --table-border: #3A3A4A;
+  --table-row-alt: #1F1F2A;
+
+  --token-bg: #2D2D3A;
+  --token-border: #4A4A5A;
+  --token-text: #F0F0F5;
+
+
+  --dim-5: rgba(20, 184, 166, 0.25);
+  --dim-4: rgba(20, 184, 166, 0.38);
+  --dim-3: rgba(20, 184, 166, 0.51);
+  --dim-2: rgba(20, 184, 166, 0.64);
+  --dim-1: rgba(20, 184, 166, 0.77);
+  --dim-0: rgba(20, 184, 166, 0.90);
+
+  --pos-12: rgba(245, 158, 11, 0.20);
+  --pos-1:  rgba(245, 158, 11, 0.35);
+  --pos-3:  rgba(245, 158, 11, 0.50);
+  --pos-6:  rgba(245, 158, 11, 0.90);
+  --pos-9:  rgba(245, 158, 11, 0.50);
+  --pos-11: rgba(245, 158, 11, 0.30);
+
+  --shadow-subtle: 0 2px 8px rgba(0,0,0,0.2);
+  --shadow-card: 0 4px 16px rgba(0,0,0,0.3);
+  --shadow-deep: 0 8px 32px rgba(0,0,0,0.4);
+}
+

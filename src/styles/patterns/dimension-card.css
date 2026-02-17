@@ -1,0 +1,245 @@
+/* ===== STRUCTURAL CONTAINERS — from Compass — WAS MISSING ===== */
+
+/* Crosswalk dimension blocks */
+.crosswalk-dimension {
+  padding: 16px;
+  margin: 16px 0;
+  border-left: 3px solid var(--border-accent);
+  background: var(--surface-elevated);
+  border-radius: var(--radius-sm);
+}
+
+/* Framework definition blocks */
+.framework-def {
+  padding: 20px;
+  margin: 20px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+}
+
+/* Dimension cards */
+.dimension-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  margin: 0.75rem 0;
+  transition: all 0.2s ease;
+}
+.dimension-card:hover {
+  border-color: var(--semantic-v);
+  box-shadow: var(--shadow-card);
+}
+
+.dimension-horizontal {
+  border-left: 5px solid var(--semantic-h);
+  padding: 25px 25px 25px 70px;
+  margin: 25px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow: var(--shadow-subtle);
+}
+.dimension-horizontal::before {
+  content: "→";
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--semantic-h);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.dimension-horizontal h4,
+.dimension-horizontal h3,
+.dimension-horizontal h2 {
+  color: var(--text);
+}
+
+.dimension-vertical {
+  border-left: 5px solid var(--semantic-v);
+  padding: 25px 25px 25px 70px;
+  margin: 25px 0;
+  background: var(--surface-elevated);
+  border-radius: var(--radius-md);
+  position: relative;
+  box-shadow: var(--shadow-subtle);
+}
+.dimension-vertical::before {
+  content: "↓";
+  position: absolute;
+  left: 20px;
+  top: 25px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--semantic-v);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+.dimension-vertical h4,
+.dimension-vertical h3,
+.dimension-vertical h2 {
+  color: var(--text);
+}
+
+/* Protocol, pattern, intersection, template, example boxes */
+.protocol-box,
+.pattern-card,
+.intersection-box,
+.template-box,
+.example-box {
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 20px;
+  margin: 20px 0;
+  transition: all 0.2s ease;
+}
+
+.protocol-box:hover,
+.pattern-card:hover {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Dimension metadata */
+.dim-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.dimension-number {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text-2);
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.dimension-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text);
+}
+
+.dimension-position {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--text-2);
+  font-size: 0.95em;
+}
+
+/* Coordinate notation */
+.coord-list {
+  list-style: none;
+  margin: 12px 0;
+  padding: 0;
+}
+
+.coord-line {
+  padding: 4px 0;
+}
+
+.coord-tag {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  background: var(--token-bg);
+  border: 1px solid var(--token-border);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  font-size: 0.85em;
+  color: var(--token-text);
+}
+
+/* Hub meta info */
+.hub-meta {
+  font-size: 0.85rem;
+  color: var(--text-2);
+  margin: 8px 0;
+}
+
+/* Strong code */
+.strong-code {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* Task list */
+.task-list {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+}
+
+.task-list li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--border);
+}
+.task-list li:last-child {
+  border-bottom: none;
+}
+
+.check {
+  color: var(--accent-green);
+  margin-right: 4px;
+}
+
+/* Page break (for long Compass pages) */
+.page-break {
+  margin: 60px 0;
+  border-top: 2px solid var(--border);
+}
+
+/* Subsection indent */
+.subsection {
+  padding-left: 1rem;
+  border-left: 2px solid var(--border);
+  margin: 1rem 0;
+}
+
+/* Fixed-column layout */
+.fixed-cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+
+
+/* ===== COORDINATE PICKER HIGHLIGHT/DIM ===== */
+/* This logic handles the "Highlight Dimension" feature */
+[data-accordion-group="dimensions"] .accordion-item {
+  transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+}
+
+/* When a dimension is highlighted, dim everything else */
+.dimension-dimmed {
+  opacity: 0.35;
+  filter: grayscale(0.8) blur(0.5px);
+  pointer-events: none;
+  transform: scale(0.98);
+}
+
+.dimension-highlighted {
+  opacity: 1;
+  filter: none;
+  transform: scale(1.02);
+  z-index: 10;
+  box-shadow: 0 0 0 2px var(--semantic-v), var(--shadow-deep);
+}
+
