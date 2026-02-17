@@ -1,0 +1,81 @@
+/* ============================================================
+   CSS ADDITIONS — ExpandingCards Slotted Mode
+   Merge into src/styles/global.css after existing expanding-cards rules.
+   ============================================================ */
+
+
+/* ===== SLOTTED MODE: rich content (Tabs, etc.) ===== */
+/* Overrides the 220px max-height for cards with slot content */
+
+.expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+  max-height: none;
+  overflow-y: auto;
+}
+
+/* Collapsed cards in slotted mode: fully hide content */
+.expanding-cards--slotted .expanding-cards__card:not([aria-expanded='true']) .expanding-cards__content {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  pointer-events: none;
+}
+
+/* Expanded card in slotted vertical mode takes available space */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card[aria-expanded='true'] {
+  flex: 1 1 auto;
+}
+
+/* Collapsed cards shrink to rail height */
+.expanding-cards--slotted.expanding-cards--vertical .expanding-cards__card:not([aria-expanded='true']) {
+  flex: 0 0 56px;
+}
+
+/* ===== DIMENSION DEPTH SCALE ACCENTS ===== */
+/* Override: when slotted, use teal accent from depth scale on expanded card border */
+.expanding-cards--slotted .expanding-cards__card[data-depth="5"][aria-expanded='true'] {
+  border-left-color: var(--dim-5);
+}
+.expanding-cards--slotted .expanding-cards__card[data-depth="4"][aria-expanded='true'] {
+  border-left-color: var(--dim-4);
+}
+.expanding-cards--slotted .expanding-cards__card[data-depth="3"][aria-expanded='true'] {
+  border-left-color: var(--dim-3);
+}
+.expanding-cards--slotted .expanding-cards__card[data-depth="2"][aria-expanded='true'] {
+  border-left-color: var(--dim-2);
+}
+.expanding-cards--slotted .expanding-cards__card[data-depth="1"][aria-expanded='true'] {
+  border-left-color: var(--dim-1);
+}
+.expanding-cards--slotted .expanding-cards__card[data-depth="0"][aria-expanded='true'] {
+  border-left-color: var(--dim-0);
+}
+
+/* ===== TABS INSIDE EXPANDING CARDS ===== */
+/* Give tabs panels enough breathing room inside the card */
+.expanding-cards--slotted .tabs__panel {
+  padding: var(--space-sm) 0;
+}
+
+/* Ensure tab strip doesn't get clipped */
+.expanding-cards--slotted .tabs__strip {
+  flex-wrap: wrap;
+}
+
+/* ===== COORDINATE PICKER → EXPANDING CARDS INTEGRATION ===== */
+/* Highlight/dim now targets expanding cards, not accordion items */
+.expanding-cards__card.dimension-highlighted {
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 0 0 2px var(--semantic-v), 0 4px 16px rgba(20, 184, 166, 0.15);
+}
+
+.expanding-cards__card.dimension-dimmed {
+  opacity: 0.35;
+  transition: opacity 0.3s ease;
+}
+
+.expanding-cards__card.dimension-dimmed:hover {
+  opacity: 0.7;
+}
