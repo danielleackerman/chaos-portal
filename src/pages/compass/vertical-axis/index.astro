@@ -926,22 +926,6 @@ const base = import.meta.env.BASE_URL;
   </nav>
 
 </PortalLayout>
-
-<style>
-  /* Dimension highlight/dim effect for Coordinate Picker */
-  .dimension-highlighted {
-    position: relative;
-    z-index: 1;
-  }
-  .dimension-dimmed {
-    opacity: 0.4;
-    transition: opacity 0.3s ease;
-  }
-  .dimension-dimmed:hover {
-    opacity: 0.8;
-  }
-</style>
-
 <script>
   // ===== ACCORDION EXPAND/COLLAPSE ALL =====
   document.querySelectorAll('.accordion-controls__btn').forEach(btn => {

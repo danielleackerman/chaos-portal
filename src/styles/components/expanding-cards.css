@@ -389,3 +389,14 @@
   /* optional: makes the inside feel less cramped */
   padding: 16px 18px;
 }
+
+/* Page-specific: vertical-axis expanding cards */
+.dimension-strip-intro {
+  font-size: 0.875rem;
+  color: var(--text-2);
+  margin-bottom: var(--space-md);
+}
+
+.compass-content .expanding-cards--slotted.expanding-cards--vertical {
+  min-height: 500px;
+}

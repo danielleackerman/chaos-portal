@@ -200,3 +200,60 @@ hr {
   transition: background 0.3s ease;
 }
 
+/* ===== TABLES — from Compass — WAS MISSING ===== */
+
+/* Overflow wrapper for wide tables */
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 25px 0;
+  border-radius: var(--radius-md);
+}
+.table-wrap table {
+  margin: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 25px 0;
+  background: var(--surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-subtle);
+}
+
+/* Make tables inside compass-content scrollable on mobile */
+.compass-content table {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+thead {
+  background: var(--table-header-bg);
+}
+
+th {
+  text-align: left;
+  padding: 15px;
+  font-weight: 600;
+  font-size: 0.9em;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--table-header-text);
+  border-bottom: 2px solid var(--table-border);
+}
+
+td {
+  padding: 12px 15px;
+  border-bottom: 1px solid var(--table-border);
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tbody tr:nth-child(even) {
+  background: var(--table-row-alt);
+}
+

@@ -3,7 +3,7 @@ import PortalLayout from '../../../layouts/PortalLayout.astro';
 import CoordinatePicker from '../../../components/ui/CoordinatePicker.astro';
 import Tabs from '../../../components/ui/Tabs.astro';
 import ExpandingCards from '../../../components/ui/ExpandingCards.astro';
-import '../../../styles/expanding-cards-slotted.css';
+// CSS moved to src/styles/components/expanding-cards.css (imported via global.css)
 const base = import.meta.env.BASE_URL;
 
 const dimensionCards = [
@@ -766,19 +766,6 @@ const dimensionCards = [
   </nav>
 
 </PortalLayout>
-
-<style>
-  .dimension-strip-intro {
-    font-size: 0.875rem;
-    color: var(--text-2);
-    margin-bottom: var(--space-md);
-  }
-
-  .compass-content :global(.expanding-cards--slotted.expanding-cards--vertical) {
-    min-height: 500px;
-  }
-</style>
-
 <script>
   function openAccordionFromHash() {
     const hash = window.location.hash.replace('#', '');
