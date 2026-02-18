@@ -253,33 +253,21 @@
   overflow: visible;
 }
 
-/* Expanded label becomes horizontal header */
+/* Expanded label: hide the D# kicker in slotted vertical expanded state.
+   The label is a direct child of the card (sibling of content), so we
+   target it directly on [aria-expanded='true']. Collapsed rails are
+   unaffected because this selector only matches aria-expanded='true'.
+   .dimension-number ("SURFACE DIMENSION 5") is a separate element — NOT hidden. */
 .expanding-cards--slotted.expanding-cards--vertical
-  .expanding-cards__card[aria-expanded='true'] .expanding-cards__label {
-  display: block;
-  writing-mode: horizontal-tb;
-  text-orientation: initial;
-  height: auto;
-  width: auto;
-  padding: 14px 18px 8px;
-  color: var(--text-2);
-  font-weight: 800;
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
-}
-
-/* Fix 1B: Hide the D# label ONLY inside the expanded card content area.
-   Collapsed rails still show D5/D4/etc normally.
-   .dimension-number ("SURFACE DIMENSION 5") is NOT hidden — restored. */
-.expanding-cards--slotted.expanding-cards--vertical
-  .expanding-cards__card[aria-expanded='true'] .expanding-cards__content
-  .expanding-cards__label {
+  .expanding-cards__card[aria-expanded='true'] > .expanding-cards__label {
   display: none;
 }
 
-/* Expanded content — scrolls inside card, deck height stays stable */
+/* Expanded content — large explicit max-height so the CSS transition
+   has two numeric endpoints (0 → 2000px). max-height:none cannot animate.
+   overflow-y:auto handles actual overflow without layout thrash. */
 .expanding-cards--slotted .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
-  max-height: none;
+  max-height: 2000px;
   opacity: 1;
   overflow-y: auto;
   transform: translateY(0);
