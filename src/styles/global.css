@@ -124,12 +124,12 @@
   border-color: var(--border);
 }
 
-/* THEME TOGGLE */
+/* THEME TOGGLE — normalized to match .site-nav a / .nav-btn */
 .theme-toggle {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-pill);
-  padding: 0.375rem 0.75rem;
+  padding: 0.375rem 0.875rem;
   cursor: pointer;
   font-size: 0.8125rem;
   color: var(--text-2);
@@ -138,6 +138,8 @@
   gap: 0.375rem;
   transition: all 0.2s ease;
   font-family: var(--font-sans);
+  font-weight: 500;
+  white-space: nowrap;
 }
 .theme-toggle:hover {
   background: var(--surface-elevated);
@@ -529,6 +531,52 @@
 
   h2 {
     font-size: 1.8em;
+  }
+
+  /* Mobile: theme-toggle icon-only — clips text, shows emoji only.
+     Button text is a plain text node set by JS (no child element to target).
+     width:2.25rem gives the emoji enough room; overflow:hidden clips the text.
+     aria-label="Toggle theme" preserves accessibility. */
+  .theme-toggle {
+    width: 2.25rem;
+    min-width: 2.25rem;
+    padding: 0.375rem 0;
+    overflow: hidden;
+    justify-content: flex-start;
+    gap: 0;
+    font-size: 1.1rem;
+    text-indent: 0.35rem;
+  }
+
+  /* F) Hide sidebar rail — eats horizontal space on phones */
+  .sidebar-rail {
+    display: none;
+  }
+
+  /* Remove body offset that base.css sets for the rail */
+  body {
+    padding-left: 0;
+  }
+
+  /* Sidebar panel opens from left edge, not past the hidden rail */
+  .page-sidebar.is-open {
+    left: 0;
+  }
+
+  /* G) Mobile breathing tidy-ups */
+  .page-content {
+    overflow-x: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .section {
+    margin-bottom: 1.5rem;
+  }
+
+  .page-hero {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
   }
 }
 

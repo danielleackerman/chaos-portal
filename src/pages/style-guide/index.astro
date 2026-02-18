@@ -2,6 +2,7 @@
 import PortalLayout from '../../layouts/PortalLayout.astro';
 import ExpandingCards from '../../components/ui/ExpandingCards.astro';
 import FlipCard from '../../components/ui/FlipCard.astro';
+import Tabs from '../../components/ui/Tabs.astro';
 const base = import.meta.env.BASE_URL;
 
 
@@ -597,6 +598,86 @@ Examine: What is the character discovering about themselves?</code></pre>
       <h5>Expanding Cards (Horizontal)</h5>
       <p>Deck flows top to bottom with laying collapsed rails. All 6 clock positions from Origin (12:00) through Midpoint (6:00) peak back to Return (12:00).</p>
       <ExpandingCards items={positionCards} orientation="horizontal" defaultActive="pos-6" />
+
+      <h5>Expanding Cards (Slotted Vertical — 6 rails D5–D0 with nested Tabs)</h5>
+      <p>Slotted mode: all 6 depth dimensions D5–D0 with nested Tabs. Use this to validate slotted-specific CSS without touching the Vertical Axis page.</p>
+      <ExpandingCards
+        cards={[
+          { id: 'sg-d5', label: 'D5', depth: 5 },
+          { id: 'sg-d4', label: 'D4', depth: 4 },
+          { id: 'sg-d3', label: 'D3', depth: 3 },
+          { id: 'sg-d2', label: 'D2', depth: 2 },
+          { id: 'sg-d1', label: 'D1', depth: 1 },
+          { id: 'sg-d0', label: 'D0', depth: 0 },
+        ]}
+        orientation="vertical"
+        defaultActive="sg-d4"
+      >
+        <div slot="sg-d5">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 5</span>
+            <h3 class="dimension-title">Surface — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d5" accent="teal" labels={['Overview', 'Details', 'Examples']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Placeholder overview for D5.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li><li>Detail item three</li></ul></div>
+              <div slot="tab-2"><p>Example content placeholder for D5.</p></div>
+            </Tabs>
+          </div>
+        </div>
+        <div slot="sg-d4">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 4</span>
+            <h3 class="dimension-title">Structural — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d4" accent="teal" labels={['Overview', 'Details', 'Examples']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet. Placeholder overview for D4.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li><li>Detail item three</li></ul></div>
+              <div slot="tab-2"><p>Example content placeholder for D4.</p></div>
+            </Tabs>
+          </div>
+        </div>
+        <div slot="sg-d3">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 3</span>
+            <h3 class="dimension-title">Cognitive — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d3" accent="teal" labels={['Overview', 'Details', 'Examples']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet. Placeholder overview for D3.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li><li>Detail item three</li></ul></div>
+              <div slot="tab-2"><p>Example content placeholder for D3.</p></div>
+            </Tabs>
+          </div>
+        </div>
+        <div slot="sg-d2">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 2</span>
+            <h3 class="dimension-title">Psychological — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d2" accent="teal" labels={['Overview', 'Details', 'Examples']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet. Placeholder overview for D2.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li><li>Detail item three</li></ul></div>
+              <div slot="tab-2"><p>Example content placeholder for D2.</p></div>
+            </Tabs>
+          </div>
+        </div>
+        <div slot="sg-d1">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 1</span>
+            <h3 class="dimension-title">Archetype — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d1" accent="teal" labels={['Overview', 'Details']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet. Placeholder overview for D1.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li></ul></div>
+            </Tabs>
+          </div>
+        </div>
+        <div slot="sg-d0">
+          <div class="dimension-card">
+            <span class="dimension-number">PLACEHOLDER DIMENSION 0</span>
+            <h3 class="dimension-title">Core — Placeholder Title</h3>
+            <Tabs id="sg-tabs-d0" accent="teal" labels={['Overview', 'Details']}>
+              <div slot="tab-0"><p>Lorem ipsum dolor sit amet. Placeholder overview for D0.</p></div>
+              <div slot="tab-1"><ul><li>Detail item one</li><li>Detail item two</li></ul></div>
+            </Tabs>
+          </div>
+        </div>
+      </ExpandingCards>
 
  <!-- ===== FLIP CARD DEMO ===== -->
       <h4 id="flip-cards">Flip Cards</h4>
