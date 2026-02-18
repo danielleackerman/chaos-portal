@@ -1,4 +1,8 @@
-/* ===== STRUCTURAL CONTAINERS — from Compass — WAS MISSING ===== */
+/* ================================================================
+   DIMENSION CARD & STRUCTURAL CONTAINERS — from Compass — WAS MISSING
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
 
 /* Crosswalk dimension blocks */
 .crosswalk-dimension {
@@ -220,7 +224,6 @@
 }
 
 
-
 /* ===== COORDINATE PICKER HIGHLIGHT/DIM ===== */
 /* This logic handles the "Highlight Dimension" feature */
 [data-accordion-group="dimensions"] .accordion-item {
@@ -271,3 +274,18 @@
   display: none;
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+/* No phone-specific overrides. */
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

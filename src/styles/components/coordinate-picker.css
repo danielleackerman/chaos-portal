@@ -1,3 +1,9 @@
+/* ================================================================
+   COORDINATE PICKER
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .coord-picker {
   width: 100%;
   background: transparent;
@@ -148,6 +154,16 @@
   border-color: var(--semantic-v);
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 @media (max-width: 600px) {
   .coord-picker__controls {
     flex-direction: column;
@@ -162,3 +178,6 @@
   }
 }
 
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

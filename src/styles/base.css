@@ -1,3 +1,9 @@
+/* ================================================================
+   BASE — Reset, element defaults, typography
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 /* ===== RESET ===== */
 *, *::before, *::after {
   margin: 0;
@@ -240,3 +246,18 @@ tbody tr:nth-child(even) {
   background: var(--table-row-alt);
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+/* No phone-specific overrides. */
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

@@ -1,4 +1,8 @@
-/* ===== CALLOUT SYSTEM — from Compass — WAS MISSING ===== */
+/* ================================================================
+   CALLOUT SYSTEM — from Compass — WAS MISSING
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
 
 /* Base callout (structured: icon + label + body) */
 .callout {
@@ -194,3 +198,18 @@ pre code {
   background-image: linear-gradient(90deg, color-mix(in srgb, #EF4444 5%, transparent), transparent);
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+/* No phone-specific overrides. */
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

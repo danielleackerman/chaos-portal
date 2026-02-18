@@ -1,4 +1,9 @@
-/* ===== ACCORDION (native <details>) ===== */
+/* ================================================================
+   ACCORDION (native <details>)
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .accordion-item {
   margin-bottom: 0.75rem;
 }
@@ -140,3 +145,18 @@ details[open] .accordion-toggle__chevron {
   color: var(--text);
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+/* No phone-specific overrides. */
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

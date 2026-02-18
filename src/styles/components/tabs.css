@@ -1,3 +1,9 @@
+/* ================================================================
+   TABS
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 /* ===== TABS ===== */
 .tabs {
   margin: 1rem 0 1.75rem;
@@ -98,6 +104,15 @@
 }
 
 
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 /* ===== MOBILE TABS ACCESSIBILITY ===== */
 @media (max-width: 600px) {
   .tabs__strip {
@@ -108,3 +123,7 @@
   }
   .tabs__strip::-webkit-scrollbar { display: none; } /* Hide scrollbar Chrome/Safari */
 }
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */
