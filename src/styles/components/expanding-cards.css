@@ -189,6 +189,57 @@
   min-height: unset;
 }
 
+/* ================================================================
+   ===== Vertical Axis page ONLY — scoped under .compass-content =====
+   These rules override the shared slotted rules above and apply
+   ONLY to the Vertical Axis expanding-cards page, not Style Guide.
+   ================================================================ */
+
+/* 1. Deck: auto height — grows to fit full content, no internal scroll.
+      The deck is the only ExpandingCards inside .compass-content.       */
+.compass-content .expanding-cards--slotted.expanding-cards--vertical {
+  height: auto;
+  min-height: 0;
+  /* will-change: contents tells the browser to prepare a compositing layer,
+     reducing layout recalc cost during the flex animation.              */
+  will-change: contents;
+}
+
+/* 2. Expanded card: overflow visible so content is NOT clipped to deck height.
+      The card grows naturally; the deck grows with it.                        */
+.compass-content .expanding-cards--slotted.expanding-cards--vertical
+  .expanding-cards__card[aria-expanded='true'] {
+  overflow: visible;
+}
+
+/* 3. Expanded content: no scroll, no max-height cap, natural height.
+      Transition: opacity + transform only (no layout-triggering properties). */
+.compass-content .expanding-cards--slotted
+  .expanding-cards__card[aria-expanded='true'] .expanding-cards__content {
+  overflow-y: visible;
+  overflow-x: visible;
+  max-height: none;
+  /* Delay fade-in slightly so card finishes widening first, then content appears.
+     This removes the simultaneous reflow + paint that felt like jank.          */
+  transition: opacity 220ms ease 120ms,
+              transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1) 120ms;
+}
+
+/* 4. Collapsed content: fade out fast before card narrows — no delay. */
+.compass-content .expanding-cards--slotted
+  .expanding-cards__card[aria-expanded='false'] .expanding-cards__content {
+  transition: opacity 100ms ease 0ms,
+              transform 100ms ease 0ms;
+}
+
+/* 5. Card flex animation: slightly slower + softer curve for page-level feel. */
+.compass-content .expanding-cards--slotted .expanding-cards__card {
+  transition: flex 380ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              box-shadow 260ms ease,
+              border-color 260ms ease,
+              background 260ms ease;
+}
+
 /* ── Card structure (slotted) ──
    FIX: display:flex + flex-direction:column so label sits above content.
    min-width:0 prevents flex blowout.                                     */
