@@ -1,4 +1,9 @@
-/* ===== SECTION NAVIGATION (V3.72 Refresh) ===== */
+/* ================================================================
+   SECTION NAVIGATION (V3.72 Refresh)
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .section-nav {
   display: flex;
   justify-content: space-between;
@@ -116,17 +121,6 @@
   color: var(--text);
 }
 
-@media (max-width: 600px) {
-  .section-nav {
-    grid-template-columns: 1fr;
-  }
-  .section-nav__link--next {
-    grid-column: 1;
-    flex-direction: row;
-    text-align: left;
-  }
-}
-
 
 /* ===== PAGE NAV CARD ===== */
 .page-nav-card {
@@ -177,12 +171,30 @@
 .page-nav-card__count--teal { background: #14B8A612; color: var(--semantic-v); }
 
 
-/* Mobile responsive */
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 @media (max-width: 600px) {
   .section-nav {
+    grid-template-columns: 1fr;
     flex-direction: column;
   }
   .section-nav__link {
     max-width: 100%;
   }
+  .section-nav__link--next {
+    grid-column: 1;
+    flex-direction: row;
+    text-align: left;
+  }
 }
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

@@ -1,4 +1,9 @@
-/* ===== LAYOUT CONTAINERS ===== */
+/* ================================================================
+   LAYOUT CONTAINERS
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
@@ -91,22 +96,6 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-@media (max-width: 768px) {
-  .card-grid--3,
-  .card-grid--2 {
-    grid-template-columns: 1fr;
-  }
-
-  .content {
-    margin: 20px 10px;
-    padding: 30px;
-  }
-
-  .compass-content {
-    padding: 1.5rem;
-  }
-}
-
 /* ===== COMPASS CONTENT (ported pages) ===== */
 .compass-content {
   background: var(--surface);
@@ -168,3 +157,33 @@
 .compass-content .nav-link:hover {
   text-decoration: underline;
 }
+
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .card-grid--3,
+  .card-grid--2 {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    margin: 20px 10px;
+    padding: 30px;
+  }
+
+  .compass-content {
+    padding: 1.5rem;
+  }
+}
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

@@ -175,6 +175,8 @@
               transform 280ms ease;
 }
 
+/* ── Desktop / Large ─────────────────────────────────────────── */
+
 /* ── Desktop deck layout ── */
 .expanding-cards--slotted.expanding-cards--vertical {
   flex-direction: row;
@@ -322,6 +324,11 @@
 }
 
 
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides; mobile breakpoint covers <=900px. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 /* ================================================================
    ===== Vertical Axis: Expanding Cards — MOBILE (<=900px) =====
    Slotted vertical cards stack top-to-bottom.
@@ -412,3 +419,7 @@
   .expanding-cards__card[aria-expanded='false'] .expanding-cards__label {
   color: rgba(255, 255, 255, 0.65);
 }
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

@@ -3,6 +3,8 @@
    Style System Reset: import hub
    ======================================================== */
 
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 /* --- Tokens & Base --- */
 @import "./tokens.css";
 @import "./base.css";
@@ -505,6 +507,15 @@
   --pagefind-ui-font: var(--font-sans);
 }
 
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides in site shell. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides in site shell. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .site-header__inner {
@@ -520,6 +531,9 @@
     font-size: 1.8em;
   }
 }
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides in site shell. */
 
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {

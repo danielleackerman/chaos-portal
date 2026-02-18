@@ -1,4 +1,9 @@
-/* ===== BREADCRUMB ===== */
+/* ================================================================
+   BREADCRUMB
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .breadcrumb {
   padding: 0.75rem 0;
   font-size: 0.8125rem;
@@ -22,3 +27,18 @@
   font-size: 0.75rem;
 }
 
+
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
+/* No phone-specific overrides. */
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */

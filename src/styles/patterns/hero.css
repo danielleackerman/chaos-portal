@@ -1,4 +1,9 @@
-/* ===== PAGE HERO ===== */
+/* ================================================================
+   PAGE HERO
+   ================================================================ */
+
+/* ── Base (all viewports) ─────────────────────────────────────── */
+
 .page-hero {
   background: var(--surface);
   padding: 2.5rem 3rem;
@@ -74,6 +79,15 @@
 }
 
 
+/* ── Desktop / Large ──────────────────────────────────────────── */
+/* No desktop-specific overrides. */
+
+
+/* ── Tablet ───────────────────────────────────────────────────── */
+/* No tablet-specific overrides. */
+
+
+/* ── Phone / iPhone ───────────────────────────────────────────── */
 /* Mobile responsive */
 @media (max-width: 768px) {
   .page-hero {
@@ -85,3 +99,7 @@
     font-size: 1.75rem;
   }
 }
+
+
+/* ── Touch (hover:none) and (pointer:coarse) ──────────────────── */
+/* No touch-specific overrides. */
