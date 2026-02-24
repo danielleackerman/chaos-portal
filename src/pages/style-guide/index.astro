@@ -141,10 +141,10 @@ const positionCards = [
       <div class="checklist">
         <div><strong>Signal Amber (#F59E0B):</strong> Horizontal Axis ONLY — timeline, position, progression, structure</div>
         <div><strong>Clarity Teal (#14B8A6):</strong> Vertical Axis ONLY — depth, dimensions (D0–D5), layers</div>
-        <div><strong>Info Blue (#3B82F6):</strong> System callouts, general UI elements NOT axis-associated</div>
-        <div><strong>Warn Red (#EF4444):</strong> Caution states, deprecation notices</div>
-        <div><strong>Accent Purple (#8B5CF6):</strong> Cross-domain bridges, Creativity Engine elements</div>
-        <div><strong>UI Colors:</strong> Links, buttons, navigation ONLY — never for semantic content</div>
+        <div><strong>Editorial Gray (#6B7280):</strong> Neutral callouts, example blocks, gray FlipCard accent — not axis-associated</div>
+        <div><strong>Warn Red (#EF4444):</strong> Constraint notices, do-not-do markers, critical caution</div>
+        <div><strong>Info Blue (#3B82F6):</strong> Links, focus rings, component outlines — functional UI only, never editorial</div>
+        <div><strong>Accent Purple (#8B5CF6):</strong> Pagefind search UI only — not a design option</div>
       </div>
 
       <h3>Typography Rules</h3>
@@ -193,11 +193,19 @@ const positionCards = [
 
       <div class="sg-color-grid">
         <div class="sg-color-card">
+          <div class="sg-swatch" style="background: #6B7280; color: white;">EDITORIAL GRAY</div>
+          <div class="sg-color-info">
+            <strong>Editorial Gray</strong>
+            <code>#6B7280</code>
+            <span>Neutral callouts, example blocks, gray FlipCard accent</span>
+          </div>
+        </div>
+        <div class="sg-color-card">
           <div class="sg-swatch" style="background: #3B82F6; color: white;">INFO BLUE</div>
           <div class="sg-color-info">
             <strong>Info Blue</strong>
             <code>#3B82F6</code>
-            <span>System callouts, general UI</span>
+            <span>Links, focus rings, component outlines — functional UI only, not editorial</span>
           </div>
         </div>
         <div class="sg-color-card">
@@ -205,7 +213,7 @@ const positionCards = [
           <div class="sg-color-info">
             <strong>Warn Red</strong>
             <code>#EF4444</code>
-            <span>Caution, deprecation notices</span>
+            <span>Constraint notices, do-not-do markers, critical caution</span>
           </div>
         </div>
         <div class="sg-color-card">
@@ -213,15 +221,7 @@ const positionCards = [
           <div class="sg-color-info">
             <strong>Accent Purple</strong>
             <code>#8B5CF6</code>
-            <span>Bridges, cross-domain elements</span>
-          </div>
-        </div>
-        <div class="sg-color-card">
-          <div class="sg-swatch" style="background: #10B981; color: white;">ACCENT GREEN</div>
-          <div class="sg-color-info">
-            <strong>Accent Green</strong>
-            <code>#10B981</code>
-            <span>Examples, positive states</span>
+            <span>Pagefind search UI only — not a design option</span>
           </div>
         </div>
       </div>
@@ -713,9 +713,9 @@ Examine: What is the character discovering about themselves?</code></pre>
         </FlipCard>
       </div>
 
-      <h5>Vertical Flip — Blue (Navigation Protocol content)</h5>
+      <h5>Vertical Flip — Gray (Navigation Protocol content)</h5>
       <div class="flip-card-strip" style="max-width: 700px;">
-        <FlipCard id="demo-flip-blue" accent="blue" flipDirection="vertical">
+        <FlipCard id="demo-flip-gray" accent="gray" flipDirection="vertical">
           <div slot="front">
             <h4 style="margin:0 0 0.5rem;">Top-Down Analysis</h4>
             <p style="margin:0; color:var(--text-2); font-size:0.875rem;">Start with what's visible, drill toward meaning</p>
