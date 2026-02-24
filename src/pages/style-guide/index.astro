@@ -441,37 +441,37 @@ Examine: What is the character discovering about themselves?</code></pre>
     <!-- ==================== HEROES ==================== -->
     <div class="section" id="heroes">
       <h2>Page Heroes</h2>
+      <p>Four active variants. Use the variant that matches the page's axis ownership.</p>
 
-      <h3>Gradient Hero (Compass pages)</h3>
+      <h3>Gradient Hero <span style="font-size:0.75rem; font-weight:400; color:var(--text-2);">— Compass pages + meta pages</span></h3>
       <div class="page-hero page-hero--gradient" style="position:relative;">
         <div class="eyebrow">SECTION LABEL</div>
         <h1 style="font-size:1.75rem;">Page Title Here</h1>
-        <p class="subtitle">Subtitle description text</p>
+        <p class="subtitle">Cross-axis or system-level pages. Amber→teal gradient stripe.</p>
       </div>
+      <div class="sg-type-details"><strong>Class:</strong> <code>page-hero--gradient</code> &nbsp;·&nbsp; <strong>Used on:</strong> all Compass pages, Roadmap</div>
 
-      <h3>Amber Hero</h3>
+      <h3>Amber Hero <span style="font-size:0.75rem; font-weight:400; color:var(--text-2);">— Horizontal axis content</span></h3>
       <div class="page-hero page-hero--amber">
-        <div class="eyebrow">HORIZONTAL</div>
+        <div class="eyebrow eyebrow--amber">HORIZONTAL</div>
         <h1 style="font-size:1.75rem;">Amber Variant</h1>
       </div>
+      <div class="sg-type-details"><strong>Class:</strong> <code>page-hero--amber</code> &nbsp;·&nbsp; <strong>Used on:</strong> Music Library</div>
 
-      <h3>Teal Hero</h3>
+      <h3>Teal Hero <span style="font-size:0.75rem; font-weight:400; color:var(--text-2);">— Vertical axis content</span></h3>
       <div class="page-hero page-hero--teal">
-        <div class="eyebrow">VERTICAL</div>
+        <div class="eyebrow eyebrow--teal">VERTICAL</div>
         <h1 style="font-size:1.75rem;">Teal Variant</h1>
       </div>
+      <div class="sg-type-details"><strong>Class:</strong> <code>page-hero--teal</code> &nbsp;·&nbsp; <strong>Used on:</strong> Vertical Axis page, Story Library</div>
 
-      <h3>Neutral Hero (Meta pages)</h3>
+      <h3>Neutral Hero <span style="font-size:0.75rem; font-weight:400; color:var(--text-2);">— Available, undeployed</span></h3>
       <div class="page-hero page-hero--neutral">
         <div class="eyebrow eyebrow--neutral">REFERENCE</div>
         <h1 style="font-size:1.75rem;">Neutral Variant</h1>
-        <p class="subtitle">For Style Guide, Roadmap, and other system-level pages that aren't axis-specific.</p>
+        <p class="subtitle">For system-level pages that aren't axis-specific.</p>
       </div>
-      <div class="sg-type-details">
-        <strong>Class:</strong> <code>page-hero--neutral</code> &nbsp;·&nbsp;
-        <strong>Stripe color:</strong> <code>var(--border-accent)</code> (mid-gray) &nbsp;·&nbsp;
-        <strong>Use when:</strong> Page is about the system itself, not about axis content
-      </div>
+      <div class="sg-type-details"><strong>Class:</strong> <code>page-hero--neutral</code> &nbsp;·&nbsp; <strong>Stripe color:</strong> <code>var(--border-accent)</code> (mid-gray) &nbsp;·&nbsp; <strong>Status:</strong> Available, not currently deployed</div>
     </div>
 
     <hr/>
@@ -497,24 +497,22 @@ Examine: What is the character discovering about themselves?</code></pre>
         <strong>Markup:</strong> <code>.dimension-horizontal</code> or <code>.dimension-vertical</code> wrapper
       </div>
 
-      <h3>Info / Example / Warning Callouts</h3>
-
-      <div class="callout-info">
-        <h4>Info Callout</h4>
-        <p>Important conceptual notes or definitions. Blue left border.</p>
-        <p><strong>Class:</strong> <code>.callout-info</code></p>
-      </div>
+      <h3>Example &amp; Warning Callouts</h3>
 
       <div class="callout-example">
         <h4>Example Callout</h4>
-        <p>Worked examples or demonstrations. Green left border.</p>
+        <p>Worked examples, demonstrations, and neutral informational notes. Gray left border.</p>
         <p><strong>Class:</strong> <code>.callout-example</code></p>
       </div>
 
       <div class="callout-warning">
-        <h4>Warning / Caution Callout</h4>
-        <p>Deprecated patterns or critical constraints. Red left border.</p>
+        <h4>Warning / Constraint Callout</h4>
+        <p>Critical constraints, do-not-do notices, and out-of-scope markers (e.g. Tool 2 placeholder). Thin full-border box with tonal red background.</p>
         <p><strong>Class:</strong> <code>.callout-warning</code></p>
+      </div>
+
+      <div class="sg-type-details" style="margin-top:1rem;">
+        <strong>Retired:</strong> <code>.callout-info</code> (blue) — use <code>.callout-example</code> for neutral informational content instead. Blue is reserved for functional UI states (links, focus rings, component outlines) — not editorial callouts.
       </div>
     </div>
 
