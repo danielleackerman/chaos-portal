@@ -1,0 +1,42 @@
+---
+// RailClockArc — Horizontal Axis illustration for the right rail.
+// Replicates the hero SVG removed during hero-slimming:
+// dashed clock circle + horizontal arrow + position dots at 12/3/6/9 + H label.
+// Usage: <RailClockArc />
+---
+<div class="rail-visual" aria-hidden="true">
+  <svg width="120" height="120" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <!-- Dashed clock circle -->
+    <circle cx="48" cy="48" r="36"
+      stroke="var(--semantic-h)" stroke-width="1.5"
+      stroke-dasharray="4 3" opacity="0.35"/>
+
+    <!-- Horizontal axis arrow -->
+    <line x1="8" y1="48" x2="88" y2="48"
+      stroke="var(--semantic-h)" stroke-width="2.5" stroke-linecap="round"/>
+
+    <!-- Arrowhead right -->
+    <polyline points="78,44 88,48 78,52"
+      stroke="var(--semantic-h)" stroke-width="2" fill="none"
+      stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Centre dot -->
+    <circle cx="48" cy="48" r="4.5" fill="var(--text-3)"/>
+
+    <!-- Position dots at 12, 3, 6, 9 -->
+    <circle cx="48" cy="12" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+    <circle cx="88" cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.7"/>
+    <circle cx="48" cy="84" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+    <circle cx="8"  cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+
+    <!-- Axis label -->
+    <text x="90" y="44" font-family="monospace" font-size="9"
+      fill="var(--semantic-h)" text-anchor="start">H</text>
+
+    <!-- Clock position labels -->
+    <text x="52" y="14" font-family="monospace" font-size="8"
+      fill="var(--semantic-h)" opacity="0.55">12</text>
+    <text x="52" y="87" font-family="monospace" font-size="8"
+      fill="var(--semantic-h)" opacity="0.55">6</text>
+  </svg>
+</div>

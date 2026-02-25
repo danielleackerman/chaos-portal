@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,33 +14,28 @@ const base = import.meta.env.BASE_URL;
     <strong>IIA. Story Structure</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION IIA</div>
     <h1>Story Structure</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#introduction" class="toc-grid__link">Introduction</a>
-        <a href="#crosswalk-methodology" class="toc-grid__link">Crosswalk Methodology</a>
-        <a href="#foundational-engines" class="toc-grid__link">Foundational Story Engines</a>
-        <a href="#structural-geometries" class="toc-grid__link">Structural Geometries</a>
-        <a href="#episodic-modular" class="toc-grid__link">Episodic &amp; Modular Structures</a>
-        <a href="#quest-braided" class="toc-grid__link">Quest &amp; Braided Structures</a>
-        <a href="#temporal-disruption" class="toc-grid__link">Temporal Disruption Structures</a>
-        <a href="#contrast-engine" class="toc-grid__link">Contrast Engines</a>
-        <a href="#five-act-lens" class="toc-grid__link">Five-Act Diagnostic Lens</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">Story structure frameworks are not formulas — they are depth-activating systems. Each one is mapped here across all six depth dimensions to reveal what kind of analytical work it performs, which archetypal patterns it invokes, and what it illuminates at each stratum.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> How foundational, geometric, episodic, quest, temporal, and contrast structures each activate the six depth dimensions differently.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Identify which structural framework best describes your story, then use the crosswalk to understand which depths it naturally illuminates.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Structures that score strongly at D0 and D1 — they're doing heavy thematic and archetypal work, not just mechanical plotting.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Section IIA: Story Structure Crosswalk</p>
+
 <div class="content-container">
 <!-- INTRODUCTION -->
 <div class="section" id="introduction">
-<h2>Story Structure Crosswalk</h2>
-<p>This section explores story structure as a <strong>depth-activating system</strong>. Each framework is treated not as a formula, but as a structural orientation—a way of organizing pressure, meaning, and transformation across multiple dimensions of narrative cognition.</p>
+<h2>Crosswalk Schema</h2>
 <p>Each framework below is now presented using the same internal schema:</p>
 <ul>
 <li><strong>Structural Function</strong> — what kind of narrative work the structure performs</li>
@@ -1321,13 +1317,38 @@ const base = import.meta.env.BASE_URL;
 <p>This section provides a comprehensive crosswalk of major structural frameworks, each analyzed through the same 7-dimensional methodology.</p>
 <p style="margin-top: 12px;"><strong>Remember:</strong> These frameworks don't tell you <em>how to write</em> – they reveal <strong>what kind of cognition each structure activates</strong> in both creator and audience.</p>
 </div>
-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
-<p>Story Analysis Coordinate System v1.1</p>
-<p style="font-size: 0.9em; margin-top: 10px;">Section IIA: Story Structure Crosswalk</p>
-<p style="font-size: 0.85em; margin-top: 8px;">Encyclopedia of Structural Frameworks – Strategic Selection via 7-Dimensional Analysis</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.1 · Section IIA: Story Structure Crosswalk</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-iia"
+      toc={[
+        { label: "Crosswalk Schema",         href: "#introduction"         },
+        { label: "Crosswalk Methodology",    href: "#crosswalk-methodology"},
+        { label: "Foundational Engines",     href: "#foundational-engines" },
+        { label: "Structural Geometries",    href: "#structural-geometries"},
+        { label: "Episodic & Modular",       href: "#episodic-modular"     },
+        { label: "Quest & Braided",          href: "#quest-braided"        },
+        { label: "Temporal Disruption",      href: "#temporal-disruption"  },
+        { label: "Contrast Engines",         href: "#contrast-engine"      },
+        { label: "Five-Act Lens",            href: "#five-act-lens"        },
+      ]}
+      chips={[
+        { label: "Method", value: "7-dim crosswalk" },
+        { label: "Axis",   value: "H = Structure"   },
+      ]}
+      visual="clock-arc"
+      nextLinks={[
+        { label: "III. Vertical Axis",      href: `${base}/compass/vertical-axis/`     },
+        { label: "IV. Intersection Logic",  href: `${base}/compass/intersection-logic/`},
+        { label: "II. Horizontal Axis",     href: `${base}/compass/horizontal-axis/`   },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/horizontal-axis/`} class="section-nav__link section-nav__link--prev">

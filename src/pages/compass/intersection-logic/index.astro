@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,31 +14,27 @@ const base = import.meta.env.BASE_URL;
     <strong>IV. Intersection Logic</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION IV</div>
     <h1>Intersection Logic</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#coordinate-reading" class="toc-grid__link">Coordinate Reading Protocol</a>
-        <a href="#intersection-signatures" class="toc-grid__link">Intersection Signatures</a>
-        <a href="#cross-reference" class="toc-grid__link">Cross-Reference System</a>
-        <a href="#common-patterns" class="toc-grid__link">Common Intersection Patterns</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">An intersection is where a story timeline position meets a depth dimension. The coordinate unlocks a specific analytical lens — a precise question you can ask at exactly that moment and that depth. This is where the two-axis system earns its precision.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> How to read and form coordinates, what the most diagnostic intersections tend to reveal, and how to cross-reference frameworks efficiently.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Form a coordinate, then apply the intersection protocol — surface observations first, then structural function, then deeper layers.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Repeating patterns across multiple coordinates; recurrence signals a structural theme or unresolved character wound.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Section IV: Intersection Logic</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <strong>Section IV: Intersection Logic</strong>
-</nav>
+
 <div class="content-container">
 <!-- SECTION IV INTRODUCTION -->
 <div class="section">
-<h2>IV. INTERSECTION LOGIC</h2>
-<p>The coordinate system's true power emerges at <strong>intersections</strong>—where story timeline positions meet story depth dimensions. Each intersection creates a unique analytical lens combining horizontal and vertical frameworks.</p>
 <p>This section explains how to read coordinates, what to examine at specific intersections, how to cross-reference frameworks, and which intersection patterns recur across stories.</p>
 </div>
 <hr/>
@@ -557,12 +554,33 @@ const base = import.meta.env.BASE_URL;
 <li><strong>Section VI: Practical Application</strong> — Detailed story analyses using coordinates</li>
 </ul>
 </div>
-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
-<p style="font-size: 0.875em; margin-top: 8px;">Section IV: Intersection Logic</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section IV: Intersection Logic</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-iv"
+      toc={[
+        { label: "Coordinate Reading",        href: "#coordinate-reading"       },
+        { label: "Intersection Signatures",   href: "#intersection-signatures"  },
+        { label: "Cross-Reference System",    href: "#cross-reference"          },
+        { label: "Common Patterns",           href: "#common-patterns"          },
+      ]}
+      chips={[
+        { label: "Notation", value: "H:MM / Dn" },
+        { label: "Example",  value: "6:00 / D2" },
+      ]}
+      visual="coord-chip"
+      nextLinks={[
+        { label: "V. Navigation Protocols",  href: `${base}/compass/navigation-protocols/` },
+        { label: "II. Horizontal Axis",      href: `${base}/compass/horizontal-axis/`      },
+        { label: "III. Vertical Axis",       href: `${base}/compass/vertical-axis/`        },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/vertical-axis/`} class="section-nav__link section-nav__link--prev">

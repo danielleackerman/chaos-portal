@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,32 +14,26 @@ const base = import.meta.env.BASE_URL;
     <strong>V. Navigation Protocols</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION V</div>
     <h1>Navigation Protocols</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#starting-strategies" class="toc-grid__link">Starting Point Strategies</a>
-        <a href="#movement" class="toc-grid__link">Movement Through the System</a>
-        <a href="#multi-coordinate" class="toc-grid__link">Multi-Coordinate Analysis</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">There is no required starting point. These protocols give you practical entry strategies, movement patterns, and multi-coordinate tracking techniques for working through the system efficiently — whether you begin at the surface, at the core, or at a specific position.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> Three movement directions (horizontal, vertical, diagonal), five entry strategies, and pattern-tracking methods for character arcs and themes.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Choose an entry strategy based on what you already know; follow the movement protocol that matches your analytical goal.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Diagonal trajectories — where position and depth shift together — often trace a character's transformation or a wound resolving.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Section V: Navigation Protocols</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <a href="../intersection-logic/">Section IV</a> › <strong>Section V: Navigation Protocols</strong>
-</nav>
+
 <div class="content-container">
 <!-- SECTION V INTRODUCTION -->
-<div class="section">
-<h2>V. NAVIGATION PROTOCOLS</h2>
-<p>Once you understand the coordinate system's structure, you need practical protocols for moving through it. This section provides strategies for beginning analysis, methods for progressing through coordinates, and techniques for tracking patterns across multiple dimensions.</p>
-</div>
-<hr/>
 <!-- A. STARTING POINT STRATEGIES -->
 <div class="section" id="starting-strategies">
 <h2>A. Starting Point Strategies</h2>
@@ -1400,12 +1395,32 @@ Belief:         False     →  Challenged → True</pre>
 <li><strong>Appendices</strong> — Quick reference guides and templates</li>
 </ul>
 </div>
-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
-<p style="font-size: 0.875em; margin-top: 8px;">Section V: Navigation Protocols</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section V: Navigation Protocols</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-v-nav"
+      toc={[
+        { label: "Starting Strategies",      href: "#starting-strategies" },
+        { label: "Movement Through System",  href: "#movement"            },
+        { label: "Multi-Coordinate Analysis",href: "#multi-coordinate"    },
+      ]}
+      chips={[
+        { label: "Entry",     value: "Any coordinate" },
+        { label: "Movements", value: "→ ↓ ↗"         },
+      ]}
+      visual="cross"
+      nextLinks={[
+        { label: "VI. Practical Application",href: `${base}/compass/practical-application/` },
+        { label: "IV. Intersection Logic",   href: `${base}/compass/intersection-logic/`    },
+        { label: "VII. Implementation",      href: `${base}/compass/implementation-guide/`  },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/intersection-logic/`} class="section-nav__link section-nav__link--prev">

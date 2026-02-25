@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../layouts/PortalLayout.astro';
+import CompassRail from '../../components/compass/CompassRail.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -23,11 +24,13 @@ const sections = [
     <strong>Story Coordinate Compass</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">FRAMEWORK</div>
     <h1>Story Coordinate Compass</h1>
-    <p class="subtitle">A two-dimensional system for mapping and navigating narrative structure</p>
   </div>
+
+  <div class="cockpit">
+    <div class="cockpit__main">
 
   <!-- Axis info -->
   <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:1.5rem;">
@@ -37,13 +40,17 @@ const sections = [
     </div>
     <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
       <div class="axis-box axis-box--h">
-        <div class="axis-box__label axis-box__label--h">HORIZONTAL →</div>
-        <p class="axis-box__text">Story Position / Timeline — where you are in the narrative arc</p>
-      </div>
-      <div class="axis-box axis-box--v">
-        <div class="axis-box__label axis-box__label--v">VERTICAL ↓</div>
-        <p class="axis-box__text">Story Depth / Dimensions — how deep you analyze at any position</p>
-      </div>
+          <a href={`${base}/compass/horizontal-axis/`} class="axis-box__link">
+            <div class="axis-box__label axis-box__label--h">HORIZONTAL →</div>
+            <p class="axis-box__text">Story Position / Timeline — where you are in the narrative arc</p>
+          </a>
+        </div>
+        <div class="axis-box axis-box--v">
+          <a href={`${base}/compass/vertical-axis/`} class="axis-box__link">
+            <div class="axis-box__label axis-box__label--v">VERTICAL ↓</div>
+            <p class="axis-box__text">Story Depth / Dimensions — how deep you analyze at any position</p>
+          </a>
+        </div>
     </div>
   </div>
 
@@ -61,4 +68,30 @@ const sections = [
     ))}
   </div>
 
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-index"
+      toc={[
+        { label: "I. Orientation",         href: `${base}/compass/orientation/`          },
+        { label: "II. Horizontal Axis",    href: `${base}/compass/horizontal-axis/`      },
+        { label: "III. Vertical Axis",     href: `${base}/compass/vertical-axis/`        },
+        { label: "IV. Intersection Logic", href: `${base}/compass/intersection-logic/`   },
+        { label: "V. Navigation Protocols",href: `${base}/compass/navigation-protocols/` },
+        { label: "VI. Practical App",      href: `${base}/compass/practical-application/`},
+        { label: "VII. Implementation",    href: `${base}/compass/implementation-guide/` },
+      ]}
+      chips={[
+        { label: "H", value: "Timeline Position" },
+        { label: "V", value: "Depth D5 → D0"     },
+      ]}
+      visual="cross"
+      nextLinks={[
+        { label: "I. Orientation",      href: `${base}/compass/orientation/`     },
+        { label: "II. Horizontal Axis", href: `${base}/compass/horizontal-axis/` },
+        { label: "III. Vertical Axis",  href: `${base}/compass/vertical-axis/`   },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 </PortalLayout>
