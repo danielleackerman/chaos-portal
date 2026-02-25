@@ -76,7 +76,6 @@
 
 .cat-card--amber:hover { border-color: var(--semantic-h); }
 .cat-card--teal:hover { border-color: var(--semantic-v); }
-.cat-card--purple:hover { border-color: var(--accent-purple); }
 .cat-card--gradient:hover { border-color: var(--semantic-v); }
 
 .cat-card__icon {
@@ -91,7 +90,6 @@
 
 .cat-card__icon--amber { background: #F59E0B18; color: var(--semantic-h); }
 .cat-card__icon--teal { background: #14B8A618; color: var(--semantic-v); }
-.cat-card__icon--purple { background: #8B5CF618; color: var(--accent-purple); }
 .cat-card__icon--gradient {
   background: linear-gradient(135deg, #F59E0B18, #14B8A618);
   color: var(--semantic-v);

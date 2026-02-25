@@ -162,7 +162,6 @@ em {
 }
 .eyebrow--amber { color: var(--semantic-h); }
 .eyebrow--teal { color: var(--semantic-v); }
-.eyebrow--purple { color: var(--accent-purple); }
 
 /* LINKS — content links use text color, not info-blue
    Info-blue is reserved for functional UI (focus rings, component outlines).
