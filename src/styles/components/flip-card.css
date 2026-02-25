@@ -93,8 +93,8 @@
 .flip-card--amber .flip-card__face::before {
   background: var(--semantic-h);
 }
-.flip-card--blue .flip-card__face::before {
-  background: var(--info-blue, #3B82F6);
+.flip-card--gray .flip-card__face::before {
+  background: var(--info-gray);
 }
 .flip-card--gradient .flip-card__face::before {
   background: linear-gradient(90deg, var(--semantic-h), var(--semantic-v));

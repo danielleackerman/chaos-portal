@@ -155,28 +155,8 @@ pre code {
   color: var(--semantic-v);
 }
 
-/* Portal (purple) — NEW in v3.2 */
-.callout--portal {
-  border-left: 5px solid var(--accent-purple);
-}
-.callout--portal .icon {
-  background: var(--accent-purple);
-  color: white;
-}
-.callout--portal .label {
-  color: var(--accent-purple);
-}
-
 /* Legacy callout variants — used in existing Compass HTML */
-.callout-info {
-  background: var(--surface-elevated);
-  border-left: 5px solid var(--info-blue);
-  border-radius: var(--radius-md);
-  padding: 25px;
-  margin: 25px 0;
-  box-shadow: var(--shadow-subtle);
-  background-image: linear-gradient(90deg, color-mix(in srgb, var(--info-blue) 5%, transparent), transparent);
-}
+/* .callout-info — RETIRED. Use .callout.callout--editorial for neutral informational content. */
 
 .callout-example,
 .callout-code {
@@ -188,14 +168,14 @@ pre code {
   box-shadow: var(--shadow-subtle);
 }
 
+/* Warning — constraint / do-not-do / critical caution
+   Thin full-border box, tonal background, no heavy left stripe */
 .callout-warning {
-  background: var(--surface-elevated);
-  border-left: 5px solid #EF4444;
-  border-radius: var(--radius-md);
-  padding: 25px;
+  background: color-mix(in srgb, #EF4444 4%, var(--surface));
+  border: 1px solid color-mix(in srgb, #EF4444 40%, var(--border));
+  border-radius: var(--radius-lg);
+  padding: 20px 25px;
   margin: 25px 0;
-  box-shadow: var(--shadow-subtle);
-  background-image: linear-gradient(90deg, color-mix(in srgb, #EF4444 5%, transparent), transparent);
 }
 
 

@@ -162,7 +162,6 @@ em {
 }
 .eyebrow--amber { color: var(--semantic-h); }
 .eyebrow--teal { color: var(--semantic-v); }
-.eyebrow--purple { color: var(--accent-purple); }
 
 /* LINKS */
 a {
