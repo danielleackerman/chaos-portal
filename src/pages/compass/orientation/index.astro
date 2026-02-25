@@ -2,6 +2,7 @@
 import PortalLayout from '../../../layouts/PortalLayout.astro';
 import FlipCard from '../../../components/ui/FlipCard.astro';
 import Tabs from '../../../components/ui/Tabs.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -337,58 +338,25 @@ const base = import.meta.env.BASE_URL;
 
     </div><!-- /.cockpit__main -->
 
-    <!-- RIGHT RAIL -->
-    <aside class="cockpit__rail" aria-label="Page reference">
-
-      <div>
-        <p class="rail__label">Axis Legend</p>
-        <div class="rail__legend">
-          <div class="rail__legend-item">
-            <span class="rail__dot rail__dot--amber"></span>
-            <span><strong>H</strong> — Timeline Position</span>
-          </div>
-          <div class="rail__legend-item">
-            <span class="rail__dot rail__dot--teal"></span>
-            <span><strong>V</strong> — Depth Dimension</span>
-          </div>
-          <div class="rail__legend-item" style="font-size:0.75rem;color:var(--text-3);padding-left:1rem;line-height:1.5;">D5 surface → D0 core</div>
-          <div class="rail__legend-item" style="font-size:0.75rem;color:var(--text-3);padding-left:1rem;line-height:1.5;">12:00 = opening · 6:00 = midpoint</div>
-        </div>
-      </div>
-
-      <hr class="rail__divider" />
-
-      <div>
-        <p class="rail__label">On This Page</p>
-        <ul class="rail__toc" id="rail-toc">
-          <li><a href="#two-axes">The Two Axes</a></li>
-          <li><a href="#reading-a-coordinate">Reading a Coordinate</a></li>
-          <li><a href="#three-ways-to-move">Three Ways to Move</a></li>
-          <li><a href="#relationship-docs">Supporting Documents</a></li>
-        </ul>
-      </div>
-
-      <hr class="rail__divider" />
-
-      <div>
-        <p class="rail__label">What's Next</p>
-        <div class="rail__next">
-          <a href={`${base}/compass/horizontal-axis/`} class="rail__next-link">
-            <span>II. Horizontal Axis</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
-          <a href={`${base}/compass/vertical-axis/`} class="rail__next-link">
-            <span>III. Vertical Axis</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
-          <a href={`${base}/compass/intersection-logic/`} class="rail__next-link">
-            <span>IV. Intersection Logic</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </a>
-        </div>
-      </div>
-
-    </aside>
+    <CompassRail
+      tocId="rail-toc"
+      toc={[
+        { label: "The Two Axes",         href: "#two-axes"             },
+        { label: "Reading a Coordinate", href: "#reading-a-coordinate" },
+        { label: "Three Ways to Move",   href: "#three-ways-to-move"   },
+        { label: "Supporting Documents", href: "#relationship-docs"    },
+      ]}
+      chips={[
+        { label: "H", value: "Timeline Position"  },
+        { label: "V", value: "Depth D5 → D0"      },
+      ]}
+      visual="cross"
+      nextLinks={[
+        { label: "II. Horizontal Axis",    href: `${base}/compass/horizontal-axis/`    },
+        { label: "III. Vertical Axis",     href: `${base}/compass/vertical-axis/`      },
+        { label: "IV. Intersection Logic", href: `${base}/compass/intersection-logic/` },
+      ]}
+    />
 
   </div><!-- /.cockpit -->
 
@@ -403,28 +371,3 @@ const base = import.meta.env.BASE_URL;
   </nav>
 
 </PortalLayout>
-
-<script>
-  (function () {
-    var links = document.querySelectorAll('#rail-toc a');
-    if (!links.length) return;
-    var sections = Array.from(links).map(function(a) {
-      var id = a.getAttribute('href').replace('#', '');
-      return { el: document.getElementById(id), a: a };
-    }).filter(function(s) { return s.el; });
-    function spy() {
-      var scrollY = window.scrollY + 100;
-      var active = null;
-      for (var i = sections.length - 1; i >= 0; i--) {
-        if (sections[i].el.offsetTop <= scrollY) { active = sections[i]; break; }
-      }
-      links.forEach(function(l) { l.classList.remove('is-active'); });
-      if (active) active.a.classList.add('is-active');
-    }
-    var ticking = false;
-    window.addEventListener('scroll', function() {
-      if (!ticking) { requestAnimationFrame(function() { spy(); ticking = false; }); ticking = true; }
-    });
-    spy();
-  })();
-</script>

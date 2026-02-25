@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -18,21 +19,9 @@ const base = import.meta.env.BASE_URL;
     <h1>Horizontal Axis</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#primary-measurement-systems" class="toc-grid__link">Primary Measurement Systems</a>
-        <a href="#key-story-positions" class="toc-grid__link">Key Story Positions</a>
-        <a href="#horizontal-movement-patterns" class="toc-grid__link">Horizontal Movement Patterns</a>
-      </div>
-    </nav>
-    <p class="subtitle">Version 1.0 | Section II: HORIZONTAL AXIS</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I: Orientation</a> › <strong>Section II: Horizontal Axis</strong>
-</nav>
-<div class="content-container">
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+    <!-- content starts -->
 <!-- MAIN SECTION II: HORIZONTAL AXIS -->
 <div class="section" id="horizontal-axis-main">
 <h2>II. HORIZONTAL AXIS: Story Timeline Position <span class="source-tag">COMPASS</span></h2>
@@ -623,12 +612,32 @@ const base = import.meta.env.BASE_URL;
 </div>
 </div>
 </div>
-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
-<p>Story Analysis Coordinate System v1.0 | Section II: HORIZONTAL AXIS</p>
-<p style="font-size: 0.9em; margin-top: 10px;">A Compass for Story Analysis and Narrative Mapping</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section II: Horizontal Axis</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-h"
+      toc={[
+        { label: "Primary Measurement Systems", href: "#primary-measurement-systems" },
+        { label: "Key Story Positions",          href: "#key-story-positions"          },
+        { label: "Movement Patterns",            href: "#horizontal-movement-patterns"  },
+      ]}
+      chips={[
+        { label: "Axis",   value: "H = Timeline" },
+        { label: "Circle", value: "12:00 → 12:00" },
+      ]}
+      visual="clock-arc"
+      nextLinks={[
+        { label: "IIA. Story Structure",  href: `${base}/compass/story-structure/`  },
+        { label: "III. Vertical Axis",    href: `${base}/compass/vertical-axis/`    },
+        { label: "IV. Intersection Logic",href: `${base}/compass/intersection-logic/`},
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/orientation/`} class="section-nav__link section-nav__link--prev">

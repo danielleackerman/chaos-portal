@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -18,20 +19,8 @@ const base = import.meta.env.BASE_URL;
     <h1>Navigation Protocols</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#starting-strategies" class="toc-grid__link">Starting Point Strategies</a>
-        <a href="#movement" class="toc-grid__link">Movement Through the System</a>
-        <a href="#multi-coordinate" class="toc-grid__link">Multi-Coordinate Analysis</a>
-      </div>
-    </nav>
-    <p class="subtitle">Section V: Navigation Protocols</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <a href="../intersection-logic/">Section IV</a> › <strong>Section V: Navigation Protocols</strong>
-</nav>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
 <div class="content-container">
 <!-- SECTION V INTRODUCTION -->
 <div class="section">
@@ -1400,12 +1389,32 @@ Belief:         False     →  Challenged → True</pre>
 <li><strong>Appendices</strong> — Quick reference guides and templates</li>
 </ul>
 </div>
-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
-<p style="font-size: 0.875em; margin-top: 8px;">Section V: Navigation Protocols</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section V: Navigation Protocols</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-v-nav"
+      toc={[
+        { label: "Starting Strategies",      href: "#starting-strategies" },
+        { label: "Movement Through System",  href: "#movement"            },
+        { label: "Multi-Coordinate Analysis",href: "#multi-coordinate"    },
+      ]}
+      chips={[
+        { label: "Entry",     value: "Any coordinate" },
+        { label: "Movements", value: "→ ↓ ↗"         },
+      ]}
+      visual="cross"
+      nextLinks={[
+        { label: "VI. Practical Application",href: `${base}/compass/practical-application/` },
+        { label: "IV. Intersection Logic",   href: `${base}/compass/intersection-logic/`    },
+        { label: "VII. Implementation",      href: `${base}/compass/implementation-guide/`  },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/intersection-logic/`} class="section-nav__link section-nav__link--prev">

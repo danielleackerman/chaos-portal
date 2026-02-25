@@ -1,0 +1,1041 @@
+diff --git a/src/components/compass/CompassRail.astro b/src/components/compass/CompassRail.astro
+new file mode 100644
+index 0000000..897284e
+--- /dev/null
++++ b/src/components/compass/CompassRail.astro
+@@ -0,0 +1,131 @@
++---
++/**
++ * CompassRail — shared right-rail for all Compass pages
++ *
++ * Props
++ * ─────
++ * toc       Array<{label:string, href:string}>          required
++ * chips     Array<{label:string, value:string}>          1–2 max
++ * nextLinks Array<{label:string, href:string}>           2–4 max
++ * visual    'cross' | 'depth-scale' | 'clock-arc' | 'coord-chip' | undefined
++ * tocId     string  — id to place on the <ul> (default: "rail-toc")
++ */
++import RailCompassCross from './RailCompassCross.astro';
++import RailDepthScale   from './RailDepthScale.astro';
++import RailClockArc     from './RailClockArc.astro';
++import RailCoordChip    from './RailCoordChip.astro';
++
++interface TOCItem    { label: string; href: string }
++interface ChipItem   { label: string; value: string }
++interface NextItem   { label: string; href: string }
++type VisualType = 'cross' | 'depth-scale' | 'clock-arc' | 'coord-chip';
++
++interface Props {
++  toc:       TOCItem[];
++  chips?:    ChipItem[];
++  nextLinks: NextItem[];
++  visual?:   VisualType;
++  tocId?:    string;
++}
++
++const {
++  toc,
++  chips    = [],
++  nextLinks,
++  visual,
++  tocId    = 'rail-toc',
++} = Astro.props;
++---
++
++<aside class="cockpit__rail" aria-label="Page reference">
++
++  <details class="rail__disclosure" open>
++    <summary class="rail__disclosure-toggle">Legend &amp; Page Map</summary>
++
++    <!-- A) TOC ────────────────────────────────────────────────── -->
++    <div class="rail__section">
++      <p class="rail__label">On This Page</p>
++      <ul class="rail__toc" id={tocId}>
++        {toc.map(item => (
++          <li><a href={item.href}>{item.label}</a></li>
++        ))}
++      </ul>
++    </div>
++
++    <hr class="rail__divider" />
++
++    <!-- B) Legend chips + optional micro-visual ─────────────── -->
++    {(chips.length > 0 || visual) && (
++      <div class="rail__section">
++        {chips.length > 0 && (
++          <>
++            <p class="rail__label">Legend</p>
++            <div class="rail__chips">
++              {chips.map(chip => (
++                <div class="rail-chip">
++                  <span class="rail-chip__label">{chip.label}</span>
++                  <span class="rail-chip__value">{chip.value}</span>
++                </div>
++              ))}
++            </div>
++          </>
++        )}
++        {visual === 'cross'       && <RailCompassCross />}
++        {visual === 'depth-scale' && <RailDepthScale />}
++        {visual === 'clock-arc'   && <RailClockArc />}
++        {visual === 'coord-chip'  && <RailCoordChip />}
++      </div>
++    )}
++
++    <hr class="rail__divider" />
++
++    <!-- C) Next links ─────────────────────────────────────────── -->
++    <div class="rail__section">
++      <p class="rail__label">What's Next</p>
++      <div class="rail__next">
++        {nextLinks.map(link => (
++          <a href={link.href} class="rail__next-link">
++            <span>{link.label}</span>
++            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
++                 stroke="currentColor" stroke-width="2"
++                 stroke-linecap="round" stroke-linejoin="round">
++              <polyline points="9 18 15 12 9 6"/>
++            </svg>
++          </a>
++        ))}
++      </div>
++    </div>
++
++  </details>
++
++</aside>
++
++<!-- Mobile collapse wrapper is handled by CSS: cockpit__rail renders
++     as a details block on narrow viewports via the mobile class toggle -->
++
++<script define:vars={{ tocId }}>
++  (function () {
++    var ul = document.getElementById(tocId);
++    if (!ul) return;
++    var links = ul.querySelectorAll('a');
++    if (!links.length) return;
++    var sections = Array.from(links).map(function(a) {
++      var id = a.getAttribute('href').replace('#', '');
++      return { el: document.getElementById(id), a: a };
++    }).filter(function(s) { return s.el; });
++    function spy() {
++      var scrollY = window.scrollY + 110;
++      var active = null;
++      for (var i = sections.length - 1; i >= 0; i--) {
++        if (sections[i].el.offsetTop <= scrollY) { active = sections[i]; break; }
++      }
++      links.forEach(function(l) { l.classList.remove('is-active'); });
++      if (active) active.a.classList.add('is-active');
++    }
++    var ticking = false;
++    window.addEventListener('scroll', function() {
++      if (!ticking) { requestAnimationFrame(function() { spy(); ticking = false; }); ticking = true; }
++    }, { passive: true });
++    spy();
++  })();
++</script>
+diff --git a/src/components/compass/RailClockArc.astro b/src/components/compass/RailClockArc.astro
+new file mode 100644
+index 0000000..0b1a07a
+--- /dev/null
++++ b/src/components/compass/RailClockArc.astro
+@@ -0,0 +1,19 @@
++---
++// RailClockArc — 12-point clock arc micro-visual for the right rail
++// Usage: <RailClockArc />
++---
++<div class="rail-visual" aria-hidden="true">
++  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
++    <circle cx="36" cy="36" r="28" stroke="var(--border)" stroke-width="1.5"/>
++    <!-- tick marks at 12, 3, 6, 9 -->
++    <line x1="36" y1="8"  x2="36" y2="12" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
++    <line x1="64" y1="36" x2="60" y2="36" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
++    <line x1="36" y1="64" x2="36" y2="60" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
++    <line x1="8"  y1="36" x2="12" y2="36" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
++    <circle cx="36" cy="36" r="3" fill="var(--text-3)"/>
++    <text x="36" y="5"  text-anchor="middle" font-family="monospace" font-size="7" fill="var(--semantic-h)">12</text>
++    <text x="68" y="39" text-anchor="end"    font-family="monospace" font-size="7" fill="var(--semantic-h)">3</text>
++    <text x="36" y="70" text-anchor="middle" font-family="monospace" font-size="7" fill="var(--semantic-h)">6</text>
++    <text x="4"  y="39" text-anchor="start"  font-family="monospace" font-size="7" fill="var(--semantic-h)">9</text>
++  </svg>
++</div>
+diff --git a/src/components/compass/RailCompassCross.astro b/src/components/compass/RailCompassCross.astro
+new file mode 100644
+index 0000000..7c36f96
+--- /dev/null
++++ b/src/components/compass/RailCompassCross.astro
+@@ -0,0 +1,15 @@
++---
++// RailCompassCross — compact H/V axis cross for the right rail
++// Usage: <RailCompassCross />
++---
++<div class="rail-visual" aria-hidden="true">
++  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
++    <line x1="6"  y1="36" x2="66" y2="36" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
++    <line x1="36" y1="6"  x2="36" y2="66" stroke="var(--semantic-v)" stroke-width="2" stroke-linecap="round"/>
++    <circle cx="36" cy="36" r="4" fill="var(--text-3)"/>
++    <polyline points="58,33 66,36 58,39" stroke="var(--semantic-h)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
++    <polyline points="33,14 36,6 39,14"  stroke="var(--semantic-v)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
++    <text x="63" y="48" font-family="monospace" font-size="8" fill="var(--semantic-h)" text-anchor="end">H</text>
++    <text x="48" y="12" font-family="monospace" font-size="8" fill="var(--semantic-v)">V</text>
++  </svg>
++</div>
+diff --git a/src/components/compass/RailCoordChip.astro b/src/components/compass/RailCoordChip.astro
+new file mode 100644
+index 0000000..c906a26
+--- /dev/null
++++ b/src/components/compass/RailCoordChip.astro
+@@ -0,0 +1,11 @@
++---
++// RailCoordChip — coordinate format reference chip for the right rail
++// Usage: <RailCoordChip />
++---
++<div class="rail-visual" aria-hidden="true">
++  <div class="rail-coord-chip">
++    <span class="rail-coord-chip__label">Format</span>
++    <code class="rail-coord-chip__value">H:MM / Dn</code>
++    <span class="rail-coord-chip__example">e.g. <code>6:00 / D2</code></span>
++  </div>
++</div>
+diff --git a/src/components/compass/RailDepthScale.astro b/src/components/compass/RailDepthScale.astro
+new file mode 100644
+index 0000000..0c8f102
+--- /dev/null
++++ b/src/components/compass/RailDepthScale.astro
+@@ -0,0 +1,21 @@
++---
++// RailDepthScale — D5→D0 depth scale micro-visual for the right rail
++// Usage: <RailDepthScale />
++---
++<div class="rail-visual" aria-hidden="true">
++  <svg width="72" height="90" viewBox="0 0 72 90" fill="none" xmlns="http://www.w3.org/2000/svg">
++    <rect x="18" y="8"  width="36" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.35"/>
++    <rect x="20" y="21" width="32" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.48"/>
++    <rect x="22" y="34" width="28" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.61"/>
++    <rect x="24" y="47" width="24" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.74"/>
++    <rect x="26" y="60" width="20" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.87"/>
++    <rect x="28" y="73" width="16" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="1"/>
++    <text x="10" y="15.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D5</text>
++    <text x="10" y="28.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D4</text>
++    <text x="10" y="41.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D3</text>
++    <text x="10" y="54.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D2</text>
++    <text x="10" y="67.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D1</text>
++    <text x="10" y="80.5"  font-family="monospace" font-size="7" fill="var(--text-3)">D0</text>
++    <text x="36" y="88" text-anchor="middle" font-family="monospace" font-size="7" fill="var(--text-3)">surface → core</text>
++  </svg>
++</div>
+diff --git a/src/pages/compass/horizontal-axis/index.astro b/src/pages/compass/horizontal-axis/index.astro
+index 4826f5a..39adee4 100644
+--- a/src/pages/compass/horizontal-axis/index.astro
++++ b/src/pages/compass/horizontal-axis/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,21 +19,9 @@ const base = import.meta.env.BASE_URL;
+     <h1>Horizontal Axis</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#primary-measurement-systems" class="toc-grid__link">Primary Measurement Systems</a>
+-        <a href="#key-story-positions" class="toc-grid__link">Key Story Positions</a>
+-        <a href="#horizontal-movement-patterns" class="toc-grid__link">Horizontal Movement Patterns</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Version 1.0 | Section II: HORIZONTAL AXIS</p>
+-<nav class="breadcrumb">
+-<a href="../">Master Outline</a> › <a href="../orientation/">Section I: Orientation</a> › <strong>Section II: Horizontal Axis</strong>
+-</nav>
+-<div class="content-container">
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
++    <!-- content starts -->
+ <!-- MAIN SECTION II: HORIZONTAL AXIS -->
+ <div class="section" id="horizontal-axis-main">
+ <h2>II. HORIZONTAL AXIS: Story Timeline Position <span class="source-tag">COMPASS</span></h2>
+@@ -623,12 +612,32 @@ const base = import.meta.env.BASE_URL;
+ </div>
+ </div>
+ </div>
+-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
+-<p>Story Analysis Coordinate System v1.0 | Section II: HORIZONTAL AXIS</p>
+-<p style="font-size: 0.9em; margin-top: 10px;">A Compass for Story Analysis and Narrative Mapping</p>
++<div class="page-stamp">
++  <p>Story Analysis Coordinate System v1.0 · Section II: Horizontal Axis</p>
+ </div>
+ </div>
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-h"
++      toc={[
++        { label: "Primary Measurement Systems", href: "#primary-measurement-systems" },
++        { label: "Key Story Positions",          href: "#key-story-positions"          },
++        { label: "Movement Patterns",            href: "#horizontal-movement-patterns"  },
++      ]}
++      chips={[
++        { label: "Axis",   value: "H = Timeline" },
++        { label: "Circle", value: "12:00 → 12:00" },
++      ]}
++      visual="clock-arc"
++      nextLinks={[
++        { label: "IIA. Story Structure",  href: `${base}/compass/story-structure/`  },
++        { label: "III. Vertical Axis",    href: `${base}/compass/vertical-axis/`    },
++        { label: "IV. Intersection Logic",href: `${base}/compass/intersection-logic/`},
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/orientation/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/implementation-guide/index.astro b/src/pages/compass/implementation-guide/index.astro
+index 16a5a63..4ff13e1 100644
+--- a/src/pages/compass/implementation-guide/index.astro
++++ b/src/pages/compass/implementation-guide/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,18 +19,9 @@ const base = import.meta.env.BASE_URL;
+     <h1>Implementation Guide</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#part-i-system-architecture" class="toc-grid__link">Part I — System Architecture</a>
+-        <a href="#part-ii-story-compass-specifications" class="toc-grid__link">Part II — Compass Specifications</a>
+-        <a href="#part-iii-hub-node-strategy" class="toc-grid__link">Part III — Hub Node Strategy</a>
+-        <a href="#part-iv-relationship-finder-tool" class="toc-grid__link">Part IV — Relationship Finder Tool</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Implementation Guide &amp; Deliverables Roadmap</p><h2 id="part-i-system-architecture">PART I: SYSTEM ARCHITECTURE</h2>
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
++    <h2 id="part-i-system-architecture">PART I: SYSTEM ARCHITECTURE</h2>
+ <h3 id="story-coordinate-compass">Story Coordinate Compass</h3>
+ <p>This is a spatial navigation system for story analysis. It treats
+ every story as a mappable territory with two primary dimensions.</p>
+@@ -1573,7 +1565,34 @@ evolves.</em></p>
+ <ul><li>D0: Point of no return, irreversible choice</li><li>D4: Structural turning point, act break</li></ul>
+ <ul><li>D2: Character identity expression</li><li>D3: Rhetorical authority, ethos</li></ul>
+ <ul><li>D0: Core realization about problem</li><li>D2: Identity shift moment</li><li>D3: Pattern recognition, belief revision</li></ul>
+-  </div>
++
++<div class="page-stamp">
++  <p>Implementation Guide v1.0 · Story Analysis Coordinate System</p>
++</div>
++
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-vii"
++      toc={[
++        { label: "Part I — System Architecture",     href: "#part-i-system-architecture"          },
++        { label: "Part II — Compass Specifications", href: "#part-ii-story-compass-specifications" },
++        { label: "Part III — Hub Node Strategy",     href: "#part-iii-hub-node-strategy"          },
++        { label: "Part IV — Relationship Finder",    href: "#part-iv-relationship-finder-tool"    },
++      ]}
++      chips={[
++        { label: "Grid",   value: "13 × 6 = 78 cells" },
++        { label: "Output", value: "[H:MM / Dn]"        },
++      ]}
++      visual="cross"
++      nextLinks={[
++        { label: "I. Orientation",            href: `${base}/compass/orientation/`          },
++        { label: "VI. Practical Application", href: `${base}/compass/practical-application/`},
++        { label: "V. Navigation Protocols",   href: `${base}/compass/navigation-protocols/` },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/practical-application/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/index.astro b/src/pages/compass/index.astro
+index 7be3260..d182821 100644
+--- a/src/pages/compass/index.astro
++++ b/src/pages/compass/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../layouts/PortalLayout.astro';
++import CompassRail from '../../components/compass/CompassRail.astro';
+ 
+ const base = import.meta.env.BASE_URL;
+ 
+@@ -29,6 +30,9 @@ const sections = [
+     <p class="subtitle">A two-dimensional system for mapping and navigating narrative structure</p>
+   </div>
+ 
++  <div class="cockpit">
++    <div class="cockpit__main">
++
+   <!-- Axis info -->
+   <div style="background:var(--surface); border:1px solid var(--border); border-radius:var(--radius-lg); padding:1.5rem; margin-bottom:1.5rem;">
+     <div style="display:flex; align-items:center; gap:0.75rem; margin-bottom:1rem;">
+@@ -61,4 +65,30 @@ const sections = [
+     ))}
+   </div>
+ 
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-index"
++      toc={[
++        { label: "I. Orientation",         href: `${base}/compass/orientation/`          },
++        { label: "II. Horizontal Axis",    href: `${base}/compass/horizontal-axis/`      },
++        { label: "III. Vertical Axis",     href: `${base}/compass/vertical-axis/`        },
++        { label: "IV. Intersection Logic", href: `${base}/compass/intersection-logic/`   },
++        { label: "V. Navigation Protocols",href: `${base}/compass/navigation-protocols/` },
++        { label: "VI. Practical App",      href: `${base}/compass/practical-application/`},
++        { label: "VII. Implementation",    href: `${base}/compass/implementation-guide/` },
++      ]}
++      chips={[
++        { label: "H", value: "Timeline Position" },
++        { label: "V", value: "Depth D5 → D0"     },
++      ]}
++      visual="cross"
++      nextLinks={[
++        { label: "I. Orientation",      href: `${base}/compass/orientation/`     },
++        { label: "II. Horizontal Axis", href: `${base}/compass/horizontal-axis/` },
++        { label: "III. Vertical Axis",  href: `${base}/compass/vertical-axis/`   },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ </PortalLayout>
+diff --git a/src/pages/compass/intersection-logic/index.astro b/src/pages/compass/intersection-logic/index.astro
+index 52bb4b3..c3acbf3 100644
+--- a/src/pages/compass/intersection-logic/index.astro
++++ b/src/pages/compass/intersection-logic/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,21 +19,8 @@ const base = import.meta.env.BASE_URL;
+     <h1>Intersection Logic</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#coordinate-reading" class="toc-grid__link">Coordinate Reading Protocol</a>
+-        <a href="#intersection-signatures" class="toc-grid__link">Intersection Signatures</a>
+-        <a href="#cross-reference" class="toc-grid__link">Cross-Reference System</a>
+-        <a href="#common-patterns" class="toc-grid__link">Common Intersection Patterns</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Section IV: Intersection Logic</p>
+-<nav class="breadcrumb">
+-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <strong>Section IV: Intersection Logic</strong>
+-</nav>
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
+ <div class="content-container">
+ <!-- SECTION IV INTRODUCTION -->
+ <div class="section">
+@@ -557,12 +545,33 @@ const base = import.meta.env.BASE_URL;
+ <li><strong>Section VI: Practical Application</strong> — Detailed story analyses using coordinates</li>
+ </ul>
+ </div>
+-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
+-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
+-<p style="font-size: 0.875em; margin-top: 8px;">Section IV: Intersection Logic</p>
++<div class="page-stamp">
++  <p>Story Analysis Coordinate System v1.0 · Section IV: Intersection Logic</p>
+ </div>
+ </div>
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-iv"
++      toc={[
++        { label: "Coordinate Reading",        href: "#coordinate-reading"       },
++        { label: "Intersection Signatures",   href: "#intersection-signatures"  },
++        { label: "Cross-Reference System",    href: "#cross-reference"          },
++        { label: "Common Patterns",           href: "#common-patterns"          },
++      ]}
++      chips={[
++        { label: "Notation", value: "H:MM / Dn" },
++        { label: "Example",  value: "6:00 / D2" },
++      ]}
++      visual="coord-chip"
++      nextLinks={[
++        { label: "V. Navigation Protocols",  href: `${base}/compass/navigation-protocols/` },
++        { label: "II. Horizontal Axis",      href: `${base}/compass/horizontal-axis/`      },
++        { label: "III. Vertical Axis",       href: `${base}/compass/vertical-axis/`        },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/vertical-axis/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/navigation-protocols/index.astro b/src/pages/compass/navigation-protocols/index.astro
+index 430eca9..6f126dc 100644
+--- a/src/pages/compass/navigation-protocols/index.astro
++++ b/src/pages/compass/navigation-protocols/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,20 +19,8 @@ const base = import.meta.env.BASE_URL;
+     <h1>Navigation Protocols</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#starting-strategies" class="toc-grid__link">Starting Point Strategies</a>
+-        <a href="#movement" class="toc-grid__link">Movement Through the System</a>
+-        <a href="#multi-coordinate" class="toc-grid__link">Multi-Coordinate Analysis</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Section V: Navigation Protocols</p>
+-<nav class="breadcrumb">
+-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <a href="../intersection-logic/">Section IV</a> › <strong>Section V: Navigation Protocols</strong>
+-</nav>
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
+ <div class="content-container">
+ <!-- SECTION V INTRODUCTION -->
+ <div class="section">
+@@ -1400,12 +1389,32 @@ Belief:         False     →  Challenged → True</pre>
+ <li><strong>Appendices</strong> — Quick reference guides and templates</li>
+ </ul>
+ </div>
+-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
+-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
+-<p style="font-size: 0.875em; margin-top: 8px;">Section V: Navigation Protocols</p>
++<div class="page-stamp">
++  <p>Story Analysis Coordinate System v1.0 · Section V: Navigation Protocols</p>
+ </div>
+ </div>
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-v-nav"
++      toc={[
++        { label: "Starting Strategies",      href: "#starting-strategies" },
++        { label: "Movement Through System",  href: "#movement"            },
++        { label: "Multi-Coordinate Analysis",href: "#multi-coordinate"    },
++      ]}
++      chips={[
++        { label: "Entry",     value: "Any coordinate" },
++        { label: "Movements", value: "→ ↓ ↗"         },
++      ]}
++      visual="cross"
++      nextLinks={[
++        { label: "VI. Practical Application",href: `${base}/compass/practical-application/` },
++        { label: "IV. Intersection Logic",   href: `${base}/compass/intersection-logic/`    },
++        { label: "VII. Implementation",      href: `${base}/compass/implementation-guide/`  },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/intersection-logic/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/orientation/index.astro b/src/pages/compass/orientation/index.astro
+index a9e55cd..7e6aadc 100644
+--- a/src/pages/compass/orientation/index.astro
++++ b/src/pages/compass/orientation/index.astro
+@@ -2,6 +2,7 @@
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
+ import FlipCard from '../../../components/ui/FlipCard.astro';
+ import Tabs from '../../../components/ui/Tabs.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -337,58 +338,25 @@ const base = import.meta.env.BASE_URL;
+ 
+     </div><!-- /.cockpit__main -->
+ 
+-    <!-- RIGHT RAIL -->
+-    <aside class="cockpit__rail" aria-label="Page reference">
+-
+-      <div>
+-        <p class="rail__label">Axis Legend</p>
+-        <div class="rail__legend">
+-          <div class="rail__legend-item">
+-            <span class="rail__dot rail__dot--amber"></span>
+-            <span><strong>H</strong> — Timeline Position</span>
+-          </div>
+-          <div class="rail__legend-item">
+-            <span class="rail__dot rail__dot--teal"></span>
+-            <span><strong>V</strong> — Depth Dimension</span>
+-          </div>
+-          <div class="rail__legend-item" style="font-size:0.75rem;color:var(--text-3);padding-left:1rem;line-height:1.5;">D5 surface → D0 core</div>
+-          <div class="rail__legend-item" style="font-size:0.75rem;color:var(--text-3);padding-left:1rem;line-height:1.5;">12:00 = opening · 6:00 = midpoint</div>
+-        </div>
+-      </div>
+-
+-      <hr class="rail__divider" />
+-
+-      <div>
+-        <p class="rail__label">On This Page</p>
+-        <ul class="rail__toc" id="rail-toc">
+-          <li><a href="#two-axes">The Two Axes</a></li>
+-          <li><a href="#reading-a-coordinate">Reading a Coordinate</a></li>
+-          <li><a href="#three-ways-to-move">Three Ways to Move</a></li>
+-          <li><a href="#relationship-docs">Supporting Documents</a></li>
+-        </ul>
+-      </div>
+-
+-      <hr class="rail__divider" />
+-
+-      <div>
+-        <p class="rail__label">What's Next</p>
+-        <div class="rail__next">
+-          <a href={`${base}/compass/horizontal-axis/`} class="rail__next-link">
+-            <span>II. Horizontal Axis</span>
+-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+-          </a>
+-          <a href={`${base}/compass/vertical-axis/`} class="rail__next-link">
+-            <span>III. Vertical Axis</span>
+-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+-          </a>
+-          <a href={`${base}/compass/intersection-logic/`} class="rail__next-link">
+-            <span>IV. Intersection Logic</span>
+-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+-          </a>
+-        </div>
+-      </div>
+-
+-    </aside>
++    <CompassRail
++      tocId="rail-toc"
++      toc={[
++        { label: "The Two Axes",         href: "#two-axes"             },
++        { label: "Reading a Coordinate", href: "#reading-a-coordinate" },
++        { label: "Three Ways to Move",   href: "#three-ways-to-move"   },
++        { label: "Supporting Documents", href: "#relationship-docs"    },
++      ]}
++      chips={[
++        { label: "H", value: "Timeline Position"  },
++        { label: "V", value: "Depth D5 → D0"      },
++      ]}
++      visual="cross"
++      nextLinks={[
++        { label: "II. Horizontal Axis",    href: `${base}/compass/horizontal-axis/`    },
++        { label: "III. Vertical Axis",     href: `${base}/compass/vertical-axis/`      },
++        { label: "IV. Intersection Logic", href: `${base}/compass/intersection-logic/` },
++      ]}
++    />
+ 
+   </div><!-- /.cockpit -->
+ 
+@@ -403,28 +371,3 @@ const base = import.meta.env.BASE_URL;
+   </nav>
+ 
+ </PortalLayout>
+-
+-<script>
+-  (function () {
+-    var links = document.querySelectorAll('#rail-toc a');
+-    if (!links.length) return;
+-    var sections = Array.from(links).map(function(a) {
+-      var id = a.getAttribute('href').replace('#', '');
+-      return { el: document.getElementById(id), a: a };
+-    }).filter(function(s) { return s.el; });
+-    function spy() {
+-      var scrollY = window.scrollY + 100;
+-      var active = null;
+-      for (var i = sections.length - 1; i >= 0; i--) {
+-        if (sections[i].el.offsetTop <= scrollY) { active = sections[i]; break; }
+-      }
+-      links.forEach(function(l) { l.classList.remove('is-active'); });
+-      if (active) active.a.classList.add('is-active');
+-    }
+-    var ticking = false;
+-    window.addEventListener('scroll', function() {
+-      if (!ticking) { requestAnimationFrame(function() { spy(); ticking = false; }); ticking = true; }
+-    });
+-    spy();
+-  })();
+-</script>
+diff --git a/src/pages/compass/practical-application/index.astro b/src/pages/compass/practical-application/index.astro
+index 34675f3..e0a8bc0 100644
+--- a/src/pages/compass/practical-application/index.astro
++++ b/src/pages/compass/practical-application/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,19 +19,8 @@ const base = import.meta.env.BASE_URL;
+     <h1>Practical Application</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#logging-templates" class="toc-grid__link">Logging Templates</a>
+-        <a href="#note-organization" class="toc-grid__link">Note Organization Systems</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Section VI: Practical Application</p>
+-<nav class="breadcrumb">
+-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <a href="../intersection-logic/">Section IV</a> › <a href="../navigation-protocols/">Section V</a> › <strong>Section VI: Practical Application</strong>
+-</nav>
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
+ <div class="content-container">
+ <!-- SECTION VI INTRODUCTION -->
+ <div class="section">
+@@ -935,12 +925,31 @@ VI. SYNTHESIS
+ <li><strong>Research:</strong> Build academic papers and presentations</li>
+ </ul>
+ </div>
+-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
+-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
+-<p style="font-size: 0.875em; margin-top: 8px;">Section VI: Practical Application</p>
++<div class="page-stamp">
++  <p>Story Analysis Coordinate System v1.0 · Section VI: Practical Application</p>
+ </div>
+ </div>
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-vi"
++      toc={[
++        { label: "Logging Templates",      href: "#logging-templates"  },
++        { label: "Note Organization",      href: "#note-organization"  },
++      ]}
++      chips={[
++        { label: "Log format", value: "Coord + Scene + Notes" },
++        { label: "Output",     value: "[Timestamp] / [H:MM/Dn]" },
++      ]}
++      visual="coord-chip"
++      nextLinks={[
++        { label: "VII. Implementation Guide",href: `${base}/compass/implementation-guide/`   },
++        { label: "V. Navigation Protocols",  href: `${base}/compass/navigation-protocols/`   },
++        { label: "I. Orientation",           href: `${base}/compass/orientation/`            },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/navigation-protocols/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/story-structure/index.astro b/src/pages/compass/story-structure/index.astro
+index a213957..c0b12d1 100644
+--- a/src/pages/compass/story-structure/index.astro
++++ b/src/pages/compass/story-structure/index.astro
+@@ -1,5 +1,6 @@
+ ---
+ import PortalLayout from '../../../layouts/PortalLayout.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ const base = import.meta.env.BASE_URL;
+ ---
+ 
+@@ -18,23 +19,8 @@ const base = import.meta.env.BASE_URL;
+     <h1>Story Structure</h1>
+   </div>
+ 
+-  <div class="compass-content">
+-    <!-- TOC -->
+-    <nav class="toc-grid">
+-      <div class="toc-grid__label">On This Page</div>
+-      <div class="toc-grid__items">
+-        <a href="#introduction" class="toc-grid__link">Introduction</a>
+-        <a href="#crosswalk-methodology" class="toc-grid__link">Crosswalk Methodology</a>
+-        <a href="#foundational-engines" class="toc-grid__link">Foundational Story Engines</a>
+-        <a href="#structural-geometries" class="toc-grid__link">Structural Geometries</a>
+-        <a href="#episodic-modular" class="toc-grid__link">Episodic &amp; Modular Structures</a>
+-        <a href="#quest-braided" class="toc-grid__link">Quest &amp; Braided Structures</a>
+-        <a href="#temporal-disruption" class="toc-grid__link">Temporal Disruption Structures</a>
+-        <a href="#contrast-engine" class="toc-grid__link">Contrast Engines</a>
+-        <a href="#five-act-lens" class="toc-grid__link">Five-Act Diagnostic Lens</a>
+-      </div>
+-    </nav>
+-    <p class="subtitle">Section IIA: Story Structure Crosswalk</p>
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
+ <div class="content-container">
+ <!-- INTRODUCTION -->
+ <div class="section" id="introduction">
+@@ -1321,13 +1307,38 @@ const base = import.meta.env.BASE_URL;
+ <p>This section provides a comprehensive crosswalk of major structural frameworks, each analyzed through the same 7-dimensional methodology.</p>
+ <p style="margin-top: 12px;"><strong>Remember:</strong> These frameworks don't tell you <em>how to write</em> – they reveal <strong>what kind of cognition each structure activates</strong> in both creator and audience.</p>
+ </div>
+-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
+-<p>Story Analysis Coordinate System v1.1</p>
+-<p style="font-size: 0.9em; margin-top: 10px;">Section IIA: Story Structure Crosswalk</p>
+-<p style="font-size: 0.85em; margin-top: 8px;">Encyclopedia of Structural Frameworks – Strategic Selection via 7-Dimensional Analysis</p>
++<div class="page-stamp">
++  <p>Story Analysis Coordinate System v1.1 · Section IIA: Story Structure Crosswalk</p>
+ </div>
+ </div>
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-iia"
++      toc={[
++        { label: "Introduction",             href: "#introduction"         },
++        { label: "Crosswalk Methodology",    href: "#crosswalk-methodology"},
++        { label: "Foundational Engines",     href: "#foundational-engines" },
++        { label: "Structural Geometries",    href: "#structural-geometries"},
++        { label: "Episodic & Modular",       href: "#episodic-modular"     },
++        { label: "Quest & Braided",          href: "#quest-braided"        },
++        { label: "Temporal Disruption",      href: "#temporal-disruption"  },
++        { label: "Contrast Engines",         href: "#contrast-engine"      },
++        { label: "Five-Act Lens",            href: "#five-act-lens"        },
++      ]}
++      chips={[
++        { label: "Method", value: "7-dim crosswalk" },
++        { label: "Axis",   value: "H = Structure"   },
++      ]}
++      visual="clock-arc"
++      nextLinks={[
++        { label: "III. Vertical Axis",      href: `${base}/compass/vertical-axis/`     },
++        { label: "IV. Intersection Logic",  href: `${base}/compass/intersection-logic/`},
++        { label: "II. Horizontal Axis",     href: `${base}/compass/horizontal-axis/`   },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+ <nav class="section-nav">
+     <a href={`${base}/compass/horizontal-axis/`} class="section-nav__link section-nav__link--prev">
+diff --git a/src/pages/compass/vertical-axis/index.astro b/src/pages/compass/vertical-axis/index.astro
+index 6836324..0a448b5 100644
+--- a/src/pages/compass/vertical-axis/index.astro
++++ b/src/pages/compass/vertical-axis/index.astro
+@@ -3,6 +3,7 @@ import PortalLayout from '../../../layouts/PortalLayout.astro';
+ import CoordinatePicker from '../../../components/ui/CoordinatePicker.astro';
+ import Tabs from '../../../components/ui/Tabs.astro';
+ import ExpandingCards from '../../../components/ui/ExpandingCards.astro';
++import CompassRail from '../../../components/compass/CompassRail.astro';
+ // CSS moved to src/styles/components/expanding-cards.css (imported via global.css)
+ const base = import.meta.env.BASE_URL;
+ 
+@@ -32,7 +33,8 @@ const dimensionCards = [
+     <p class="subtitle">Story Depth Dimensions — six layers from surface to core</p>
+   </div>
+ 
+-  <div class="compass-content">
++  <div class="cockpit">
++    <div class="cockpit__main compass-content">
+ 
+    <!-- ===== COORDINATE PICKER ===== -->
+ <div class="dimension-card dimension-card--coord-picker">
+@@ -727,7 +729,29 @@ const dimensionCards = [
+       </details>
+     </div>
+ 
+-  </div>
++    </div><!-- /.cockpit__main -->
++
++    <CompassRail
++      tocId="rail-toc-v"
++      toc={[
++        { label: "Introduction",        href: "#introduction"        },
++        { label: "The Six Dimensions",  href: "#dimensions"          },
++        { label: "D5 — Surface",        href: "#d5-expressive"       },
++        { label: "D0 — Core",           href: "#d0-core"             },
++      ]}
++      chips={[
++        { label: "Axis",  value: "V = Depth"       },
++        { label: "Scale", value: "D5 (surface) → D0 (core)" },
++      ]}
++      visual="depth-scale"
++      nextLinks={[
++        { label: "IV. Intersection Logic",    href: `${base}/compass/intersection-logic/`    },
++        { label: "V. Navigation Protocols",   href: `${base}/compass/navigation-protocols/`  },
++        { label: "I. Orientation",            href: `${base}/compass/orientation/`           },
++      ]}
++    />
++
++  </div><!-- /.cockpit -->
+ 
+   <!-- SECTION NAVIGATION -->
+   <nav class="section-nav">
+diff --git a/src/styles/patterns/layout.css b/src/styles/patterns/layout.css
+index 3fd2475..ad6da21 100644
+--- a/src/styles/patterns/layout.css
++++ b/src/styles/patterns/layout.css
+@@ -228,6 +228,149 @@
+   text-decoration-color: transparent;
+ }
+ 
++/* Rail chips — compact label+value badges */
++.rail__chips {
++  display: flex;
++  flex-direction: column;
++  gap: 0.375rem;
++  margin-bottom: 0.75rem;
++}
++
++.rail-chip {
++  display: flex;
++  align-items: baseline;
++  gap: 0.375rem;
++  padding: 0.3rem 0.5rem;
++  background: var(--surface-elevated);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-sm);
++  line-height: 1.3;
++}
++
++.rail-chip__label {
++  font-size: 0.6875rem;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.06em;
++  color: var(--text-3);
++  white-space: nowrap;
++}
++
++.rail-chip__value {
++  font-size: 0.75rem;
++  color: var(--text-2);
++  font-family: var(--font-mono);
++}
++
++/* Rail micro-visual container */
++.rail-visual {
++  display: flex;
++  justify-content: center;
++  align-items: center;
++  padding: 0.5rem 0;
++  opacity: 0.85;
++}
++
++/* Coordinate format chip (coord-chip visual) */
++.rail-coord-chip {
++  display: flex;
++  flex-direction: column;
++  gap: 0.2rem;
++  padding: 0.5rem 0.625rem;
++  background: var(--surface-elevated);
++  border: 1px solid var(--border);
++  border-radius: var(--radius-md);
++  font-size: 0.75rem;
++}
++
++.rail-coord-chip__label {
++  font-size: 0.625rem;
++  font-weight: 700;
++  text-transform: uppercase;
++  letter-spacing: 0.08em;
++  color: var(--text-3);
++}
++
++.rail-coord-chip__value {
++  font-family: var(--font-mono);
++  font-size: 0.875rem;
++  color: var(--text);
++}
++
++.rail-coord-chip__example {
++  font-size: 0.6875rem;
++  color: var(--text-3);
++}
++
++/* Mobile rail: wrap entire aside in a <details> on narrow viewports */
++@media (max-width: 900px) {
++  .cockpit__rail details summary {
++    font-size: 0.8125rem;
++    font-weight: 600;
++    color: var(--text-2);
++    cursor: pointer;
++    list-style: none;
++    padding: 0.25rem 0;
++  }
++  .cockpit__rail details summary::marker,
++  .cockpit__rail details summary::-webkit-details-marker {
++    display: none;
++  }
++  .cockpit__rail details[open] summary::after {
++    content: ' ▴';
++    font-size: 0.7em;
++  }
++  .cockpit__rail details:not([open]) summary::after {
++    content: ' ▾';
++    font-size: 0.7em;
++  }
++}
++
++/* Rail disclosure — desktop: always open, summary hidden */
++.rail__disclosure {
++  display: contents; /* on desktop, details is invisible wrapper */
++}
++.rail__disclosure-toggle {
++  display: none; /* hidden on desktop */
++}
++@media (max-width: 900px) {
++  .rail__disclosure {
++    display: block;
++    width: 100%;
++  }
++  .rail__disclosure-toggle {
++    display: list-item;
++    font-size: 0.8125rem;
++    font-weight: 700;
++    letter-spacing: 0.04em;
++    text-transform: uppercase;
++    color: var(--text-2);
++    cursor: pointer;
++    padding: 0.5rem 0;
++    list-style: none;
++    border-bottom: 1px solid var(--border);
++    margin-bottom: 0.75rem;
++  }
++  .rail__disclosure-toggle::marker,
++  .rail__disclosure-toggle::-webkit-details-marker {
++    display: none;
++  }
++  .rail__disclosure[open] .rail__disclosure-toggle::after {
++    content: ' ▴';
++    font-size: 0.75em;
++    color: var(--text-3);
++  }
++  .rail__disclosure:not([open]) .rail__disclosure-toggle::after {
++    content: ' ▾';
++    font-size: 0.75em;
++    color: var(--text-3);
++  }
++  /* On mobile, close by default — user taps to open */
++  .cockpit__rail .rail__section {
++    /* sections inside details are hidden when closed, shown when open — native behavior */
++  }
++}
++
+ /* Media intro — diagram + text side by side (reusable) */
+ .media-intro {
+   display: grid;

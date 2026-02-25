@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -18,21 +19,8 @@ const base = import.meta.env.BASE_URL;
     <h1>Intersection Logic</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#coordinate-reading" class="toc-grid__link">Coordinate Reading Protocol</a>
-        <a href="#intersection-signatures" class="toc-grid__link">Intersection Signatures</a>
-        <a href="#cross-reference" class="toc-grid__link">Cross-Reference System</a>
-        <a href="#common-patterns" class="toc-grid__link">Common Intersection Patterns</a>
-      </div>
-    </nav>
-    <p class="subtitle">Section IV: Intersection Logic</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <strong>Section IV: Intersection Logic</strong>
-</nav>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
 <div class="content-container">
 <!-- SECTION IV INTRODUCTION -->
 <div class="section">
@@ -557,12 +545,33 @@ const base = import.meta.env.BASE_URL;
 <li><strong>Section VI: Practical Application</strong> — Detailed story analyses using coordinates</li>
 </ul>
 </div>
-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
-<p style="font-size: 0.875em; margin-top: 8px;">Section IV: Intersection Logic</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section IV: Intersection Logic</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-iv"
+      toc={[
+        { label: "Coordinate Reading",        href: "#coordinate-reading"       },
+        { label: "Intersection Signatures",   href: "#intersection-signatures"  },
+        { label: "Cross-Reference System",    href: "#cross-reference"          },
+        { label: "Common Patterns",           href: "#common-patterns"          },
+      ]}
+      chips={[
+        { label: "Notation", value: "H:MM / Dn" },
+        { label: "Example",  value: "6:00 / D2" },
+      ]}
+      visual="coord-chip"
+      nextLinks={[
+        { label: "V. Navigation Protocols",  href: `${base}/compass/navigation-protocols/` },
+        { label: "II. Horizontal Axis",      href: `${base}/compass/horizontal-axis/`      },
+        { label: "III. Vertical Axis",       href: `${base}/compass/vertical-axis/`        },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/vertical-axis/`} class="section-nav__link section-nav__link--prev">

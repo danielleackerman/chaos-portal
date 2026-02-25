@@ -228,6 +228,149 @@
   text-decoration-color: transparent;
 }
 
+/* Rail chips — compact label+value badges */
+.rail__chips {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 0.75rem;
+}
+
+.rail-chip {
+  display: flex;
+  align-items: baseline;
+  gap: 0.375rem;
+  padding: 0.3rem 0.5rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  line-height: 1.3;
+}
+
+.rail-chip__label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-3);
+  white-space: nowrap;
+}
+
+.rail-chip__value {
+  font-size: 0.75rem;
+  color: var(--text-2);
+  font-family: var(--font-mono);
+}
+
+/* Rail micro-visual container */
+.rail-visual {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 0;
+  opacity: 0.85;
+}
+
+/* Coordinate format chip (coord-chip visual) */
+.rail-coord-chip {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  padding: 0.5rem 0.625rem;
+  background: var(--surface-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: 0.75rem;
+}
+
+.rail-coord-chip__label {
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-3);
+}
+
+.rail-coord-chip__value {
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  color: var(--text);
+}
+
+.rail-coord-chip__example {
+  font-size: 0.6875rem;
+  color: var(--text-3);
+}
+
+/* Mobile rail: wrap entire aside in a <details> on narrow viewports */
+@media (max-width: 900px) {
+  .cockpit__rail details summary {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: var(--text-2);
+    cursor: pointer;
+    list-style: none;
+    padding: 0.25rem 0;
+  }
+  .cockpit__rail details summary::marker,
+  .cockpit__rail details summary::-webkit-details-marker {
+    display: none;
+  }
+  .cockpit__rail details[open] summary::after {
+    content: ' ▴';
+    font-size: 0.7em;
+  }
+  .cockpit__rail details:not([open]) summary::after {
+    content: ' ▾';
+    font-size: 0.7em;
+  }
+}
+
+/* Rail disclosure — desktop: always open, summary hidden */
+.rail__disclosure {
+  display: contents; /* on desktop, details is invisible wrapper */
+}
+.rail__disclosure-toggle {
+  display: none; /* hidden on desktop */
+}
+@media (max-width: 900px) {
+  .rail__disclosure {
+    display: block;
+    width: 100%;
+  }
+  .rail__disclosure-toggle {
+    display: list-item;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--text-2);
+    cursor: pointer;
+    padding: 0.5rem 0;
+    list-style: none;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+  }
+  .rail__disclosure-toggle::marker,
+  .rail__disclosure-toggle::-webkit-details-marker {
+    display: none;
+  }
+  .rail__disclosure[open] .rail__disclosure-toggle::after {
+    content: ' ▴';
+    font-size: 0.75em;
+    color: var(--text-3);
+  }
+  .rail__disclosure:not([open]) .rail__disclosure-toggle::after {
+    content: ' ▾';
+    font-size: 0.75em;
+    color: var(--text-3);
+  }
+  /* On mobile, close by default — user taps to open */
+  .cockpit__rail .rail__section {
+    /* sections inside details are hidden when closed, shown when open — native behavior */
+  }
+}
+
 /* Media intro — diagram + text side by side (reusable) */
 .media-intro {
   display: grid;

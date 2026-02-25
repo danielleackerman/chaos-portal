@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -18,23 +19,8 @@ const base = import.meta.env.BASE_URL;
     <h1>Story Structure</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#introduction" class="toc-grid__link">Introduction</a>
-        <a href="#crosswalk-methodology" class="toc-grid__link">Crosswalk Methodology</a>
-        <a href="#foundational-engines" class="toc-grid__link">Foundational Story Engines</a>
-        <a href="#structural-geometries" class="toc-grid__link">Structural Geometries</a>
-        <a href="#episodic-modular" class="toc-grid__link">Episodic &amp; Modular Structures</a>
-        <a href="#quest-braided" class="toc-grid__link">Quest &amp; Braided Structures</a>
-        <a href="#temporal-disruption" class="toc-grid__link">Temporal Disruption Structures</a>
-        <a href="#contrast-engine" class="toc-grid__link">Contrast Engines</a>
-        <a href="#five-act-lens" class="toc-grid__link">Five-Act Diagnostic Lens</a>
-      </div>
-    </nav>
-    <p class="subtitle">Section IIA: Story Structure Crosswalk</p>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
 <div class="content-container">
 <!-- INTRODUCTION -->
 <div class="section" id="introduction">
@@ -1321,13 +1307,38 @@ const base = import.meta.env.BASE_URL;
 <p>This section provides a comprehensive crosswalk of major structural frameworks, each analyzed through the same 7-dimensional methodology.</p>
 <p style="margin-top: 12px;"><strong>Remember:</strong> These frameworks don't tell you <em>how to write</em> – they reveal <strong>what kind of cognition each structure activates</strong> in both creator and audience.</p>
 </div>
-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
-<p>Story Analysis Coordinate System v1.1</p>
-<p style="font-size: 0.9em; margin-top: 10px;">Section IIA: Story Structure Crosswalk</p>
-<p style="font-size: 0.85em; margin-top: 8px;">Encyclopedia of Structural Frameworks – Strategic Selection via 7-Dimensional Analysis</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.1 · Section IIA: Story Structure Crosswalk</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-iia"
+      toc={[
+        { label: "Introduction",             href: "#introduction"         },
+        { label: "Crosswalk Methodology",    href: "#crosswalk-methodology"},
+        { label: "Foundational Engines",     href: "#foundational-engines" },
+        { label: "Structural Geometries",    href: "#structural-geometries"},
+        { label: "Episodic & Modular",       href: "#episodic-modular"     },
+        { label: "Quest & Braided",          href: "#quest-braided"        },
+        { label: "Temporal Disruption",      href: "#temporal-disruption"  },
+        { label: "Contrast Engines",         href: "#contrast-engine"      },
+        { label: "Five-Act Lens",            href: "#five-act-lens"        },
+      ]}
+      chips={[
+        { label: "Method", value: "7-dim crosswalk" },
+        { label: "Axis",   value: "H = Structure"   },
+      ]}
+      visual="clock-arc"
+      nextLinks={[
+        { label: "III. Vertical Axis",      href: `${base}/compass/vertical-axis/`     },
+        { label: "IV. Intersection Logic",  href: `${base}/compass/intersection-logic/`},
+        { label: "II. Horizontal Axis",     href: `${base}/compass/horizontal-axis/`   },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/horizontal-axis/`} class="section-nav__link section-nav__link--prev">

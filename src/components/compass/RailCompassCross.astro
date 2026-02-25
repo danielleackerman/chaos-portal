@@ -1,0 +1,15 @@
+---
+// RailCompassCross — compact H/V axis cross for the right rail
+// Usage: <RailCompassCross />
+---
+<div class="rail-visual" aria-hidden="true">
+  <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="6"  y1="36" x2="66" y2="36" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
+    <line x1="36" y1="6"  x2="36" y2="66" stroke="var(--semantic-v)" stroke-width="2" stroke-linecap="round"/>
+    <circle cx="36" cy="36" r="4" fill="var(--text-3)"/>
+    <polyline points="58,33 66,36 58,39" stroke="var(--semantic-h)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <polyline points="33,14 36,6 39,14"  stroke="var(--semantic-v)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="63" y="48" font-family="monospace" font-size="8" fill="var(--semantic-h)" text-anchor="end">H</text>
+    <text x="48" y="12" font-family="monospace" font-size="8" fill="var(--semantic-v)">V</text>
+  </svg>
+</div>
