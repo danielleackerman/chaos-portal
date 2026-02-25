@@ -94,6 +94,8 @@
   /* LAYOUT */
   --max-width: 1100px;
   --header-height: 56px;
+  --rail-width: 300px;
+  --cockpit-gap: var(--space-md);
 }
 
 /* DARK MODE — Merged */

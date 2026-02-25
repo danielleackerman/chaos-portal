@@ -163,13 +163,19 @@ em {
 .eyebrow--amber { color: var(--semantic-h); }
 .eyebrow--teal { color: var(--semantic-v); }
 
-/* LINKS */
+/* LINKS — content links use text color, not info-blue
+   Info-blue is reserved for functional UI (focus rings, component outlines).
+   Cross-reference links retain blue as intentional semantic signal. */
 a {
-  color: var(--info-blue);
-  text-decoration: none;
-  transition: opacity 0.18s ease, transform 0.18s ease;
+  color: var(--text-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--border-accent);
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 a:hover {
+  color: var(--text);
+  text-decoration-color: var(--text-2);
   text-decoration: underline;
 }
 

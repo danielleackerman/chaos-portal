@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,31 +14,26 @@ const base = import.meta.env.BASE_URL;
     <strong>VI. Practical Application</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION VI</div>
     <h1>Practical Application</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#logging-templates" class="toc-grid__link">Logging Templates</a>
-        <a href="#note-organization" class="toc-grid__link">Note Organization Systems</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">Standardized templates, logging formats, and note-organization systems for applying the coordinate framework to real analysis work — efficiently and consistently. Use these tools before you start, not after.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> The scene log format with coordinates, multi-coordinate tracking sheets, and layered note structures.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Set up your log before you start; fill in coordinate fields first, then surface observations, then deeper layers.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Entries where coordinate fields conflict — when clock position and act structure disagree, that tension is analytically useful data.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Section VI: Practical Application</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I</a> › <a href="../horizontal-axis/">Section II</a> › <a href="../vertical-axis/">Section III</a> › <a href="../intersection-logic/">Section IV</a> › <a href="../navigation-protocols/">Section V</a> › <strong>Section VI: Practical Application</strong>
-</nav>
+
 <div class="content-container">
 <!-- SECTION VI INTRODUCTION -->
-<div class="section">
-<h2>VI. PRACTICAL APPLICATION</h2>
-<p>This section provides standardized templates, workflows, and documentation methods for applying the coordinate system to actual film analysis. Use these practical tools to record findings efficiently, organize discoveries systematically, and present insights professionally.</p>
-</div>
-<hr/>
 <!-- A. LOGGING TEMPLATES -->
 <div class="section" id="logging-templates">
 <h2>A. Logging Templates</h2>
@@ -935,12 +931,31 @@ VI. SYNTHESIS
 <li><strong>Research:</strong> Build academic papers and presentations</li>
 </ul>
 </div>
-<div style="text-align: center; margin-top: 64px; padding-top: 32px; border-top: 2px solid #E0E0E0; color: #9E9E9E;">
-<p style="font-size: 0.875em;">Story Analysis Coordinate System v1.0</p>
-<p style="font-size: 0.875em; margin-top: 8px;">Section VI: Practical Application</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section VI: Practical Application</p>
 </div>
 </div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-vi"
+      toc={[
+        { label: "Logging Templates",      href: "#logging-templates"  },
+        { label: "Note Organization",      href: "#note-organization"  },
+      ]}
+      chips={[
+        { label: "Log format", value: "Coord + Scene + Notes" },
+        { label: "Output",     value: "[Timestamp] / [H:MM/Dn]" },
+      ]}
+      visual="coord-chip"
+      nextLinks={[
+        { label: "VII. Implementation Guide",href: `${base}/compass/implementation-guide/`   },
+        { label: "V. Navigation Protocols",  href: `${base}/compass/navigation-protocols/`   },
+        { label: "I. Orientation",           href: `${base}/compass/orientation/`            },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/navigation-protocols/`} class="section-nav__link section-nav__link--prev">

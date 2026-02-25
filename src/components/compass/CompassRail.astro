@@ -1,0 +1,131 @@
+---
+/**
+ * CompassRail — shared right-rail for all Compass pages
+ *
+ * Props
+ * ─────
+ * toc       Array<{label:string, href:string}>          required
+ * chips     Array<{label:string, value:string}>          1–2 max
+ * nextLinks Array<{label:string, href:string}>           2–4 max
+ * visual    'cross' | 'depth-scale' | 'clock-arc' | 'coord-chip' | undefined
+ * tocId     string  — id to place on the <ul> (default: "rail-toc")
+ */
+import RailCompassCross from './RailCompassCross.astro';
+import RailDepthScale   from './RailDepthScale.astro';
+import RailClockArc     from './RailClockArc.astro';
+import RailCoordChip    from './RailCoordChip.astro';
+
+interface TOCItem    { label: string; href: string }
+interface ChipItem   { label: string; value: string }
+interface NextItem   { label: string; href: string }
+type VisualType = 'cross' | 'depth-scale' | 'clock-arc' | 'coord-chip';
+
+interface Props {
+  toc:       TOCItem[];
+  chips?:    ChipItem[];
+  nextLinks: NextItem[];
+  visual?:   VisualType;
+  tocId?:    string;
+}
+
+const {
+  toc,
+  chips    = [],
+  nextLinks,
+  visual,
+  tocId    = 'rail-toc',
+} = Astro.props;
+---
+
+<aside class="cockpit__rail" aria-label="Page reference">
+
+  <details class="rail__disclosure" open>
+    <summary class="rail__disclosure-toggle">Legend &amp; Page Map</summary>
+
+    <!-- A) TOC ────────────────────────────────────────────────── -->
+    <div class="rail__section">
+      <p class="rail__label">On This Page</p>
+      <ul class="rail__toc" id={tocId}>
+        {toc.map(item => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <hr class="rail__divider" />
+
+    <!-- B) Legend chips + optional micro-visual ─────────────── -->
+    {(chips.length > 0 || visual) && (
+      <div class="rail__section">
+        {chips.length > 0 && (
+          <>
+            <p class="rail__label">Legend</p>
+            <div class="rail__chips">
+              {chips.map(chip => (
+                <div class="rail-chip">
+                  <span class="rail-chip__label">{chip.label}</span>
+                  <span class="rail-chip__value">{chip.value}</span>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
+        {visual === 'cross'       && <RailCompassCross />}
+        {visual === 'depth-scale' && <RailDepthScale />}
+        {visual === 'clock-arc'   && <RailClockArc />}
+        {visual === 'coord-chip'  && <RailCoordChip />}
+      </div>
+    )}
+
+    <hr class="rail__divider" />
+
+    <!-- C) Next links ─────────────────────────────────────────── -->
+    <div class="rail__section">
+      <p class="rail__label">What's Next</p>
+      <div class="rail__next">
+        {nextLinks.map(link => (
+          <a href={link.href} class="rail__next-link">
+            <span>{link.label}</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+        ))}
+      </div>
+    </div>
+
+  </details>
+
+</aside>
+
+<!-- Mobile collapse wrapper is handled by CSS: cockpit__rail renders
+     as a details block on narrow viewports via the mobile class toggle -->
+
+<script define:vars={{ tocId }}>
+  (function () {
+    var ul = document.getElementById(tocId);
+    if (!ul) return;
+    var links = ul.querySelectorAll('a');
+    if (!links.length) return;
+    var sections = Array.from(links).map(function(a) {
+      var id = a.getAttribute('href').replace('#', '');
+      return { el: document.getElementById(id), a: a };
+    }).filter(function(s) { return s.el; });
+    function spy() {
+      var scrollY = window.scrollY + 110;
+      var active = null;
+      for (var i = sections.length - 1; i >= 0; i--) {
+        if (sections[i].el.offsetTop <= scrollY) { active = sections[i]; break; }
+      }
+      links.forEach(function(l) { l.classList.remove('is-active'); });
+      if (active) active.a.classList.add('is-active');
+    }
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) { requestAnimationFrame(function() { spy(); ticking = false; }); ticking = true; }
+    }, { passive: true });
+    spy();
+  })();
+</script>

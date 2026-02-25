@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,23 +14,25 @@ const base = import.meta.env.BASE_URL;
     <strong>VII. Implementation Guide</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION VII</div>
     <h1>Implementation Guide</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#part-i-system-architecture" class="toc-grid__link">Part I — System Architecture</a>
-        <a href="#part-ii-story-compass-specifications" class="toc-grid__link">Part II — Compass Specifications</a>
-        <a href="#part-iii-hub-node-strategy" class="toc-grid__link">Part III — Hub Node Strategy</a>
-        <a href="#part-iv-relationship-finder-tool" class="toc-grid__link">Part IV — Relationship Finder Tool</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">The full system architecture: grid specifications, hub node strategy, and the relationship-finder tool concept — everything needed to build and maintain the coordinate framework at scale, from the 78-cell grid down to individual cell documentation.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> The 13 × 6 grid structure, hub node documentation format, dimensional content build-out protocols, and similarity-scoring methodology.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Start with hub nodes — the highest-density intersections — before filling in peripheral coordinate cells.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Cells where multiple frameworks agree on the same analytical question; these produce the most transferable, story-agnostic observations.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Implementation Guide &amp; Deliverables Roadmap</p><h2 id="part-i-system-architecture">PART I: SYSTEM ARCHITECTURE</h2>
+
+    <h2 id="part-i-system-architecture">PART I: SYSTEM ARCHITECTURE</h2>
 <h3 id="story-coordinate-compass">Story Coordinate Compass</h3>
 <p>This is a spatial navigation system for story analysis. It treats
 every story as a mappable territory with two primary dimensions.</p>
@@ -1573,7 +1576,34 @@ evolves.</em></p>
 <ul><li>D0: Point of no return, irreversible choice</li><li>D4: Structural turning point, act break</li></ul>
 <ul><li>D2: Character identity expression</li><li>D3: Rhetorical authority, ethos</li></ul>
 <ul><li>D0: Core realization about problem</li><li>D2: Identity shift moment</li><li>D3: Pattern recognition, belief revision</li></ul>
-  </div>
+
+<div class="page-stamp">
+  <p>Implementation Guide v1.0 · Story Analysis Coordinate System</p>
+</div>
+
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-vii"
+      toc={[
+        { label: "Part I — System Architecture",     href: "#part-i-system-architecture"          },
+        { label: "Part II — Compass Specifications", href: "#part-ii-story-compass-specifications" },
+        { label: "Part III — Hub Node Strategy",     href: "#part-iii-hub-node-strategy"          },
+        { label: "Part IV — Relationship Finder",    href: "#part-iv-relationship-finder-tool"    },
+      ]}
+      chips={[
+        { label: "Grid",   value: "13 × 6 = 78 cells" },
+        { label: "Output", value: "[H:MM / Dn]"        },
+      ]}
+      visual="cross"
+      nextLinks={[
+        { label: "I. Orientation",            href: `${base}/compass/orientation/`          },
+        { label: "VI. Practical Application", href: `${base}/compass/practical-application/`},
+        { label: "V. Navigation Protocols",   href: `${base}/compass/navigation-protocols/` },
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/practical-application/`} class="section-nav__link section-nav__link--prev">

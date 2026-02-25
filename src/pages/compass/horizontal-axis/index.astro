@@ -1,5 +1,6 @@
 ---
 import PortalLayout from '../../../layouts/PortalLayout.astro';
+import CompassRail from '../../../components/compass/CompassRail.astro';
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -13,30 +14,27 @@ const base = import.meta.env.BASE_URL;
     <strong>II. Horizontal Axis</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
+  <div class="page-hero page-hero--gradient page-hero--slim">
     <div class="eyebrow">SECTION II</div>
     <h1>Horizontal Axis</h1>
   </div>
 
-  <div class="compass-content">
-    <!-- TOC -->
-    <nav class="toc-grid">
-      <div class="toc-grid__label">On This Page</div>
-      <div class="toc-grid__items">
-        <a href="#primary-measurement-systems" class="toc-grid__link">Primary Measurement Systems</a>
-        <a href="#key-story-positions" class="toc-grid__link">Key Story Positions</a>
-        <a href="#horizontal-movement-patterns" class="toc-grid__link">Horizontal Movement Patterns</a>
+  <div class="cockpit">
+    <div class="cockpit__main compass-content">
+
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">The horizontal axis maps <em>where</em> in a story's timeline you are. Multiple measurement systems — clock positions, act structures, beat markers, symmetry points — operate simultaneously and map onto the same journey; use whichever gives you the clearest orientation for your current task.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> The clock circle, act and beat systems, and the key position clusters that mark structural turning points.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Pick the horizontal system that best matches your analytical goal; cross-check with a second system to confirm position.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Agreement across frameworks at the same position — when clock, act, and beat systems converge, you've found a structurally strong beat.</p>
+        </div>
       </div>
-    </nav>
-    <p class="subtitle">Version 1.0 | Section II: HORIZONTAL AXIS</p>
-<nav class="breadcrumb">
-<a href="../">Master Outline</a> › <a href="../orientation/">Section I: Orientation</a> › <strong>Section II: Horizontal Axis</strong>
-</nav>
-<div class="content-container">
+
+    <!-- content starts -->
 <!-- MAIN SECTION II: HORIZONTAL AXIS -->
 <div class="section" id="horizontal-axis-main">
-<h2>II. HORIZONTAL AXIS: Story Timeline Position <span class="source-tag">COMPASS</span></h2>
-<p>The horizontal axis tracks <strong>WHERE you are in the narrative</strong>. Multiple measurement systems operate simultaneously — use whichever provides the clearest orientation for your current analysis.</p>
 <div class="callout-info">
 <h4>Key Principle:</h4>
 <p>All horizontal measurement systems map onto each other. You can use <strong>clock positions</strong>, <strong>act structure</strong>, <strong>timestamps</strong>, <strong>beat markers</strong>, or <strong>symmetry points</strong> — they're different ways of measuring the same journey.</p>
@@ -623,12 +621,32 @@ const base = import.meta.env.BASE_URL;
 </div>
 </div>
 </div>
-<div style="text-align: center; margin-top: 50px; padding-top: 30px; border-top: 2px solid #e2e8f0; color: #94a3b8;">
-<p>Story Analysis Coordinate System v1.0 | Section II: HORIZONTAL AXIS</p>
-<p style="font-size: 0.9em; margin-top: 10px;">A Compass for Story Analysis and Narrative Mapping</p>
+<div class="page-stamp">
+  <p>Story Analysis Coordinate System v1.0 · Section II: Horizontal Axis</p>
 </div>
-</div>
-  </div>
+    </div><!-- /.cockpit__main -->
+
+    <CompassRail
+      tocId="rail-toc-h"
+      toc={[
+        { label: "Primary Measurement Systems", href: "#primary-measurement-systems" },
+        { label: "Key Story Positions",          href: "#key-story-positions"          },
+        { label: "Movement Patterns",            href: "#horizontal-movement-patterns"  },
+      ]}
+      chips={[
+        { label: "Measures",  value: "Story Timeline Position" },
+        { label: "Notation",  value: "H:MM" },
+        { label: "Example",   value: "6:00 / D2" },
+      ]}
+      visual="clock-arc"
+      nextLinks={[
+        { label: "IIA. Story Structure",  href: `${base}/compass/story-structure/`  },
+        { label: "III. Vertical Axis",    href: `${base}/compass/vertical-axis/`    },
+        { label: "IV. Intersection Logic",href: `${base}/compass/intersection-logic/`},
+      ]}
+    />
+
+  </div><!-- /.cockpit -->
 
 <nav class="section-nav">
     <a href={`${base}/compass/orientation/`} class="section-nav__link section-nav__link--prev">
