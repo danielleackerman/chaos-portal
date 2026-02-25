@@ -36,6 +36,16 @@ const dimensionCards = [
   <div class="cockpit">
     <div class="cockpit__main compass-content">
 
+      <!-- OVERVIEW -->
+      <div class="page-overview">
+        <p class="page-overview__lead">The vertical axis defines <em>what depth</em> of analysis you're operating at — six strata from observable surface (D5) down to thematic core (D0), each demanding different frameworks and specific questions about what the story is doing at that level.</p>
+        <ul class="page-overview__bullets">
+          <li><strong>What you'll learn:</strong> The six depth dimensions, their defining questions, and the frameworks that belong to each stratum.</li>
+          <li><strong>What to do:</strong> Fix your dimension before drilling in; apply only the frameworks native to that depth, not the full stack.</li>
+          <li><strong>What to watch for:</strong> Moments where a surface observation (D5) has an unexpectedly direct thematic resonance (D0) — these are a story's most loaded scenes.</li>
+        </ul>
+      </div>
+
    <!-- ===== COORDINATE PICKER ===== -->
 <div class="dimension-card dimension-card--coord-picker">
   <div class="coord-picker-card__header">
@@ -48,7 +58,7 @@ const dimensionCards = [
 
     <!-- ===== INTRODUCTION ===== -->
     <div class="section">
-      <h2 id="introduction">Vertical Axis: Story Depth Dimensions</h2>
+      <h2 id="introduction">Axis Structure &amp; Notation</h2>
       <p>The vertical axis consists of six story depth dimensions arranged from surface to core. Each dimension represents a different depth of analysis, using specific frameworks and asking specific analytical questions.</p>
 
       <div class="dimension-vertical">
@@ -734,10 +744,10 @@ const dimensionCards = [
     <CompassRail
       tocId="rail-toc-v"
       toc={[
-        { label: "Introduction",        href: "#introduction"        },
-        { label: "The Six Dimensions",  href: "#dimensions"          },
-        { label: "D5 — Surface",        href: "#d5-expressive"       },
-        { label: "D0 — Core",           href: "#d0-core"             },
+        { label: "Axis Structure & Notation", href: "#introduction"        },
+        { label: "The Six Dimensions",        href: "#dimensions"          },
+        { label: "D5 — Surface",              href: "#d5-expressive"       },
+        { label: "D0 — Core",                 href: "#d0-core"             },
       ]}
       chips={[
         { label: "Axis",  value: "V = Depth"       },
