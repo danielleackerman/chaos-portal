@@ -16,30 +16,10 @@ const base = import.meta.env.BASE_URL;
     <strong>I. Orientation</strong>
   </nav>
 
-  <!-- ── HERO — compass cross + one-liner, side by side ── -->
-  <div class="page-hero page-hero--gradient">
-    <div class="media-intro">
-      <div class="media-intro__visual">
-        <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <line x1="8" y1="48" x2="88" y2="48" stroke="var(--semantic-h)" stroke-width="2.5" stroke-linecap="round"/>
-          <line x1="48" y1="8" x2="48" y2="88" stroke="var(--semantic-v)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="48" cy="48" r="5" fill="var(--text-3)"/>
-          <polyline points="78,44 88,48 78,52" stroke="var(--semantic-h)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <polyline points="44,18 48,8 52,18" stroke="var(--semantic-v)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="88" y="62" font-family="monospace" font-size="9" fill="var(--semantic-h)" text-anchor="end">H</text>
-          <text x="62" y="12" font-family="monospace" font-size="9" fill="var(--semantic-v)">V</text>
-          <circle cx="88" cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
-          <circle cx="8" cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
-          <circle cx="48" cy="88" r="2.5" fill="var(--semantic-v)" opacity="0.5"/>
-          <circle cx="48" cy="8" r="2.5" fill="var(--semantic-v)" opacity="0.5"/>
-        </svg>
-      </div>
-      <div>
-        <div class="eyebrow">SECTION I</div>
-        <h1>Orientation</h1>
-        <p class="subtitle">A two-axis coordinate system for story analysis — <span style="color:var(--semantic-h);">where</span> in the story × <span style="color:var(--semantic-v);">what depth</span> of analysis.</p>
-      </div>
-    </div>
+  <!-- ── HERO — slim: eyebrow + title only (icon moved to rail visual) ── -->
+  <div class="page-hero page-hero--gradient page-hero--slim">
+    <div class="eyebrow">SECTION I</div>
+    <h1>Orientation</h1>
   </div>
 
   <div class="cockpit">

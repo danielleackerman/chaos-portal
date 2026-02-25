@@ -14,29 +14,9 @@ const base = import.meta.env.BASE_URL;
     <strong>II. Horizontal Axis</strong>
   </nav>
 
-  <div class="page-hero page-hero--gradient">
-    <div class="media-intro">
-      <div class="media-intro__visual">
-        <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="48" cy="48" r="36" stroke="var(--semantic-h)" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
-          <line x1="8" y1="48" x2="88" y2="48" stroke="var(--semantic-h)" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="48" cy="48" r="4.5" fill="var(--text-3)"/>
-          <polyline points="78,44 88,48 78,52" stroke="var(--semantic-h)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="48" cy="12" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
-          <circle cx="88" cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.7"/>
-          <circle cx="48" cy="84" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
-          <circle cx="8"  cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
-          <text x="90" y="44" font-family="monospace" font-size="9" fill="var(--semantic-h)" text-anchor="start">H</text>
-          <text x="52" y="14" font-family="monospace" font-size="8" fill="var(--semantic-h)" opacity="0.55">12</text>
-          <text x="52" y="87" font-family="monospace" font-size="8" fill="var(--semantic-h)" opacity="0.55">6</text>
-        </svg>
-      </div>
-      <div>
-        <div class="eyebrow">SECTION II</div>
-        <h1>Horizontal Axis</h1>
-        <p class="subtitle">Story Timeline Position — <span style="color:var(--semantic-h);">where</span> you are in the narrative, measured through overlapping structural systems simultaneously.</p>
-      </div>
-    </div>
+  <div class="page-hero page-hero--gradient page-hero--slim">
+    <div class="eyebrow">SECTION II</div>
+    <h1>Horizontal Axis</h1>
   </div>
 
   <div class="cockpit">
@@ -45,17 +25,16 @@ const base = import.meta.env.BASE_URL;
       <!-- OVERVIEW -->
       <div class="page-overview">
         <p class="page-overview__lead">The horizontal axis maps <em>where</em> in a story's timeline you are. Multiple measurement systems — clock positions, act structures, beat markers, symmetry points — operate simultaneously and map onto the same journey; use whichever gives you the clearest orientation for your current task.</p>
-        <ul class="page-overview__bullets">
-          <li><strong>What you'll learn:</strong> The clock circle, act and beat systems, and the key position clusters that mark structural turning points.</li>
-          <li><strong>What to do:</strong> Pick the horizontal system that best matches your analytical goal; cross-check with a second system to confirm position.</li>
-          <li><strong>What to watch for:</strong> Agreement across frameworks at the same position — when clock, act, and beat systems converge, you've found a structurally strong beat.</li>
-        </ul>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> The clock circle, act and beat systems, and the key position clusters that mark structural turning points.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Pick the horizontal system that best matches your analytical goal; cross-check with a second system to confirm position.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Agreement across frameworks at the same position — when clock, act, and beat systems converge, you've found a structurally strong beat.</p>
+        </div>
       </div>
 
     <!-- content starts -->
 <!-- MAIN SECTION II: HORIZONTAL AXIS -->
 <div class="section" id="horizontal-axis-main">
-<p>The horizontal axis tracks <strong>WHERE you are in the narrative</strong>. Multiple measurement systems operate simultaneously — use whichever provides the clearest orientation for your current analysis.</p>
 <div class="callout-info">
 <h4>Key Principle:</h4>
 <p>All horizontal measurement systems map onto each other. You can use <strong>clock positions</strong>, <strong>act structure</strong>, <strong>timestamps</strong>, <strong>beat markers</strong>, or <strong>symmetry points</strong> — they're different ways of measuring the same journey.</p>

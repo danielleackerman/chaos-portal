@@ -79,6 +79,24 @@
 }
 
 
+/* ===== SLIM HERO VARIANT =====
+   Use on all Compass section pages.
+   Contains: eyebrow + h1 only.
+   Icons, subtitles, and chips belong in the right rail.
+   ================================================================ */
+.page-hero--slim {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Suppress anything that makes heroes tall inside a slim variant */
+.page-hero--slim .subtitle,
+.page-hero--slim .media-intro__visual,
+.page-hero--slim .page-hero__chips { display: none; }
+
+.page-hero--slim h1 { margin-bottom: 0; }
+
+
 /* ── Desktop / Large ──────────────────────────────────────────── */
 /* No desktop-specific overrides. */
 
