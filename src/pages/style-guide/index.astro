@@ -119,6 +119,9 @@ const positionCards = [
       <a href="#typography" class="toc-grid__link">Typography</a>
       <a href="#notation" class="toc-grid__link">Coordinate Notation</a>
       <a href="#spacing" class="toc-grid__link">Layout &amp; Spacing</a>
+      <a href="#rail-visuals" class="toc-grid__link">Rail Visuals</a>
+      <a href="#overview-block" class="toc-grid__link">Overview Block</a>
+      <a href="#progressive-disclosure" class="toc-grid__link">Progressive Disclosure</a>
       <a href="#heroes" class="toc-grid__link">Page Heroes</a>
       <a href="#callouts" class="toc-grid__link">Callouts</a>
       <a href="#cards" class="toc-grid__link">Cards</a>
@@ -434,6 +437,147 @@ Examine: What is the character discovering about themselves?</code></pre>
 
       <h3>Border Radius</h3>
       <p><strong>Small</strong> (3px): tokens, inline code &nbsp;·&nbsp; <strong>Medium</strong> (6px): callouts, cards, tables &nbsp;·&nbsp; <strong>Large</strong> (8px): heroes, main containers</p>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== COMPASS RIGHT RAIL VISUALS ==================== -->
+    <div class="section" id="rail-visuals">
+      <h2>Compass Right Rail Visuals</h2>
+      <p>Each Compass page passes a <code>visual</code> prop to <code>&lt;CompassRail&gt;</code> to render a bespoke per-page illustration in the Legend area of the right rail. Pass <code>visual="..."</code> — do not inline SVG in page files.</p>
+
+      <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:1rem; margin:1.5rem 0;">
+
+        <div style="border:1px solid var(--border); border-radius:var(--radius-lg); padding:1rem; background:var(--surface);">
+          <p style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); margin:0 0 0.75rem;">visual="clock-arc"</p>
+          <!-- RailClockArc inline preview -->
+          <div class="rail-visual" aria-hidden="true">
+            <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="48" cy="48" r="36" stroke="var(--semantic-h)" stroke-width="1.5" stroke-dasharray="4 3" opacity="0.35"/>
+              <line x1="8" y1="48" x2="88" y2="48" stroke="var(--semantic-h)" stroke-width="2.5" stroke-linecap="round"/>
+              <polyline points="78,44 88,48 78,52" stroke="var(--semantic-h)" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="48" cy="48" r="4.5" fill="var(--text-3)"/>
+              <circle cx="48" cy="12" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+              <circle cx="88" cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.7"/>
+              <circle cx="48" cy="84" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+              <circle cx="8"  cy="48" r="2.5" fill="var(--semantic-h)" opacity="0.5"/>
+              <text x="90" y="44" font-family="monospace" font-size="9" fill="var(--semantic-h)" text-anchor="start">H</text>
+              <text x="52" y="14" font-family="monospace" font-size="8" fill="var(--semantic-h)" opacity="0.55">12</text>
+              <text x="52" y="87" font-family="monospace" font-size="8" fill="var(--semantic-h)" opacity="0.55">6</text>
+            </svg>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-2); margin:0.5rem 0 0;">Used on: <strong>II. Horizontal Axis</strong><br/>Dashed clock circle + H arrow</p>
+        </div>
+
+        <div style="border:1px solid var(--border); border-radius:var(--radius-lg); padding:1rem; background:var(--surface);">
+          <p style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); margin:0 0 0.75rem;">visual="depth-scale"</p>
+          <!-- RailDepthScale inline preview -->
+          <div class="rail-visual" aria-hidden="true">
+            <svg width="72" height="90" viewBox="0 0 72 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="18" y="8"  width="36" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.35"/>
+              <rect x="20" y="21" width="32" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.48"/>
+              <rect x="22" y="34" width="28" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.61"/>
+              <rect x="24" y="47" width="24" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.74"/>
+              <rect x="26" y="60" width="20" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="0.87"/>
+              <rect x="28" y="73" width="16" height="9" rx="2" fill="var(--semantic-v)" fill-opacity="1"/>
+              <text x="10" y="15.5" font-family="monospace" font-size="7" fill="var(--text-3)">D5</text>
+              <text x="10" y="28.5" font-family="monospace" font-size="7" fill="var(--text-3)">D4</text>
+              <text x="10" y="41.5" font-family="monospace" font-size="7" fill="var(--text-3)">D3</text>
+              <text x="10" y="54.5" font-family="monospace" font-size="7" fill="var(--text-3)">D2</text>
+              <text x="10" y="67.5" font-family="monospace" font-size="7" fill="var(--text-3)">D1</text>
+              <text x="10" y="80.5" font-family="monospace" font-size="7" fill="var(--text-3)">D0</text>
+              <text x="36" y="88" text-anchor="middle" font-family="monospace" font-size="7" fill="var(--text-3)">surface → core</text>
+            </svg>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-2); margin:0.5rem 0 0;">Used on: <strong>III. Vertical Axis</strong><br/>D5→D0 tapering depth scale</p>
+        </div>
+
+        <div style="border:1px solid var(--border); border-radius:var(--radius-lg); padding:1rem; background:var(--surface);">
+          <p style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); margin:0 0 0.75rem;">visual="cross"</p>
+          <!-- RailCompassCross inline preview -->
+          <div class="rail-visual" aria-hidden="true">
+            <svg width="72" height="72" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <line x1="6"  y1="36" x2="66" y2="36" stroke="var(--semantic-h)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="36" y1="6"  x2="36" y2="66" stroke="var(--semantic-v)" stroke-width="2" stroke-linecap="round"/>
+              <circle cx="36" cy="36" r="4" fill="var(--text-3)"/>
+              <polyline points="58,33 66,36 58,39" stroke="var(--semantic-h)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <polyline points="33,14 36,6 39,14"  stroke="var(--semantic-v)" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <text x="63" y="48" font-family="monospace" font-size="8" fill="var(--semantic-h)" text-anchor="end">H</text>
+              <text x="48" y="12" font-family="monospace" font-size="8" fill="var(--semantic-v)">V</text>
+            </svg>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-2); margin:0.5rem 0 0;">Used on: <strong>I. Orientation</strong>, <strong>Index</strong><br/>H × V axis cross</p>
+        </div>
+
+        <div style="border:1px solid var(--border); border-radius:var(--radius-lg); padding:1rem; background:var(--surface);">
+          <p style="font-size:0.6875rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-3); margin:0 0 0.75rem;">visual="coord-chip"</p>
+          <!-- RailCoordChip inline preview -->
+          <div class="rail-visual" aria-hidden="true">
+            <div class="rail-coord-chip">
+              <span class="rail-coord-chip__label">Format</span>
+              <code class="rail-coord-chip__value">H:MM / Dn</code>
+              <span class="rail-coord-chip__example">e.g. <code>6:00 / D2</code></span>
+            </div>
+          </div>
+          <p style="font-size:0.75rem; color:var(--text-2); margin:0.5rem 0 0;">Used on: <strong>IV. Intersection Logic</strong><br/>Coordinate format reference</p>
+        </div>
+
+      </div>
+
+      <div class="sg-type-details">
+        <strong>Prop:</strong> <code>visual="clock-arc" | "depth-scale" | "cross" | "coord-chip"</code> &nbsp;·&nbsp;
+        <strong>Where:</strong> <code>CompassRail</code> component, Legend section &nbsp;·&nbsp;
+        <strong>Rule:</strong> One visual per page. Each page gets its own. Do not share visuals between pages unless the pages share a subject.
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== OVERVIEW BLOCK ==================== -->
+    <div class="section" id="overview-block">
+      <h2>Overview Block</h2>
+      <p>The canonical above-the-fold summary block on all Compass section pages. Replaces the old intro lead paragraph — do not duplicate it. Uses label+sentence rows, not bullets.</p>
+
+      <div class="page-overview" style="max-width:600px;">
+        <p class="page-overview__lead">The overview block summarises the page in one sentence — what it covers, who it's for, and what work it does. This is the lead.</p>
+        <div class="page-overview__rows">
+          <p class="page-overview__row"><strong class="page-overview__label">What you'll learn:</strong> The three row labels, their typography, and how they differ from a bullet list.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to do:</strong> Use <code>page-overview__rows</code> + <code>page-overview__row</code> + <code>page-overview__label</code> — never a <code>&lt;ul&gt;</code>.</p>
+          <p class="page-overview__row"><strong class="page-overview__label">What to watch for:</strong> Font-family drift or list styling leaking in from a parent context — the block must inherit body system-sans only.</p>
+        </div>
+      </div>
+
+      <div class="sg-type-details" style="margin-top:1rem;">
+        <strong>Container:</strong> <code>.page-overview</code> &nbsp;·&nbsp;
+        <strong>Lead:</strong> <code>.page-overview__lead</code> (0.9375rem, var(--text-2)) &nbsp;·&nbsp;
+        <strong>Rows:</strong> <code>.page-overview__rows</code> + <code>.page-overview__row</code> (0.8125rem) &nbsp;·&nbsp;
+        <strong>Label:</strong> <code>.page-overview__label</code> (600 weight, var(--text)) &nbsp;·&nbsp;
+        <strong>CSS:</strong> <code>src/styles/patterns/content.css</code>
+      </div>
+    </div>
+
+    <hr/>
+
+    <!-- ==================== PROGRESSIVE DISCLOSURE ==================== -->
+    <div class="section" id="progressive-disclosure">
+      <h2>Progressive Disclosure — <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code></h2>
+      <p>Global token-driven styling for native HTML disclosure. Ready to use — not yet applied broadly. The <code>›</code> chevron animates on open. Do not wrap entire page sections in <code>&lt;details&gt;</code> yet.</p>
+
+      <details style="max-width:500px;">
+        <summary>What is progressive disclosure?</summary>
+        <p>A pattern where secondary content is hidden until the user requests it. Used for reference material, worked examples, and footnote-level information that would otherwise interrupt the reading flow.</p>
+      </details>
+      <details style="max-width:500px;">
+        <summary>When to use it</summary>
+        <p>Use only for content that is genuinely optional for most readers on most visits — supplementary examples, edge cases, extended definitions. Do not use for primary page content.</p>
+      </details>
+
+      <div class="sg-type-details" style="margin-top:1rem;">
+        <strong>Elements:</strong> native <code>&lt;details&gt;</code> / <code>&lt;summary&gt;</code> &nbsp;·&nbsp;
+        <strong>CSS:</strong> <code>src/styles/patterns/content.css</code> &nbsp;·&nbsp;
+        <strong>Tokens used:</strong> <code>--border</code>, <code>--surface</code>, <code>--text</code>, <code>--radius-md</code> &nbsp;·&nbsp;
+        <strong>Do not:</strong> add class names, wrap entire pages, or replicate with JS
+      </div>
     </div>
 
     <hr/>
@@ -940,6 +1084,62 @@ Examine: What is the character discovering about themselves?</code></pre>
     <!-- ==================== STRUCTURAL CONTAINERS ==================== -->
     <div class="section" id="containers">
       <h2>Structural Containers</h2>
+
+      <h3>Cockpit Layout — <code>.cockpit</code></h3>
+      <p>The two-column grid used on all Compass section pages. Left: <code>.cockpit__main</code> (prose, all page content). Right: <code>.cockpit__rail</code> (sticky sidebar). Collapses to single column on mobile, rail moves above content.</p>
+      <div class="sg-type-details">
+        <strong>Grid:</strong> <code>minmax(0, 1fr) var(--rail-width)</code> &nbsp;·&nbsp;
+        <strong>Gap:</strong> <code>var(--cockpit-gap)</code> &nbsp;·&nbsp;
+        <strong>Rail:</strong> sticky, max-height = viewport minus header &nbsp;·&nbsp;
+        <strong>Mobile:</strong> single column, rail first &nbsp;·&nbsp;
+        <strong>Prose clamp:</strong> <code>.cockpit__main p/li/blockquote</code> max 72ch &nbsp;·&nbsp;
+        <strong>CSS:</strong> <code>src/styles/patterns/layout.css</code>
+      </div>
+      <pre style="background:var(--surface-elevated); border:1px solid var(--border); border-radius:var(--radius-md); padding:1rem; font-size:0.8125rem; overflow-x:auto; margin:1rem 0;"><code>&lt;div class="cockpit"&gt;
+  &lt;main class="cockpit__main"&gt;
+    &lt;!-- all page content --&gt;
+  &lt;/main&gt;
+  &lt;aside class="cockpit__rail"&gt;
+    &lt;CompassRail visual="clock-arc" chips={[...]} /&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre>
+
+      <h3>Rail Chip — <code>.rail-chip</code></h3>
+      <p>Compact label+value row used inside <code>CompassRail</code> to surface page metadata (axis name, notation format, example coordinate). Always rendered via the <code>chips</code> prop — never hardcoded.</p>
+      <div style="display:flex; flex-direction:column; gap:0.375rem; max-width:280px; margin:1rem 0;">
+        <div class="rail-chip">
+          <span class="rail-chip__label">Measures</span>
+          <span class="rail-chip__value">Story Timeline Position</span>
+        </div>
+        <div class="rail-chip">
+          <span class="rail-chip__label">Notation</span>
+          <span class="rail-chip__value">H:MM</span>
+        </div>
+        <div class="rail-chip">
+          <span class="rail-chip__label">Example</span>
+          <span class="rail-chip__value">6:00 / D2</span>
+        </div>
+      </div>
+      <div class="sg-type-details">
+        <strong>Elements:</strong> <code>.rail-chip</code> → <code>.rail-chip__label</code> + <code>.rail-chip__value</code> &nbsp;·&nbsp;
+        <strong>Label:</strong> 0.6875rem, 700, uppercase, var(--text-3) &nbsp;·&nbsp;
+        <strong>Value:</strong> 0.75rem, monospace, var(--text-2) &nbsp;·&nbsp;
+        <strong>Background:</strong> <code>var(--surface-elevated)</code> &nbsp;·&nbsp;
+        <strong>CSS:</strong> <code>src/styles/patterns/layout.css</code>
+      </div>
+
+      <h3>Page Stamp — <code>.page-stamp</code></h3>
+      <p>End-of-page footer metadata block showing the Compass coordinate and build date. Centered, muted, separated from content by a top border. One per page, placed last inside <code>.cockpit__main</code>.</p>
+      <div class="page-stamp" style="max-width:400px;">
+        <p>COMPASS · Horizontal Axis · <code>H:MM / Dn</code></p>
+        <p>Updated February 2026</p>
+      </div>
+      <div class="sg-type-details" style="margin-top:1rem;">
+        <strong>Class:</strong> <code>.page-stamp</code> &nbsp;·&nbsp;
+        <strong>Position:</strong> last child inside <code>.cockpit__main</code> &nbsp;·&nbsp;
+        <strong>Font:</strong> 0.8125rem, var(--text-3) &nbsp;·&nbsp;
+        <strong>CSS:</strong> <code>src/styles/patterns/layout.css</code>
+      </div>
 
       <h3>Crosswalk Dimension</h3>
       <p>Groups dimension-specific analysis with a subtle left accent:</p>
