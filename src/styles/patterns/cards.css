@@ -74,9 +74,30 @@
   box-shadow: var(--shadow-deep);
 }
 
-.cat-card--amber:hover { border-color: var(--semantic-h); }
-.cat-card--teal:hover { border-color: var(--semantic-v); }
+.cat-card--amber:hover    { border-color: var(--semantic-h); }
+.cat-card--teal:hover     { border-color: var(--semantic-v); }
 .cat-card--gradient:hover { border-color: var(--semantic-v); }
+
+/* Coming Soon chip — positioned top-right inside card */
+.cat-card__coming {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Cards with coming-soon chip need relative positioning */
+.cat-card:has(.cat-card__coming) {
+  position: relative;
+}
+
+/* Module color variants — hover border */
+.cat-card--purple:hover    { border-color: var(--module-library); }
+.cat-card--indigo:hover    { border-color: var(--module-engine); }
+.cat-card--green:hover     { border-color: var(--module-pipeline); }
+.cat-card--red:hover       { border-color: var(--module-piano); }
+.cat-card--blue:hover      { border-color: var(--module-vocal); }
+.cat-card--cyan:hover      { border-color: var(--module-songs); }
+.cat-card--gold:hover      { border-color: var(--module-staircase); }
 
 .cat-card__icon {
   width: 2.5rem;
@@ -86,14 +107,32 @@
   align-items: center;
   justify-content: center;
   margin-bottom: 1rem;
+  transition: background 0.2s ease;
 }
 
-.cat-card__icon--amber { background: #F59E0B18; color: var(--semantic-h); }
-.cat-card__icon--teal { background: #14B8A618; color: var(--semantic-v); }
-.cat-card__icon--gradient {
-  background: linear-gradient(135deg, #F59E0B18, #14B8A618);
-  color: var(--semantic-v);
-}
+/* Resting icon backgrounds */
+.cat-card__icon--amber    { background: #F59E0B18; color: var(--semantic-h); }
+.cat-card__icon--teal     { background: #14B8A618; color: var(--semantic-v); }
+.cat-card__icon--gradient { background: linear-gradient(135deg, #F59E0B18, #14B8A618); color: var(--semantic-v); }
+.cat-card__icon--purple   { background: color-mix(in srgb, var(--module-library) 12%, transparent);   color: var(--module-library); }
+.cat-card__icon--indigo   { background: color-mix(in srgb, var(--module-engine) 12%, transparent);    color: var(--module-engine); }
+.cat-card__icon--green    { background: color-mix(in srgb, var(--module-pipeline) 12%, transparent);  color: var(--module-pipeline); }
+.cat-card__icon--red      { background: color-mix(in srgb, var(--module-piano) 12%, transparent);     color: var(--module-piano); }
+.cat-card__icon--blue     { background: color-mix(in srgb, var(--module-vocal) 12%, transparent);     color: var(--module-vocal); }
+.cat-card__icon--cyan     { background: color-mix(in srgb, var(--module-songs) 12%, transparent);     color: var(--module-songs); }
+.cat-card__icon--gold     { background: color-mix(in srgb, var(--module-staircase) 12%, transparent); color: var(--module-staircase); }
+
+/* Hover: icon background brightens to match border accent */
+.cat-card--amber:hover    .cat-card__icon--amber    { background: #F59E0B28; }
+.cat-card--teal:hover     .cat-card__icon--teal      { background: #14B8A628; }
+.cat-card--gradient:hover .cat-card__icon--gradient  { background: linear-gradient(135deg, #F59E0B28, #14B8A628); }
+.cat-card--purple:hover   .cat-card__icon--purple    { background: color-mix(in srgb, var(--module-library) 22%, transparent); }
+.cat-card--indigo:hover   .cat-card__icon--indigo    { background: color-mix(in srgb, var(--module-engine) 22%, transparent); }
+.cat-card--green:hover    .cat-card__icon--green     { background: color-mix(in srgb, var(--module-pipeline) 22%, transparent); }
+.cat-card--red:hover      .cat-card__icon--red       { background: color-mix(in srgb, var(--module-piano) 22%, transparent); }
+.cat-card--blue:hover     .cat-card__icon--blue      { background: color-mix(in srgb, var(--module-vocal) 22%, transparent); }
+.cat-card--cyan:hover     .cat-card__icon--cyan      { background: color-mix(in srgb, var(--module-songs) 22%, transparent); }
+.cat-card--gold:hover     .cat-card__icon--gold      { background: color-mix(in srgb, var(--module-staircase) 22%, transparent); }
 
 .cat-card__title {
   font-size: 1rem;

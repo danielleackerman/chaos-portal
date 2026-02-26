@@ -19,6 +19,7 @@
 @import "./patterns/tags.css";
 @import "./patterns/section-nav.css";
 @import "./patterns/dimension-card.css";
+@import "./patterns/module-cards.css";
 
 /* --- Components --- */
 @import "./components/tabs.css";
