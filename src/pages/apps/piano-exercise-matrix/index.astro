@@ -9,10 +9,8 @@ const target = "https://danielleackerman.github.io/piano-exercise-matrix/";
     <link rel="canonical" href={target} />
     <title>Redirecting…</title>
 
-    <!-- Fast fallback for no-JS -->
     <meta http-equiv="refresh" content={`0; url=${target}`} />
 
-    <!-- Instant JS redirect (Astro-safe) -->
     <script is:inline>
       window.location.replace("{target}");
     </script>
