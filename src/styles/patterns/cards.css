@@ -74,51 +74,6 @@
   box-shadow: var(--shadow-deep);
 }
 
-/* ===== MODULE CARD — Flat 2.0 color identity ===== */
-/* Set --module-color on the element; all tints derive from it. */
-.cat-card--module {
-  --module-color: var(--text-3); /* fallback; always overridden per card */
-  background: color-mix(in srgb, var(--module-color) 10%, var(--surface));
-  border-color: color-mix(in srgb, var(--module-color) 38%, var(--border));
-  position: relative;
-}
-
-.cat-card--module .cat-card__icon {
-  background: color-mix(in srgb, var(--module-color) 16%, var(--surface));
-  color: var(--module-color);
-}
-
-.cat-card--module:hover {
-  border-color: color-mix(in srgb, var(--module-color) 65%, var(--border));
-  box-shadow: 0 4px 20px color-mix(in srgb, var(--module-color) 18%, transparent);
-}
-
-.cat-card--module:hover .cat-card__icon {
-  background: color-mix(in srgb, var(--module-color) 26%, var(--surface));
-}
-
-.cat-card--module:focus-visible {
-  outline: 2px solid var(--module-color);
-  outline-offset: 2px;
-}
-
-/* Compass: thin gradient top accent rule */
-.cat-card--module.cat-card--compass::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: var(--gradient-brand);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-
-/* Coming-soon: accessible disabled, keeps full color identity */
-.cat-card--module[aria-disabled="true"] {
-  cursor: default;
-  pointer-events: none;
-  opacity: 0.72;
-}
-
 .cat-card--amber:hover    { border-color: var(--semantic-h); }
 .cat-card--teal:hover     { border-color: var(--semantic-v); }
 .cat-card--gradient:hover { border-color: var(--semantic-v); }
