@@ -5,11 +5,21 @@ const target = "https://danielleackerman.github.io/piano-exercise-matrix/";
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <meta name="robots" content="noindex" />
     <link rel="canonical" href={target} />
-    <title>Opening Piano Exercise Matrix…</title>
+    <title>Redirecting…</title>
+
+    <!-- Fast fallback for no-JS -->
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+
+    <!-- Instant JS redirect (Astro-safe) -->
+    <script is:inline>
+      window.location.replace("{target}");
+    </script>
+
+    <style>
+      html, body { height: 100%; margin: 0; background: transparent; }
+    </style>
   </head>
-  <body>
-    <p>Redirecting to <a href={target}>Piano Exercise Matrix</a>…</p>
-  </body>
+  <body aria-hidden="true"></body>
 </html>
