@@ -78,6 +78,18 @@
 .cat-card--teal:hover     { border-color: var(--semantic-v); }
 .cat-card--gradient:hover { border-color: var(--semantic-v); }
 
+/* Coming Soon chip — positioned top-right inside card */
+.cat-card__coming {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Cards with coming-soon chip need relative positioning */
+.cat-card:has(.cat-card__coming) {
+  position: relative;
+}
+
 /* Module color variants — hover border */
 .cat-card--purple:hover    { border-color: var(--module-library); }
 .cat-card--indigo:hover    { border-color: var(--module-engine); }
