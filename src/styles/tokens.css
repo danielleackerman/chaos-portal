@@ -80,6 +80,16 @@
   --pos-9:  rgba(245, 158, 11, 0.60);
   --pos-11: rgba(245, 158, 11, 0.35);
 
+  /* MODULE IDENTITY — one definition per module, used for card tinting */
+  --module-compass:    #F59E0B;   /* Compass — fallback amber from brand gradient */
+  --module-library:    #8B5CF6;   /* Library Links — purple/lavender */
+  --module-engine:     #6366F1;   /* Creativity Engine — indigo */
+  --module-pipeline:   #10B981;   /* Corpus→Opus Pipeline — green */
+  --module-piano:      #EF4444;   /* Piano Exercise Matrix — red */
+  --module-vocal:      #3B82F6;   /* Vocal Exercise Matrix — blue/azure */
+  --module-songs:      #06B6D4;   /* Source of Truth: Songs — cyan */
+  --module-staircase:  #EAB308;   /* Staircase to My Biggest Why — gold */
+
   /* RADIUS */
   --radius-sm: 3px;
   --radius-md: 6px;
