@@ -5,89 +5,11 @@ import { getCategoryStats } from '../data/library.js';
 const musicStats = getCategoryStats('music');
 const storyStats = getCategoryStats('story');
 const base = import.meta.env.BASE_URL;
-
-// Normalize base — strip trailing slash so we can always do `${b}/path`
-const b = base.replace(/\/$/, '');
-
-const modules = [
-  {
-    key:   'compass',
-    title: 'Story Coordinate Compass',
-    desc:  'A two-axis coordinate system for mapping narrative structure across eight dimensions.',
-    meta:  '8 sections · Complete framework',
-    href:  `${b}/compass/`,
-    color: 'var(--module-compass)',
-    live:  true,
-  },
-  {
-    key:   'library',
-    title: 'Library Links',
-    desc:  'Curated music and story resources, organized by category and page.',
-    meta:  `${musicStats.links + storyStats.links} resources · ${musicStats.pages + storyStats.pages} pages`,
-    href:  `${b}/library/music/`,
-    color: 'var(--module-library)',
-    live:  true,
-  },
-  {
-    key:   'engine',
-    title: 'Creativity Engine',
-    desc:  'Generative tools for songwriting ideation, prompts, and compositional scaffolding.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-engine)',
-    live:  false,
-  },
-  {
-    key:   'pipeline',
-    title: 'Corpus → Opus Pipeline',
-    desc:  'Execution pipeline that transforms raw material into finished works.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-pipeline)',
-    live:  false,
-  },
-  {
-    key:   'piano',
-    title: 'Piano Exercise Matrix',
-    desc:  'Structured piano exercises indexed by technique, key, and difficulty.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-piano)',
-    live:  false,
-  },
-  {
-    key:   'vocal',
-    title: 'Vocal Exercise Matrix',
-    desc:  'Vocal warm-ups and exercises mapped by range, register, and goal.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-vocal)',
-    live:  false,
-  },
-  {
-    key:   'songs',
-    title: 'Source of Truth: Songs',
-    desc:  'Master registry of songs — lyrics, structure, versions, and metadata.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-songs)',
-    live:  false,
-  },
-  {
-    key:   'staircase',
-    title: 'Staircase to My Biggest Why',
-    desc:  'A progressive framework for clarifying purpose, values, and long-range creative vision.',
-    meta:  'Coming Soon',
-    href:  null,
-    color: 'var(--module-staircase)',
-    live:  false,
-  },
-];
 ---
 
 <PortalLayout title="Home" currentPage="home">
 
-  <!-- Hero — preserved from v1 -->
+  <!-- Hero — unchanged -->
   <div style="text-align:center; padding:3.5rem 0 3rem;">
     <div class="eyebrow eyebrow--amber" style="font-size:0.6875rem; letter-spacing:0.15em; text-transform:uppercase; font-weight:600; margin-bottom:1rem; color:var(--semantic-h);">
       CREATIVE FRAMEWORK PORTAL
@@ -98,58 +20,113 @@ const modules = [
     </p>
   </div>
 
-  <!-- Module Pills Row -->
-  <nav class="module-pills animate-in" aria-label="Module navigation">
-    {modules.map((m) => (
-      m.live
-        ? <a href={m.href} class="module-pill">{m.title}</a>
-        : <span class="module-pill" aria-disabled="true" role="link">{m.title}</span>
-    ))}
-  </nav>
+  <!-- Live module cards — 3 col -->
+  <div class="card-grid card-grid--3 animate-in" style="margin-bottom:2.5rem;">
 
-  <!-- Module Card Grid -->
-  <div class="module-grid animate-in animate-in-1">
-    {modules.map((m) => {
-      const isLink = m.live;
-      return isLink ? (
-        <a
-          href={m.href}
-          class={`module-card module-card--${m.key}`}
-          style={`--module-color:${m.color}`}
-        >
-          <div class="module-card__header">
-            <div class="module-card__icon">
-              {m.key === 'compass'   && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>}
-              {m.key === 'library'   && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="4" height="18" rx="1"/><rect x="9" y="3" width="4" height="18" rx="1"/><path d="M15 5l4 14"/></svg>}
-            </div>
-            <svg class="module-card__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-          </div>
-          <div class="module-card__title">{m.title}</div>
-          <div class="module-card__desc">{m.desc}</div>
-          <div class="module-card__meta"><span class="module-chip">{m.meta}</span></div>
-        </a>
-      ) : (
-        <div
-          class={`module-card module-card--${m.key}`}
-          style={`--module-color:${m.color}`}
-          aria-disabled="true"
-        >
-          <div class="module-card__header">
-            <div class="module-card__icon">
-              {m.key === 'engine'    && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>}
-              {m.key === 'pipeline'  && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/></svg>}
-              {m.key === 'piano'     && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M7 5v8M12 5v8M17 5v8"/><path d="M9.5 5v5M14.5 5v5"/></svg>}
-              {m.key === 'vocal'     && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>}
-              {m.key === 'songs'     && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>}
-              {m.key === 'staircase' && <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 19h4v-4h4v-4h4V7h4"/><path d="M3 19V5"/></svg>}
-            </div>
-          </div>
-          <div class="module-card__title">{m.title}</div>
-          <div class="module-card__desc">{m.desc}</div>
-          <div class="module-card__meta"><span class="module-chip module-chip--coming">Coming Soon</span></div>
-        </div>
-      );
-    })}
+    <a href={`${base}/compass/`} class="cat-card cat-card--gradient">
+      <div class="cat-card__icon cat-card__icon--gradient">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>
+      </div>
+      <div class="cat-card__title">Story Coordinate Compass</div>
+      <div class="cat-card__count">8 sections · Complete framework</div>
+    </a>
+
+    <a href={`${base}/library/music/`} class="cat-card cat-card--amber">
+      <div class="cat-card__icon cat-card__icon--amber">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div class="cat-card__title">Music Library</div>
+      <div class="cat-card__count">{musicStats.links} resources · {musicStats.pages} pages</div>
+    </a>
+
+    <a href={`${base}/library/story/`} class="cat-card cat-card--teal">
+      <div class="cat-card__icon cat-card__icon--teal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg>
+      </div>
+      <div class="cat-card__title">Story Library</div>
+      <div class="cat-card__count">{storyStats.links} resources · {storyStats.pages} pages</div>
+    </a>
+
+  </div>
+
+  <!-- Coming soon modules — 2-col + 3-col rows -->
+  <div class="card-grid card-grid--2 animate-in animate-in-1" style="margin-bottom:0.75rem;">
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>
+      </div>
+      <div class="coming-card__title">Creativity Engine</div>
+      <p class="coming-card__desc">Songwriting dashboard — generative tools for ideation and composition</p>
+    </div>
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="M12 5v14"/><circle cx="5" cy="12" r="2"/><circle cx="19" cy="12" r="2"/><circle cx="12" cy="5" r="2"/><circle cx="12" cy="19" r="2"/></svg>
+      </div>
+      <div class="coming-card__title">Corpus → Opus Pipeline</div>
+      <p class="coming-card__desc">Execution pipeline transforming raw material into finished works</p>
+    </div>
+
+  </div>
+
+  <div class="card-grid card-grid--3 animate-in animate-in-2" style="margin-bottom:3rem;">
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="1"/><path d="M7 5v8M12 5v8M17 5v8"/><path d="M9.5 5v5M14.5 5v5"/></svg>
+      </div>
+      <div class="coming-card__title">Piano Exercise Matrix</div>
+      <p class="coming-card__desc">Exercises indexed by technique, key, and difficulty</p>
+    </div>
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
+      </div>
+      <div class="coming-card__title">Vocal Exercise Matrix</div>
+      <p class="coming-card__desc">Warm-ups mapped by range, register, and goal</p>
+    </div>
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      </div>
+      <div class="coming-card__title">Source of Truth: Songs</div>
+      <p class="coming-card__desc">Master registry — lyrics, structure, versions, metadata</p>
+    </div>
+
+  </div>
+
+  <!-- Staircase — full width coming soon -->
+  <div class="card-grid animate-in animate-in-3" style="margin-bottom:3rem;">
+
+    <div class="coming-card">
+      <div class="coming-card__badge">
+        <span class="status-tag status-tag--coming">Coming Soon</span>
+      </div>
+      <div class="coming-card__icon">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h4v-4h4v-4h4V7h4"/><path d="M3 19V5"/></svg>
+      </div>
+      <div class="coming-card__title">Staircase to My Biggest Why</div>
+      <p class="coming-card__desc">Progressive framework for clarifying purpose, values, and long-range creative vision</p>
+    </div>
+
   </div>
 
 </PortalLayout>
